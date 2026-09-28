@@ -1,0 +1,93 @@
+/* ==========================================================================
+   BUTTON SYSTEM
+   ==========================================================================
+   Lifted out of the Studio City page stylesheet when /neighborhoods/studio-city
+   was retired in favour of the flat /real-estate-agent-in-* structure.
+
+   These three buttons were never Studio City's own: roughly twenty files across
+   the blog, contact, team, property, valuation and concierge pages use them.
+   They only lived there because that page happened to define them, and because
+   it was imported globally they styled the whole site from inside a single
+   neighbourhood folder.
+
+   Import position matters. property.css also defines .btn-gold, as a bare
+   background/colour pair with no box or padding. This file is imported after
+   it, exactly where studio-city.css used to sit, so the fuller pill below keeps
+   winning the cascade the way it did before. Moving this import earlier would
+   silently flatten every gold button on the site.
+   ========================================================================== */
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--gold);
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid var(--gold);
+  box-shadow: 0 4px 16px rgba(209, 152, 82, 0.28);
+  transition: all 0.22s var(--ease-out);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-gold:hover {
+  background: #be8642;
+  border-color: #be8642;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(209, 152, 82, 0.38);
+}
+
+.btn-outline-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  color: #f6f5f1 !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  transition: all 0.22s var(--ease-out);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* --sc-text-main was #17140f, identical to the global --ink, so it uses the
+   token. --sc-border was rgba(23,20,15,0.09), which sits between --line (0.12)
+   and --line-soft (0.07) — neither matches, so it keeps the literal rather than
+   quietly shifting every outline button to a near-miss. */
+.btn-outline-dark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--ink) !important;
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 14px 28px;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 20, 15, 0.09);
+  transition: all 0.22s var(--ease-out);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-outline-dark:hover {
+  background: #ffffff;
+  border-color: var(--ink);
+  transform: translateY(-2px);
+}

@@ -40,7 +40,7 @@ type Area = { name: string; img: string; alt: string; href: string; tall?: boole
 // but lands somewhere else is the kind of thing that gets missed.
 const COLUMNS: Area[][] = [
   [
-    { name: "Studio City", img: "/images/studio-city.jpg", alt: "Studio City, Los Angeles", href: "/neighborhoods/studio-city", tall: true },
+    { name: "Studio City", img: "/images/studio-city.jpg", alt: "Studio City, Los Angeles", href: "/real-estate-agent-in-studio-city", tall: true },
     { name: "Sherman Oaks", img: "/images/sold-sherman-oaks.jpg", alt: "Sherman Oaks, Los Angeles", href: "/real-estate-agent-in-sherman-oaks" },
   ],
   [

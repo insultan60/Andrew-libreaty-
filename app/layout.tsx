@@ -12,7 +12,7 @@ import "./compass-concierge/concierge.css";
 import "./blog/blog.css";
 import "./detail.css";
 import "./neighborhood.css";
-import "./neighborhoods/studio-city/studio-city.css";
+import "./buttons.css";
 import "./my-search-portal/portal.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";

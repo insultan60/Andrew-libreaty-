@@ -28,7 +28,6 @@ const ROUTES: { path: string; priority: number; changeFrequency: MetadataRoute.S
   { path: "/property", priority: 0.9, changeFrequency: "weekly" },
   { path: "/home-search", priority: 0.9, changeFrequency: "daily" },
   { path: "/neighborhoods", priority: 0.8, changeFrequency: "monthly" },
-  { path: "/neighborhoods/studio-city", priority: 0.9, changeFrequency: "monthly" },
   { path: "/home-valuation", priority: 0.9, changeFrequency: "monthly" },
   { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
   { path: "/team", priority: 0.7, changeFrequency: "monthly" },
