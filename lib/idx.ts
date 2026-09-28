@@ -6,12 +6,12 @@
  * fetchRawListings() returns the account's featured (active) + soldpending
  * (sold/pending) listings, combined, as raw IDX records. toListing()/
  * toDetailListing() derive the two view-shapes the app already has UI for
- * (app/home-search/listings.ts's Listing, and app/property/[slug]/data.ts's
+ * (app/home-search/listings.ts's Listing, and app/[slug]/data.ts's
  * richer Listing) from that same fetch — one network round trip, two views.
  */
 
 import type { Listing } from "@/app/home-search/listings";
-import type { Listing as DetailListing, Feature, HistoryItem } from "@/app/property/[slug]/data";
+import type { Listing as DetailListing, Feature, HistoryItem } from "@/app/[slug]/data";
 import type { PropertyItem } from "@/app/property/PropertyCard";
 
 const STATE_ABBR: Record<string, string> = {
@@ -182,7 +182,7 @@ function monthDayYear(iso: string | undefined): string {
   return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
-/** Detail-page shape (app/property/[slug]/data.ts's Listing) — uses the
+/** Detail-page shape (app/[slug]/data.ts's Listing) — uses the
  *  `advanced` field bag for Interior/Exterior/Details, remarksConcat for
  *  the overview copy, and synthesizes a short history from dateAdded/
  *  soldDate rather than fabricating a full transaction history (IDX has no

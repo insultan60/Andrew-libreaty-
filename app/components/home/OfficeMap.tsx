@@ -28,7 +28,7 @@ export default function OfficeMap() {
             mapType="map"
             officeMarker={OFFICE}
             onOpen={(l) => {
-              window.location.href = `/property/${l.slug}`;
+              window.location.href = `/${l.slug}`;
             }}
           />
         </div>

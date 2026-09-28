@@ -1,5 +1,5 @@
 /** Shared types for the property detail page. Real listing data is fetched
- *  at runtime via lib/idx.ts's toDetailListing() — see app/property/[slug]/page.tsx. */
+ *  at runtime via lib/idx.ts's toDetailListing() — see app/[slug]/page.tsx. */
 
 export type Feature = { label: string; value: string };
 export type HistoryItem = { event: string; sub: string; price?: string };

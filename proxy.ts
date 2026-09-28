@@ -15,6 +15,12 @@ import type { NextRequest } from "next/server";
  *                                     id that is no longer in use.
  *   /home-search/auth/*               the old account flow.
  *   /neighborhoods/*                  the nested neighbourhood pages.
+ *   /property/<slug>                  the old detail-page location. Detail
+ *                                     pages now live at the site root, e.g.
+ *                                     /541-martos-drive-south-pasadena-91030.
+ *                                     /property, /property/active and
+ *                                     /property/sold are live listing pages
+ *                                     and are held open in KEEP_EXACT below.
  *   /agent, /agent/*                  the old agent profile pages. Note this
  *                                     is distinct from /real-estate-agent-in-*,
  *                                     which are live - the prefix below is
@@ -41,6 +47,7 @@ const GONE_PREFIXES = [
   "/home-search/auth/",
   "/neighborhoods/",
   "/agent/",
+  "/property/",
 ];
 
 /**
@@ -48,7 +55,13 @@ const GONE_PREFIXES = [
  * matcher that is looser than intended can never take a working page off the
  * site - the decision to serve 410 is made here, not by the matcher.
  */
-const KEEP_EXACT = new Set(["/neighborhoods", "/home-search", "/property"]);
+const KEEP_EXACT = new Set([
+  "/neighborhoods",
+  "/home-search",
+  "/property",
+  "/property/active",
+  "/property/sold",
+]);
 
 function isGone(pathname: string): boolean {
   // Trailing slashes arrive from old inbound links; treat /properties/ as
@@ -131,5 +144,6 @@ export const config = {
     "/neighborhoods/:path+",
     "/agent",
     "/agent/:path+",
+    "/property/:path+",
   ],
 };

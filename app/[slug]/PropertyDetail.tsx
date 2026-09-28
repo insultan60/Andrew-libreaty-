@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRight } from "../../components/icons";
-import { SmsIcon, ShareIcon, WhatsappIcon } from "../../components/vuesax";
+import { ArrowRight } from "../components/icons";
+import { SmsIcon, ShareIcon, WhatsappIcon } from "../components/vuesax";
 import PropertyMap from "./PropertyMap";
 import { createLead } from "@/lib/idx";
 import { useLead } from "@/hooks/useLead";

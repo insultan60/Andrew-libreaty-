@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
-import PropertyMap from "../property/[slug]/PropertyMap";
+import PropertyMap from "../[slug]/PropertyMap";
 import {
   SmsIcon, LocationIcon, InstagramIcon, FacebookIcon, LinkedInIcon, CompassIcon, StarIcon, WhatsappIcon,
 } from "../components/vuesax";

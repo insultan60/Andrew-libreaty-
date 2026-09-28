@@ -212,7 +212,7 @@ export default function HomeSearchClient() {
   const openDetails = (l: Listing) => {
     setMenuOpen(null);
     // eslint-disable-next-line react-hooks/immutability -- full navigation, not a render-owned value
-    window.location.href = `/property/${l.slug}`;
+    window.location.href = `/${l.slug}`;
   };
   const menuAction = (act: string, l: Listing) => {
     setMenuOpen(null);
@@ -722,7 +722,7 @@ function ListingCard({
           button and the options menu keep their own clicks. */}
       <a
         className="lc-hit"
-        href={`/property/${l.slug}`}
+        href={`/${l.slug}`}
         aria-label={`View details for ${l.addr}, ${l.city}`}
       />
       <div className="lc-media">
