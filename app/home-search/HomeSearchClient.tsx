@@ -424,7 +424,6 @@ export default function HomeSearchClient() {
                     l={l}
                     saved={saved.has(l.mls)}
                     menuOpen={menuOpen === l.id}
-                    onCard={() => openDetails(l)}
                     onSave={() => toggleSave(l)}
                     onShare={() => openShare(l)}
                     onToggleMenu={() => setMenuOpen((m) => (m === l.id ? null : l.id))}
@@ -669,7 +668,6 @@ function ListingCard({
   l,
   saved,
   menuOpen,
-  onCard,
   onSave,
   onShare,
   onToggleMenu,
@@ -678,7 +676,6 @@ function ListingCard({
   l: Listing;
   saved: boolean;
   menuOpen: boolean;
-  onCard: () => void;
   onSave: () => void;
   onShare: () => void;
   onToggleMenu: () => void;
@@ -711,7 +708,24 @@ function ListingCard({
 
   return (
     <article className="listing-card">
-      <div className="lc-media" onClick={onCard}>
+      {/* Whole-card hit target. A real <a> stretched over the card rather than
+          an onClick on <article>, so the card behaves like the link it is:
+          ctrl- or middle-click opens the detail page in a new tab, right-click
+          offers "copy link address", the URL appears in the status bar on
+          hover, and a crawler can follow it to the listing.
+
+          Plain <a> rather than next/link on purpose - this matches the full
+          navigation openDetails already did, and a results page renders enough
+          cards that viewport prefetching them all would be its own problem.
+
+          It sits on the layer below the controls, so the heart, the share
+          button and the options menu keep their own clicks. */}
+      <a
+        className="lc-hit"
+        href={`/property/${l.slug}`}
+        aria-label={`View details for ${l.addr}, ${l.city}`}
+      />
+      <div className="lc-media">
         <Thumb src={l.img} alt={`${l.addr}, ${l.city}`} />
         <span className={`lc-status${l.status !== "Active" ? " is-coming" : ""}`}>{l.status}</span>
         <div className="lc-quick">
@@ -754,12 +768,12 @@ function ListingCard({
         {specs}
         <p className="lc-addr">{l.addr}, {l.city} CA, {l.zip}</p>
         <p className="lc-mls">MLS®: {l.mls}</p>
-        <button className="lc-view" onClick={onCard} aria-label={`View details for ${l.addr}`}>
+        <span className="lc-view">
           <span>View Details</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
             <path d="M5 12h14M13 6l6 6-6 6" />
           </svg>
-        </button>
+        </span>
       </div>
     </article>
   );

@@ -156,9 +156,20 @@ body.map-view .results-col { display: none; }
 }
 .listing-card:hover { box-shadow: var(--shadow-float); transform: translateY(-3px); }
 
+/* The stretched link that makes the whole card clickable. It covers the card
+   and sits on the layer just above the content but below the controls, so a
+   click anywhere that is not the heart, the share button or the options menu
+   lands on the anchor and goes to the listing. */
+.lc-hit { position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.lc-hit:focus-visible { outline: 2px solid var(--gold); outline-offset: -3px; }
+
+/* Controls ride above the hit layer and keep their own clicks. */
+.lc-quick { z-index: 2; }
+.lc-options { z-index: 2; }
+
 /* 378 x 300 in the design comp — kept as a ratio so the image fills whatever
    width the card lands on and holds the intended proportion. */
-.lc-media { position: relative; aspect-ratio: 378 / 300; overflow: hidden; background: var(--ivory-deep); cursor: pointer; }
+.lc-media { position: relative; aspect-ratio: 378 / 300; overflow: hidden; background: var(--ivory-deep); }
 .lc-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease-out); }
 .listing-card:hover .lc-media img { transform: scale(1.05); }
 .lc-status {
@@ -204,8 +215,8 @@ body.map-view .results-col { display: none; }
   transition: color var(--dur);
 }
 .lc-view svg { width: 16px; height: 16px; transition: transform var(--dur); }
-.lc-view:hover { color: var(--gold-deep); }
-.lc-view:hover svg { transform: translateX(4px); }
+.listing-card:hover .lc-view { color: var(--gold-deep); }
+.listing-card:hover .lc-view svg { transform: translateX(4px); }
 
 /* 3-dot options */
 .lc-options { position: relative; flex: none; }
