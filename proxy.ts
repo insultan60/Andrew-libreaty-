@@ -15,6 +15,11 @@ import type { NextRequest } from "next/server";
  *                                     id that is no longer in use.
  *   /home-search/auth/*               the old account flow.
  *   /neighborhoods/*                  the nested neighbourhood pages.
+ *   /agent, /agent/*                  the old agent profile pages. Note this
+ *                                     is distinct from /real-estate-agent-in-*,
+ *                                     which are live - the prefix below is
+ *                                     anchored at /agent/ so it cannot reach
+ *                                     them.
  *
  * 410 rather than 404 on purpose: a 404 means "not found, maybe later", and
  * crawlers keep coming back to check. 410 means "deliberately gone", and
@@ -27,7 +32,7 @@ import type { NextRequest } from "next/server";
  */
 
 /** Exact paths that are gone. */
-const GONE_EXACT = new Set(["/properties", "/home-search/listings"]);
+const GONE_EXACT = new Set(["/properties", "/home-search/listings", "/agent"]);
 
 /** Everything under these prefixes is gone. */
 const GONE_PREFIXES = [
@@ -35,6 +40,7 @@ const GONE_PREFIXES = [
   "/home-search/listings/",
   "/home-search/auth/",
   "/neighborhoods/",
+  "/agent/",
 ];
 
 /**
@@ -123,5 +129,7 @@ export const config = {
     "/home-search/listings/:path+",
     "/home-search/auth/:path+",
     "/neighborhoods/:path+",
+    "/agent",
+    "/agent/:path+",
   ],
 };
