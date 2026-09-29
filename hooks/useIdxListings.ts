@@ -22,11 +22,23 @@ function loadListings(): Promise<RawIdxListing[]> {
 
 /** Real IDX Broker listings (featured/active + sold/pending) for this
  *  account. Returns the raw combined array — call toListing()/
- *  toDetailListing() from lib/idx.ts to get the shape a given page needs. */
-export function useIdxListings(): ListingsState {
-  const [state, setState] = useState<ListingsState>({ data: null, loading: true, error: null });
+ *  toDetailListing() from lib/idx.ts to get the shape a given page needs.
+ *
+ *  `initial` lets a server component hand over listings it has already
+ *  fetched. When it is supplied the hook starts populated and never fetches:
+ *  the markup is then identical on both sides, which is what lets the page be
+ *  indexed with real content instead of an empty shell. Every existing caller
+ *  passes nothing and behaves exactly as before. */
+export function useIdxListings(initial?: RawIdxListing[] | null): ListingsState {
+  const seeded = Boolean(initial && initial.length > 0);
+  const [state, setState] = useState<ListingsState>(
+    seeded
+      ? { data: initial as RawIdxListing[], loading: false, error: null }
+      : { data: null, loading: true, error: null }
+  );
 
   useEffect(() => {
+    if (seeded) return;
     let cancelled = false;
     loadListings()
       .then((data) => {
@@ -40,7 +52,7 @@ export function useIdxListings(): ListingsState {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [seeded]);
 
   return state;
 }

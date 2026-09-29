@@ -109,7 +109,7 @@ function simpleType(raw: RawIdxListing): string {
  *  sale sitting beside $3.8M closings. Nothing in the site presents rentals as
  *  a category, so they are dropped here at the fetch rather than at each of the
  *  five places sold listings are rendered. */
-function isLease(raw: RawIdxListing): boolean {
+export function isLease(raw: RawIdxListing): boolean {
   return (raw.propType || "").toLowerCase().includes("lease");
 }
 

@@ -15,6 +15,7 @@ import FiltersDrawer from "./FiltersDrawer";
 import MapPanel from "./MapPanel";
 import SaveSearchButton from "./SaveSearchButton";
 import { useIdxListings } from "@/hooks/useIdxListings";
+import type { RawIdxListing } from "@/lib/idx";
 import { toListing, fetchSystemLinks } from "@/lib/idx";
 import { useLead } from "@/hooks/useLead";
 import { listFavoriteMlsIds, addFavorite, removeFavorite } from "@/lib/favorites";
@@ -57,7 +58,15 @@ const SEG_VALS = [
   { val: 3, label: "3+" }, { val: 4, label: "4+" }, { val: 5, label: "5+" },
 ];
 
-export default function HomeSearchClient() {
+export default function HomeSearchClient({
+  initialListings,
+}: {
+  /** Listings fetched on the server so the first paint - and the HTML Google
+   *  indexes - already carries real addresses and prices. Null when the feed
+   *  was unreachable at build/request time, in which case this falls back to
+   *  fetching them in the browser exactly as before. */
+  initialListings?: RawIdxListing[] | null;
+}) {
   const [state, setState] = useState<SearchState>(DEFAULT_STATE);
   const [searchValue, setSearchValue] = useState("");
   const [openPop, setOpenPop] = useState<{ key: PopKey; left: number; top: number } | null>(null);
@@ -78,7 +87,7 @@ export default function HomeSearchClient() {
   const searchTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   /* ---------- Live IDX listings ---------- */
-  const { data: rawListings, loading } = useIdxListings();
+  const { data: rawListings, loading } = useIdxListings(initialListings);
   const listings = useMemo(
     () => (rawListings ?? []).map((raw, i) => toListing(raw, i)),
     [rawListings]
@@ -397,8 +406,29 @@ export default function HomeSearchClient() {
             <div className="results-head">
               <div>
                 <h1 className="results-title">Real Estate &amp; Homes for Sale</h1>
+                {/*
+                  Never render "0 results" before the feed has answered.
+
+                  The count used to print unconditionally, so the server HTML -
+                  the version Google indexes first, and the one it judges the
+                  page on if its renderer gives up early - read "0 results"
+                  directly above "Loading listings...". "No results" on a 200 is
+                  the textbook soft 404 signal: Google treats a page that tells
+                  a user there is nothing here as a missing page, whatever the
+                  status code says. Listings only arrive about 5s later, from
+                  three client-side IDX calls.
+
+                  While loading, the count says what is actually true - that it
+                  is still counting - and the real number replaces it once known.
+                */}
                 <p className="results-count">
-                  <span>{resultCountText}</span> results
+                  {loading ? (
+                    <span>Searching listings&hellip;</span>
+                  ) : (
+                    <>
+                      <span>{resultCountText}</span> results
+                    </>
+                  )}
                 </p>
               </div>
               <label className="sort-wrap">

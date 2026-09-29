@@ -65,21 +65,35 @@ export const AGENT = {
    */
   logo: "/al-logo-lockup.png",
   /**
-   * The list supplied with the SEO schema, with two deliberate differences:
+   * Identity profiles for the BUSINESS entity.
    *
-   * - Instagram points at the profile root rather than .../reels/. sameAs is an
-   *   identity claim — "this entity is that profile" — so it wants the profile,
-   *   not one tab inside it. The reels URL resolves, so this is a refinement
-   *   rather than a fix.
-   * - Facebook is GONE because the supplied list omits it. Flagging it here
-   *   rather than quietly keeping it: if that was an oversight rather than a
-   *   decision, restoring the line is the whole fix.
-   *     "https://www.facebook.com/andrew.liberty.90",
+   * Instagram points at the profile root rather than .../reels/: sameAs is an
+   * identity claim — "this entity is that profile" — so it wants the profile,
+   * not one tab inside it.
+   *
+   * Facebook was previously dropped here, because the first schema we were sent
+   * omitted it and it was not clear whether that was a decision or an oversight.
+   * The revised schema includes it, so it is back — that question is answered.
    */
   sameAs: [
     "https://www.instagram.com/iamandrewliberty",
     "https://www.linkedin.com/in/andrew-liberty-7768431a9",
     "https://www.youtube.com/@andrewlibertyrealestate",
+    "https://www.facebook.com/andrew.liberty.90/",
+    "https://www.compass.com/agents/andrew-liberty/",
+  ],
+
+  /**
+   * The PERSON's profiles. Same list plus IMDb, which belongs to Andrew the
+   * actor rather than to the brokerage practice — putting a filmography on a
+   * RealEstateAgent node would be claiming the business is the credit.
+   */
+  personSameAs: [
+    "https://www.imdb.com/name/nm5280936/",
+    "https://www.instagram.com/iamandrewliberty",
+    "https://www.youtube.com/@andrewlibertyrealestate",
+    "https://www.linkedin.com/in/andrew-liberty-7768431a9",
+    "https://www.facebook.com/andrew.liberty.90/",
     "https://www.compass.com/agents/andrew-liberty/",
   ],
 } as const;
@@ -124,12 +138,20 @@ export const OPENING_HOURS = [
   closes: "19:00",
 }));
 
-/** Everywhere the team actually works — used for schema areaServed. */
+/**
+ * Everywhere the team actually works, as schema areaServed place names.
+ *
+ * These are now written out in full rather than being built by appending
+ * ", Los Angeles, CA" to a short name. That template produced "Pasadena, Los
+ * Angeles, CA", and Pasadena is not in the city of Los Angeles — it is its own
+ * incorporated city in LA County. A place name that does not exist is worse
+ * than a vaguer one, because it is the string Google tries to resolve.
+ */
 export const AREAS_SERVED = [
-  "Studio City",
-  "Sherman Oaks",
-  "Valley Village",
-  "Hollywood Hills",
-  "Laurel Canyon",
-  "Pasadena",
+  "Studio City, Los Angeles, CA",
+  "Sherman Oaks, Los Angeles, CA",
+  "Valley Village, Los Angeles, CA",
+  "Hollywood Hills, Los Angeles, CA",
+  "Laurel Canyon, Los Angeles, CA",
+  "Pasadena, CA",
 ] as const;

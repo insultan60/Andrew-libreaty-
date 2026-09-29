@@ -19,9 +19,8 @@ import Footer from "./components/Footer";
 import GlobalEffects from "./components/GlobalEffects";
 import MobileCtaBar from "./components/MobileCtaBar";
 import AuthModal from "./components/AuthModal";
-import JsonLd from "./components/JsonLd";
 import { LeadProvider } from "@/hooks/useLead";
-import { SITE_URL, SITE_NAME, AGENT, AREAS_SERVED, ADDRESS, OPENING_HOURS, abs } from "@/lib/site";
+import { SITE_URL, SITE_NAME } from "@/lib/site";
 
 const fraunces = Fraunces({
   subsets: ["latin"],
@@ -109,45 +108,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        {/* Site-wide identity. Sits in the layout so every route carries it. */}
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "RealEstateAgent",
-            "@id": `${SITE_URL}/#agent`,
-            /* "Andrew Liberty", per the supplied schema — not SITE_NAME
-               ("Andrew Liberty Team"). The entity Google is being asked to
-               recognise is the agent, and that is the name on the licence, the
-               Compass profile and every sameAs below. SITE_NAME still drives
-               page titles and Open Graph, which is a different job. */
-            name: AGENT.name,
-            /* The supplied schema has https://andrewliberty.com — the APEX —
-               and that was right. This briefly forced www on the mistaken
-               belief that the apex redirects there; production says the
-               opposite (see SITE_URL in lib/site.ts). SITE_URL is now the apex,
-               so this matches both the supplied schema and every canonical. */
-            url: SITE_URL,
-            image: abs(AGENT.image),
-            logo: abs(AGENT.logo),
-            telephone: AGENT.phone,
-            email: AGENT.email,
-            address: ADDRESS,
-            openingHoursSpecification: OPENING_HOURS,
-            areaServed: AREAS_SERVED.map((name) => ({
-              "@type": "Place",
-              name: `${name}, Los Angeles, CA`,
-            })),
-            sameAs: AGENT.sameAs,
-            employee: {
-              "@type": "Person",
-              name: AGENT.name,
-              alternateName: AGENT.legalName,
-              jobTitle: AGENT.jobTitle,
-              identifier: AGENT.licence,
-              worksFor: { "@type": "Organization", name: AGENT.brokerage },
-            },
-          }}
-        />
+        {/*
+          The RealEstateAgent / Person identity used to be emitted here, which
+          put the same entity on every route - twenty-odd copies of one
+          business. It now lives once, on the home page, as a single @graph.
+          That is the pattern the rest of the site already assumed: the
+          neighbourhood pages reference `${SITE_URL}/#agent` as the provider of
+          their Service nodes, and an @id is meant to be DEFINED once and
+          REFERENCED everywhere else, not restated on every page.
+        */}
         <LeadProvider>
           <GlobalEffects />
           <a className="skip-link" href="#main">
