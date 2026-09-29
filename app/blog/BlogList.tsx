@@ -84,7 +84,6 @@ export default function BlogList({ posts }: { posts: Post[] }) {
               {visible.map((p) => (
                 <a className="bl-card" key={p.title} href={`/blog/${p.slug}`} aria-label={p.title}>
                   <div className="bl-card-media">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={p.img} alt="" loading="lazy" />
                   </div>
                   <div className="bl-card-body">
