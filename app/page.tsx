@@ -46,6 +46,14 @@ export const metadata: Metadata = {
  * Footer and Contact page actually display. Google cross-checks those against
  * the visible page, and a mismatch is worse than an omission.
  */
+/* Repeated verbatim on the WebSite and WebPage nodes in the supplied schema,
+   so they are declared once here rather than typed out twice. */
+const SITE_KEYWORDS =
+  "real estate agent in Los Angeles, Los Angeles real estate agent, Andrew Liberty";
+
+const AGENT_KEYWORDS =
+  "real estate agent in Los Angeles, Los Angeles real estate agent, Studio City real estate agent, Compass agent";
+
 const IDENTITY = {
   "@context": "https://schema.org",
   "@graph": [
@@ -57,6 +65,7 @@ const IDENTITY = {
       alternateName: ["Andrew Liberty Team", "andrewliberty.com"],
       description:
         "Official website of Andrew Liberty, a Certified Real Estate Negotiation Expert with Compass, offering strategic guidance for buyers, sellers, and investors across Los Angeles.",
+      keywords: SITE_KEYWORDS,
       inLanguage: "en-US",
       publisher: { "@id": `${SITE_URL}/#agent` },
     },
@@ -64,9 +73,10 @@ const IDENTITY = {
       "@type": "WebPage",
       "@id": `${SITE_URL}/#webpage`,
       url: SITE_URL,
-      name: "Andrew Liberty | Los Angeles Real Estate Agent – Compass",
+      name: "Real Estate Agent in Los Angeles | Certified Negotiator - Andrew Liberty",
       description:
         "Work directly with Andrew Liberty, a Certified Real Estate Negotiation Expert in Los Angeles. Get a free consultation for buying, selling, or investing in Los Angeles real estate.",
+      keywords: SITE_KEYWORDS,
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#andrew` },
       primaryImageOfPage: abs(AGENT.image),
@@ -79,6 +89,7 @@ const IDENTITY = {
       alternateName: "Andrew Liberty Team",
       description:
         "Andrew Liberty is a real estate agent in Los Angeles and Certified Real Estate Negotiation Expert with Compass, helping buyers, sellers, and investors in Studio City, Sherman Oaks, Valley Village, Hollywood Hills, Laurel Canyon, and Pasadena.",
+      keywords: AGENT_KEYWORDS,
       url: SITE_URL,
       image: abs(AGENT.image),
       logo: abs(AGENT.logo),
