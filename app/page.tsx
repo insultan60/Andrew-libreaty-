@@ -22,11 +22,23 @@ import {
   abs,
 } from "@/lib/site";
 
+/* The one place the home page's title is written. The schema's WebPage.name
+   reads from it too, so the <title> tag and the structured data cannot say two
+   different things about the same page. */
+const HOME_TITLE = "Real Estate Agent in Los Angeles | Certified Negotiator - Andrew Liberty";
+
+const HOME_DESCRIPTION =
+  "Work directly with Andrew Liberty, a Certified Real Estate Negotiation Expert in Los Angeles. Get a free consultation for buying, selling, or investing in Los Angeles real estate.";
+
 export const metadata: Metadata = {
-  title: "Real Estate Agent in Los Angeles | Certified Negotiator",
-  description:
-    "Work directly with Andrew Liberty, a Certified Real Estate Negotiation Expert in Los Angeles. Get a free consultation, no directories, no waiting.",
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
   alternates: { canonical: "/" },
+  /* The layout sets Open Graph and Twitter titles site-wide from its own
+     constant. Without these two the card shared from the home page would carry
+     a different headline from the page itself. */
+  openGraph: { title: HOME_TITLE, description: HOME_DESCRIPTION, url: SITE_URL },
+  twitter: { title: HOME_TITLE, description: HOME_DESCRIPTION },
 };
 
 
@@ -73,9 +85,8 @@ const IDENTITY = {
       "@type": "WebPage",
       "@id": `${SITE_URL}/#webpage`,
       url: SITE_URL,
-      name: "Real Estate Agent in Los Angeles | Certified Negotiator - Andrew Liberty",
-      description:
-        "Work directly with Andrew Liberty, a Certified Real Estate Negotiation Expert in Los Angeles. Get a free consultation for buying, selling, or investing in Los Angeles real estate.",
+      name: HOME_TITLE,
+      description: HOME_DESCRIPTION,
       keywords: SITE_KEYWORDS,
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#andrew` },
