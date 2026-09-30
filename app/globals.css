@@ -991,16 +991,20 @@ ul, ol { list-style: none; }
 }
 @keyframes quote-drift { from { transform: translateX(-50%) translateY(0); } to { transform: translateX(-50%) translateY(8px); } }
 
-.testimonial-track { position: relative; min-height: 240px; }
+/* Every slide sits in the same grid cell, so the track is always as tall as
+   the LONGEST quote. It used to size to whichever slide was active, which
+   changed height on each 6s auto-advance and shoved the rest of the page up
+   and down underneath the reader. */
+.testimonial-track { display: grid; min-height: 240px; }
 
 .testimonial {
-  position: absolute; inset: 0;
+  grid-area: 1 / 1;
   opacity: 0; transform: translateY(16px);
   transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out);
   pointer-events: none;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
 }
-.testimonial.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; position: relative; }
+.testimonial.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
 .testimonial p {
   font-family: var(--font-display); font-weight: 400;
@@ -1089,7 +1093,7 @@ ul, ol { list-style: none; }
 .section-final {
   background: var(--ivory);
   text-align: center;
-  padding: 130px 0;
+  padding: 80px 0;
 }
 .final-inner { max-width: 760px; margin-inline: auto; }
 .final-title {
