@@ -159,26 +159,19 @@
 
 .hood-glance-table tbody tr:nth-child(even) { background: var(--ivory); }
 
-/* Follow-up prompt under the table: for readers the table did not settle. */
-.hood-glance-cta {
-  max-width: 640px;
-  margin: 64px auto 0;
-  text-align: center;
-}
-.hood-glance-cta h2 {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: clamp(28px, 3.6vw, 40px);
-  line-height: 1.1;
-  color: var(--ink);
-}
-.hood-glance-cta p {
-  margin: 16px auto 0;
-  font-size: 17px;
+/* "Not Sure Which Area Fits?" reuses the property pages' search-band card,
+   which only carries a heading; this adds room for its line of copy. */
+.hood-fit-band { flex-wrap: nowrap; }
+.hood-fit-band p {
+  margin-top: 10px;
+  font-size: 16.5px;
   color: var(--muted);
-  max-width: 54ch;
+  max-width: 58ch;
 }
-.hood-glance-cta .btn { margin-top: 28px; }
+.hood-fit-band .btn { flex-shrink: 0; }
+@media (max-width: 680px) {
+  .hood-fit-band { flex-wrap: wrap; }
+}
 
 /* Phones: three columns do not fit, so each row becomes a small card with the
    neighborhood as its heading and the two facts labelled beneath it. */
