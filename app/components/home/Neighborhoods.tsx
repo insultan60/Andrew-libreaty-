@@ -5,8 +5,9 @@ export type Hood = {
   name: string;
   desc: string;
   img: string;
-  /** Where the card goes. Defaults to the neighborhoods index. */
-  href?: string;
+  /** Where the card goes: that neighborhood's own page. Required, so a card
+   *  can never quietly fall back to the /neighborhoods hub. */
+  href: string;
   /** Card link text. Defaults to "Learn More"; the Valley Village and
    *  Sherman Oaks briefs name theirs ("Explore Studio City"), which reads
    *  better anyway when the card leads to that neighborhood's own page. */
@@ -19,6 +20,7 @@ const DEFAULT_HOODS: Hood[] = [
     name: "Studio City",
     desc: "Village feel south of the Boulevard, minutes from the studios, with sought-after schools.",
     img: "/images/studio-city.jpg",
+    href: "/real-estate-agent-in-studio-city",
   },
   {
     coords: "Los Angeles · The Hills",
@@ -32,6 +34,7 @@ const DEFAULT_HOODS: Hood[] = [
     name: "Hollywood Hills",
     desc: "Skyline views and architectural pedigree that holds value across market cycles.",
     img: "/images/hollywood-hills.jpg",
+    href: "/real-estate-agent-in-hollywood-hills",
   },
 ];
 
@@ -62,7 +65,7 @@ export default function Neighborhoods({
           {hoods.map((hood, i) => (
             <a
               key={hood.name}
-              href={hood.href ?? "/neighborhoods"}
+              href={hood.href}
               className="hood-card reveal"
               data-reveal-delay={i === 0 ? undefined : i * 100}
               aria-label={`Learn more about ${hood.name}`}
