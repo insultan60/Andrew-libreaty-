@@ -33,6 +33,18 @@ export const SITE_URL = (
 
 export const SITE_NAME = "Andrew Liberty Team";
 
+/**
+ * The Google Tag Manager container installed site-wide.
+ *
+ * It lives here rather than inline in the root layout because two places now
+ * need to agree on it: the layout that loads the container, and the dashboard's
+ * Connections panel, which tells whoever reads it which container is on the
+ * site. A hard-coded string in both would eventually drift, and the failure
+ * would be silent — the panel would confidently name a container that is not
+ * the one actually running.
+ */
+export const GTM_CONTAINER_ID = "GTM-NC52RXBT";
+
 /** Absolute URL for a site-relative path. */
 export const abs = (path: string) =>
   `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
@@ -124,19 +136,21 @@ export const ADDRESS = {
  * in both components and this constant together.
  */
 export const OPENING_HOURS = [
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-].map((dayOfWeek) => ({
-  "@type": "OpeningHoursSpecification" as const,
-  dayOfWeek,
-  opens: "08:00",
-  closes: "19:00",
-}));
+  {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "08:00",
+    closes: "19:00",
+  },
+] as const;
 
 /**
  * Everywhere the team actually works, as schema areaServed place names.

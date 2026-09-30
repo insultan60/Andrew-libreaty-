@@ -1,7 +1,52 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { DASHBOARD_COOKIE, sessionToken } from "@/lib/dashboardAuth";
 
 /**
+ * This file does two unrelated jobs, and they live together because Next runs
+ * exactly one proxy per app: retiring dead URLs from the previous site, and
+ * gating /dashboard. They share nothing but this entry point, so each keeps
+ * its own section below and the dashboard gate returns before the 410 logic is
+ * ever consulted.
+ */
+
+/* ==========================================================================
+   1. The dashboard gate
+   ========================================================================== */
+
+/**
+ * Fail CLOSED: if DASHBOARD_PASSWORD is unset the route is refused outright
+ * rather than served. An open analytics page publishes the site's traffic, its
+ * best queries and its weakest pages to anyone who guesses the URL, so "not
+ * configured yet" has to mean "nobody gets in", never "everybody does".
+ *
+ * /dashboard/login is deliberately let through — it is the way in, and gating
+ * it would mean nobody could ever sign in. /api/dashboard/login is not under
+ * this prefix at all, so it is never matched.
+ */
+async function dashboardGate(req: NextRequest): Promise<NextResponse | null> {
+  const path = req.nextUrl.pathname;
+  if (path === "/dashboard/login" || path.startsWith("/dashboard/login/")) return null;
+
+  const password = process.env.DASHBOARD_PASSWORD;
+  if (!password) {
+    return new NextResponse(
+      "The dashboard is not configured. Set DASHBOARD_PASSWORD to enable it.",
+      { status: 503, headers: { "content-type": "text/plain", "x-robots-tag": "noindex" } },
+    );
+  }
+
+  const cookie = req.cookies.get(DASHBOARD_COOKIE)?.value;
+  if (cookie && cookie === (await sessionToken(password))) return null;
+
+  const loginUrl = new URL("/dashboard/login", req.url);
+  loginUrl.searchParams.set("next", path);
+  return NextResponse.redirect(loginUrl);
+}
+
+/* ==========================================================================
+   2. Retired URLs
+   --------------------------------------------------------------------------
  * Serves 410 Gone for the URL families carried over from the previous site.
  *
  * These paths are still being crawled and reported in Search Console, but
@@ -116,7 +161,11 @@ const BODY = `<!doctype html>
 </body>
 </html>`;
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
+  if (request.nextUrl.pathname.startsWith("/dashboard")) {
+    return (await dashboardGate(request)) ?? NextResponse.next();
+  }
+
   if (isGone(request.nextUrl.pathname)) {
     return new NextResponse(BODY, {
       status: 410,
@@ -130,12 +179,19 @@ export function proxy(request: NextRequest) {
 }
 
 /**
- * Narrow the paths proxy runs on. This is a performance filter only - isGone()
- * above is what actually decides. `:path+` requires at least one segment, so
- * the live /neighborhoods and /home-search index pages are not matched.
+ * Narrow the paths proxy runs on. For the retired URLs this is a performance
+ * filter only - isGone() above is what actually decides. `:path+` requires at
+ * least one segment, so the live /neighborhoods and /home-search index pages
+ * are not matched.
+ *
+ * For /dashboard it is load-bearing: this is what puts the gate in front of
+ * every section. Everything else on this site stays static and never touches
+ * an Edge function.
  */
 export const config = {
   matcher: [
+    "/dashboard",
+    "/dashboard/:path*",
     "/properties",
     "/properties/:path+",
     "/home-search/listings",
