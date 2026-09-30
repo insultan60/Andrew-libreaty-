@@ -24,7 +24,6 @@ const DEFAULT_CARDS: MoveCard[] = [
   {
     title: "Sell a Home",
     body: "Price it right, position it well, and let a certified negotiation expert handle offers on your Los Angeles home.",
-    proof: "Positioning · pricing · negotiation, handled",
     ctaLabel: "Get Home Value",
     href: "#valuation",
   },
