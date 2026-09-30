@@ -86,6 +86,13 @@ export default function Neighborhoods({
             </a>
           ))}
         </div>
+
+        <div className="hood-all reveal">
+          <a href="/neighborhoods" className="btn btn-secondary">
+            <span>Explore Neighborhoods</span>
+            <ArrowRight />
+          </a>
+        </div>
       </div>
     </section>
   );

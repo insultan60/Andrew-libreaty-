@@ -845,6 +845,7 @@ ul, ol { list-style: none; }
    Neighborhoods
    ========================================================================== */
 .hood-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.hood-all { margin-top: 40px; display: flex; justify-content: center; }
 
 .hood-card {
   position: relative; display: block;
