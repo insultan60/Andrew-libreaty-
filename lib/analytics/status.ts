@@ -1,4 +1,4 @@
-import { GTM_CONTAINER_ID } from "@/lib/site";
+import { GTM_CONTAINER_ID, GA4_MEASUREMENT_ID } from "@/lib/site";
 
 /**
  * What is actually wired up, and what is not.
@@ -59,13 +59,13 @@ function has(name: string): boolean {
  * which GA4 stream the container fires, nothing more, so it stays server-side.
  */
 export function collectionStatus(): SourceStatus {
-  const set = has("GA4_MEASUREMENT_ID");
+  const set = Boolean(GA4_MEASUREMENT_ID);
   return {
     key: "collection",
     title: "Tracking tag",
     state: set ? "live" : "missing",
     provides: set
-      ? `Tag Manager container ${GTM_CONTAINER_ID} is installed on every page, and the GA4 stream it fires is recorded as ${process.env.GA4_MEASUREMENT_ID}.`
+      ? `Tag Manager container ${GTM_CONTAINER_ID} is installed on every page, and the GA4 stream it fires is recorded as ${GA4_MEASUREMENT_ID}.`
       : `Tag Manager container ${GTM_CONTAINER_ID} is installed on every page, but nothing here confirms a GA4 tag inside it. If the container has no GA4 configuration tag, nothing is being recorded and no history is accumulating.`,
     vars: [
       {

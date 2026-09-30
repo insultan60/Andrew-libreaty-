@@ -45,6 +45,18 @@ export const SITE_NAME = "Andrew Liberty Team";
  */
 export const GTM_CONTAINER_ID = "GTM-NC52RXBT";
 
+/**
+ * The GA4 stream that the container above fires. Confirmed by reading the
+ * published container (gtm.js?id=GTM-NC52RXBT), which references this ID.
+ *
+ * This is a record, not an install: nothing renders it into the page, because
+ * the container already sends to it and a second tag would double-count every
+ * session. It is written here rather than left to an env var because it is
+ * public and fixed; GA4_MEASUREMENT_ID still overrides it if set.
+ */
+export const GA4_MEASUREMENT_ID =
+  process.env.GA4_MEASUREMENT_ID?.trim() || "G-QQP41ZEBBW";
+
 /** Absolute URL for a site-relative path. */
 export const abs = (path: string) =>
   `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
