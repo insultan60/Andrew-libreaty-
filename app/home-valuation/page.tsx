@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "../components/icons";
-import ValuationSearch from "./ValuationSearch";
+import Valuation from "../components/home/Valuation";
 
 export const metadata: Metadata = {
   title: "Home Valuation in Los Angeles | Free & Accurate",
@@ -84,15 +84,20 @@ export default function HomeValuationPage() {
   return (
     <>
       {/* ============ HERO ============ */}
-      <section className="val-hero" id="val-form">
+      <section className="val-hero">
         <div className="container">
           <h1 className="val-hero-title">Curious About Your Home Valuation?</h1>
           <p className="val-hero-sub">
             Enter your address and get a <b>free, no-obligation valuation</b> for your Los Angeles home.
           </p>
-          <ValuationSearch />
         </div>
       </section>
+
+      {/* ============ VALUATION FORM ============ */}
+      {/* The same form as the homepage. It replaced an address-only search bar
+          that showed a thank-you message but never sent the request anywhere,
+          so every valuation asked for through it was lost. */}
+      <Valuation />
 
       {/* ============ A VALUATION BUILT ON YOUR NEIGHBORHOOD ============ */}
       <section className="section">
@@ -117,7 +122,7 @@ export default function HomeValuationPage() {
               <li>Comes with context on how your number was calculated, not just a figure</li>
               <li>Can be followed up with a full Comparative Market Analysis or a licensed appraisal for even more precision</li>
             </ul>
-            <a href="#val-form" className="btn btn-secondary">
+            <a href="#valuation" className="btn btn-secondary">
               Get my valuation
               <ArrowRight />
             </a>
@@ -147,25 +152,8 @@ export default function HomeValuationPage() {
         </div>
       </section>
 
-      {/* ============ SEARCH BAND ============ */}
-      <section className="val-band-wrap">
-        <div className="container">
-          <div className="val-band reveal">
-            <div>
-              <p className="eyebrow">Start your property search</p>
-              <h2>Curious what your next move looks like?</h2>
-              <p>Browse active listings across Studio City, Sherman Oaks, the Hills and beyond.</p>
-            </div>
-            <a href="/home-search" className="btn btn-gold btn-magnetic">
-              <span>Browse Homes</span>
-              <ArrowRight />
-            </a>
-          </div>
-        </div>
-      </section>
-
       {/* ============ HOW WE CALCULATE YOUR HOME'S VALUE ============ */}
-      <section className="section" style={{ paddingTop: 0 }}>
+      <section className="section val-methods">
         <div className="container">
           <div className="section-head reveal">
             <p className="eyebrow">How it&rsquo;s done</p>
@@ -204,7 +192,7 @@ export default function HomeValuationPage() {
       </section>
 
       {/* ============ FINAL CTA ============ */}
-      <section className="section">
+      <section className="section val-final">
         <div className="container val-final-inner">
           <h2 className="reveal">Ready for your number?</h2>
           <p className="reveal" data-reveal-delay={60}>
@@ -212,7 +200,7 @@ export default function HomeValuationPage() {
             back to you within the hour.
           </p>
           <div className="val-final-ctas reveal" data-reveal-delay={120}>
-            <a href="#val-form" className="btn btn-primary btn-magnetic">
+            <a href="#valuation" className="btn btn-primary btn-magnetic">
               <span>Unlock Your Free Valuation</span>
               <ArrowRight />
             </a>
