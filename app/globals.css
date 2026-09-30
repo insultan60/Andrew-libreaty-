@@ -708,6 +708,10 @@ ul, ol { list-style: none; }
 .about-award-img--tall { height: 42px; }
 
 .about-ctas { margin-top: 32px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+/* Footer's social buttons, re-toned for the light ground of this section. */
+.about-social { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 10px; }
+.about-social .social-link { border-color: var(--line); color: var(--ink-soft); }
+.about-social .social-link:hover { color: var(--ink); border-color: var(--gold); background: var(--gold-tint); }
 
 /* ==========================================================================
    Recently Sold

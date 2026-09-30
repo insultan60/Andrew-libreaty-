@@ -8,7 +8,7 @@ import {
 const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/iamandrewliberty?igsi=cnZ3c3g4dmxsdWdu", Icon: InstagramIcon },
   { label: "Facebook", href: "https://www.facebook.com/andrew.liberty.90?mibextid=wwXIfr", Icon: FacebookIcon },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/andrew-liberty-55aa612a?utm_source=share_via&utm_content=profile&utm_medium=member_ios", Icon: LinkedInIcon },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/andrew-liberty-7768431a9", Icon: LinkedInIcon },
   { label: "Compass agent profile", href: "https://www.compass.com/agents/andrew-liberty/", Icon: CompassIcon },
   { label: "Google Reviews", href: "https://share.google/sbU7WzKUX9hpNJfOj", Icon: StarIcon },
 ];

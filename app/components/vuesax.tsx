@@ -123,6 +123,13 @@ export const ShieldTickIcon = (p: IconProps) => (
   </Svg>
 );
 
+export const YoutubeIcon = (p: IconProps) => (
+  <Svg strokeWidth={1.5} {...p}>
+    <path d="M17 20H7C4 20 2 18 2 15V9C2 6 4 4 7 4H17C20 4 22 6 22 9V15C22 18 20 20 17 20Z" />
+    <path d="M11.4 9.5L13.9 11C14.8 11.6 14.8 12.5 13.9 13.1L11.4 14.6C10.4 15.2 9.6 14.7 9.6 13.5V10.5C9.6 9.4 10.4 8.9 11.4 9.5Z" />
+  </Svg>
+);
+
 export const LinkedInIcon = (p: IconProps) => (
   <Svg strokeWidth={1.5} {...p}>
     <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4V8h4v2a5 5 0 0 1 2-2z" />

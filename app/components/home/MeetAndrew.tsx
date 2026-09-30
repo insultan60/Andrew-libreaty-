@@ -1,4 +1,20 @@
 import { ArrowRight } from "../icons";
+import { InstagramIcon, LinkedInIcon, YoutubeIcon, FacebookIcon, CompassIcon } from "../vuesax";
+import { AGENT } from "@/lib/site";
+
+/* Built from AGENT.sameAs so these links are the same profiles the
+   structured data names — one list, not two that can drift apart. */
+const SOCIAL_ICONS = [
+  { match: "instagram.com", label: "Instagram", Icon: InstagramIcon },
+  { match: "linkedin.com", label: "LinkedIn", Icon: LinkedInIcon },
+  { match: "youtube.com", label: "YouTube", Icon: YoutubeIcon },
+  { match: "facebook.com", label: "Facebook", Icon: FacebookIcon },
+  { match: "compass.com", label: "Compass agent profile", Icon: CompassIcon },
+];
+const SOCIALS = AGENT.sameAs.flatMap((href) => {
+  const icon = SOCIAL_ICONS.find((i) => href.includes(i.match));
+  return icon ? [{ ...icon, href }] : [];
+});
 
 const DEFAULT_BIO = [
   "I’m a Los Angeles based REALTOR® and Certified Real Estate Negotiation Expert who combines strategic thinking with real-world experience. With a background in commercial real estate, I bring a sharp eye for value and opportunity, whether that is a single-family home, an income property, or a development play.",
@@ -74,9 +90,17 @@ export default function MeetAndrew({
               <span>Schedule a Consultation</span>
               <ArrowRight />
             </a>
-            <a href="/team" className="btn btn-secondary">
+            <a href="/team/andrew-liberty" className="btn btn-secondary">
               Meet the Team
             </a>
+          </div>
+
+          <div className="about-social reveal" data-reveal-delay="340" aria-label="Andrew Liberty on social media">
+            {SOCIALS.map(({ label, href, Icon }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="social-link" aria-label={label}>
+                <Icon />
+              </a>
+            ))}
           </div>
         </div>
       </div>

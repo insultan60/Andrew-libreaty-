@@ -19,13 +19,13 @@ const DEFAULT_CARDS: MoveCard[] = [
     title: "Buy a Home",
     body: "Find the right home in Los Angeles at the right price, with a certified negotiator reading the market on your side.",
     ctaLabel: "Start Home Search",
-    href: "#sold",
+    href: "/home-search",
   },
   {
     title: "Sell a Home",
     body: "Price it right, position it well, and let a certified negotiation expert handle offers on your Los Angeles home.",
     ctaLabel: "Get Home Value",
-    href: "#valuation",
+    href: "/home-valuation",
   },
   {
     title: "Invest Strategically",
