@@ -53,6 +53,17 @@ const COLUMNS: Area[][] = [
   ],
 ];
 
+// Same order as the client's copy doc. Names link to each area's own page,
+// like the cards above; Pasadena has none yet, so it stays plain text.
+const GLANCE: { name: string; href?: string; homes: string; bestFor: string }[] = [
+  { name: "Studio City", href: "/real-estate-agent-in-studio-city", homes: "Single-family homes, condos, townhomes", bestFor: "Walkability and dining" },
+  { name: "Sherman Oaks", href: "/real-estate-agent-in-sherman-oaks", homes: "Flat-street and hillside homes", bestFor: "A suburban feel near Ventura Boulevard" },
+  { name: "Laurel Canyon", href: "/real-estate-agent-in-laurel-canyon", homes: "Hillside homes", bestFor: "Privacy and a wooded setting" },
+  { name: "Valley Village", href: "/real-estate-agent-in-valley-village", homes: "Single-family homes, multi-unit properties", bestFor: "Quiet streets near Studio City" },
+  { name: "Hollywood Hills", href: "/real-estate-agent-in-hollywood-hills", homes: "Hillside homes with views", bestFor: "Views and privacy" },
+  { name: "Pasadena, CA", homes: "Historic homes", bestFor: "Historic architecture and a walkable downtown" },
+];
+
 export default function NeighborhoodsPage() {
   return (
     <>
@@ -95,6 +106,49 @@ export default function NeighborhoodsPage() {
                 ))}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ AT A GLANCE ============ */}
+      <section className="hood-glance">
+        <div className="container">
+          <div className="section-head reveal">
+            <h2 className="section-title">Neighborhoods at a Glance</h2>
+          </div>
+          <div className="hood-glance-card reveal">
+            <table className="hood-glance-table">
+              <thead>
+                <tr>
+                  <th scope="col">Neighborhood</th>
+                  <th scope="col">Typical homes</th>
+                  <th scope="col">Best for</th>
+                </tr>
+              </thead>
+              <tbody>
+                {GLANCE.map((n) => (
+                  <tr key={n.name}>
+                    <th scope="row">
+                      {n.href ? <a href={n.href}>{n.name}</a> : n.name}
+                    </th>
+                    <td data-label="Typical homes">{n.homes}</td>
+                    <td data-label="Best for">{n.bestFor}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="hood-glance-cta reveal">
+            <h2>Not Sure Which Area Fits?</h2>
+            <p>
+              Tell Andrew your budget, timing, and what you want from a neighborhood. He will point
+              you to the areas worth seeing first.
+            </p>
+            <a href="/contact" className="btn btn-gold btn-magnetic">
+              <span>Contact Andrew</span>
+              <ArrowRight />
+            </a>
           </div>
         </div>
       </section>

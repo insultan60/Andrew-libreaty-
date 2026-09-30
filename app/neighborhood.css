@@ -94,6 +94,116 @@
   margin-inline: auto;
 }
 
+/* ---------- /neighborhoods: at-a-glance table ----------
+   Follows straight on from the areas grid, which already ends with 96px of
+   padding, so this section adds none on top — only below, before the search
+   band. */
+.hood-glance { padding: 0 0 96px; }
+.hood-glance .section-head { text-align: center; margin-inline: auto; margin-bottom: 36px; }
+
+.hood-glance-card {
+  max-width: 980px;
+  margin-inline: auto;
+  background: var(--paper);
+  border: 1px solid var(--line-soft);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.hood-glance-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.hood-glance-table thead th {
+  background: var(--brand);
+  color: var(--paper);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 16px 28px;
+}
+
+.hood-glance-table tbody th,
+.hood-glance-table td {
+  padding: 20px 28px;
+  border-top: 1px solid var(--line-soft);
+  vertical-align: top;
+  color: var(--ink-soft);
+}
+
+.hood-glance-table tbody tr:first-child th,
+.hood-glance-table tbody tr:first-child td { border-top: 0; }
+
+.hood-glance-table tbody th {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.hood-glance-table tbody th a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.hood-glance-table tbody th a:hover { color: var(--gold-deep); }
+
+.hood-glance-table tbody tr:nth-child(even) { background: var(--ivory); }
+
+/* Follow-up prompt under the table: for readers the table did not settle. */
+.hood-glance-cta {
+  max-width: 640px;
+  margin: 64px auto 0;
+  text-align: center;
+}
+.hood-glance-cta h2 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(28px, 3.6vw, 40px);
+  line-height: 1.1;
+  color: var(--ink);
+}
+.hood-glance-cta p {
+  margin: 16px auto 0;
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 54ch;
+}
+.hood-glance-cta .btn { margin-top: 28px; }
+
+/* Phones: three columns do not fit, so each row becomes a small card with the
+   neighborhood as its heading and the two facts labelled beneath it. */
+@media (max-width: 640px) {
+  .hood-glance { padding-bottom: 64px; }
+  .hood-glance-table thead { display: none; }
+  .hood-glance-table,
+  .hood-glance-table tbody,
+  .hood-glance-table tr,
+  .hood-glance-table th,
+  .hood-glance-table td { display: block; }
+  .hood-glance-table tbody tr { padding: 18px 20px; border-top: 1px solid var(--line-soft); }
+  .hood-glance-table tbody tr:first-child { border-top: 0; }
+  .hood-glance-table tbody th,
+  .hood-glance-table td { padding: 0; border: 0; white-space: normal; }
+  .hood-glance-table tbody th { margin-bottom: 8px; }
+  .hood-glance-table td { font-size: 15px; }
+  .hood-glance-table td + td { margin-top: 6px; }
+  .hood-glance-table td::before {
+    content: attr(data-label) ": ";
+    font-weight: 600;
+    color: var(--ink);
+  }
+}
+
 @media (max-width: 860px) {
   .nb-hero {
     min-height: 0;
