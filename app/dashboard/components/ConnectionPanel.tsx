@@ -43,6 +43,7 @@ function Source({ source }: { source: SourceStatus }) {
         <StatusChip state={source.state} />
       </div>
 
+      {source.fix ? <p className="dash-fix">{source.fix}</p> : null}
       {source.error ? <pre className="dash-err">{source.error}</pre> : null}
 
       {missing.length > 0 ? (

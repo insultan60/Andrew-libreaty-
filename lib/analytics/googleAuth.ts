@@ -30,7 +30,7 @@ export function serviceAccount(): { email: string; key: string } | null {
   if (!email || !raw) return null;
   // Hosts that store secrets as single-line strings keep the newlines escaped;
   // the PEM parser needs them real.
-  return { email, key: raw.replace(/\n/g, "\n") };
+  return { email, key: raw.replace(/\\n/g, "\n") };
 }
 
 // One token lasts an hour. Caching it keeps a dashboard refresh from doing a

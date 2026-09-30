@@ -231,6 +231,18 @@
   transition: background var(--dur) var(--ease-out), color var(--dur) var(--ease-out);
 }
 
+/* The sign-out is a form button so it can POST; strip the button chrome so it
+   reads as the same kind of row as the link above it. */
+button.dash-out {
+  width: 100%;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 12.5px;
+  text-align: left;
+  cursor: pointer;
+}
+
 .dash-out:hover {
   background: var(--dash-sunk);
   color: var(--ink);
@@ -1173,6 +1185,17 @@
   background: color-mix(in srgb, var(--state-off) 12%, transparent);
   color: var(--state-off);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--state-off) 26%, transparent);
+}
+
+.dash-fix {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.dash-fix code {
+  word-break: break-all;
 }
 
 .dash-err {

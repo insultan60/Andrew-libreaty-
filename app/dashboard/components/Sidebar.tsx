@@ -11,6 +11,7 @@ import {
   MenuIcon,
   PlugIcon,
   SearchIcon,
+  SignOutIcon,
   UsersIcon,
 } from "./icons";
 
@@ -100,10 +101,18 @@ export default function Sidebar({ liveCount, total }: { liveCount: number; total
   );
 
   const footer = (
-    <Link href="/" className="dash-out">
-      <ExternalIcon />
-      View the site
-    </Link>
+    <>
+      <Link href="/" className="dash-out">
+        <ExternalIcon />
+        View the site
+      </Link>
+      <form action="/api/dashboard/logout" method="POST">
+        <button type="submit" className="dash-out">
+          <SignOutIcon />
+          Sign out
+        </button>
+      </form>
+    </>
   );
 
   return (

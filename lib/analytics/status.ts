@@ -32,6 +32,33 @@ export interface SourceStatus {
   vars: VarStatus[];
   /** set when state === 'error' */
   error?: string;
+  /** set when the error is a known one: what to do about it, in words */
+  fix?: string;
+}
+
+/**
+ * Google's error bodies are JSON meant for developers. The two failures that
+ * actually happen here — the service account was never granted access, or the
+ * ID points at the wrong property — get a sentence naming the exact account
+ * to add, so whoever owns the Google login can act without reading a stack.
+ */
+function explain(source: "ga4" | "gsc", error?: string): string | undefined {
+  if (!error) return undefined;
+  const who = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL?.trim() || "the service account";
+  if (/\((403)\)/.test(error) || /PERMISSION_DENIED/.test(error)) {
+    return source === "ga4"
+      ? `Google Analytics refused access. Open analytics.google.com → Admin → Property access management on property ${process.env.GA4_PROPERTY_ID ?? ""} and add ${who} as a Viewer. If it is already there, GA4_PROPERTY_ID is pointing at a different property.`
+      : `Search Console refused access. Open search.google.com/search-console → Settings → Users and permissions and add ${who} as a Restricted user.`;
+  }
+  if (/\((404)\)/.test(error)) {
+    return source === "ga4"
+      ? "Google Analytics has no property with that ID. Check GA4_PROPERTY_ID against Admin → Property details — it is the number, not the G- ID."
+      : "Search Console has no property by that name. GSC_SITE_URL must match the property exactly, e.g. sc-domain:andrewliberty.com.";
+  }
+  if (/DECODER|PEM|private key/i.test(error)) {
+    return "The private key could not be read. Copy private_key from the service account JSON again, in quotes, with its literal backslash-n line breaks left as they are.";
+  }
+  return undefined;
 }
 
 function has(name: string): boolean {
@@ -103,6 +130,7 @@ export function ga4Status(error?: string): SourceStatus {
     provides: "Visitors, sessions, page views, devices, cities, and which pages get read.",
     vars,
     error,
+    fix: explain("ga4", error),
   };
 }
 
@@ -133,6 +161,7 @@ export function gscStatus(error?: string): SourceStatus {
       "Impressions, clicks, click-through rate, ranking position, and the queries people search. The site is already verified in Search Console, so the property exists — these variables only grant this page read access to it.",
     vars,
     error,
+    fix: explain("gsc", error),
   };
 }
 
