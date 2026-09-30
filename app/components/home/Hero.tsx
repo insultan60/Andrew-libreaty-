@@ -1,5 +1,4 @@
-import { ArrowRight } from "../icons";
-import { HomeHashtagIcon, DollarSquareIcon } from "../vuesax";
+import { HomeHashtagIcon, DollarSquareIcon, CalendarIcon } from "../vuesax";
 import HeroVideo from "./HeroVideo";
 
 export default function Hero() {
@@ -53,15 +52,9 @@ export default function Hero() {
               <DollarSquareIcon className="capsule-icon" />
               <span>Sell</span>
             </a>
-          </div>
-
-          <div className="hero-ctas reveal" data-reveal-delay="340">
-            <a href="#sold" className="btn btn-primary btn-magnetic">
-              <span>Browse Homes</span>
-              <ArrowRight />
-            </a>
-            <a href="#about" className="btn btn-ghost-light">
-              Meet Andrew
+            <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="capsule-item">
+              <CalendarIcon className="capsule-icon" />
+              <span>Schedule a Meeting</span>
             </a>
           </div>
         </div>

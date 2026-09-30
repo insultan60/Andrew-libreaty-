@@ -513,7 +513,6 @@ ul, ol { list-style: none; }
 }
 .capsule-item:hover + .capsule-item::before { opacity: 0; }
 
-.hero-ctas { margin-top: 30px; display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 
 /* Licensing credentials + Compass logo, bottom-right of the hero */
 .hero-compass {
@@ -1293,6 +1292,7 @@ ul, ol { list-style: none; }
   .hero-capsule { display: grid; grid-template-columns: 1fr 1fr; border-radius: var(--radius-md); width: 100%; }
   .capsule-item { justify-content: flex-start; border-radius: var(--radius-sm); padding: 13px 14px; }
   .capsule-item + .capsule-item::before { display: none; }
+  .capsule-item:nth-child(3) { grid-column: 1 / -1; }
 
   .hero-visual { min-height: 400px; }
   .hero-image-wrap { inset: 0 0 26px 20px; }
