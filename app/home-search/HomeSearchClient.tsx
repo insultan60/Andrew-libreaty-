@@ -409,8 +409,7 @@ export default function HomeSearchClient({
                 <p className="results-intro">
                   Search homes for sale in Los Angeles, CA, including Studio City, Sherman Oaks, and the
                   Hollywood Hills. Filter listings by price, bedrooms, bathrooms, and property type to match
-                  your budget. Andrew Liberty, a Los Angeles buyer agent, can schedule a tour when you find a
-                  home you like. Ready to buy a home in Los Angeles? Start your search above.
+                  your budget. Andrew Liberty, a Los Angeles buyer agent, can schedule a tour.
                 </p>
                 {/*
                   Never render "0 results" before the feed has answered.

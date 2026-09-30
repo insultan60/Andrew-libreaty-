@@ -28,7 +28,6 @@ export default function Hero() {
       <div className="hero-screen">
       <div className="hero-inner">
         <div className="hero-copy">
-          <p className="eyebrow reveal">Los Angeles · Compass</p>
           <h1 className="hero-title reveal" data-reveal-delay="80">
             Real Estate Agent in Los&nbsp;Angeles
             <br />
@@ -79,31 +78,7 @@ export default function Hero() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/AL logo 2.png" alt="Compass" className="hero-compass-logo" width={150} height={22} />
       </div>
-
-      <a href="#move" className="scroll-indicator" aria-label="Scroll to next section">
-        <span className="scroll-indicator-line" aria-hidden="true"></span>
-        <span className="scroll-indicator-text">Scroll</span>
-      </a>
       </div>
-
-      <ul className="hero-stats reveal" data-reveal-delay="380">
-        <li>
-          <span className="stat-num">REALTOR®</span>
-          <span className="stat-label">Licensed · CA DRE# 01965696</span>
-        </li>
-        <li>
-          <span className="stat-num">RENE</span>
-          <span className="stat-label">Certified Negotiation Expert</span>
-        </li>
-        <li>
-          <span className="stat-num">Compass</span>
-          <span className="stat-label">California affiliated</span>
-        </li>
-        <li>
-          <span className="stat-num">Studio City</span>
-          <span className="stat-label">Local market specialist</span>
-        </li>
-      </ul>
     </section>
   );
 }
