@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "../components/icons";
 import Valuation from "../components/home/Valuation";
+import Faq from "../components/home/Faq";
 
 export const metadata: Metadata = {
   title: "Home Valuation in Los Angeles | Free & Accurate",
@@ -82,13 +83,14 @@ const WHY = [
 
 export default function HomeValuationPage() {
   return (
-    <>
+    <div className="val-page">
       {/* ============ HERO ============ */}
       <section className="val-hero">
         <div className="container">
-          <h1 className="val-hero-title">Curious About Your Home Valuation?</h1>
+          <h1 className="val-hero-title">Free Home Valuation in Los Angeles</h1>
           <p className="val-hero-sub">
-            Enter your address and get a <b>free, no-obligation valuation</b> for your Los Angeles home.
+            Enter your address to get a free, no-obligation home valuation for your Los Angeles home.
+            Andrew Liberty reviews every valuation using recent comparable sales in your neighborhood.
           </p>
         </div>
       </section>
@@ -122,38 +124,12 @@ export default function HomeValuationPage() {
               <li>Comes with context on how your number was calculated, not just a figure</li>
               <li>Can be followed up with a full Comparative Market Analysis or a licensed appraisal for even more precision</li>
             </ul>
-            <a href="#valuation" className="btn btn-secondary">
-              Get my valuation
-              <ArrowRight />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ KNOW BEFORE YOU ASK ============ */}
-      <section className="section val-faq">
-        <div className="container">
-          <div className="section-head reveal">
-            <h2 className="section-title">Know Before You Ask</h2>
-          </div>
-          <div className="faq-list reveal" data-reveal-delay={100}>
-            {FAQS.map((f, i) => (
-              <details className="faq-item" key={f.q} open={i === 0}>
-                <summary>
-                  {f.q}
-                  <span className="faq-plus" aria-hidden="true" />
-                </summary>
-                <div className="faq-body">
-                  <p>{f.a}</p>
-                </div>
-              </details>
-            ))}
           </div>
         </div>
       </section>
 
       {/* ============ HOW WE CALCULATE YOUR HOME'S VALUE ============ */}
-      <section className="section val-methods">
+      <section className="section">
         <div className="container">
           <div className="section-head reveal">
             <p className="eyebrow">How it&rsquo;s done</p>
@@ -192,7 +168,7 @@ export default function HomeValuationPage() {
       </section>
 
       {/* ============ FINAL CTA ============ */}
-      <section className="section val-final">
+      <section className="section">
         <div className="container val-final-inner">
           <h2 className="reveal">Ready for your number?</h2>
           <p className="reveal" data-reveal-delay={60}>
@@ -210,6 +186,11 @@ export default function HomeValuationPage() {
           </div>
         </div>
       </section>
-    </>
+
+      {/* ============ KNOW BEFORE YOU ASK ============ */}
+      {/* Last on the page. The shared Faq component also emits the matching
+          FAQPage structured data from this same array. */}
+      <Faq title="Know Before You Ask" faqs={FAQS} />
+    </div>
   );
 }

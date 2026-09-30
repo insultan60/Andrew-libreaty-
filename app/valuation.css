@@ -15,10 +15,10 @@
   color: var(--gold-tint);
 }
 .val-hero-sub {
-  margin: 16px auto 0; max-width: 60ch;
-  font-size: 15.5px; line-height: 1.65; color: var(--on-dark-muted);
+  margin: 18px auto 0; max-width: 60ch;
+  font-size: clamp(15px, 1.4vw, 17px); line-height: 1.65;
+  color: var(--on-dark-muted);
 }
-.val-hero-sub b { color: var(--on-dark); font-weight: 500; }
 
 /* ---------- What's your property worth ---------- */
 .val-worth-grid {
@@ -94,14 +94,12 @@
 /* ---------- Why a valuation matters ---------- */
 .val-why { background: var(--ivory); }
 
-/* These three sit back to back on the same ground, so each one's full 110px
-   padding stacked with the next into ~220px gaps. Halved at each join, the
-   gaps come out near a single section's worth, like the rest of the site. */
-.val-methods { padding: 0 0 56px; }
-.val-why { padding: 56px 0; }
-.val-final { padding-top: 56px; }
-.val-methods .section-head,
-.val-why .section-head { margin-bottom: 36px; }
+/* Every section on this page shares the same ground, so each one's full
+   site-wide padding stacked with the next into 220px gaps. One even rhythm
+   instead: 48px a side, so every join is ~96px. */
+.val-page .section { padding: 48px 0; }
+.val-page .section:last-child { padding-bottom: 96px; }
+.val-page .section-head { margin-bottom: 36px; }
 .why-grid {
   display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;
 }
