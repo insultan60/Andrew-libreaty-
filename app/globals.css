@@ -1093,16 +1093,21 @@ ul, ol { list-style: none; }
 .section-final {
   background: var(--ivory);
   text-align: center;
-  padding: 80px 0;
+  padding: 0;
 }
+/* Its neighbours share the ivory ground, so their padding stacks onto this
+   section's. Its own padding is zero and the gap is set on them instead:
+   64px above and below, rather than 110px + 56px on each side. */
+.section:has(+ .section-final) { padding-bottom: 64px; }
+.section-final + .section { padding-top: 64px; }
 .final-inner { max-width: 760px; margin-inline: auto; }
 .final-title {
   font-family: var(--font-display); font-weight: 300;
   font-size: clamp(38px, 5vw, 64px); line-height: 1.05;
 }
-.final-copy { margin-top: 24px; font-size: 17px; color: var(--muted); }
+.final-copy { margin-top: 18px; font-size: 17px; color: var(--muted); }
 .final-ctas {
-  margin-top: 40px;
+  margin-top: 28px;
   display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 14px;
 }
 

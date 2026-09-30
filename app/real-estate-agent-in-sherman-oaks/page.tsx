@@ -238,7 +238,6 @@ export default function ShermanOaksPage() {
       <FinalCta
         title="More Than Just a Sale"
         copy="The Andrew Liberty Team brings together real-world experience, thoughtful strategy, and a calm, hands-on approach to help Sherman Oaks clients move with clarity. From homes to investments, we focus on smart decisions, not unnecessary complexity."
-        browseHref="/home-search"
       />
 
       <Faq title="Frequently Asked Questions" faqs={FAQS} />

@@ -256,7 +256,6 @@ export default function ValleyVillagePage() {
       <FinalCta
         title="Ready to Find Your Place in Valley Village?"
         copy="Quiet streets, strong schools, and steady value make Valley Village one of the smartest places to put down roots in the Valley. Whether you're buying your first home or ready to sell, I will help you make the move with confidence."
-        browseHref="/home-search"
       />
 
       <Faq title="Frequently Asked Questions" faqs={FAQS} />

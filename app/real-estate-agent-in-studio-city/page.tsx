@@ -242,7 +242,6 @@ export default function StudioCityPage() {
       <FinalCta
         title="Experience You Can Trust in Studio City"
         copy="The Andrew Liberty Team combines local experience, clear strategy, and personalized service to help Studio City clients buy, sell, and invest with confidence. We keep the process simple, provide honest guidance, and focus on making smart real estate decisions."
-        browseHref="/home-search"
       />
 
       <Faq title="Frequently Asked Questions" faqs={FAQS} />
