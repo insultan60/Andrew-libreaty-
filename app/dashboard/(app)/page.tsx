@@ -75,10 +75,30 @@ export default async function OverviewPage({ searchParams }: Props) {
         >
           <FunnelChart
             stages={[
-              { label: "Impressions", value: Math.round(g.impressions), note: "appeared in Google" },
-              { label: "Clicks", value: Math.round(g.clicks), note: "chose the result" },
-              { label: "Sessions", value: t.sessions, note: "visits, all sources" },
-              { label: "Page views", value: t.screenPageViews, note: "pages opened" },
+              {
+                label: "Impressions",
+                value: Math.round(g.impressions),
+                note: "appeared in Google",
+                available: gsc.live,
+              },
+              {
+                label: "Clicks",
+                value: Math.round(g.clicks),
+                note: "chose the result",
+                available: gsc.live,
+              },
+              {
+                label: "Sessions",
+                value: t.sessions,
+                note: "visits, all sources",
+                available: ga.live,
+              },
+              {
+                label: "Page views",
+                value: t.screenPageViews,
+                note: "pages opened",
+                available: ga.live,
+              },
             ]}
           />
         </Card>

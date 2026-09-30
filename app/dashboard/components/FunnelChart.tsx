@@ -16,6 +16,12 @@ export interface FunnelStage {
   value: number;
   /** what the number actually counts, for the caption under the axis */
   note: string;
+  /**
+   * false when this stage's source is not reporting. Its zero is then a
+   * missing reading, not a real zero, so it gets no bar, no value and no drop
+   * — a "↓ 100%" there would read as everyone leaving at that step.
+   */
+  available?: boolean;
 }
 
 function pct(from: number, to: number): number | null {
@@ -26,6 +32,7 @@ function pct(from: number, to: number): number | null {
 export default function FunnelChart({ stages }: { stages: FunnelStage[] }) {
   const base = stages[0]?.value ?? 0;
   const anyData = stages.some((s) => s.value > 0);
+  const missing = stages.filter((s) => s.available === false);
 
   return (
     <div>
@@ -33,11 +40,16 @@ export default function FunnelChart({ stages }: { stages: FunnelStage[] }) {
         {stages.map((s, i) => {
           // With no data every bar is zero; a flat row of empty columns still
           // shows the shape of the funnel that will appear once data lands.
-          const h = base > 0 ? Math.max((s.value / base) * 100, s.value > 0 ? 2 : 0) : 0;
-          const drop = i === 0 ? null : pct(stages[i - 1].value, s.value);
+          const off = s.available === false;
+          const prevOff = i > 0 && stages[i - 1].available === false;
+          const h = off || base <= 0 ? 0 : Math.max((s.value / base) * 100, s.value > 0 ? 2 : 0);
+          const drop = i === 0 || off || prevOff ? null : pct(stages[i - 1].value, s.value);
+          // Inside the bar when it is tall enough to hold the number; otherwise
+          // sitting just on top of it, so a short bar never covers its figure.
+          const inside = i > 0 && h >= 18;
 
           return (
-            <div key={s.label} className="dash-funnel-col">
+            <div key={s.label} className={`dash-funnel-col${off ? " is-off" : ""}`}>
               <div className="dash-funnel-track">
                 {/* the lost portion, as texture rather than another colour */}
                 <div className="dash-funnel-hatch" aria-hidden="true" />
@@ -46,20 +58,24 @@ export default function FunnelChart({ stages }: { stages: FunnelStage[] }) {
                   style={{ height: `${h}%` }}
                 />
 
+                {/* Pinned to the top of the column, clear of the bar and its
+                    number whatever their height. */}
                 {drop !== null && drop > 0 ? (
-                  <span
-                    className="dash-funnel-drop"
-                    style={{ bottom: `calc(${Math.min(h, 88)}% + 8px)` }}
-                  >
-                    &darr; {drop.toFixed(1)}%
-                  </span>
+                  <span className="dash-funnel-drop">&darr; {drop.toFixed(1)}%</span>
                 ) : null}
 
-                <span
-                  className={`dash-funnel-value${i > 0 && h >= 18 ? " on-fill" : ""}`}
-                >
-                  {s.value.toLocaleString()}
-                </span>
+                {off ? (
+                  <span className="dash-funnel-value is-off">Not connected</span>
+                ) : (
+                  <span
+                    className={`dash-funnel-value${inside ? " on-fill" : ""}`}
+                    style={{
+                      bottom: inside || h === 0 ? "8px" : `calc(${Math.min(h, 80)}% + 6px)`,
+                    }}
+                  >
+                    {s.value.toLocaleString()}
+                  </span>
+                )}
               </div>
 
               <p className="dash-funnel-label" title={s.label}>
@@ -70,6 +86,13 @@ export default function FunnelChart({ stages }: { stages: FunnelStage[] }) {
           );
         })}
       </div>
+
+      {anyData && missing.length > 0 ? (
+        <p className="dash-funnel-empty">
+          {missing.map((s) => s.label).join(" and ")} will fill in once Google Analytics is
+          connected.
+        </p>
+      ) : null}
 
       {!anyData ? (
         <p className="dash-funnel-empty">

@@ -54,8 +54,11 @@ export const GTM_CONTAINER_ID = "GTM-NC52RXBT";
  * session. It is written here rather than left to an env var because it is
  * public and fixed; GA4_MEASUREMENT_ID still overrides it if set.
  */
-export const GA4_MEASUREMENT_ID =
-  process.env.GA4_MEASUREMENT_ID?.trim() || "G-QQP41ZEBBW";
+export const GA4_MEASUREMENT_ID = /^G-[A-Z0-9]+$/i.test(process.env.GA4_MEASUREMENT_ID?.trim() ?? "")
+  ? process.env.GA4_MEASUREMENT_ID!.trim()
+  : // An override that is not a G- ID is almost always the numeric property ID
+    // pasted into the wrong box; ignore it rather than report it as the stream.
+    "G-QQP41ZEBBW";
 
 /** Absolute URL for a site-relative path. */
 export const abs = (path: string) =>
