@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "../../components/icons";
+import PhoneLink, { PHONE_DISPLAY } from "../../components/PhoneLink";
 import {
   SmsIcon, LocationIcon, StarIcon, ShieldTickIcon, ShareIcon,
-  FacebookIcon, InstagramIcon, WhatsappIcon, LinkedInIcon, CompassIcon,
+  FacebookIcon, InstagramIcon, WhatsappIcon, LinkedInIcon, CompassIcon, CallIcon,
 } from "../../components/vuesax";
 
 export const metadata: Metadata = {
@@ -62,10 +63,10 @@ export default function AndrewLibertyPage() {
             <h2 className="ag-touch-name">Andrew Liberty</h2>
             <p className="ag-touch-sub">Founder &amp; Lead Agent — DRE# 01965696 · Compass</p>
             <div className="ag-touch-actions">
-              <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="ag-pill ag-pill-solid">
-                <WhatsappIcon />
-                <span>(310) 709-0581</span>
-              </a>
+              <PhoneLink className="ag-pill ag-pill-solid">
+                <CallIcon />
+                <span>{PHONE_DISPLAY}</span>
+              </PhoneLink>
               <a
                 href="mailto:andrew.liberty@compass.com"
                 className="ag-pill ag-pill-ghost"

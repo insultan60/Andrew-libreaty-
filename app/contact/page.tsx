@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import ContactForm from "./ContactForm";
+import PhoneLink from "../components/PhoneLink";
 import PropertyMap from "../[slug]/PropertyMap";
 import {
-  SmsIcon, LocationIcon, InstagramIcon, FacebookIcon, LinkedInIcon, CompassIcon, StarIcon, WhatsappIcon,
+  SmsIcon, LocationIcon, InstagramIcon, FacebookIcon, LinkedInIcon, CompassIcon, StarIcon, CallIcon,
 } from "../components/vuesax";
 
 const SOCIALS = [
@@ -32,12 +33,12 @@ export default function ContactPage() {
         <div className="contact-list">
           <div className="contact-item">
             <span className="contact-item-ic">
-              <WhatsappIcon />
+              <CallIcon />
             </span>
             <div>
               <p className="contact-item-label">Phone</p>
               <p className="contact-item-val">
-                <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer">(310) 709-0581</a>
+                <PhoneLink />
               </p>
             </div>
           </div>

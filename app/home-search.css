@@ -490,7 +490,7 @@ body.map-view .results-col { display: none; }
 }
 
 @media (max-width: 900px) {
-  .site-header.is-solid .header-portal, .site-header.is-solid .header-phone span { display: none; }
+  .site-header.is-solid .header-portal, .site-header.is-solid .header-phone span:not(.phone-copied) { display: none; }
 }
 
 @media (max-width: 768px) {

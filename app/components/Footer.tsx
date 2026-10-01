@@ -1,4 +1,5 @@
 import { FacebookIcon, InstagramIcon, LinkedInIcon, CompassIcon, StarIcon } from "./vuesax";
+import PhoneLink from "./PhoneLink";
 
 const SOCIALS = [
   { label: "Instagram", href: "https://www.instagram.com/iamandrewliberty?igsi=cnZ3c3g4dmxsdWdu", Icon: InstagramIcon },
@@ -47,9 +48,7 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="footer-link">
-                (310) 709-0581
-              </a>
+              <PhoneLink className="footer-link" />
             </li>
             <li>
               12001 Ventura Pl Ste 100

@@ -324,6 +324,21 @@ ul, ol { list-style: none; }
 .header-phone svg { width: 15px; height: 15px; }
 .header-phone:hover { color: var(--gold-deep); }
 
+/* PhoneLink: on a computer a click copies the number; this confirms it. */
+.phone-link { position: relative; }
+.phone-copied {
+  position: absolute; left: 50%; top: calc(100% + 6px); z-index: 20;
+  transform: translate(-50%, -4px);
+  padding: 6px 10px; border-radius: 8px;
+  background: var(--ink); color: var(--paper);
+  font-family: var(--font-body, inherit); font-size: 12px; font-weight: 500;
+  line-height: 1; letter-spacing: 0; text-transform: none; white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+.phone-copied.is-on { opacity: 1; transform: translate(-50%, 0); }
+.phone-copied:empty { padding: 0; }
+
 .header-portal { font-size: 14px; padding: 10px 10px; }
 .header-cta { padding: 13px 22px; font-size: 14px; }
 
@@ -1246,7 +1261,7 @@ ul, ol { list-style: none; }
 }
 
 @media (max-width: 1180px) {
-  .header-phone span { display: none; }
+  .header-phone span:not(.phone-copied) { display: none; }
   .hero-inner { gap: 40px; }
 }
 
