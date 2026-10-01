@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { SITE_URL } from "@/lib/site";
 import { ALL as ALL_POSTS } from "./blog/posts";
 import { isPublished } from "./blog/bodies";
+import { fetchRawListingsServer } from "@/lib/idxServer";
 
 /**
  * Static routes only, as locations — no <lastmod>, <changefreq> or <priority>.
@@ -19,9 +20,11 @@ import { isPublished } from "./blog/bodies";
  *   none. The blog posts do have real authored dates and could carry a true
  *   lastmod; that is a deliberate open choice, not an oversight.
  *
- * Property detail pages are driven by IDX at request time and have no
- * build-time slug list, so they are left out — an incomplete sitemap beats one
- * full of URLs that may 404.
+ * Listing pages (/<address-slug>) come from the live IDX feed, the same
+ * fifteen-minute cached copy the pages render from, so every URL listed here
+ * is one the listing page will serve rather than 404. If IDX does not answer,
+ * they are simply left out of that copy of the sitemap — an incomplete
+ * sitemap beats one full of URLs that may 404.
  *
  * /my-search-portal is excluded on purpose: it is a signed-in area.
  *
@@ -52,7 +55,12 @@ const ROUTES = [
   "/property/sold",
 ] as const;
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const revalidate = 900;
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const listings = (await fetchRawListingsServer()) ?? [];
+  const listingSlugs = [...new Set(listings.map((raw) => raw.detailsUrlSlug.toLowerCase()))];
+
   return [
     ...ROUTES.map((path) => ({ url: `${SITE_URL}${path}` })),
 
@@ -63,5 +71,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...ALL_POSTS.filter((post) => isPublished(post.slug)).map((post) => ({
       url: `${SITE_URL}/blog/${post.slug}`,
     })),
+
+    ...listingSlugs.map((slug) => ({ url: `${SITE_URL}/${slug}` })),
   ];
 }

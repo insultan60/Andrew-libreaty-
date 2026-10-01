@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "../components/icons";
 import PropertyListingsSection from "./PropertyListingsSection";
+import { fetchRawListingsServer } from "@/lib/idxServer";
 
 export const metadata: Metadata = {
   title: "Properties — Andrew Liberty Team | Los Angeles Real Estate",
@@ -15,7 +16,16 @@ const HERO_GALLERY = [
   { src: "/images/sold-toluca-lake.jpg", alt: "Architectural glass home, Toluca Lake" },
 ];
 
-export default function PropertiesPage() {
+/* Listings are fetched on the server and handed to the section, so the cards
+   (addresses, prices, links to each listing page) are in the HTML a crawler
+   receives instead of arriving seconds later from the browser — the same fix
+   /home-search had for its soft-404 report. If IDX does not answer, the
+   section falls back to its old client-side fetch.
+   The feed itself is cached for fifteen minutes in lib/idxServer.ts. */
+export const revalidate = 900;
+
+export default async function PropertiesPage() {
+  const initialListings = await fetchRawListingsServer();
   return (
     <>
       {/* ============ HERO ============ */}
@@ -33,7 +43,7 @@ export default function PropertiesPage() {
         </div>
       </section>
 
-      <PropertyListingsSection />
+      <PropertyListingsSection initialListings={initialListings} />
 
       {/* ============ START YOUR SEARCH ============ */}
       <section className="prop-searchband-wrap">

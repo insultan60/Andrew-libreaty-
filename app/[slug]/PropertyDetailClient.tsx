@@ -6,10 +6,17 @@ import PropertyDetail from "./PropertyDetail";
 import ComingSoon from "../components/ComingSoon";
 import PageLoader from "../components/PageLoader";
 import { useIdxListings } from "@/hooks/useIdxListings";
-import { toDetailListing, toPropertyItem } from "@/lib/idx";
+import { toDetailListing, toPropertyItem, type RawIdxListing } from "@/lib/idx";
 
-export default function PropertyDetailClient({ slug }: { slug: string }) {
-  const { data, loading } = useIdxListings();
+export default function PropertyDetailClient({
+  slug,
+  initialListings,
+}: {
+  slug: string;
+  /** Server-fetched: the listing plus its similar cards. See ./page.tsx. */
+  initialListings?: RawIdxListing[] | null;
+}) {
+  const { data, loading } = useIdxListings(initialListings);
 
   const match = useMemo(() => {
     if (!data) return undefined;

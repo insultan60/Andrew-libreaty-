@@ -1,7 +1,7 @@
 "use client";
 
 import { useIdxListings } from "@/hooks/useIdxListings";
-import { toPropertyItem } from "@/lib/idx";
+import { toPropertyItem, type RawIdxListing } from "@/lib/idx";
 import { ArrowRight } from "../components/icons";
 import PropertyCard from "./PropertyCard";
 import PageLoader from "../components/PageLoader";
@@ -17,13 +17,17 @@ const PAST_PREVIEW = 9;
    leaves a visitor no route to the full set. /property/active is that route. */
 const ACTIVE_PREVIEW = 6;
 
-export default function PropertyListingsSection() {
+export default function PropertyListingsSection({
+  initialListings,
+}: {
+  initialListings?: RawIdxListing[] | null;
+}) {
   /* `error` matters as much as `data` here. Without it a failed fetch falls
      through to the same branch as a genuinely empty feed, and the page tells
      visitors there is nothing for sale when the truth is that IDX did not
      answer — which is exactly what happens when the account trips IDX's hourly
      rate limit. An outage should read as an outage. */
-  const { data, loading, error } = useIdxListings();
+  const { data, loading, error } = useIdxListings(initialListings);
   const items = (data ?? []).map(toPropertyItem);
   /* Not Sold, rather than Active: a Pending listing is neither, so it used to
      be fetched and then rendered nowhere at all. See ./active. */

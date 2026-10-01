@@ -1,7 +1,7 @@
 "use client";
 
 import { useIdxListings } from "@/hooks/useIdxListings";
-import { toPropertyItem } from "@/lib/idx";
+import { toPropertyItem, type RawIdxListing } from "@/lib/idx";
 import PropertyCard from "../PropertyCard";
 import PageLoader from "../../components/PageLoader";
 
@@ -16,8 +16,12 @@ import PageLoader from "../../components/PageLoader";
    carry zero pending today, which is why nobody noticed; the moment one goes
    under contract it would vanish instead of showing as Pending. Here it is
    included and keeps its own badge. */
-export default function ActiveListingsSection() {
-  const { data, loading, error } = useIdxListings();
+export default function ActiveListingsSection({
+  initialListings,
+}: {
+  initialListings?: RawIdxListing[] | null;
+}) {
+  const { data, loading, error } = useIdxListings(initialListings);
   const active = (data ?? []).map(toPropertyItem).filter((p) => p.badge !== "Sold");
 
   return (

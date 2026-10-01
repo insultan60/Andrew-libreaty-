@@ -1,5 +1,6 @@
 import "server-only";
 
+import { unstable_cache } from "next/cache";
 import { proxyIdxRequest } from "@/lib/idxProxy";
 import { isLease, type RawIdxListing } from "@/lib/idx";
 
@@ -38,8 +39,24 @@ async function serverIdxFetch<T>(path: string): Promise<T | null> {
 
 type RawIdxListResponse = { total: number; data: Record<string, RawIdxListing> };
 
-export async function fetchRawListingsServer(): Promise<RawIdxListing[] | null> {
-  try {
+/**
+ * One cached copy of the feed, shared by every page that renders listings on
+ * the server: /home-search, /property, /property/active, /property/sold and
+ * every listing page at /<address-slug>.
+ *
+ * The listing pages are why this is cached here rather than left to each
+ * route's `revalidate`. Those are one URL per address, so a crawler walking
+ * them would otherwise cost two IDX calls per page and run through IDX
+ * Broker's hourly limit in a single pass. With this, the whole site makes at
+ * most two calls per fifteen minutes however many pages are rendered.
+ *
+ * A failed or empty fetch throws inside the cached function, and
+ * unstable_cache does not store a throw, so an IDX outage is retried on the
+ * next render instead of being remembered as "no listings" for fifteen
+ * minutes.
+ */
+const cachedListings = unstable_cache(
+  async (): Promise<RawIdxListing[]> => {
     const [featured, soldpending] = await Promise.all([
       serverIdxFetch<RawIdxListResponse>("clients/featured"),
       serverIdxFetch<RawIdxListResponse>("clients/soldpending"),
@@ -48,8 +65,23 @@ export async function fetchRawListingsServer(): Promise<RawIdxListing[] | null> 
       ...Object.values(featured?.data || {}),
       ...Object.values(soldpending?.data || {}),
     ].filter((raw) => !isLease(raw));
-    return all.length > 0 ? all : null;
+    if (all.length === 0) throw new Error("IDX returned no listings");
+    return all;
+  },
+  ["idx-listings-v1"],
+  { revalidate: 900, tags: ["idx-listings"] }
+);
+
+export async function fetchRawListingsServer(): Promise<RawIdxListing[] | null> {
+  try {
+    return await cachedListings();
   } catch {
     return null;
   }
+}
+
+/** The listing at /<slug>, matched the same way the client page matches it. */
+export function findListing(all: RawIdxListing[], slug: string): RawIdxListing | undefined {
+  const want = slug.toLowerCase();
+  return all.find((raw) => raw.detailsUrlSlug.toLowerCase() === want);
 }

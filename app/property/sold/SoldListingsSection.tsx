@@ -1,15 +1,19 @@
 "use client";
 
 import { useIdxListings } from "@/hooks/useIdxListings";
-import { toPropertyItem } from "@/lib/idx";
+import { toPropertyItem, type RawIdxListing } from "@/lib/idx";
 import PropertyCard from "../PropertyCard";
 import PageLoader from "../../components/PageLoader";
 
 /* Every closing, uncapped — /property shows the first nine and links here.
    useIdxListings caches its fetch at module level, so arriving from that page
    costs no second request against IDX's hourly limit. */
-export default function SoldListingsSection() {
-  const { data, loading, error } = useIdxListings();
+export default function SoldListingsSection({
+  initialListings,
+}: {
+  initialListings?: RawIdxListing[] | null;
+}) {
+  const { data, loading, error } = useIdxListings(initialListings);
   const sold = (data ?? []).map(toPropertyItem).filter((p) => p.badge === "Sold");
 
   return (
