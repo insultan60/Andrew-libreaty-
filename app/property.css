@@ -192,6 +192,15 @@
 .prop-beyond-ctas { margin-top: 34px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
 .prop-beyond .btn-secondary { color: var(--on-dark); border-color: rgba(243, 239, 230, 0.28); }
 .prop-beyond .btn-secondary:hover { border-color: var(--on-dark); background: rgba(243, 239, 230, 0.06); }
+/* The third, quieter route under the two buttons: a plain text link. */
+.prop-beyond-link {
+  display: inline-block; margin-top: 22px;
+  font-size: 15px; font-weight: 500; color: var(--on-dark);
+  text-decoration: underline; text-decoration-color: var(--gold);
+  text-underline-offset: 5px; text-decoration-thickness: 1px;
+  transition: color var(--dur) var(--ease-out);
+}
+.prop-beyond-link:hover { color: var(--gold); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {

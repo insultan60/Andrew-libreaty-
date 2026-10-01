@@ -103,39 +103,30 @@ export default async function PropertiesPage() {
 
       <PropertyListingsSection initialListings={initialListings} />
 
-      {/* ============ START YOUR SEARCH ============ */}
-      <section className="prop-searchband-wrap">
-        <div className="container">
-          <div className="prop-searchband reveal">
-            <h2>Start Your Property Search</h2>
-            <a href="/home-search" className="btn btn-gold btn-magnetic">
-              <span>Browse Homes</span>
-              <ArrowRight />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ BEYOND THE TRANSACTION ============ */}
+      {/* ============ NEXT MOVE ============
+          Replaces both "Start Your Property Search" and "Beyond the
+          Transaction": one closing call to action with the three routes off
+          this page, in the client's order of priority. */}
       <section className="prop-beyond-wrap">
         <div className="container">
           <div className="prop-beyond reveal">
-            <p className="eyebrow">The Long View</p>
-            <h2>Beyond the Transaction</h2>
+            <h2>Ready to make your next move?</h2>
             <p>
-              Our team brings together real-world experience, thoughtful strategy, and a calm,
-              hands-on approach to help clients move with clarity. From homes to investments, we
-              focus on smart decisions, not unnecessary complexity.
+              Search all available homes in Los Angeles, find out what your own home could sell for, or
+              talk with Andrew about your goals.
             </p>
             <div className="prop-beyond-ctas">
-              <a href="/contact" className="btn btn-gold btn-magnetic">
-                <span>Contact Us</span>
+              <a href="/home-search" className="btn btn-gold btn-magnetic">
+                <span>Browse Homes for Sale</span>
                 <ArrowRight />
               </a>
-              <a href="/home-search" className="btn btn-secondary">
-                Browse Homes
+              <a href="/home-valuation" className="btn btn-secondary">
+                Get Your Free Home Value
               </a>
             </div>
+            <a href="/contact" className="prop-beyond-link">
+              Talk to Andrew
+            </a>
           </div>
         </div>
       </section>

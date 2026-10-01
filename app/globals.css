@@ -1005,10 +1005,12 @@ ul, ol { list-style: none; }
 }
 .testimonial.is-active { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
+/* Body copy, not display type: set in the heading face at up to 28px the
+   quote read as a second, heavier headline under the section title. */
 .testimonial p {
-  font-family: var(--font-display); font-weight: 400;
-  font-size: clamp(20px, 2.6vw, 28px); line-height: 1.42;
-  color: var(--ink); max-width: 26em;
+  font-family: var(--font-body); font-weight: 400;
+  font-size: clamp(16px, 1.5vw, 18px); line-height: 1.75;
+  color: var(--ink-soft); max-width: 62ch;
 }
 .testimonial footer { margin-top: 26px; display: flex; flex-direction: column; gap: 4px; }
 .testimonial cite { font-style: normal; font-size: 15px; font-weight: 600; }
