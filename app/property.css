@@ -45,8 +45,36 @@
 /* ---------- Sections ---------- */
 .prop-section { padding: 96px 0; }
 .prop-section .section-head { text-align: center; margin-inline: auto; }
+/* The H1 band between the hero and Featured Listings: it sits close to the
+   listings it introduces rather than a full section gap away. */
+.prop-intro { padding-bottom: 0; }
+.prop-intro .section-head { margin-bottom: 0; }
 
 .prop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+/* Fills the rest of a short Featured Listings row (see
+   PropertyListingsSection). data-beside is how many listing cards share the
+   row with it: 0 -> the whole row, 1 -> two columns, 2 -> the last column. */
+.prop-mls-card {
+  grid-column: span 1;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  gap: 14px;
+  padding: clamp(28px, 4vw, 48px);
+  min-height: 320px;
+  background: var(--dark); color: var(--on-dark);
+  border-radius: var(--radius-lg);
+  transition: transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out);
+}
+.prop-mls-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-soft); }
+.prop-mls-card .eyebrow { color: var(--gold); margin: 0; }
+.prop-mls-card h3 {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(26px, 2.6vw, 36px); line-height: 1.1; color: var(--on-dark);
+}
+.prop-mls-card p:not(.eyebrow) { color: var(--on-dark-muted); font-size: 15.5px; line-height: 1.6; max-width: 46ch; }
+.prop-mls-card .btn { margin-top: 8px; }
+.prop-mls-card[data-beside="0"] { grid-column: 1 / -1; min-height: 0; }
+.prop-mls-card[data-beside="1"] { grid-column: span 2; }
 
 /* "See All N Sold Listings" under the three-row preview on /property. */
 .prop-more { display: flex; justify-content: center; margin-top: 48px; }
@@ -164,6 +192,9 @@
 /* ---------- Responsive ---------- */
 @media (max-width: 900px) {
   .prop-grid { grid-template-columns: repeat(2, 1fr); }
+  /* Two columns: alone or beside two listings it takes a whole row. */
+  .prop-mls-card[data-beside="1"] { grid-column: span 1; }
+  .prop-mls-card[data-beside="2"] { grid-column: 1 / -1; }
 }
 @media (max-width: 680px) {
   .prop-hero-gallery { grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -171,6 +202,7 @@
   .prop-hero-gallery .prop-tile:nth-child(2) { height: clamp(150px, 40vw, 240px); }
   .prop-hero-gallery .prop-tile:nth-child(3) { grid-column: 1 / -1; height: clamp(180px, 52vw, 260px); }
   .prop-grid { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
+  .prop-mls-card[data-beside] { grid-column: auto; min-height: 0; }
   .prop-searchband { flex-direction: column; align-items: flex-start; text-align: left; }
 }
 

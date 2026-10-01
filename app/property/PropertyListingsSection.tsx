@@ -17,6 +17,10 @@ const PAST_PREVIEW = 9;
    leaves a visitor no route to the full set. /property/active is that route. */
 const ACTIVE_PREVIEW = 6;
 
+/* Below one full row of active listings, the rest of the row becomes a card
+   pointing at the full MLS search. */
+const MLS_FILL_BELOW = 3;
+
 export default function PropertyListingsSection({
   initialListings,
 }: {
@@ -45,7 +49,8 @@ export default function PropertyListingsSection({
             <p className="eyebrow">Start Here</p>
             <h2 className="section-title">Featured Listings</h2>
             <p className="section-sub">
-              Hand-picked homes currently on the market, positioned to move with strategy.
+              See what is available now. Each listing includes photos, price, beds, baths, and square
+              footage.
             </p>
           </div>
           {loading ? (
@@ -54,10 +59,32 @@ export default function PropertyListingsSection({
             <p style={{ textAlign: "center", color: "var(--muted)" }}>
               Listings are unavailable right now — please try again shortly.
             </p>
-          ) : featured.length === 0 ? (
-            <p style={{ textAlign: "center", color: "var(--muted)" }}>
-              No active listings right now — check back soon.
-            </p>
+          ) : featured.length < MLS_FILL_BELOW ? (
+            /* A short feed leaves holes in the row, so the space goes to the
+               full MLS search instead. With no active listings at all the card
+               runs the full width and stands in for the grid. */
+            <div className="prop-grid">
+              {featured.map((p) => (
+                <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+              ))}
+              <a
+                href="/home-search"
+                className="prop-mls-card"
+                data-beside={featured.length}
+              >
+                <p className="eyebrow">Search Every Listing</p>
+                <h3>Search My Full MLS</h3>
+                <p>
+                  {featured.length === 0
+                    ? "Nothing of Andrew\u2019s own is on the market right now. Search every home for sale across Los Angeles, straight from the MLS."
+                    : "Beyond Andrew\u2019s own listings, search every home for sale across Los Angeles, straight from the MLS."}
+                </p>
+                <span className="btn btn-gold">
+                  <span>Search All Homes</span>
+                  <ArrowRight />
+                </span>
+              </a>
+            </div>
           ) : (
             <>
               <div className="prop-grid">
@@ -90,7 +117,15 @@ export default function PropertyListingsSection({
             <p className="eyebrow">Proof, Not Promises</p>
             <h2 className="section-title">Past Transactions</h2>
             <p className="section-sub">
-              A view of deals consistently navigated with strategy, discipline, and steady composure.
+              Every home on this page has already sold, so these are real results at real prices. They
+              span Studio City, South Pasadena, Tarzana, and other Los Angeles neighborhoods, with sales
+              reaching $3.8 million.
+            </p>
+            <p className="section-sub">
+              If you are thinking about selling, this is how Andrew works: a clear pricing plan, honest
+              communication, and steady guidance through offers, negotiation, and closing. No two homes or
+              clients are alike, so each plan is built around the person behind the sale. The goal is
+              simple. You should know what to expect at every step and feel confident about the result.
             </p>
           </div>
           {/* Same fault in a different shape: `!loading` alone rendered an empty

@@ -40,7 +40,6 @@ export default function MapPanel({
   items: Listing[];
   mapType: "map" | "satellite";
   onOpen: (l: Listing) => void;
-  /** An extra fixed pin (e.g. the office) drawn alongside the listing pins. */
   officeMarker?: OfficeMarker;
 }) {
   const elRef = useRef<HTMLDivElement>(null);
@@ -51,7 +50,6 @@ export default function MapPanel({
   const onOpenRef = useRef(onOpen);
   onOpenRef.current = onOpen;
 
-  // Init the map once (client only)
   useEffect(() => {
     let cancelled = false;
     let ro: ResizeObserver | undefined;
