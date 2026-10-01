@@ -42,10 +42,6 @@ export default function MeetAndrew({
             <img src="/images/andrew-liberty.jpg" alt={imageAlt} loading="lazy" />
           </div>
           <div className="about-image-backdrop" aria-hidden="true"></div>
-          <div className="about-experience-chip">
-            <span className="chip-number">RENE</span>
-            <span className="chip-label">Certified Negotiation Expert</span>
-          </div>
         </div>
 
         <div className="about-copy">

@@ -30,32 +30,34 @@ const HERO_GALLERY = [
   { src: "/images/laurel-canyon.jpg", alt: "Homes tucked into the hillside above Laurel Canyon" },
 ];
 
-type Area = { name: string; img: string; alt: string; tall?: boolean };
-// Three columns, each with one tall + one short tile (tall-short / short-tall / tall-short)
-// so the middle column's second tile rides up — a woven masonry matching the Figma.
+type Area = { name: string; img: string; alt: string; href: string; size: "tall" | "short" | "full" };
+// Three columns. The first two weave one tall + one short tile (tall-short /
+// short-tall) so the middle column's second tile rides up — the Figma masonry.
+// The third holds a single tile stretched to the full column height: Pasadena
+// used to sit under Hollywood Hills, but it has no page of its own, and every
+// tile here links to its neighborhood's page.
 const COLUMNS: Area[][] = [
   [
-    { name: "Studio City", img: "/images/studio-city.jpg", alt: "Studio City, Los Angeles", tall: true },
-    { name: "Sherman Oaks", img: "/images/sold-sherman-oaks.jpg", alt: "Sherman Oaks, Los Angeles" },
+    { name: "Studio City", img: "/images/studio-city.jpg", alt: "Studio City, Los Angeles", href: "/real-estate-agent-in-studio-city", size: "tall" },
+    { name: "Sherman Oaks", img: "/images/sold-sherman-oaks.jpg", alt: "Sherman Oaks, Los Angeles", href: "/real-estate-agent-in-sherman-oaks", size: "short" },
   ],
   [
-    { name: "Laurel Canyon", img: "/images/laurel-canyon.jpg", alt: "Laurel Canyon, Los Angeles" },
-    { name: "Valley Village", img: "/images/sold-valley-village.jpg", alt: "Valley Village, Los Angeles", tall: true },
+    { name: "Laurel Canyon", img: "/images/laurel-canyon.jpg", alt: "Laurel Canyon, Los Angeles", href: "/real-estate-agent-in-laurel-canyon", size: "short" },
+    { name: "Valley Village", img: "/images/sold-valley-village.jpg", alt: "Valley Village, Los Angeles", href: "/real-estate-agent-in-valley-village", size: "tall" },
   ],
   [
-    { name: "Hollywood Hills", img: "/images/hollywood-hills.jpg", alt: "Hollywood Hills, Los Angeles", tall: true },
-    { name: "Pasadena", img: "/images/hero-la-aerial.jpg", alt: "Pasadena, Los Angeles" },
+    { name: "Hollywood Hills", img: "/images/hollywood-hills.jpg", alt: "Hollywood Hills, Los Angeles", href: "/real-estate-agent-in-hollywood-hills", size: "full" },
   ],
 ];
 
-// Same order as the client's copy doc. Names link to each area's own page,
-// like the cards above; Pasadena has none yet, so it stays plain text.
-const GLANCE: { name: string; href?: string; homes: string; bestFor: string }[] = [
-  { name: "Studio City", href: "/real-estate-agent-in-studio-city", homes: "Single-family homes, condos, townhomes", bestFor: "Walkability and dining" },
-  { name: "Sherman Oaks", href: "/real-estate-agent-in-sherman-oaks", homes: "Flat-street and hillside homes", bestFor: "A suburban feel near Ventura Boulevard" },
-  { name: "Laurel Canyon", href: "/real-estate-agent-in-laurel-canyon", homes: "Hillside homes", bestFor: "Privacy and a wooded setting" },
-  { name: "Valley Village", href: "/real-estate-agent-in-valley-village", homes: "Single-family homes, multi-unit properties", bestFor: "Quiet streets near Studio City" },
-  { name: "Hollywood Hills", href: "/real-estate-agent-in-hollywood-hills", homes: "Hillside homes with views", bestFor: "Views and privacy" },
+// Same order as the client's copy doc. Plain text by the client's call — the
+// photo tiles above are the links to each area's page.
+const GLANCE: { name: string; homes: string; bestFor: string }[] = [
+  { name: "Studio City", homes: "Single-family homes, condos, townhomes", bestFor: "Walkability and dining" },
+  { name: "Sherman Oaks", homes: "Flat-street and hillside homes", bestFor: "A suburban feel near Ventura Boulevard" },
+  { name: "Laurel Canyon", homes: "Hillside homes", bestFor: "Privacy and a wooded setting" },
+  { name: "Valley Village", homes: "Single-family homes, multi-unit properties", bestFor: "Quiet streets near Studio City" },
+  { name: "Hollywood Hills", homes: "Hillside homes with views", bestFor: "Views and privacy" },
   { name: "Pasadena, CA", homes: "Historic homes", bestFor: "Historic architecture and a walkable downtown" },
 ];
 
@@ -88,11 +90,16 @@ export default function NeighborhoodsPage() {
             {COLUMNS.map((col, i) => (
               <div className="areas-col" key={i}>
                 {col.map((a) => (
-                  <div key={a.name} className={`area-card${a.tall ? " is-tall" : " is-short"}`}>
+                  <a
+                    key={a.name}
+                    href={a.href}
+                    className={`area-card is-${a.size}`}
+                    aria-label={`Explore ${a.name}`}
+                  >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={a.img} alt={a.alt} loading="lazy" />
                     <span className="area-name">{a.name}</span>
-                  </div>
+                  </a>
                 ))}
               </div>
             ))}
@@ -119,7 +126,7 @@ export default function NeighborhoodsPage() {
                 {GLANCE.map((n) => (
                   <tr key={n.name}>
                     <th scope="row">
-                      {n.href ? <a href={n.href}>{n.name}</a> : n.name}
+                      {n.name}
                     </th>
                     <td data-label="Typical homes">{n.homes}</td>
                     <td data-label="Best for">{n.bestFor}</td>
@@ -132,7 +139,7 @@ export default function NeighborhoodsPage() {
       </section>
 
       {/* ============ NOT SURE WHICH AREA FITS ============ */}
-      <section className="prop-searchband-wrap">
+      <section className="prop-searchband-wrap hood-fit-wrap">
         <div className="container">
           <div className="prop-searchband hood-fit-band reveal">
             <div>
@@ -146,30 +153,6 @@ export default function NeighborhoodsPage() {
               <span>Contact Andrew</span>
               <ArrowRight />
             </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ============ BEYOND THE TRANSACTION ============ */}
-      <section className="prop-beyond-wrap">
-        <div className="container">
-          <div className="prop-beyond reveal">
-            <p className="eyebrow">The Long View</p>
-            <h2>Beyond the Transaction</h2>
-            <p>
-              Our team brings together real-world experience, thoughtful strategy, and a calm,
-              hands-on approach to help clients move with clarity. From homes to investments, we
-              focus on smart decisions, not unnecessary complexity.
-            </p>
-            <div className="prop-beyond-ctas">
-              <a href="/contact" className="btn btn-gold btn-magnetic">
-                <span>Contact Us</span>
-                <ArrowRight />
-              </a>
-              <a href="/home-search" className="btn btn-secondary">
-                Browse Homes
-              </a>
-            </div>
           </div>
         </div>
       </section>

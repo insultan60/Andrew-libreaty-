@@ -147,20 +147,12 @@
   white-space: nowrap;
 }
 
-.hood-glance-table tbody th a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: var(--gold);
-  text-underline-offset: 4px;
-  text-decoration-thickness: 1px;
-}
-
-.hood-glance-table tbody th a:hover { color: var(--gold-deep); }
-
 .hood-glance-table tbody tr:nth-child(even) { background: var(--ivory); }
 
 /* "Not Sure Which Area Fits?" reuses the property pages' search-band card,
    which only carries a heading; this adds room for its line of copy. */
+/* Last section on the page now, so it carries the gap above the footer. */
+.hood-fit-wrap { padding-bottom: 110px; }
 .hood-fit-band { flex-wrap: nowrap; }
 .hood-fit-band p {
   margin-top: 10px;
@@ -170,6 +162,7 @@
 }
 .hood-fit-band .btn { flex-shrink: 0; }
 @media (max-width: 680px) {
+  .hood-fit-wrap { padding-bottom: 72px; }
   .hood-fit-band { flex-wrap: wrap; }
 }
 
