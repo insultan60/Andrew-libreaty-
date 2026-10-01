@@ -7,9 +7,9 @@ import PropertyCard from "./PropertyCard";
 import PageLoader from "../components/PageLoader";
 
 /* Past transactions run to dozens of closings, far more than belongs on a page
-   that is also introducing the practice. Show three rows and send the rest to
+   that is also introducing the practice. Show two rows and send the rest to
    /property/sold, which lists every one. */
-const PAST_PREVIEW = 9;
+const PAST_PREVIEW = 6;
 
 /* Two rows of current listings. Sold had a "see all" link for its overflow and
    this grid did not, so anything past the sixth was dropped with nothing to

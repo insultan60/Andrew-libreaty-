@@ -44,7 +44,11 @@
 
 /* ---------- Sections ---------- */
 .prop-section { padding: 96px 0; }
-.prop-section .section-head { text-align: center; margin-inline: auto; }
+/* Wider than the site-wide 640px heading block: the listing pages carry
+   paragraph-length descriptions (Past Transactions has two), which at that
+   width ran to five narrow lines each. */
+.prop-section .section-head { text-align: center; margin-inline: auto; max-width: 920px; }
+.prop-section .section-head .section-sub { max-width: 82ch; margin-inline: auto; }
 /* The H1 band between the hero and Featured Listings: it sits close to the
    listings it introduces rather than a full section gap away. */
 .prop-intro { padding-bottom: 0; }
