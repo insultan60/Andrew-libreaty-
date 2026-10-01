@@ -14,7 +14,7 @@ export default function Footer() {
     <footer className="site-footer" id="contact">
       <div className="container footer-grid">
         <div className="footer-brand">
-          <a className="footer-logo" href="/#top" aria-label="Andrew Liberty Team — home">
+          <a className="footer-logo" href="/" aria-label="Andrew Liberty Team — home">
             {/* The same single SVG the header uses, whitened for the dark
                 ground. It replaced a hand-assembled lockup of three PNGs whose
                 mark-to-words alignment had to be held by a CSS offset; the

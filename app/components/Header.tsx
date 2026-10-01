@@ -84,7 +84,7 @@ export default function Header() {
         id="site-header"
       >
         <div className="header-inner">
-          <a href="/#top" className="wordmark" aria-label="Andrew Liberty Team — home">
+          <a href="/" className="wordmark" aria-label="Andrew Liberty Team — home">
             {/* One SVG carries the whole lockup, so the mark and the words can no
                 longer drift out of alignment with each other. width/height are the
                 artwork's own box - they only supply the aspect ratio, since CSS

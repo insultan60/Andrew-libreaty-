@@ -106,7 +106,7 @@ export default function HomeValuationPage() {
         <div className="container val-worth-grid">
           <div className="val-worth-media reveal">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/valuation-interior.jpg" alt="Los Angeles home interior" loading="lazy" />
+            <img src="/images/hero-poster.jpg" alt="Andrew Liberty walking a neighborhood street in Los Angeles" loading="lazy" />
           </div>
           <div className="val-worth-copy reveal" data-reveal-delay={100}>
             <p className="eyebrow">Knowledge, not guesswork</p>
