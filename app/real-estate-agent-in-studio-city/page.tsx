@@ -12,6 +12,13 @@ import { SITE_URL, SITE_NAME, AGENT, abs } from "@/lib/site";
 // Scoped to this page: every rule is under .sc-page, so it is loaded here
 // rather than from the root layout.
 import "./studio-city.css";
+import StudioCityListings from "./StudioCityListings";
+import { fetchRawListingsServer } from "@/lib/idxServer";
+import { inArea } from "@/lib/areas";
+
+/* The listings section is rendered from the server-side IDX feed, cached for
+   fifteen minutes in lib/idxServer.ts; the page follows the same cadence. */
+export const revalidate = 900;
 
 const PATH = "/real-estate-agent-in-studio-city";
 const TITLE = "Studio City Neighborhood Guide & Real Estate | Andrew Liberty";
@@ -39,7 +46,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default function StudioCityPage() {
+export default async function StudioCityPage() {
+  // Only the Studio City subset goes to the client, not the whole feed.
+  const feed = await fetchRawListingsServer();
+  const studioCityListings = feed ? feed.filter((raw) => inArea(raw, "studio-city")) : null;
+
   return (
     <div className="sc-page">
       <JsonLd
@@ -263,222 +274,9 @@ export default function StudioCityPage() {
       </section>
 
       {/* ==================================================================
-          4. MICRO-NEIGHBORHOODS (Studio City Isn't One Market)
-          ================================================================== */}
-      <section className="sc-section sc-bg-ivory" id="micro-neighborhoods">
-        <div className="container">
-          <div className="sc-section-head">
-            <span className="sc-eyebrow">THE DIFFERENCE THAT MATTERS</span>
-            <h2 className="sc-title">Studio City Isn&apos;t One Market</h2>
-            <p className="sc-sub">
-              A house four blocks from another can sit in a different price bracket, a different
-              school boundary and a different kind of street. These are the pockets buyers and
-              sellers should know by name.
-            </p>
-          </div>
-
-          <div className="sc-pockets-grid">
-            {/* Card 1: Colfax Meadows */}
-            <div className="sc-pocket-card">
-              <div className="sc-pocket-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/sold-studio-city.jpg"
-                  alt="Colfax Meadows home in Studio City"
-                  loading="lazy"
-                />
-                <span className="sc-pocket-badge">THE FLATS • FAMILY</span>
-              </div>
-              <div className="sc-pocket-body">
-                <h3>Colfax Meadows</h3>
-                <p className="sc-pocket-desc">
-                  One of Studio City&apos;s original neighborhoods, north of Ventura in the flats.
-                  Large lots, mature trees, 1920s–30s character homes alongside postwar ranches
-                  and newer builds.
-                </p>
-                <div className="sc-pocket-consider">
-                  <strong>Consider if:</strong> you want walkability, a flat street and proximity
-                  to Carpenter&apos;s boundary.
-                </div>
-                <Link href="/home-search" className="sc-pocket-btn">
-                  <span>Explore Colfax Meadows</span>
-                  <ArrowRight />
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 2: Wrightwood Estates */}
-            <div className="sc-pocket-card">
-              <div className="sc-pocket-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/sold-canyon-midcentury.jpg"
-                  alt="Wrightwood Estates architectural home"
-                  loading="lazy"
-                />
-                <span className="sc-pocket-badge">HILLSIDE • ARCHITECTURAL</span>
-              </div>
-              <div className="sc-pocket-body">
-                <h3>Wrightwood Estates</h3>
-                <p className="sc-pocket-desc">
-                  In the hills south of Ventura, along Wrightwood Drive and its side streets.
-                  The densest concentration of mid-century and design-forward homes in the area,
-                  with canyon and valley views.
-                </p>
-                <div className="sc-pocket-consider">
-                  <strong>Consider if:</strong> you value privacy, views and architecture over
-                  walkability.
-                </div>
-                <Link href="/home-search" className="sc-pocket-btn">
-                  <span>Explore Wrightwood Estates</span>
-                  <ArrowRight />
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 3: Silver Triangle */}
-            <div className="sc-pocket-card">
-              <div className="sc-pocket-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/hero-poster.jpg"
-                  alt="Silver Triangle shaded street"
-                  loading="lazy"
-                />
-                <span className="sc-pocket-badge">BELOW FRYMAN • CANOPY STREETS</span>
-              </div>
-              <div className="sc-pocket-body">
-                <h3>Silver Triangle</h3>
-                <p className="sc-pocket-desc">
-                  A compact pocket below Fryman Canyon, with heavily shaded streets and a short
-                  walk to the boulevard. Character homes and remodels on a tight, well-defined
-                  grid.
-                </p>
-                <div className="sc-pocket-consider">
-                  <strong>Consider if:</strong> you want quiet streets without giving up boulevard
-                  access.
-                </div>
-                <Link href="/home-search" className="sc-pocket-btn">
-                  <span>Explore Silver Triangle</span>
-                  <ArrowRight />
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 4: Tujunga Village */}
-            <div className="sc-pocket-card">
-              <div className="sc-pocket-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/sold-valley-village.jpg"
-                  alt="Tujunga Village residential street"
-                  loading="lazy"
-                />
-                <span className="sc-pocket-badge">WALKABLE • VILLAGE SCALE</span>
-              </div>
-              <div className="sc-pocket-body">
-                <h3>Tujunga Village</h3>
-                <p className="sc-pocket-desc">
-                  Built around a short walkable strip of independent cafés, boutiques and
-                  neighborhood restaurants. Smaller-scale homes that trade heavily on charm and
-                  location.
-                </p>
-                <div className="sc-pocket-consider">
-                  <strong>Consider if:</strong> walkable daily life matters more to you than lot
-                  size.
-                </div>
-                <Link href="/home-search" className="sc-pocket-btn">
-                  <span>Explore Tujunga Village</span>
-                  <ArrowRight />
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 5: Beeman Park */}
-            <div className="sc-pocket-card">
-              <div className="sc-pocket-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/sold-sherman-oaks.jpg"
-                  alt="Beeman Park neighborhood home"
-                  loading="lazy"
-                />
-                <span className="sc-pocket-badge">THE FLATS • FAMILY</span>
-              </div>
-              <div className="sc-pocket-body">
-                <h3>Beeman Park</h3>
-                <p className="sc-pocket-desc">
-                  Named for the park at its centre, with tree-lined streets and a strong family
-                  buyer profile. Traditional and ranch homes, many expanded or rebuilt over the
-                  last two decades.
-                </p>
-                <div className="sc-pocket-consider">
-                  <strong>Consider if:</strong> you want park access and a settled residential
-                  street.
-                </div>
-                <Link href="/home-search" className="sc-pocket-btn">
-                  <span>Explore Beeman Park</span>
-                  <ArrowRight />
-                </Link>
-              </div>
-            </div>
-
-            {/* Card 6: Longridge Estates */}
-            <div className="sc-pocket-card">
-              <div className="sc-pocket-media">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/sold-hollywood-hills.jpg"
-                  alt="Longridge Estates luxury secluded home"
-                  loading="lazy"
-                />
-                <span className="sc-pocket-badge">HILLSIDE • HIGH END</span>
-              </div>
-              <div className="sc-pocket-body">
-                <h3>Longridge Estates</h3>
-                <p className="sc-pocket-desc">
-                  Above Coldwater Canyon, set back behind mature trees. Larger properties,
-                  significant privacy, and price points that behave differently from the flats.
-                </p>
-                <div className="sc-pocket-consider">
-                  <strong>Consider if:</strong> you&apos;re looking for scale and seclusion within
-                  Studio City.
-                </div>
-                <Link href="/home-search" className="sc-pocket-btn">
-                  <span>Explore Longridge Estates</span>
-                  <ArrowRight />
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* School Boundary Banner */}
-          <div className="sc-school-banner">
-            <svg
-              style={{ width: "24px", height: "24px", flexShrink: 0, color: "var(--sc-gold-deep)" }}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
-            <div>
-              <strong>Note on school boundaries:</strong> The Carpenter Community Charter
-              attendance line runs block by block rather than following neighborhood edges. Any
-              specific address should be verified against the current LAUSD boundary before an offer
-              is written or a list price is set.
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================================================================
           5. INVENTORY & HOUSING TYPES
           ================================================================== */}
-      <section className="sc-section sc-bg-stone" id="inventory">
+      <section className="sc-section sc-bg-ivory" id="inventory">
         <div className="container">
           <div className="sc-section-head">
             <span className="sc-eyebrow">INVENTORY</span>
@@ -594,7 +392,7 @@ export default function StudioCityPage() {
       {/* ==================================================================
           8. BUYER GUIDE
           ================================================================== */}
-      <section className="sc-section sc-bg-ivory" id="buyer-guide">
+      <section className="sc-section sc-bg-stone" id="buyer-guide">
         <div className="container">
           <div className="sc-section-head">
             <span className="sc-eyebrow">BUYER GUIDE</span>
@@ -668,7 +466,7 @@ export default function StudioCityPage() {
       {/* ==================================================================
           9. SELLER GUIDE
           ================================================================== */}
-      <section className="sc-section sc-bg-stone" id="seller-guide">
+      <section className="sc-section sc-bg-ivory" id="seller-guide">
         <div className="container">
           <div className="sc-section-head">
             <span className="sc-eyebrow">SELLER GUIDE</span>
@@ -740,6 +538,11 @@ export default function StudioCityPage() {
           </div>
         </div>
       </section>
+
+      {/* ==================================================================
+          LISTINGS — Studio City homes for sale and recently sold (IDX)
+          ================================================================== */}
+      <StudioCityListings initialListings={studioCityListings} tone="stone" />
 
       {/* ==================================================================
           12. EVERYDAY LIFE & LOCAL ANCHORS
