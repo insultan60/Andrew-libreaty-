@@ -143,6 +143,60 @@ export default async function StudioCityPage() {
       </section>
 
       {/* ==================================================================
+          WHERE TO START — buying, selling, investing
+          Its own band below the hero (these cards used to sit inside it).
+          The buyer and seller guides they pointed at were removed, so they
+          now go to the pages that cover the same ground.
+          ================================================================== */}
+      <section className="sc-section sc-bg-stone sc-paths">
+        <div className="container">
+          <div className="sc-hero-action-grid">
+            <Link href="/home-search" className="sc-hero-action-card">
+              <div>
+                <span className="sc-hero-card-tag">BUYING</span>
+                <h3>Buying in Studio City</h3>
+                <p>
+                  Understand the pockets, home types, school boundaries and what current inventory
+                  actually looks like.
+                </p>
+              </div>
+              <span className="sc-hero-card-link">
+                BROWSE STUDIO CITY HOMES <ArrowRight />
+              </span>
+            </Link>
+
+            <Link href="/home-valuation" className="sc-hero-action-card">
+              <div>
+                <span className="sc-hero-card-tag">SELLING</span>
+                <h3>Selling in Studio City</h3>
+                <p>
+                  Valuation, preparation, positioning and pricing against real neighborhood
+                  comparables — not citywide averages.
+                </p>
+              </div>
+              <span className="sc-hero-card-link">
+                GET YOUR HOME VALUE <ArrowRight />
+              </span>
+            </Link>
+
+            <Link href="/contact" className="sc-hero-action-card">
+              <div>
+                <span className="sc-hero-card-tag">INVESTING</span>
+                <h3>Investing in Studio City</h3>
+                <p>
+                  Income property, small multifamily and development sites evaluated on
+                  fundamentals and real numbers.
+                </p>
+              </div>
+              <span className="sc-hero-card-link">
+                EXPLORE OPPORTUNITIES <ArrowRight />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================================================================
           2. ORIENTATION (Studio City at a Glance)
           ================================================================== */}
       <section className="sc-section sc-bg-ivory" id="orientation">

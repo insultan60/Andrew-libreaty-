@@ -246,6 +246,29 @@
   gap: 12px;
 }
 
+/* The same three cards in their own light band below the hero (.sc-paths):
+   no divider line above them, and light-surface colours in place of the
+   translucent white the dark hero needed. */
+.sc-paths .sc-hero-action-grid {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+.sc-paths .sc-hero-action-card {
+  background: #ffffff;
+  border-color: var(--sc-border);
+}
+.sc-paths .sc-hero-action-card:hover {
+  background: #ffffff;
+  border-color: rgba(209, 152, 82, 0.5);
+  box-shadow: 0 16px 36px -12px rgba(23, 20, 15, 0.18);
+}
+.sc-paths .sc-hero-action-card h3 { color: var(--sc-text-main); }
+.sc-paths .sc-hero-action-card p { color: var(--sc-text-muted, rgba(23, 20, 15, 0.68)); }
+/* The hero's pale gold is too faint on white; the site's deep gold reads. */
+.sc-paths .sc-hero-card-tag,
+.sc-paths .sc-hero-card-link { color: var(--gold-deep); }
+
 /* ==========================================================================
    2. ORIENTATION (Studio City at a Glance)
    ========================================================================== */
