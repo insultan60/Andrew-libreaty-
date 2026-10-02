@@ -32,7 +32,14 @@ export default function StudioCityListings({
   tone?: "ivory" | "stone";
 }) {
   const { data, loading, error } = useIdxListings(initialListings);
-  const items = (data ?? []).filter((raw) => inArea(raw, "studio-city")).map(toPropertyItem);
+  /* The MLS files some 91604 homes under "Los Angeles" (3377 Canton Lane sits
+     across the street from 3378, which is filed as Studio City). Every home in
+     this section has already been matched to Studio City, so it is labelled
+     that way rather than by whatever the feed's city field says. */
+  const items = (data ?? [])
+    .filter((raw) => inArea(raw, "studio-city"))
+    .map(toPropertyItem)
+    .map((p) => ({ ...p, location: "Studio City, CA" }));
   const forSale = items.filter((p) => p.badge !== "Sold");
   const sold = items.filter((p) => p.badge === "Sold");
   const shown = [...forSale, ...sold].slice(0, MAX);

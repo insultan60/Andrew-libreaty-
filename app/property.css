@@ -106,7 +106,10 @@
 .pl-media { position: relative; aspect-ratio: 4 / 4.7; overflow: hidden; background: var(--ivory-deep); }
 .pl-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 600ms var(--ease-out); }
 .pl-card:hover .pl-media img { transform: scale(1.05); }
-.pl-badge { top: 14px; left: 14px; }
+/* position was missing, so the badge sat in normal flow after the 100%-tall
+   image and pl-media's overflow clipped it away: every Active/Sold label on
+   these cards existed in the HTML but never showed. */
+.pl-badge { position: absolute; top: 14px; left: 14px; z-index: 1; }
 
 .pl-heart {
   position: absolute; top: 12px; right: 12px;
