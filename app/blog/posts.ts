@@ -30,6 +30,7 @@ export type Post = {
 export const TITLES = {
   tipsForShowing: "Tips for Showing Your House",
   sellInFall: "Tips to Sell Your Home in the Fall",
+  sellAsIs: "Selling a House As-Is in California",
 } as const;
 
 export function slugify(s: string): string {
@@ -76,6 +77,22 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Selling Strategy",
+    title: TITLES.sellAsIs,
+    /* Written for the card; the SERP copy supplied with the article is in
+       metaTitle / metaDescription below. */
+    excerpt:
+      "Selling as-is is legal in California, but your disclosure duties don't change. What you must tell buyers, the Los Angeles rules that catch sellers off guard, and how listing compares with a cash offer once fees are counted.",
+    metaTitle: "Selling a House As-Is in California | LA Agent Guide",
+    metaDescription:
+      "Selling a house as-is in California? Learn what you must still disclose, how as-is sales are priced, and how cash and agent offers compare.",
+    date: "Oct 2, 2026",
+    /* About twice the length of the other two posts, so the label says so. */
+    read: "17 min read",
+    img: "/images/blog/selling-a-house-as-is-in-california.webp",
+    tags: ["Selling Strategy", "As-Is Sales", "Seller Disclosures", "Cash Offers", "Los Angeles"],
+  },
   {
     category: "Selling Strategy",
     title: TITLES.sellInFall,

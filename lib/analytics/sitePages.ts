@@ -52,6 +52,11 @@ export const SITE_PAGES: SitePage[] = [
     name: "Tips to sell your home in the fall",
     group: "Content",
   },
+  {
+    path: "/blog/selling-a-house-as-is-in-california",
+    name: "Selling a house as-is in California",
+    group: "Content",
+  },
 
   { path: "/my-search-portal", name: "Saved search portal", group: "Internal" },
 ];
