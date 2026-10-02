@@ -5,7 +5,6 @@ import JsonLd from "../components/JsonLd";
 import {
   LifestyleShowcase,
   FaqAccordion,
-  StudioCityValuationForm,
 } from "./StudioCityInteractive";
 import { FAQ_ITEMS } from "./data";
 import { SITE_URL, SITE_NAME, AGENT, abs } from "@/lib/site";
@@ -134,56 +133,12 @@ export default async function StudioCityPage() {
                 <span>Browse Studio City Homes</span>
                 <ArrowRight />
               </Link>
-              <a href="#valuation-form" className="btn-outline-light">
+              <Link href="/home-valuation" className="btn-outline-light">
                 <span>Get Your Home Value</span>
-              </a>
+              </Link>
             </div>
           </div>
 
-          {/* 3 Quick Action Cards */}
-          <div className="sc-hero-action-grid">
-            <a href="#buyer-guide" className="sc-hero-action-card">
-              <div>
-                <span className="sc-hero-card-tag">BUYING</span>
-                <h3>Buying in Studio City</h3>
-                <p>
-                  Understand the pockets, home types, school boundaries and what current inventory
-                  actually looks like.
-                </p>
-              </div>
-              <span className="sc-hero-card-link">
-                START WITH THE BUYER GUIDE <ArrowRight />
-              </span>
-            </a>
-
-            <a href="#seller-guide" className="sc-hero-action-card">
-              <div>
-                <span className="sc-hero-card-tag">SELLING</span>
-                <h3>Selling in Studio City</h3>
-                <p>
-                  Valuation, preparation, positioning and pricing against real neighborhood
-                  comparables — not citywide averages.
-                </p>
-              </div>
-              <span className="sc-hero-card-link">
-                START WITH THE SELLER GUIDE <ArrowRight />
-              </span>
-            </a>
-
-            <Link href="/contact" className="sc-hero-action-card">
-              <div>
-                <span className="sc-hero-card-tag">INVESTING</span>
-                <h3>Investing in Studio City</h3>
-                <p>
-                  Income property, small multifamily and development sites evaluated on
-                  fundamentals and real numbers.
-                </p>
-              </div>
-              <span className="sc-hero-card-link">
-                EXPLORE OPPORTUNITIES <ArrowRight />
-              </span>
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -385,156 +340,6 @@ export default async function StudioCityPage() {
                 <strong>Check:</strong> RSO status, current rents vs market, deferred maintenance.
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================================================================
-          8. BUYER GUIDE
-          ================================================================== */}
-      <section className="sc-section sc-bg-stone" id="buyer-guide">
-        <div className="container">
-          <div className="sc-section-head">
-            <span className="sc-eyebrow">BUYER GUIDE</span>
-            <h2 className="sc-title">Buying a Home in Studio City</h2>
-            <p className="sc-sub">
-              Key considerations before scheduling tours or writing offers on these streets.
-            </p>
-          </div>
-
-          <div className="sc-guide-wrap">
-            <div className="sc-guide-accordion">
-              <div className="sc-guide-box">
-                <h3 className="sc-guide-q">Who does Studio City tend to suit?</h3>
-                <p className="sc-guide-a">
-                  Buyers who want a residential, walkable neighborhood with real trail access and a
-                  short hop to the studios and the Westside — without moving into a hillside-only
-                  lifestyle. The pool skews toward families in the flats and design-led buyers in
-                  the hills, but the neighborhood carries both comfortably.
-                </p>
-              </div>
-
-              <div className="sc-guide-box">
-                <h3 className="sc-guide-q">What should buyers look for?</h3>
-                <p className="sc-guide-a">
-                  Flat, usable outdoor space; permitted square footage that matches what you&apos;re
-                  being shown; a school boundary confirmed for the specific address; and on
-                  hillside properties, the condition of retaining walls, drainage and access.
-                </p>
-              </div>
-
-              <div className="sc-guide-box">
-                <h3 className="sc-guide-q">How much does micro-location matter?</h3>
-                <p className="sc-guide-a">
-                  More than almost anywhere comparable in the Valley. Proximity to Ventura cuts both
-                  ways — walkability on one side, traffic and noise on the other. Two similar houses
-                  a few blocks apart can price differently because of the boundary line, the canyon
-                  route, or the street&apos;s canopy.
-                </p>
-              </div>
-
-              <div className="sc-guide-box">
-                <h3 className="sc-guide-q">What should you check before making an offer?</h3>
-                <p className="sc-guide-a">
-                  Permit history with the city, sewer and foundation condition on older flats homes,
-                  geology and slope on hillside lots, HOA documents on condos, and the actual
-                  comparable set — including what sold and then resold, not just what listed.
-                </p>
-              </div>
-
-              <div className="sc-guide-box">
-                <h3 className="sc-guide-q">What do buyers commonly overlook?</h3>
-                <p className="sc-guide-a">
-                  Noise exposure from Ventura and the 101, driveway grade and guest parking on
-                  hillside streets, unpermitted additions presented as finished square footage, and
-                  how much the specific canyon route they&apos;ll use daily actually adds to a
-                  commute.
-                </p>
-              </div>
-            </div>
-
-            <div style={{ textAlign: "center" }}>
-              <Link href="/home-search" className="btn-gold">
-                <span>Browse Studio City Homes</span>
-                <ArrowRight />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================================================================
-          9. SELLER GUIDE
-          ================================================================== */}
-      <section className="sc-section sc-bg-ivory" id="seller-guide">
-        <div className="container">
-          <div className="sc-section-head">
-            <span className="sc-eyebrow">SELLER GUIDE</span>
-            <h2 className="sc-title">Selling a Home in Studio City</h2>
-            <p className="sc-sub">Six stages, each of which affects the final number.</p>
-          </div>
-
-          <div className="sc-seller-stages-grid">
-            <div className="sc-seller-stage-card">
-              <span className="sc-stage-number">01</span>
-              <h3>How Studio City homes are valued</h3>
-              <p>
-                Pocket-level comparables, adjusted for street, lot, condition and architecture —
-                then sense-checked against current absorption.
-              </p>
-            </div>
-
-            <div className="sc-seller-stage-card">
-              <span className="sc-stage-number">02</span>
-              <h3>Preparing for market</h3>
-              <p>
-                Targeted work only: what returns more than it costs. Paint, landscaping, systems
-                and staging in that order.
-              </p>
-            </div>
-
-            <div className="sc-seller-stage-card">
-              <span className="sc-stage-number">03</span>
-              <h3>Pricing against real comps</h3>
-              <p>
-                Priced into the band buyers are actually searching, not above it. The first two
-                weeks carry most of the leverage.
-              </p>
-            </div>
-
-            <div className="sc-seller-stage-card">
-              <span className="sc-stage-number">04</span>
-              <h3>Positioning &amp; marketing</h3>
-              <p>
-                Photography, video, copy and placement that speak to the specific buyer for that
-                pocket and that architecture.
-              </p>
-            </div>
-
-            <div className="sc-seller-stage-card">
-              <span className="sc-stage-number">05</span>
-              <h3>Evaluating offers</h3>
-              <p>
-                Price is one term. Financing strength, contingency periods, appraisal risk and
-                close timeline decide which offer is genuinely best.
-              </p>
-            </div>
-
-            <div className="sc-seller-stage-card">
-              <span className="sc-stage-number">06</span>
-              <h3>Negotiation &amp; closing</h3>
-              <p>
-                Certified negotiation handling through inspection response, repair requests,
-                appraisal and escrow.
-              </p>
-            </div>
-          </div>
-
-          <div style={{ textAlign: "center" }}>
-            <a href="#valuation-form" className="btn-gold">
-              <span>Get a Studio City Home Valuation</span>
-              <ArrowRight />
-            </a>
           </div>
         </div>
       </section>
@@ -758,18 +563,9 @@ export default async function StudioCityPage() {
       </section>
 
       {/* ==================================================================
-          16. VALUATION LEAD CAPTURE FORM
-          ================================================================== */}
-      <section className="sc-section sc-bg-ivory" id="valuation">
-        <div className="container">
-          <StudioCityValuationForm />
-        </div>
-      </section>
-
-      {/* ==================================================================
           17. FAQ ACCORDION
           ================================================================== */}
-      <section className="sc-section sc-bg-stone" id="faq">
+      <section className="sc-section sc-bg-ivory" id="faq">
         <div className="container">
           <div className="sc-section-head text-center">
             <span className="sc-eyebrow">COMMON QUESTIONS</span>
@@ -802,9 +598,9 @@ export default async function StudioCityPage() {
                 <span>Browse Studio City Homes</span>
                 <ArrowRight />
               </Link>
-              <a href="#valuation-form" className="btn-outline-light">
+              <Link href="/home-valuation" className="btn-outline-light">
                 <span>Get Your Home Value</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
