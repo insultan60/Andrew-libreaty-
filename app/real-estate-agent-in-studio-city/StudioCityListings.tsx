@@ -6,6 +6,7 @@ import { toPropertyItem, type RawIdxListing } from "@/lib/idx";
 import { inArea } from "@/lib/areas";
 import PropertyCard from "../property/PropertyCard";
 import PageLoader from "../components/PageLoader";
+import MlsSearchCard from "../components/MlsSearchCard";
 import { ArrowRight } from "../components/icons";
 
 /* Most a neighbourhood page shows before handing over to the full search. */
@@ -43,6 +44,9 @@ export default function StudioCityListings({
   const forSale = items.filter((p) => p.badge !== "Sold");
   const sold = items.filter((p) => p.badge === "Sold");
   const shown = [...forSale, ...sold].slice(0, MAX);
+  // Fewer than a full row: the full-MLS card fills the gap and stands in for
+  // the "Search All" button below.
+  const fill = !loading && !error && shown.length < 3;
 
   return (
     <section className={`sc-section sc-bg-${tone}`} id="listings">
@@ -62,26 +66,27 @@ export default function StudioCityListings({
           <p style={{ textAlign: "center", color: "var(--muted)" }}>
             Listings are unavailable right now — please try again shortly.
           </p>
-        ) : shown.length === 0 ? (
-          <p style={{ textAlign: "center", color: "var(--muted)" }}>
-            No Studio City listings right now — search the full MLS below.
-          </p>
         ) : (
           <div className="prop-grid">
             {shown.map((p) => (
               <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
             ))}
+            {fill && (
+              <MlsSearchCard href="/home-search?area=studio-city" place="Studio City" beside={shown.length} />
+            )}
           </div>
         )}
 
         {/* No "reveal" class: in the browser-fetch fallback this mounts after
             GlobalEffects has snapshotted .reveal, and would stay invisible. */}
-        <div className="prop-more">
-          <Link href="/home-search?area=studio-city" className="btn btn-gold btn-magnetic">
-            <span>Search All Studio City Homes</span>
-            <ArrowRight />
-          </Link>
-        </div>
+        {!fill && (
+          <div className="prop-more">
+            <Link href="/home-search?area=studio-city" className="btn btn-gold btn-magnetic">
+              <span>Search All Studio City Homes</span>
+              <ArrowRight />
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

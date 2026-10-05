@@ -6,6 +6,7 @@ import { toPropertyItem, type RawIdxListing } from "@/lib/idx";
 import { inArea, type AreaKey } from "@/lib/areas";
 import PropertyCard from "../property/PropertyCard";
 import PageLoader from "./PageLoader";
+import MlsSearchCard from "./MlsSearchCard";
 import { ArrowRight } from "./icons";
 
 /**
@@ -57,6 +58,13 @@ export default function AreaListings({
         })()
       : [];
 
+  /* A row of fewer than three cards gets the full-MLS card in the gap, so a
+     thin area still leads somewhere. It also replaces the "Search All" button
+     below, which would say the same thing twice. */
+  const search = `/home-search?area=${area}`;
+  const row = shown.length || others.length;
+  const fill = !loading && !error && row < 3;
+
   return (
     <>
       {loading ? (
@@ -74,28 +82,32 @@ export default function AreaListings({
             {others.map((p) => (
               <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
             ))}
+            {fill && <MlsSearchCard href={search} place={place} beside={others.length} />}
           </div>
         </>
       ) : shown.length === 0 ? (
-        <p style={{ textAlign: "center", color: "var(--muted)" }}>
-          No {place} listings right now — search the full MLS below.
-        </p>
+        <div className="prop-grid">
+          <MlsSearchCard href={search} place={place} beside={0} />
+        </div>
       ) : (
         <div className="prop-grid">
           {shown.map((p) => (
             <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
           ))}
+          {fill && <MlsSearchCard href={search} place={place} beside={shown.length} />}
         </div>
       )}
 
       {/* No "reveal" class: in the browser-fetch fallback this mounts after
           GlobalEffects has snapshotted .reveal, and would stay invisible. */}
-      <div className="area-listings-more">
-        <Link href={`/home-search?area=${area}`} className="btn btn-gold btn-magnetic">
-          <span>Search All {place} Homes</span>
-          <ArrowRight />
-        </Link>
-      </div>
+      {!fill && (
+        <div className="area-listings-more">
+          <Link href={search} className="btn btn-gold btn-magnetic">
+            <span>Search All {place} Homes</span>
+            <ArrowRight />
+          </Link>
+        </div>
+      )}
     </>
   );
 }

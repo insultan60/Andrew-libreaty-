@@ -292,7 +292,7 @@
   margin-bottom: 10px;
 }
 
-.sc-hero-action-card h3 {
+.sc-hero-action-card h2 {
   font-family: var(--font-display);
   font-size: 1.35rem;
   font-weight: 500;
@@ -341,7 +341,7 @@
   border-color: rgba(209, 152, 82, 0.5);
   box-shadow: 0 16px 36px -12px rgba(23, 20, 15, 0.18);
 }
-.sc-paths .sc-hero-action-card h3 { color: var(--sc-text-main); }
+.sc-paths .sc-hero-action-card h2 { color: var(--sc-text-main); }
 .sc-paths .sc-hero-action-card p { color: var(--sc-text-muted, rgba(23, 20, 15, 0.68)); }
 /* The hero's pale gold is too faint on white; the site's deep gold reads. */
 .sc-paths .sc-hero-card-tag,

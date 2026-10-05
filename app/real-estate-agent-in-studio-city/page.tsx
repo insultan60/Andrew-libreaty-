@@ -162,7 +162,7 @@ export default async function StudioCityPage() {
             <Link href="/home-search?area=studio-city" className="sc-hero-action-card">
               <div>
                 <span className="sc-hero-card-tag">BUYING</span>
-                <h3>Buying in Studio City</h3>
+                <h2>Buying in Studio City</h2>
                 <p>
                   Understand the pockets, home types, school boundaries and what current inventory
                   actually looks like.
@@ -176,7 +176,7 @@ export default async function StudioCityPage() {
             <Link href="/home-valuation" className="sc-hero-action-card">
               <div>
                 <span className="sc-hero-card-tag">SELLING</span>
-                <h3>Selling in Studio City</h3>
+                <h2>Selling in Studio City</h2>
                 <p>
                   Valuation, preparation, positioning and pricing against real neighborhood
                   comparables — not citywide averages.
@@ -190,7 +190,7 @@ export default async function StudioCityPage() {
             <Link href="/contact" className="sc-hero-action-card">
               <div>
                 <span className="sc-hero-card-tag">INVESTING</span>
-                <h3>Investing in Studio City</h3>
+                <h2>Investing in Studio City</h2>
                 <p>
                   Income property, small multifamily and development sites evaluated on
                   fundamentals and real numbers.

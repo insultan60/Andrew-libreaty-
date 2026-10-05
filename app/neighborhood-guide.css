@@ -46,6 +46,11 @@
   font-family: var(--font-display); font-weight: 500;
   font-size: 21px; line-height: 1.25; color: var(--lcn-ink); margin: 0;
 }
+/* The full-MLS card (app/property.css) sits on a dark ground; the rule above
+   would otherwise paint its heading dark-on-dark at body size. */
+.lcn-page .prop-mls-card h3 {
+  font-weight: 400; font-size: clamp(26px, 2.6vw, 36px); line-height: 1.1; color: var(--on-dark);
+}
 
 .lcn-num {
   display: block;
