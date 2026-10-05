@@ -101,6 +101,14 @@ export default async function StudioCityPage() {
           1. HERO SECTION
           ================================================================== */}
       <section className="sc-hero">
+        {/* Looking north over Universal City and Studio City to the Valley.
+            Photo: Leslie Cross on Unsplash (Unsplash License). */}
+        <img
+          className="sc-hero-bg"
+          src="/images/studio-city-hero.jpg"
+          alt="View from Mulholland over Studio City and the San Fernando Valley"
+          fetchPriority="high"
+        />
         <div className="container">
           <nav className="sc-crumbs" aria-label="Breadcrumb">
             <Link href="/">Home</Link>
@@ -279,6 +287,20 @@ export default async function StudioCityPage() {
           </div>
 
           <LifestyleShowcase />
+
+          <div className="sc-mls-cta">
+            <div>
+              <h3>See what&apos;s on the market in Studio City right now</h3>
+              <p>
+                Search every active Studio City listing on my MLS — flats, hillside and
+                condos — with live prices and photos.
+              </p>
+            </div>
+            <Link href="/home-search" className="btn-gold">
+              <span>Search My MLS</span>
+              <ArrowRight />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -306,9 +328,6 @@ export default async function StudioCityPage() {
                   contemporary and mid-century in the hills.
                 </p>
               </div>
-              <div className="sc-inventory-check">
-                <strong>Check:</strong> Permitted square footage against county records.
-              </div>
             </div>
 
             <div className="sc-inventory-card">
@@ -319,9 +338,6 @@ export default async function StudioCityPage() {
                   Concentrated along and just off Ventura. Often the accessible way into the
                   neighborhood.
                 </p>
-              </div>
-              <div className="sc-inventory-check">
-                <strong>Check:</strong> HOA reserves, litigation history, rental caps.
               </div>
             </div>
 
@@ -334,9 +350,6 @@ export default async function StudioCityPage() {
                   its own dedicated buyers.
                 </p>
               </div>
-              <div className="sc-inventory-check">
-                <strong>Check:</strong> Original systems, single-pane glazing, roof age.
-              </div>
             </div>
 
             <div className="sc-inventory-card">
@@ -347,9 +360,6 @@ export default async function StudioCityPage() {
                   Ground-up contemporary builds and significant architectural remodels, mostly in
                   the hills.
                 </p>
-              </div>
-              <div className="sc-inventory-check">
-                <strong>Check:</strong> Build quality behind the finish level.
               </div>
             </div>
 
@@ -362,9 +372,6 @@ export default async function StudioCityPage() {
                   scenic vistas.
                 </p>
               </div>
-              <div className="sc-inventory-check">
-                <strong>Check:</strong> Slope, retaining walls, geology report, access and parking.
-              </div>
             </div>
 
             <div className="sc-inventory-card">
@@ -376,9 +383,6 @@ export default async function StudioCityPage() {
                   Longridge pockets.
                 </p>
               </div>
-              <div className="sc-inventory-check">
-                <strong>Check:</strong> Comparable depth — thin comp sets make pricing harder.
-              </div>
             </div>
 
             <div className="sc-inventory-card">
@@ -389,9 +393,6 @@ export default async function StudioCityPage() {
                   Duplexes through small apartment buildings, primarily near the boulevard and
                   eastern edge.
                 </p>
-              </div>
-              <div className="sc-inventory-check">
-                <strong>Check:</strong> RSO status, current rents vs market, deferred maintenance.
               </div>
             </div>
           </div>
