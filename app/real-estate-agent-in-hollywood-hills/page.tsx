@@ -48,7 +48,7 @@ const MOVE_CARDS = [
     title: "Buy a Home",
     body: "Every home in Hollywood Hills is different. Andrew helps you find the right one and make a smart offer, view and all.",
     ctaLabel: "Start Home Search",
-    href: "/home-search",
+    href: "/home-search?area=hollywood-hills",
   },
   {
     title: "Sell a Home",
@@ -189,7 +189,7 @@ export default function HollywoodHillsPage() {
               </a>
               {/* btn-secondary is inked for light sections and disappears on
                   the hero photo; btn-ghost-light is the on-dark variant. */}
-              <a href="/home-search" className="btn btn-ghost-light">
+              <a href="/home-search?area=hollywood-hills" className="btn btn-ghost-light">
                 Browse Hollywood Hills Listings
               </a>
             </div>

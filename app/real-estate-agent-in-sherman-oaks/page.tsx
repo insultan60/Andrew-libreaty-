@@ -289,7 +289,7 @@ export default async function ShermanOaksPage() {
               sides.
             </p>
             <div className="lcn-ctas">
-              <Link href="/home-search" className="lcn-btn lcn-btn-dark">
+              <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-dark">
                 Browse Sherman Oaks Homes
               </Link>
               <a href="#valuation" className="lcn-btn lcn-btn-outline">
@@ -435,7 +435,7 @@ export default async function ShermanOaksPage() {
             ))}
           </div>
           <div className="lcn-after">
-            <Link href="/home-search" className="lcn-btn lcn-btn-dark">
+            <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-dark">
               Browse Sherman Oaks Homes
             </Link>
           </div>
@@ -737,7 +737,7 @@ export default async function ShermanOaksPage() {
               </p>
             </div>
             <div className="lcn-ctas">
-              <Link href="/home-search" className="lcn-btn lcn-btn-light">
+              <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-light">
                 Browse Sherman Oaks Homes
               </Link>
               <a href="#valuation" className="lcn-btn lcn-btn-outline-light">

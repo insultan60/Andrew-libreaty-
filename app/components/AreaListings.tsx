@@ -67,7 +67,7 @@ export default function AreaListings({
       {/* No "reveal" class: in the browser-fetch fallback this mounts after
           GlobalEffects has snapshotted .reveal, and would stay invisible. */}
       <div className="area-listings-more">
-        <Link href="/home-search" className="btn btn-gold btn-magnetic">
+        <Link href={`/home-search?area=${area}`} className="btn btn-gold btn-magnetic">
           <span>Search All {place} Homes</span>
           <ArrowRight />
         </Link>

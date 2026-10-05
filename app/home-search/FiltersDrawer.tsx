@@ -165,8 +165,9 @@ export default function FiltersDrawer({
         baths: draft.baths,
         sqft: draft.sqftMin ? +draft.sqftMin : 0,
         q: draft.keywords.trim() || draft.mls.trim(),
+        area: state.area,
       }),
-    [draft, listings]
+    [draft, listings, state.area]
   );
 
   const apply = () => {

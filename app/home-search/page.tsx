@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import HomeSearchClient from "./HomeSearchClient";
 import Faq, { type FaqItem } from "../components/home/Faq";
 import { fetchRawListingsServer } from "@/lib/idxServer";
+import { isAreaKey } from "@/lib/areas";
+import { stateFromParams } from "./listings";
 
 const TITLE = "Los Angeles Homes for Sale | Andrew Liberty";
 const DESCRIPTION =
@@ -65,11 +67,20 @@ const FAQS: FaqItem[] = [
 
 export const revalidate = 900;
 
-export default async function HomeSearchPage() {
-  const initialListings = await fetchRawListingsServer();
+type Props = {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export default async function HomeSearchPage({ searchParams }: Props) {
+  /* Filters come from the query string (?area=studio-city&beds=3 ...) and are
+     applied on the server too, so a neighbourhood link lands on - and the
+     HTML carries - only that neighbourhood's homes. The feed itself is still
+     the cached one; only the filtering is per request. */
+  const [initialListings, params] = await Promise.all([fetchRawListingsServer(), searchParams]);
+  const initialState = stateFromParams(params, isAreaKey);
   return (
     <>
-      <HomeSearchClient initialListings={initialListings} />
+      <HomeSearchClient initialListings={initialListings} initialState={initialState} />
       <Faq faqs={FAQS} />
     </>
   );

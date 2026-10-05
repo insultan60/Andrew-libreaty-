@@ -265,7 +265,7 @@ export default async function LaurelCanyonPage() {
             helps people buy, sell, and invest here.
           </p>
           <div className="lcn-ctas">
-            <Link href="/home-search" className="lcn-btn lcn-btn-light">
+            <Link href="/home-search?area=laurel-canyon" className="lcn-btn lcn-btn-light">
               Browse Canyon Homes
             </Link>
             <a href="#valuation" className="lcn-btn lcn-btn-outline-light">
@@ -379,7 +379,7 @@ export default async function LaurelCanyonPage() {
             <p className="lcn-eyebrow">Buyer Guide</p>
             <h2 className="lcn-title">Buying a Home in Laurel Canyon</h2>
             <p className="lcn-sub">Answers to find before you tour or write an offer.</p>
-            <Link href="/home-search" className="lcn-btn lcn-btn-dark">
+            <Link href="/home-search?area=laurel-canyon" className="lcn-btn lcn-btn-dark">
               Browse Canyon Homes
             </Link>
           </div>
@@ -660,7 +660,7 @@ export default async function LaurelCanyonPage() {
               </p>
             </div>
             <div className="lcn-ctas">
-              <Link href="/home-search" className="lcn-btn lcn-btn-light">
+              <Link href="/home-search?area=laurel-canyon" className="lcn-btn lcn-btn-light">
                 Browse Canyon Homes
               </Link>
               <a href="#valuation" className="lcn-btn lcn-btn-outline-light">

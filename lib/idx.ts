@@ -13,6 +13,7 @@
 import type { Listing } from "@/app/home-search/listings";
 import type { Listing as DetailListing, Feature, HistoryItem } from "@/app/[slug]/data";
 import type { PropertyItem } from "@/app/property/PropertyCard";
+import { areasOf } from "@/lib/areas";
 
 const STATE_ABBR: Record<string, string> = {
   California: "CA",
@@ -144,6 +145,7 @@ export function toListing(raw: RawIdxListing, index: number): Listing {
     order: index,
     lat: Number(raw.latitude),
     lng: Number(raw.longitude),
+    areas: areasOf(raw),
   };
 }
 

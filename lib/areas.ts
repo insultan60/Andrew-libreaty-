@@ -67,6 +67,19 @@ function inBox(raw: RawIdxListing, box: Box): boolean {
   return lat >= box.minLat && lat <= box.maxLat && lon >= box.minLon && lon <= box.maxLon;
 }
 
+/** Display names, for the home search's area chip and heading. */
+export const AREA_LABELS: Record<AreaKey, string> = {
+  "studio-city": "Studio City",
+  "sherman-oaks": "Sherman Oaks",
+  "valley-village": "Valley Village",
+  "laurel-canyon": "Laurel Canyon",
+  "hollywood-hills": "Hollywood Hills",
+};
+
+export function isAreaKey(v: unknown): v is AreaKey {
+  return typeof v === "string" && Object.prototype.hasOwnProperty.call(AREAS, v);
+}
+
 /** Is this listing in the given neighborhood? */
 export function inArea(raw: RawIdxListing, key: AreaKey): boolean {
   const area: Area = AREAS[key];
@@ -74,4 +87,9 @@ export function inArea(raw: RawIdxListing, key: AreaKey): boolean {
     area.zips.includes(raw.zipcode) || area.cities.includes(raw.cityName);
   if (!nearby) return false;
   return area.box ? inBox(raw, area.box) : true;
+}
+
+/** Every area a listing falls in (most fall in none or one). */
+export function areasOf(raw: RawIdxListing): AreaKey[] {
+  return (Object.keys(AREAS) as AreaKey[]).filter((k) => inArea(raw, k));
 }

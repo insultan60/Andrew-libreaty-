@@ -77,7 +77,7 @@ export default function StudioCityListings({
         {/* No "reveal" class: in the browser-fetch fallback this mounts after
             GlobalEffects has snapshotted .reveal, and would stay invisible. */}
         <div className="prop-more">
-          <Link href="/home-search" className="btn btn-gold btn-magnetic">
+          <Link href="/home-search?area=studio-city" className="btn btn-gold btn-magnetic">
             <span>Search All Studio City Homes</span>
             <ArrowRight />
           </Link>

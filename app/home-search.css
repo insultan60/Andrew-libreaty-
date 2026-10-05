@@ -58,6 +58,9 @@
 .filter-pill.is-open { border-color: var(--ink); color: var(--ink); }
 .filter-pill.is-open .pill-caret { transform: rotate(180deg); }
 .filter-pill.is-set { background: var(--gold-tint); border-color: var(--gold); color: var(--gold-deep); }
+/* Neighbourhood chip (from ?area=); the x clears it back to all of LA */
+.hs-area-chip svg { width: 13px; height: 13px; }
+.hs-area-chip:hover { border-color: var(--gold-deep); }
 
 .filter-right { display: flex; align-items: center; gap: 10px; margin-left: auto; }
 
@@ -131,6 +134,7 @@ body.map-view .results-col { display: none; }
 }
 .results-title { font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 2.6vw, 30px); color: var(--ink); }
 .results-intro { font-size: 15px; line-height: 1.6; color: var(--muted); max-width: 68ch; margin-top: 8px; }
+.hs-area-clear { font: inherit; color: var(--gold-deep); text-decoration: underline; text-underline-offset: 3px; padding: 0; background: none; border: 0; cursor: pointer; }
 .results-count { font-size: 14px; color: var(--muted); margin-top: 4px; font-variant-numeric: tabular-nums; }
 
 .sort-wrap { position: relative; display: inline-flex; align-items: center; }

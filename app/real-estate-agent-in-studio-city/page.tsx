@@ -137,7 +137,7 @@ export default async function StudioCityPage() {
               a move — then work with someone who knows the block, not just the ZIP code.
             </p>
             <div className="sc-hero-ctas">
-              <Link href="/home-search" className="btn-gold">
+              <Link href="/home-search?area=studio-city" className="btn-gold">
                 <span>Browse Studio City Homes</span>
                 <ArrowRight />
               </Link>
@@ -159,7 +159,7 @@ export default async function StudioCityPage() {
       <section className="sc-section sc-bg-stone sc-paths">
         <div className="container">
           <div className="sc-hero-action-grid">
-            <Link href="/home-search" className="sc-hero-action-card">
+            <Link href="/home-search?area=studio-city" className="sc-hero-action-card">
               <div>
                 <span className="sc-hero-card-tag">BUYING</span>
                 <h3>Buying in Studio City</h3>
@@ -296,7 +296,7 @@ export default async function StudioCityPage() {
                 condos — with live prices and photos.
               </p>
             </div>
-            <Link href="/home-search" className="btn-gold">
+            <Link href="/home-search?area=studio-city" className="btn-gold">
               <span>Search My MLS</span>
               <ArrowRight />
             </Link>
@@ -649,7 +649,7 @@ export default async function StudioCityPage() {
               means for your specific situation.
             </p>
             <div className="sc-hero-ctas" style={{ justifyContent: "center" }}>
-              <Link href="/home-search" className="btn-gold">
+              <Link href="/home-search?area=studio-city" className="btn-gold">
                 <span>Browse Studio City Homes</span>
                 <ArrowRight />
               </Link>

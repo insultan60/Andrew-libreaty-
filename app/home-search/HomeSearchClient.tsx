@@ -10,7 +10,9 @@ import {
   PLACEHOLDER,
   type Listing,
   type SearchState,
+  stateToQuery,
 } from "./listings";
+import { AREA_LABELS, isAreaKey } from "@/lib/areas";
 import FiltersDrawer from "./FiltersDrawer";
 import MapPanel from "./MapPanel";
 import SaveSearchButton from "./SaveSearchButton";
@@ -60,15 +62,18 @@ const SEG_VALS = [
 
 export default function HomeSearchClient({
   initialListings,
+  initialState,
 }: {
   /** Listings fetched on the server so the first paint - and the HTML Google
    *  indexes - already carries real addresses and prices. Null when the feed
    *  was unreachable at build/request time, in which case this falls back to
    *  fetching them in the browser exactly as before. */
   initialListings?: RawIdxListing[] | null;
+  /** Filters read from the query string on the server (page.tsx). */
+  initialState?: SearchState;
 }) {
-  const [state, setState] = useState<SearchState>(DEFAULT_STATE);
-  const [searchValue, setSearchValue] = useState("");
+  const [state, setState] = useState<SearchState>(initialState ?? DEFAULT_STATE);
+  const [searchValue, setSearchValue] = useState(initialState?.q ?? "");
   const [openPop, setOpenPop] = useState<{ key: PopKey; left: number; top: number } | null>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [saved, setSaved] = useState<Set<string>>(new Set());
@@ -115,9 +120,20 @@ export default function HomeSearchClient({
   const results = useMemo(() => applyState(listings, state), [listings, state]);
   const visibleResults = useMemo(() => results.filter((l) => !hidden.has(l.id)), [results, hidden]);
   const filterCount = activeFilterCount(state);
-  const isFiltered = filterCount > 0 || !!state.q;
+  const isFiltered = filterCount > 0 || !!state.q || !!state.area;
+  const areaLabel = isAreaKey(state.area) ? AREA_LABELS[state.area] : "";
 
   const patch = (p: Partial<SearchState>) => setState((s) => ({ ...s, ...p }));
+
+  /* ---------- Keep the URL in step with the filters ----------
+     replaceState, not navigation: no server round trip and no history entry
+     per click, but the address bar always holds a link to this exact search. */
+  useEffect(() => {
+    const next = location.pathname + stateToQuery(state) + location.hash;
+    if (next !== location.pathname + location.search + location.hash) {
+      history.replaceState(history.state, "", next);
+    }
+  }, [state]);
 
   /* ---------- Debounced free-text search ---------- */
   const onSearch = (v: string) => {
@@ -322,6 +338,18 @@ export default function HomeSearchClient({
           </div>
 
           <div className="filter-pills" role="group" aria-label="Filters">
+            {areaLabel && (
+              <button
+                type="button"
+                className="filter-pill is-set hs-area-chip"
+                aria-label={`Remove ${areaLabel} filter`}
+                title="Show all of Los Angeles"
+                onClick={() => patch({ area: "" })}
+              >
+                <span>{areaLabel}</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" /></svg>
+              </button>
+            )}
             <Pill label={statusLabel} set={isSet.status} open={openPop?.key === "status"} onClick={(e) => togglePop("status", e)} />
             <Pill label={priceLabel} set={isSet.price} open={openPop?.key === "price"} onClick={(e) => togglePop("price", e)} />
             <Pill label={typeLabel} set={isSet.type} open={openPop?.key === "type"} onClick={(e) => togglePop("type", e)} />
@@ -386,7 +414,7 @@ export default function HomeSearchClient({
               </button>
             )}
             <SaveSearchButton
-              searchName={`${state.status.join("/")}${state.beds ? `, ${state.beds}+ beds` : ""}${searchValue ? `, "${searchValue}"` : ""}`}
+              searchName={`${areaLabel ? areaLabel + ": " : ""}${state.status.join("/")}${state.beds ? `, ${state.beds}+ beds` : ""}${searchValue ? `, "${searchValue}"` : ""}`}
               criteria={{
                 status: state.status.join(","),
                 q: state.q,
@@ -405,11 +433,26 @@ export default function HomeSearchClient({
           <section className="results-col" id="results" aria-label="Property listings">
             <div className="results-head">
               <div>
-                <h1 className="results-title">Real Estate &amp; Homes For Sale in Los Angeles</h1>
+                <h1 className="results-title">
+                  Real Estate &amp; Homes For Sale in {areaLabel || "Los Angeles"}
+                </h1>
                 <p className="results-intro">
-                  Search homes for sale in Los Angeles, CA, including Studio City, Sherman Oaks, and the
-                  Hollywood Hills. Filter listings by price, bedrooms, bathrooms, and property type to match
-                  your budget. Andrew Liberty, a Los Angeles buyer agent, can schedule a tour.
+                  {areaLabel ? (
+                    <>
+                      Homes for sale and recently sold in {areaLabel}, CA. Narrow them by price,
+                      bedrooms, bathrooms, and property type, or{" "}
+                      <button type="button" className="hs-area-clear" onClick={() => patch({ area: "" })}>
+                        search all of Los Angeles
+                      </button>
+                      . Andrew Liberty, a Los Angeles buyer agent, can schedule a tour.
+                    </>
+                  ) : (
+                    <>
+                      Search homes for sale in Los Angeles, CA, including Studio City, Sherman Oaks, and the
+                      Hollywood Hills. Filter listings by price, bedrooms, bathrooms, and property type to match
+                      your budget. Andrew Liberty, a Los Angeles buyer agent, can schedule a tour.
+                    </>
+                  )}
                 </p>
                 {/*
                   Never render "0 results" before the feed has answered.

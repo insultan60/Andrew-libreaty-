@@ -59,7 +59,7 @@ const MOVE_CARDS = [
     title: "Buy a Home",
     body: "Valley Village draws families for the schools and the quiet streets. I will help you find a home that actually fits how you want to live.",
     ctaLabel: "Start Home Search",
-    href: "/home-search",
+    href: "/home-search?area=valley-village",
   },
   {
     title: "Sell a Home",
@@ -205,7 +205,7 @@ export default function ValleyVillagePage() {
               </a>
               {/* btn-secondary is inked for light sections and disappears on
                   the hero photo; btn-ghost-light is the on-dark variant. */}
-              <a href="/home-search" className="btn btn-ghost-light">
+              <a href="/home-search?area=valley-village" className="btn btn-ghost-light">
                 Browse Valley Village Listings
               </a>
             </div>
