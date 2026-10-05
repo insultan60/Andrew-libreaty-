@@ -1,7 +1,8 @@
 /* ==========================================================================
-   Laurel Canyon neighbourhood guide — "Laurel Canyon (desktop).pdf"
+   Neighbourhood guide pages — built to "Laurel Canyon (desktop).pdf" and
+   "Sherman Oaks (desktop).pdf". Shared by every page that uses .lcn-page.
    Every rule is scoped under .lcn-page ("lcn", not "lc": home-search.css
-   already owns the lc- prefix for its listing cards) and imported by this page only, so
+   already owns the lc- prefix for its listing cards) and imported only by those pages, so
    nothing here can restyle another page. Colours and type are the site's own
    tokens from globals.css.
    ========================================================================== */
@@ -230,12 +231,63 @@ a.lcn-card:hover { transform: translateY(-3px); border-color: rgba(154, 108, 46,
 .lcn-final .lcn-sub { color: rgba(255, 255, 255, 0.78); }
 .lcn-final .lcn-ctas { margin-top: 0; }
 
+/* ==========================================================================
+   Pieces added for the Sherman Oaks design (same tokens, new layouts)
+   ========================================================================== */
+
+/* Light hero: copy left, photo right (Laurel Canyon uses the dark photo hero) */
+.lcn-hero-split { background: var(--lcn-ivory); padding: calc(var(--header-h, 80px) + 32px) 0 clamp(56px, 7vw, 88px); }
+.lcn-hero-split-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr); gap: clamp(32px, 5vw, 64px); align-items: center; }
+.lcn-hero-split .lcn-crumbs { color: var(--lcn-muted); }
+.lcn-hero-split .lcn-crumbs a:hover { color: var(--lcn-ink); }
+.lcn-hero-split .lcn-hero-title { color: var(--lcn-ink); }
+.lcn-hero-split .lcn-hero-sub { color: var(--lcn-text); }
+.lcn-hero-photo { aspect-ratio: 1 / 1; }
+
+/* Card with the design's gold top rule */
+.lcn-card-accent { border-top: 3px solid var(--gold); }
+
+/* North / Ventura Boulevard / South */
+.lcn-sides { background: var(--lcn-card); border-radius: var(--lcn-radius); overflow: hidden; border: 1px solid var(--line-soft); }
+.lcn-side { padding: 26px 28px; }
+.lcn-side dl { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 16px 0 0; }
+.lcn-side dt { font-size: 13.5px; font-weight: 600; color: var(--lcn-ink); }
+.lcn-side dd { margin: 4px 0 0; font-size: 14.5px; line-height: 1.55; color: var(--lcn-text); }
+.lcn-divide {
+  margin: 0; padding: 13px; text-align: center; background: var(--lcn-dark); color: #fff;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase;
+}
+.lcn-facts-wide { margin-top: 28px; }
+.lcn-facts-wide > div { grid-template-columns: 160px 1fr; }
+
+/* Buyer guide question cards */
+.lcn-qa-card h3 { font-size: 19px; }
+.lcn-span-2 { grid-column: 1 / -1; }
+.lcn-qa-card .lcn-bullets { margin-top: 10px; line-height: 1.8; }
+
+/* Seller guide: heading left, numbered steps right of a gold rule */
+.lcn-seller { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: clamp(32px, 5vw, 64px); align-items: start; }
+.lcn-seller-q { margin-top: 20px !important; }
+.lcn-steps { list-style: none; margin: 0; padding: 0 0 0 clamp(20px, 3vw, 28px); border-left: 1px solid var(--gold); }
+.lcn-steps li + li { margin-top: 22px; }
+.lcn-steps p { margin: 6px 0 0; font-size: 15px; line-height: 1.6; color: var(--lcn-text); }
+.lcn-num-inline { font-family: var(--font-display); color: var(--gold); margin-right: 4px; }
+
+/* Snapshot: pockets table */
+.lcn-subhead { margin: 44px 0 18px !important; }
+.lcn-table-pockets tbody th { font-family: var(--font-display); font-weight: 500; font-size: 17px; width: 26%; }
+
+/* Meet Andrew with the photo on the right */
+.lcn-andrew-flip { grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1024px) {
   .lcn-grid-4 { grid-template-columns: repeat(2, 1fr); }
   .lcn-grid-3 { grid-template-columns: 1fr; }
   .lcn-process { grid-template-columns: repeat(3, 1fr); row-gap: 28px; }
-  .lcn-split, .lcn-andrew, .lcn-aside-layout { grid-template-columns: 1fr; }
+  .lcn-split, .lcn-andrew, .lcn-andrew-flip, .lcn-aside-layout, .lcn-hero-split-inner, .lcn-seller { grid-template-columns: 1fr; }
+  .lcn-side dl { grid-template-columns: repeat(2, 1fr); }
+  .lcn-hero-photo { aspect-ratio: 4 / 3; }
   .lcn-split > .lcn-photo, .lcn-aside { position: static; }
   .lcn-photo-portrait { max-width: 420px; }
 }
@@ -244,6 +296,8 @@ a.lcn-card:hover { transform: translateY(-3px); border-color: rgba(154, 108, 46,
   .lcn-grid-2, .lcn-grid-4 { grid-template-columns: 1fr; }
   .lcn-process { grid-template-columns: repeat(2, 1fr); }
   .lcn-type-card { grid-template-columns: 1fr; gap: 0; }
+  .lcn-side dl { grid-template-columns: 1fr; gap: 12px; }
+  .lcn-facts-wide > div { grid-template-columns: 1fr; }
   .lcn-facts > div { grid-template-columns: 1fr; gap: 4px; }
   .lcn-rows li { grid-template-columns: 52px 1fr; }
   .lcn-rows p { grid-column: 2; }

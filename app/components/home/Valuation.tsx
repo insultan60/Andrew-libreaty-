@@ -10,12 +10,17 @@ type Props = {
   eyebrow?: string;
   title?: string;
   sub?: string;
+  /** Photo beside the form. The homepage keeps the default interior. */
+  image?: string;
+  imageAlt?: string;
 };
 
 export default function Valuation({
   eyebrow = "Free & Confidential",
   title = "How Much Is Your Home Worth?",
   sub = "Get an instant property valuation and expert guidance from Andrew Liberty, your Los Angeles real estate advisor.",
+  image = "/images/valuation-interior.jpg",
+  imageAlt = "Sunlit luxury living room interior",
 }: Props = {}) {
   const [status, setStatus] = useState("");
   const [isError, setIsError] = useState(false);
@@ -84,8 +89,8 @@ export default function Valuation({
         <div className="valuation-visual reveal">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/valuation-interior.jpg"
-            alt="Sunlit luxury living room interior"
+            src={image}
+            alt={imageAlt}
             loading="lazy"
           />
           <ul className="trust-bullets">

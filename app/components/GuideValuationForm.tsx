@@ -5,9 +5,9 @@ import { createLead } from "@/lib/idx";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-/** The Laurel Canyon page's valuation form. Submits an IDX lead, the same way
- *  the other neighbourhood valuation forms do. */
-export default function ValuationForm() {
+/** Valuation form for the neighbourhood guide pages (styled by
+ *  app/neighborhood-guide.css). Submits an IDX lead tagged with the place. */
+export default function GuideValuationForm({ place, title }: { place: string; title: string }) {
   const [status, setStatus] = useState("");
   const [isError, setIsError] = useState(false);
   const [sending, setSending] = useState(false);
@@ -52,10 +52,10 @@ export default function ValuationForm() {
         lastName: rest.join(" ") || "—",
         email,
         phone: phone || undefined,
-        comments: `Laurel Canyon Page valuation request for: ${address}`,
+        comments: `${place} Page valuation request for: ${address}`,
       });
       if (leadId) {
-        setStatus("Thank you — your Laurel Canyon valuation request is in. Andrew will be in touch shortly.");
+        setStatus(`Thank you — your ${place} valuation request is in. Andrew will be in touch shortly.`);
         form.reset();
       } else {
         setIsError(true);
@@ -67,11 +67,11 @@ export default function ValuationForm() {
     } finally {
       setSending(false);
     }
-  }, []);
+  }, [place]);
 
   return (
     <form className="lcn-form" onSubmit={onSubmit} noValidate>
-      <h3 className="lcn-form-title">Get Your Free Canyon Home Valuation</h3>
+      <h3 className="lcn-form-title">{title}</h3>
 
       <label className="lcn-field">
         <span>

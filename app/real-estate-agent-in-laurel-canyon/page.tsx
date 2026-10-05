@@ -3,12 +3,12 @@ import Link from "next/link";
 import { ArrowRight } from "../components/icons";
 import JsonLd from "../components/JsonLd";
 import AreaListings from "../components/AreaListings";
-import ValuationForm from "./ValuationForm";
+import GuideValuationForm from "../components/GuideValuationForm";
 import { fetchRawListingsServer } from "@/lib/idxServer";
 import { inArea } from "@/lib/areas";
 import { SITE_URL, SITE_NAME, abs } from "@/lib/site";
-// Scoped to this page: every rule is under .lcn-page.
-import "./laurel-canyon.css";
+// Shared neighbourhood-guide styles; every rule is under .lcn-page.
+import "../neighborhood-guide.css";
 
 /**
  * Laurel Canyon neighbourhood guide, built to "Laurel Canyon (desktop).pdf".
@@ -577,7 +577,7 @@ export default async function LaurelCanyonPage() {
               <li>Reviewed by Andrew himself</li>
             </ul>
           </div>
-          <ValuationForm />
+          <GuideValuationForm place="Laurel Canyon" title="Get Your Free Canyon Home Valuation" />
         </div>
       </section>
 

@@ -99,14 +99,17 @@ export default function HomeValuationPage() {
       {/* The same form as the homepage. It replaced an address-only search bar
           that showed a thank-you message but never sent the request anywhere,
           so every valuation asked for through it was lost. */}
-      <Valuation />
+      <Valuation
+        image="/images/valuation-house-model.jpg"
+        imageAlt="A hand holding a small wooden model of a house"
+      />
 
       {/* ============ A VALUATION BUILT ON YOUR NEIGHBORHOOD ============ */}
       <section className="section">
         <div className="container val-worth-grid">
           <div className="val-worth-media reveal">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/hero-poster.jpg" alt="Andrew Liberty walking a neighborhood street in Los Angeles" loading="lazy" />
+            <img src="/images/valuation-consultation.jpg" alt="A homeowner talking with her agent outside a modern wood-clad house" loading="lazy" />
           </div>
           <div className="val-worth-copy reveal" data-reveal-delay={100}>
             <p className="eyebrow">Knowledge, not guesswork</p>
