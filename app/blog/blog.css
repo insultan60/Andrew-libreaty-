@@ -192,11 +192,13 @@
    of its own, which takes another 48px of gutter off the inside — so the hero
    actually rendered at 952px, narrower than every section below it. */
 .ar-hero-img { max-width: var(--container); margin: 0 auto; padding: 8px 0 0; }
-/* 5/3 is the artwork's own shape (1619x971 = 1.667). It was 16/8, which is
-   2.000 — a 16.6% crop off a hero that carries its title inside the image, so
-   the type was the first thing to go. Matching the source means nothing is cut,
-   and the taller box is what makes it read bigger: 952x476 -> 1152x691. */
-.ar-hero-img img { width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: cover; border-radius: var(--radius-lg); display: block; }
+/* No fixed aspect-ratio. The heroes carry their title as type inside the
+   image, so any crop cuts the words first. This was 16/8, then 5/3 to fit the
+   first two posts' 1619x971 artwork — which then cut ~12% off the sides of the
+   1200x630 as-is post. Now each hero keeps its own shape: the width/height
+   attributes on the <img> (from Post.imgWidth/imgHeight) give the browser the
+   ratio to reserve, so there is still no layout shift while it loads. */
+.ar-hero-img img { width: 100%; height: auto; border-radius: var(--radius-lg); display: block; }
 
 /* Prose */
 .ar-body { padding: 44px 0 8px; }

@@ -5,6 +5,14 @@ export type Post = {
   date: string;
   read: string;
   img: string;
+  /**
+   * The hero artwork's real pixel size. The article page sizes the hero box
+   * from these, so each image shows at its own shape instead of being cropped
+   * into one fixed ratio — the artwork carries its title as type, and a crop
+   * takes the type first.
+   */
+  imgWidth: number;
+  imgHeight: number;
   slug: string;
   /**
    * SEO copy supplied with the article, when it differs from what the page
@@ -66,6 +74,8 @@ const FEATURED_RAW: RawPost = {
   date: "Sep 21, 2026",
   read: "9 min read",
   img: "/images/blog/tips-for-showing-your-house.webp",
+  imgWidth: 1619,
+  imgHeight: 971,
   tags: ["Selling Strategy", "Home Showings", "Open House", "Seller Checklist"],
 };
 
@@ -91,6 +101,13 @@ const POSTS_RAW: RawPost[] = [
     /* About twice the length of the other two posts, so the label says so. */
     read: "17 min read",
     img: "/images/blog/selling-a-house-as-is-in-california.webp",
+    /* Supplied at 1200x630 (1.9:1) with its type close to both edges, so the
+       16:10 cards cut "Seller's" and the sign. The webp is that artwork with
+       45px of its own flat #0f2a2e background added top and bottom, making it
+       5:3 like the other two posts — every card then crops it as gently as
+       theirs. */
+    imgWidth: 1200,
+    imgHeight: 720,
     tags: ["Selling Strategy", "As-Is Sales", "Seller Disclosures", "Cash Offers", "Los Angeles"],
   },
   {
@@ -110,6 +127,8 @@ const POSTS_RAW: RawPost[] = [
        other on word count, so a different number would just read as noise. */
     read: "9 min read",
     img: "/images/blog/tips-to-sell-your-home-in-the-fall.webp",
+    imgWidth: 1619,
+    imgHeight: 971,
     tags: ["Selling Strategy", "Fall Market", "Home Staging", "Curb Appeal", "Seller Checklist"],
   },
 ];

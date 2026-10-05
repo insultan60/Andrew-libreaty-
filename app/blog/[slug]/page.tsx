@@ -118,7 +118,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <div className="ar-hero-img">
         <div className="container">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={post.img} alt={post.title} />
+          <img src={post.img} alt={post.title} width={post.imgWidth} height={post.imgHeight} />
         </div>
       </div>
 
