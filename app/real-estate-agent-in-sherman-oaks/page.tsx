@@ -5,7 +5,6 @@ import JsonLd from "../components/JsonLd";
 import AreaListings from "../components/AreaListings";
 import GuideValuationForm from "../components/GuideValuationForm";
 import { fetchRawListingsServer } from "@/lib/idxServer";
-import { inArea } from "@/lib/areas";
 import { SITE_URL, SITE_NAME, abs } from "@/lib/site";
 // Shared neighbourhood-guide styles; every rule is under .lcn-page.
 import "../neighborhood-guide.css";
@@ -220,9 +219,9 @@ const FAQS = [
 const pad = (i: number) => String(i + 1).padStart(2, "0");
 
 export default async function ShermanOaksPage() {
-  // Only the Sherman Oaks subset goes to the client, not the whole feed.
-  const feed = await fetchRawListingsServer();
-  const listings = feed ? feed.filter((raw) => inArea(raw, "sherman-oaks")) : null;
+  // Whole feed, not the area subset: AreaListings filters it, and shows three
+  // of Andrew's other homes when the area has none.
+  const listings = await fetchRawListingsServer();
 
   return (
     <div className="lcn-page">

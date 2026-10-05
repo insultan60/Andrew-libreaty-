@@ -5,7 +5,6 @@ import JsonLd from "../components/JsonLd";
 import AreaListings from "../components/AreaListings";
 import GuideValuationForm from "../components/GuideValuationForm";
 import { fetchRawListingsServer } from "@/lib/idxServer";
-import { inArea } from "@/lib/areas";
 import { SITE_URL, SITE_NAME, abs } from "@/lib/site";
 // Shared neighbourhood-guide styles; every rule is under .lcn-page.
 import "../neighborhood-guide.css";
@@ -55,15 +54,15 @@ const START = [
     tag: "Buying",
     title: "Buying in Laurel Canyon",
     body: "Most canyon homes sit back from the road on private, wooded lots. That makes prices hard to compare. Andrew shows you what a home is really worth before you make an offer.",
-    cta: "Start with the buyer guide",
-    href: "#buyer-guide",
+    cta: "Browse Laurel Canyon homes",
+    href: "/home-search?area=laurel-canyon",
   },
   {
     tag: "Selling",
     title: "Selling in Laurel Canyon",
     body: "Canyon buyers pay for privacy, character, and design, not only square feet. Andrew prices your home on real canyon sales and markets it to the right buyer.",
-    cta: "Start with the seller guide",
-    href: "#seller-guide",
+    cta: "Get your home value",
+    href: "/home-valuation",
   },
   {
     tag: "Investing",
@@ -94,50 +93,6 @@ const LIFESTYLE = [
   ["Music and Creative Roots", "The canyon was home to the 1960s and 1970s folk-rock scene. Joni Mitchell, Frank Zappa, and members of the Doors and the Byrds all lived here. Today it still draws buyers who want quiet near Hollywood."],
 ];
 
-const INVENTORY = [
-  { tag: "Most common", title: "Cabins and Cottages", body: "Small, woodsy homes on private lots.", check: "Foundation, roof, drainage, and parking." },
-  { tag: "Character", title: "Mid-Century Homes", body: "Glass walls, open plans, and indoor-outdoor living. A favorite of design-minded buyers.", check: "Old wiring, single-pane windows, and roof age." },
-  { tag: "Classic", title: "Spanish Revival and Traditional", body: "Stucco walls, tile roofs, and arched doors.", check: "Plumbing, wiring, and permits for any additions." },
-  { tag: "Design-led", title: "Modern and Architectural", body: "New builds and big remodels with clean lines and large windows.", check: "Build quality behind the finish, permits, and slope work." },
-  { tag: "Views", title: "Hillside View Homes", body: "Steep lots with city or canyon views, often built in steps.", check: "Retaining walls, drainage, geology report, and road access." },
-  { tag: "Upper tier", title: "Estates and Compounds", body: "Large lots with guest houses, gates, and privacy walls. Few sales match them closely.", check: "Road rights, comparable sales, and fire access." },
-];
-
-const BUYER_QA: { q: string; a: string; list?: string[] }[] = [
-  { q: "Who does Laurel Canyon suit?", a: "Buyers who want privacy, trees, and character close to the city. It fits people who accept a car-based life and winding roads." },
-  { q: "What should buyers look for?", a: "Look for safe road access, parking, a usable yard, and permits that match the home. On hillside lots, check walls and drainage." },
-  { q: "How much does the road matter?", a: "A lot. Some homes sit on private roads with shared repair costs. Ask who owns the road and who pays for upkeep." },
-  {
-    q: "What should you check before you make an offer?",
-    a: "Check these six items first:",
-    list: [
-      "Permit history with the city",
-      "Fire rating and an insurance quote",
-      "Slope, retaining walls, and drainage",
-      "The road agreement, if the road is private",
-      "A lender with canyon experience",
-      "Real comps, including homes that sold and resold",
-    ],
-  },
-  { q: "What do buyers often miss?", a: "Guest parking, steep driveways, insurance costs, and unpermitted rooms listed as finished space." },
-];
-
-const SELLER_STEPS = [
-  ["How canyon homes are valued", "Andrew starts with the closest real sales. Then he adjusts for lot, privacy, views, road, and condition."],
-  ["Preparing for market", "Do work that pays back. Clear brush, fix drainage, and refresh paint and landscaping."],
-  ["Pricing against real comps", "Few canyon homes match. Andrew uses a wider set of sales and explains each choice."],
-  ["Positioning and marketing", "Photos, video, and words that show privacy, setting, and design to the right buyer."],
-  ["Evaluating offers", "Price is one term. Check the loan type, appraisal risk, and closing time. Steep lots and private roads can slow an appraisal."],
-  ["Negotiation and closing", "Andrew, a Certified Real Estate Negotiation Expert, handles inspection requests, repairs, the appraisal, and escrow."],
-];
-
-const SNAPSHOT = [
-  ["$2M to $3M+", "Median price range", "Public sources report different medians. Most fall in this range."],
-  ["$1.2M to $3M", "Most character homes", "Larger canyon compounds sell for more."],
-  ["18 to 67 days", "Time to sell", "Well-priced, updated homes sell fastest. A typical home takes longer."],
-  ["About 34", "Walk Score", "Most errands need a car."],
-];
-
 const EVERYDAY = [
   ["Food and drink", "Dining", "The Canyon Country Store has a deli, wine, and pantry basics. Sunset Strip dining sits minutes south. Ventura Boulevard dining sits minutes north."],
   ["Errands", "Shopping and Services", "Small stores cover daily basics. Larger stores are a short drive away in West Hollywood or Studio City."],
@@ -166,20 +121,6 @@ const QUOTES = [
   "Andrew and his team made the whole process easy. We were green to everything, and he always had time to answer our questions.",
 ];
 
-const COMPARE = {
-  cols: ["Laurel Canyon", "Studio City", "Hollywood Hills"],
-  rows: [
-    ["Typical price band", "$1.2M to $3M+", "$1.3M to $4M", "$3M and up (Bird Streets)"],
-    ["Main appeal", "Privacy and a woodsy feel", "A walkable village and flat streets", "Big views and larger homes"],
-    ["Getting around", "Car needed", "Walk to Ventura Boulevard", "Car needed"],
-  ],
-};
-
-const NEARBY = [
-  { coords: "Los Angeles · 91604", name: "Studio City", desc: "Down the canyon, with a walkable village and easy access to the Valley.", href: "/real-estate-agent-in-studio-city" },
-  { coords: "Los Angeles · 90068", name: "Hollywood Hills", desc: "Just over the ridge, with sweeping views and homes that rarely come up.", href: "/real-estate-agent-in-hollywood-hills" },
-];
-
 const FAQS = [
   { q: "What is Laurel Canyon known for?", a: "Laurel Canyon is known for the 1960s and 1970s folk-rock music scene. Today it is known for quiet, wooded streets and private homes." },
   { q: "Where is Laurel Canyon?", a: "Laurel Canyon is a hillside neighborhood in Los Angeles. It sits mostly in ZIP code 90046, along Laurel Canyon Boulevard between Sunset and Ventura." },
@@ -196,9 +137,9 @@ const FAQS = [
 const pad = (i: number) => String(i + 1).padStart(2, "0");
 
 export default async function LaurelCanyonPage() {
-  // Only the Laurel Canyon subset goes to the client, not the whole feed.
-  const feed = await fetchRawListingsServer();
-  const listings = feed ? feed.filter((raw) => inArea(raw, "laurel-canyon")) : null;
+  // The whole feed goes down, not just the canyon subset: when the canyon has
+  // nothing, AreaListings shows three of Andrew's other homes instead.
+  const listings = await fetchRawListingsServer();
 
   return (
     <div className="lcn-page">
@@ -268,9 +209,9 @@ export default async function LaurelCanyonPage() {
             <Link href="/home-search?area=laurel-canyon" className="lcn-btn lcn-btn-light">
               Browse Canyon Homes
             </Link>
-            <a href="#valuation" className="lcn-btn lcn-btn-outline-light">
-              Get Your Canyon Home Value
-            </a>
+            <Link href="/home-valuation" className="lcn-btn lcn-btn-outline-light">
+              Get Your Home Valuation
+            </Link>
           </div>
         </div>
       </section>
@@ -346,107 +287,6 @@ export default async function LaurelCanyonPage() {
         </div>
       </section>
 
-      {/* ========================== INVENTORY ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Inventory</p>
-            <h2 className="lcn-title">What Can You Buy in Laurel Canyon?</h2>
-            <p className="lcn-sub">Six home styles. Each has its own buyers, its own pricing, and its own checks.</p>
-          </div>
-          <div className="lcn-grid-2">
-            {INVENTORY.map((h) => (
-              <div key={h.title} className="lcn-card lcn-type-card">
-                <p className="lcn-tag">{h.tag}</p>
-                <div>
-                  <h3>{h.title}</h3>
-                  <p>{h.body}</p>
-                  <p>
-                    <strong>Check:</strong> {h.check}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="lcn-note">Condos and small apartment buildings are rare in the canyon.</p>
-        </div>
-      </section>
-
-      {/* ========================= BUYER GUIDE ========================= */}
-      <section className="lcn-section lcn-ivory" id="buyer-guide">
-        <div className="container lcn-aside-layout">
-          <div className="lcn-aside">
-            <p className="lcn-eyebrow">Buyer Guide</p>
-            <h2 className="lcn-title">Buying a Home in Laurel Canyon</h2>
-            <p className="lcn-sub">Answers to find before you tour or write an offer.</p>
-            <Link href="/home-search?area=laurel-canyon" className="lcn-btn lcn-btn-dark">
-              Browse Canyon Homes
-            </Link>
-          </div>
-          <div className="lcn-qa">
-            {BUYER_QA.map((x) => (
-              <div key={x.q}>
-                <h3>{x.q}</h3>
-                <p>{x.a}</p>
-                {x.list && (
-                  <ul>
-                    {x.list.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================= SELLER GUIDE ========================= */}
-      <section className="lcn-section lcn-stone" id="seller-guide">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Seller Guide</p>
-            <h2 className="lcn-title">Selling a Home in Laurel Canyon</h2>
-            <p className="lcn-sub">Six steps. Each one shapes your final price.</p>
-          </div>
-          <div className="lcn-grid-3">
-            {SELLER_STEPS.map(([t, d], i) => (
-              <div key={t} className="lcn-card lcn-step-card">
-                <span className="lcn-num">{pad(i)}</span>
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-          <div className="lcn-after">
-            <a href="#valuation" className="lcn-btn lcn-btn-dark">
-              Get a Laurel Canyon Home Valuation
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ======================= MARKET SNAPSHOT ======================= */}
-      <section className="lcn-section lcn-ivory">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Market Snapshot</p>
-            <h2 className="lcn-title">Laurel Canyon Market Snapshot</h2>
-            <p className="lcn-sub">Numbers change by month and by source. Use these as a guide. Ask Andrew for current sales.</p>
-          </div>
-          <div className="lcn-grid-4">
-            {SNAPSHOT.map(([v, l, d]) => (
-              <div key={l} className="lcn-card lcn-stat">
-                <p className="lcn-stat-value">{v}</p>
-                <p className="lcn-stat-label">{l}</p>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-          <p className="lcn-note lcn-note-small">Sources: Redfin, Grey Square, and neighborhood data sites.</p>
-        </div>
-      </section>
-
       {/* =========================== LISTINGS =========================== */}
       <section className="lcn-section lcn-stone" id="listings">
         <div className="container">
@@ -507,11 +347,16 @@ export default async function LaurelCanyonPage() {
               ))}
             </ul>
             <div className="lcn-ctas">
-              <Link href="/contact" className="lcn-btn lcn-btn-dark">
+              <a
+                href="https://wa.me/13107090581"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lcn-btn lcn-btn-dark"
+              >
                 Schedule a Consultation
-              </Link>
-              <Link href="/team" className="lcn-btn lcn-btn-outline">
-                Meet the Team
+              </a>
+              <Link href="/team/andrew-liberty" className="lcn-btn lcn-btn-outline">
+                Meet Andrew
               </Link>
             </div>
           </div>
@@ -581,53 +426,6 @@ export default async function LaurelCanyonPage() {
         </div>
       </section>
 
-      {/* ========================== NEARBY AREAS ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Nearby Areas</p>
-            <h2 className="lcn-title">How Laurel Canyon Compares With Nearby Areas</h2>
-            <p className="lcn-sub">Laurel Canyon costs less than the Hollywood Hills and feels more private than Studio City.</p>
-          </div>
-          <div className="lcn-table-wrap">
-            <table className="lcn-table">
-              <thead>
-                <tr>
-                  <td />
-                  {COMPARE.cols.map((c) => (
-                    <th key={c} scope="col">
-                      {c}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {COMPARE.rows.map(([label, ...cells]) => (
-                  <tr key={label}>
-                    <th scope="row">{label}</th>
-                    {cells.map((c, i) => (
-                      <td key={i} data-label={COMPARE.cols[i]}>
-                        {c}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="lcn-note lcn-note-small">Price bands come from a 2026 Grey Square neighborhood guide.</p>
-          <div className="lcn-grid-2">
-            {NEARBY.map((n) => (
-              <Link key={n.name} href={n.href} className="lcn-card lcn-nearby">
-                <p className="lcn-tag">{n.coords}</p>
-                <h3>{n.name}</h3>
-                <p>{n.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ============================== FAQ ============================== */}
       <section className="lcn-section lcn-ivory">
         <div className="container lcn-aside-layout">
@@ -663,9 +461,9 @@ export default async function LaurelCanyonPage() {
               <Link href="/home-search?area=laurel-canyon" className="lcn-btn lcn-btn-light">
                 Browse Canyon Homes
               </Link>
-              <a href="#valuation" className="lcn-btn lcn-btn-outline-light">
+              <Link href="/home-valuation" className="lcn-btn lcn-btn-outline-light">
                 Get Your Home Value
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -44,6 +44,19 @@ export default function AreaListings({
     ...items.filter((p) => p.badge === "Sold"),
   ].slice(0, max);
 
+  /* Nothing in this area right now: rather than an empty section, show three
+     of Andrew's other homes, for sale first. They keep their own city label
+     and the note above them says they're from elsewhere, so none of them is
+     passed off as being in this area. Only works when the page passes the
+     whole feed, not just the area's subset. */
+  const others =
+    shown.length === 0
+      ? (() => {
+          const rest = (data ?? []).filter((raw) => !inArea(raw, area)).map(toPropertyItem);
+          return [...rest.filter((p) => p.badge !== "Sold"), ...rest.filter((p) => p.badge === "Sold")].slice(0, 3);
+        })()
+      : [];
+
   return (
     <>
       {loading ? (
@@ -52,6 +65,17 @@ export default function AreaListings({
         <p style={{ textAlign: "center", color: "var(--muted)" }}>
           Listings are unavailable right now — please try again shortly.
         </p>
+      ) : shown.length === 0 && others.length > 0 ? (
+        <>
+          <p className="area-listings-note">
+            No {place} listings right now. Here are other homes Andrew has listed and sold.
+          </p>
+          <div className="prop-grid">
+            {others.map((p) => (
+              <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+            ))}
+          </div>
+        </>
       ) : shown.length === 0 ? (
         <p style={{ textAlign: "center", color: "var(--muted)" }}>
           No {place} listings right now — search the full MLS below.

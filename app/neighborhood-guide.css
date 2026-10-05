@@ -217,6 +217,7 @@ a.lcn-card:hover { transform: translateY(-3px); border-color: rgba(154, 108, 46,
 
 /* ---------- Listings (AreaListings) ---------- */
 .lcn-page .area-listings-more { display: flex; justify-content: center; margin-top: 40px; }
+.lcn-page .area-listings-note { color: var(--muted); margin: 0 0 24px; }
 
 /* ---------- Final call to action ---------- */
 .lcn-final-wrap { padding-top: 0; }
