@@ -50,15 +50,15 @@ const START = [
     tag: "Buying",
     title: "Buying in Sherman Oaks",
     body: "Sherman Oaks has homes for every stage of life, from starter houses to estates south of the boulevard. Andrew helps you find the one that fits.",
-    cta: "Start with the buyer guide",
-    href: "#buyer-guide",
+    cta: "Browse Sherman Oaks homes",
+    href: "/home-search?area=sherman-oaks",
   },
   {
     tag: "Selling",
     title: "Selling in Sherman Oaks",
     body: "Good schools and tree-lined streets help homes sell, but pricing still matters. Andrew prices your home against sales in its own pocket.",
-    cta: "Start with the seller guide",
-    href: "#seller-guide",
+    cta: "Get your home value",
+    href: "/home-valuation",
   },
   {
     tag: "Investing",
@@ -110,57 +110,6 @@ const LIFESTYLE = [
   ["Outdoor Living", "Many homes have big yards for pools, play, and outdoor dining. South-side lots add views and privacy."],
 ];
 
-const INVENTORY = [
-  { tag: "Most common", title: "Ranches and Traditional Homes", body: "Single-story and two-story family homes from the 1930s to the 1950s, mostly on the flats.", check: "Roof, plumbing, and permits for added rooms." },
-  { tag: "Entry point", title: "Condos and Townhomes", body: "Priced about $600,000 to $950,000. Found near the boulevard and on the northern edge.", check: "HOA fees, reserves, and rental limits." },
-  { tag: "Character", title: "Mid-Century Homes", body: "Open plans, large windows, and indoor-outdoor living.", check: "Windows, wiring, and roof age." },
-  { tag: "Updated", title: "Remodels and New Builds", body: "Modern finishes on both sides of the boulevard.", check: "Permits and the build quality behind the finish." },
-  { tag: "Views", title: "Hillside Homes", body: "Curving streets south of the boulevard, with views and privacy.", check: "Retaining walls, drainage, geology, and parking." },
-  { tag: "Upper tier", title: "Estates", body: "Large lots with mature trees and strong privacy.", check: "Comparable sales, lot lines, and privacy walls." },
-];
-
-const BUYER_QA: { q: string; a?: string; list?: string[]; wide?: boolean }[] = [
-  { q: "Who does Sherman Oaks suit?", a: "Families, first-time buyers, and move-up buyers who want Valley space with quick freeway access." },
-  { q: "What should buyers look for?", a: "Confirm the side of Ventura, the lot size, and the school for the exact address. Check permits for added rooms." },
-  { q: "How much does location within Sherman Oaks matter?", a: "A lot. The side of Ventura, lot size, hillside, and street noise all change the price. Two homes a few blocks apart can sit in different markets." },
-  {
-    q: "What should you check before you make an offer?",
-    list: [
-      "Permit history with the city",
-      "The school boundary for the exact address",
-      "Noise from Ventura, Van Nuys Boulevard, and the freeways",
-      "HOA documents, if the home is a condo",
-      "Retaining walls and drainage on hillside lots",
-      "Real comps from the same pocket",
-    ],
-  },
-  { q: "What do buyers commonly overlook?", a: "Noise near the boulevard and freeways, small lots that limit additions, and condo fees.", wide: true },
-];
-
-const SELLER_STEPS = [
-  ["How Sherman Oaks homes are valued", "Andrew places your home on the right side of the boulevard and in the right pocket."],
-  ["Preparing for market", "Do work that pays back. Paint, landscaping, and fixes come first."],
-  ["Pricing against real comps", "Price goes into the range buyers search. The first two weeks matter most."],
-  ["Positioning and marketing", "Photos, video, and words that show lot size, schools, and walkability."],
-  ["Evaluating offers", "Price is one term. Check the loan type, contingencies, and closing time."],
-  ["Negotiation and closing", "Andrew, a Certified Real Estate Negotiation Expert, handles inspection requests, appraisal, and escrow."],
-];
-
-const SNAPSHOT = [
-  ["$1.3M to $1.7M", "Typical median price", "Sources measure it differently, so figures vary."],
-  ["$1.1M+", "Houses on the north flats", "Entry prices often start near this level."],
-  ["$600K to $950K", "Condos and townhomes", "Found near the boulevard and on the northern edge."],
-  ["26 to 58 days", "Time to sell", "Well-priced homes sell fastest."],
-];
-
-const POCKETS = [
-  ["Flat streets north of Ventura", "$1.1M to $1.6M", "Original-condition ranches and family homes on smaller lots", "Families and first-time buyers"],
-  ["Northern edge toward Van Nuys", "Condos about $500K to $950K. Some houses $1.1M to $1.3M", "Condos, townhomes, and 1950s remodels", "Buyers who want an entry point"],
-  ["Streets just south of Ventura", "$1.2M to $2M+", "Family homes near boulevard dining and parks, such as on Longridge and Kester Avenues", "Buyers who want to walk to the boulevard"],
-  ["Hillside streets and Royal Woods", "Often $2M and up", "Larger lots, mature trees, and estate-style homes", "Buyers who want space and privacy"],
-];
-const POCKET_COLS = ["Typical price", "What it buys", "Good for"];
-
 const EVERYDAY = [
   ["Food and drink", "Dining", "Ventura Boulevard has restaurants and cafes along its whole length. Streets just south of it sit within walking distance."],
   ["Errands", "Shopping and Services", "Westfield Fashion Square and the boulevard cover shopping, groceries, and daily services."],
@@ -187,20 +136,6 @@ const PROCESS = [
 const QUOTES = [
   "His professionalism, patience and expertise made purchasing a home in an incredibly difficult market seamless.",
   "Andrew and his team made the whole process easy. We were green to everything, and he always had time to answer our questions.",
-];
-
-const COMPARE = {
-  cols: ["Sherman Oaks", "Studio City"],
-  rows: [
-    ["Recent median sale price", "About $1.35 million", "About $1.79 million"],
-    ["Main appeal", "Two markets: flats and hills, with freeway access", "A walkable village and hillside streets"],
-    ["Entry point", "Condos about $600K to $950K", "Condos and townhomes along Ventura"],
-  ],
-};
-
-const NEARBY = [
-  { coords: "Los Angeles · 91604", name: "Studio City", desc: "Just next door, with a walkable village and easy access to the Cahuenga Pass.", href: "/real-estate-agent-in-studio-city" },
-  { coords: "Los Angeles · 91607", name: "Valley Village", desc: "Right around the corner, with quieter streets and the same easy Valley access.", href: "/real-estate-agent-in-valley-village" },
 ];
 
 const FAQS = [
@@ -291,9 +226,9 @@ export default async function ShermanOaksPage() {
               <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-dark">
                 Browse Sherman Oaks Homes
               </Link>
-              <a href="#valuation" className="lcn-btn lcn-btn-outline">
-                Get Your Home Value
-              </a>
+              <Link href="/home-valuation" className="lcn-btn lcn-btn-outline">
+                Get Your Home Valuation
+              </Link>
             </div>
           </div>
           <div className="lcn-photo lcn-hero-photo">
@@ -387,139 +322,6 @@ export default async function ShermanOaksPage() {
         </div>
       </section>
 
-      {/* ========================== INVENTORY ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Inventory</p>
-            <h2 className="lcn-title">What Can You Buy in Sherman Oaks?</h2>
-            <p className="lcn-sub">Six kinds of homes. Each has its own buyers, its own pricing, and its own checks.</p>
-          </div>
-          <div className="lcn-grid-3">
-            {INVENTORY.map((h) => (
-              <div key={h.title} className="lcn-card lcn-card-accent">
-                <p className="lcn-tag">{h.tag}</p>
-                <h3>{h.title}</h3>
-                <p>{h.body}</p>
-                <p>
-                  <strong>Check:</strong> {h.check}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================= BUYER GUIDE ========================= */}
-      <section className="lcn-section lcn-ivory" id="buyer-guide">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Buyer Guide</p>
-            <h2 className="lcn-title">Buying a Home in Sherman Oaks</h2>
-            <p className="lcn-sub">Answers to find before you tour or write an offer.</p>
-          </div>
-          <div className="lcn-grid-2">
-            {BUYER_QA.map((x) => (
-              <div key={x.q} className={`lcn-card lcn-qa-card${x.wide ? " lcn-span-2" : ""}`}>
-                <h3>{x.q}</h3>
-                {x.a && <p>{x.a}</p>}
-                {x.list && (
-                  <ul className="lcn-bullets">
-                    {x.list.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="lcn-after">
-            <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-dark">
-              Browse Sherman Oaks Homes
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================= SELLER GUIDE ========================= */}
-      <section className="lcn-section lcn-stone" id="seller-guide">
-        <div className="container lcn-seller">
-          <div>
-            <p className="lcn-eyebrow">Seller Guide</p>
-            <h2 className="lcn-title">Selling a Home in Sherman Oaks</h2>
-            <h3 className="lcn-seller-q">How do you price a Sherman Oaks home?</h3>
-            <p className="lcn-sub">
-              Andrew prices your home against sales in its own pocket, not the whole ZIP code. North-side flats and
-              south-side hills use different comps.
-            </p>
-            <div className="lcn-ctas">
-              <a href="#valuation" className="lcn-btn lcn-btn-dark">
-                Get a Sherman Oaks Home Valuation
-              </a>
-            </div>
-          </div>
-          <ol className="lcn-steps">
-            {SELLER_STEPS.map(([t, d], i) => (
-              <li key={t}>
-                <h3>
-                  <span className="lcn-num-inline">{pad(i)}</span> {t}
-                </h3>
-                <p>{d}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* ======================= MARKET SNAPSHOT ======================= */}
-      <section className="lcn-section lcn-ivory">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Market Snapshot</p>
-            <h2 className="lcn-title">Sherman Oaks Market Snapshot</h2>
-            <p className="lcn-sub">Numbers change by month and by source. Use them as a guide. Ask Andrew for current sales.</p>
-          </div>
-          <div className="lcn-grid-4">
-            {SNAPSHOT.map(([v, l, d]) => (
-              <div key={l} className="lcn-card lcn-stat">
-                <p className="lcn-stat-value">{v}</p>
-                <p className="lcn-stat-label">{l}</p>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-
-          <h3 className="lcn-subhead">Typical prices by pocket</h3>
-          <div className="lcn-table-wrap">
-            <table className="lcn-table lcn-table-pockets">
-              <thead>
-                <tr>
-                  <th scope="col">Pocket</th>
-                  {POCKET_COLS.map((c) => (
-                    <th key={c} scope="col">
-                      {c}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {POCKETS.map(([pocket, ...cells]) => (
-                  <tr key={pocket}>
-                    <th scope="row">{pocket}</th>
-                    {cells.map((c, i) => (
-                      <td key={i} data-label={POCKET_COLS[i]}>
-                        {c}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="lcn-note lcn-note-small">Sources: 2026 local market guides and Zillow data.</p>
-        </div>
-      </section>
-
       {/* =========================== LISTINGS =========================== */}
       <section className="lcn-section lcn-stone" id="listings">
         <div className="container">
@@ -579,11 +381,16 @@ export default async function ShermanOaksPage() {
               ))}
             </ul>
             <div className="lcn-ctas">
-              <Link href="/contact" className="lcn-btn lcn-btn-dark">
+              <a
+                href="https://wa.me/13107090581"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lcn-btn lcn-btn-dark"
+              >
                 Schedule a Consultation
-              </Link>
-              <Link href="/team" className="lcn-btn lcn-btn-outline">
-                Meet the Team
+              </a>
+              <Link href="/team/andrew-liberty" className="lcn-btn lcn-btn-outline">
+                Meet Andrew
               </Link>
             </div>
           </div>
@@ -657,53 +464,6 @@ export default async function ShermanOaksPage() {
         </div>
       </section>
 
-      {/* ========================== NEARBY AREAS ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Nearby Areas</p>
-            <h2 className="lcn-title">How Sherman Oaks Compares With Studio City</h2>
-            <p className="lcn-sub">Sherman Oaks usually costs less than Studio City. Both sit on Ventura Boulevard.</p>
-          </div>
-          <div className="lcn-table-wrap">
-            <table className="lcn-table">
-              <thead>
-                <tr>
-                  <td />
-                  {COMPARE.cols.map((c) => (
-                    <th key={c} scope="col">
-                      {c}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {COMPARE.rows.map(([label, ...cells]) => (
-                  <tr key={label}>
-                    <th scope="row">{label}</th>
-                    {cells.map((c, i) => (
-                      <td key={i} data-label={COMPARE.cols[i]}>
-                        {c}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="lcn-note lcn-note-small">Median prices are from a May 2026 local market report.</p>
-          <div className="lcn-grid-2">
-            {NEARBY.map((n) => (
-              <Link key={n.name} href={n.href} className="lcn-card lcn-nearby">
-                <p className="lcn-tag">{n.coords}</p>
-                <h3>{n.name}</h3>
-                <p>{n.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ============================== FAQ ============================== */}
       <section className="lcn-section lcn-ivory">
         <div className="container lcn-aside-layout">
@@ -739,9 +499,9 @@ export default async function ShermanOaksPage() {
               <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-light">
                 Browse Sherman Oaks Homes
               </Link>
-              <a href="#valuation" className="lcn-btn lcn-btn-outline-light">
+              <Link href="/home-valuation" className="lcn-btn lcn-btn-outline-light">
                 Get Your Home Value
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -60,15 +60,15 @@ const START = [
     tag: "Buying",
     title: "Buying in the Hollywood Hills",
     body: "Every home in the Hills is different. Andrew helps you find the right one and make a smart offer, view and all.",
-    cta: "See the buyer guide",
-    href: "#buyer-guide",
+    cta: "Browse Hollywood Hills homes",
+    href: "/home-search?area=hollywood-hills",
   },
   {
     tag: "Selling",
     title: "Selling in the Hollywood Hills",
     body: "Selling here means showing off the view and the design, not just the square footage. Andrew prices on the view and the lot, not a formula.",
-    cta: "See the seller guide",
-    href: "#seller-guide",
+    cta: "Get your home value",
+    href: "/home-valuation",
   },
   {
     tag: "Investing",
@@ -97,50 +97,6 @@ const LIFESTYLE = [
   ["Nature and Privacy", "Expect trails, tall trees, wildlife, and quiet streets, all minutes from Hollywood."],
 ];
 
-const INVENTORY = [
-  { tag: "Classic", title: "Spanish and Traditional Homes", body: "Stucco walls, tile roofs, and arched doors on canyon streets.", check: "Plumbing, wiring, and permits for additions." },
-  { tag: "Character", title: "Mid-Century and Architectural", body: "Post-and-beam frames, glass walls, and open plans. Nichols Canyon holds many.", check: "Original systems, windows, roof age, and records." },
-  { tag: "Storybook", title: "Cottages in Beachwood Canyon", body: "Whimsical homes with rolled eaves, turrets, and stone walls.", check: "Foundation, wiring, and small floor plans." },
-  { tag: "Design-led", title: "Contemporary and New Builds", body: "Clean lines and big windows, often on view lots.", check: "Build quality, permits, and city hillside rules." },
-  { tag: "Entry point", title: "Condos and Older Mid-Rise", body: "1960s and 1970s buildings near the base of Runyon and Beachwood Canyons, about $600,000 to $1.2 million.", check: "HOA dues, reserves, and building age." },
-  { tag: "Upper tier", title: "View Estates and Compounds", body: "Large lots with pools, guest houses, and privacy walls.", check: "Comparable sales, retaining walls, fire access, and insurance." },
-];
-
-const BUYER_QA: { q: string; a: string; list?: string[] }[] = [
-  { q: "Who do the Hollywood Hills suit?", a: "Buyers who want views, privacy, and nature minutes from Hollywood. It fits people who accept steep roads and car trips." },
-  { q: "What should buyers look for in the Hollywood Hills?", a: "Look for safe road access, parking, a usable flat yard, and views that will last. Make sure permits match the home." },
-  { q: "How much does location within the Hills matter?", a: "A lot. Canyon, street, view, and road width all change the price. Two homes on the same street can differ widely in value based on view, lot, and access." },
-  {
-    q: "What should you check before an offer in the Hollywood Hills?",
-    a: "Six items to confirm before you offer:",
-    list: [
-      "Permit history for additions and retaining walls",
-      "Fire risk and an insurance quote",
-      "Geology reports, retaining walls, and drainage",
-      "Road width, parking, and who owns the road",
-      "View easements and city hillside rules",
-      "Real comps from the same canyon",
-    ],
-  },
-  { q: "What do buyers commonly overlook in the Hollywood Hills?", a: "Insurance cost, steep driveways, limits on building size, and views that new houses or trees can block." },
-];
-
-const SELLER_STEPS = [
-  ["How Hollywood Hills homes are valued", "Andrew starts with sales in your own canyon. Then he adjusts for the view, the lot, the road, and the design."],
-  ["Preparing for market", "Do work that pays back. Clear brush, check walls and drainage, and refresh paint and landscaping."],
-  ["Pricing against real comps", "Price lands in the band view buyers search. Updated homes with parking move fastest."],
-  ["Positioning and marketing", "Buyers pay for the view, the design, and the lifestyle. Professional photos, video, and aerial views show them."],
-  ["Evaluating offers", "Price is one term. Compare financing, contingencies, and closing time."],
-  ["Negotiation and closing", "Andrew negotiates repairs, geology findings, and escrow terms."],
-];
-
-const SNAPSHOT = [
-  ["$1.7M to $2.4M", "Typical median price", "Sources measure the Hills differently, so figures vary."],
-  ["$600K to $1.2M", "Condos and older mid-rise", "Found near the base of Runyon and Beachwood Canyons."],
-  ["50 to 59 days", "Average time to sell", "Well-positioned homes can sell in 18 to 28 days."],
-  ["70 homes", "Sold in June 2026", "Down from 85 in June 2025."],
-];
-
 const EVERYDAY = [
   ["Food and drink", "Dining", "Beachwood Village and Sunset Plaza have cafes and restaurants. Hollywood and Sunset Boulevards sit minutes below the hills."],
   ["Errands", "Everyday Errands", "Groceries and daily services sit along the base of the hills, on Sunset, Hollywood, and Franklin."],
@@ -167,21 +123,6 @@ const PROCESS = [
 const QUOTES = [
   "His professionalism, patience and expertise made purchasing a home in an incredibly difficult market seamless.",
   "Andrew and his team made the whole process easy. We were green to everything, and he always had time to answer our questions.",
-];
-
-const COMPARE = {
-  cols: ["Hollywood Hills", "Laurel Canyon", "Studio City"],
-  rows: [
-    ["Typical price", "Median about $1.7M to $2.4M", "Character homes $1.2M to $3M+", "$1.3M to $4M"],
-    ["Top of the market", "Bird Streets and estates, $4M to $20M+", "Large compounds above $3M", "Larger hillside and new-build homes"],
-    ["Main appeal", "Views, privacy, and many different canyons", "Privacy and a woodsy feel", "A walkable village and flat streets"],
-  ],
-};
-
-const NEARBY = [
-  { coords: "Los Angeles · 90046", name: "Laurel Canyon", desc: "Just over the ridge, with the same quiet, tucked-away feel and even more privacy.", href: "/real-estate-agent-in-laurel-canyon" },
-  { coords: "Los Angeles · 91604", name: "Studio City", desc: "Down the hill and a different pace entirely: walkable, lively, and close to everything.", href: "/real-estate-agent-in-studio-city" },
-  { coords: "Los Angeles · 91403", name: "Sherman Oaks", desc: "A bit further into the Valley, but a market I work often enough to know well.", href: "/real-estate-agent-in-sherman-oaks" },
 ];
 
 const FAQS = [
@@ -273,9 +214,9 @@ export default async function HollywoodHillsPage() {
             <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-light">
               Browse Hollywood Hills Homes
             </Link>
-            <a href="#valuation" className="lcn-btn lcn-btn-outline-light">
-              Get Your Hollywood Hills Home Value
-            </a>
+            <Link href="/home-valuation" className="lcn-btn lcn-btn-outline-light">
+              Get Your Home Valuation
+            </Link>
           </div>
         </div>
       </section>
@@ -351,109 +292,6 @@ export default async function HollywoodHillsPage() {
         </div>
       </section>
 
-      {/* ========================== INVENTORY ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Inventory</p>
-            <h2 className="lcn-title">What Can You Buy in the Hollywood Hills?</h2>
-            <p className="lcn-sub">Six kinds of homes, from storybook cottages to view estates.</p>
-          </div>
-          <div className="lcn-grid-2">
-            {INVENTORY.map((h) => (
-              <div key={h.title} className="lcn-card lcn-type-card">
-                <p className="lcn-tag">{h.tag}</p>
-                <div>
-                  <h3>{h.title}</h3>
-                  <p>{h.body}</p>
-                  <p>
-                    <strong>Check:</strong> {h.check}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================= BUYER GUIDE ========================= */}
-      <section className="lcn-section lcn-ivory" id="buyer-guide">
-        <div className="container lcn-aside-layout">
-          <div className="lcn-aside">
-            <p className="lcn-eyebrow">Buyer Guide</p>
-            <h2 className="lcn-title">Buying a Home in the Hollywood Hills</h2>
-            <p className="lcn-sub">What to ask about views, roads, and permits before you offer.</p>
-            <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-dark">
-              Browse Hollywood Hills Homes
-            </Link>
-          </div>
-          <div className="lcn-qa">
-            {BUYER_QA.map((x) => (
-              <div key={x.q}>
-                <h3>{x.q}</h3>
-                <p>{x.a}</p>
-                {x.list && (
-                  <ul>
-                    {x.list.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================= SELLER GUIDE ========================= */}
-      <section className="lcn-section lcn-stone" id="seller-guide">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Seller Guide</p>
-            <h2 className="lcn-title">Selling a Home in the Hollywood Hills</h2>
-            <p className="lcn-sub">Six steps that shape what a view is worth at sale.</p>
-          </div>
-          <div className="lcn-grid-3">
-            {SELLER_STEPS.map(([t, d], i) => (
-              <div key={t} className="lcn-card lcn-step-card">
-                <span className="lcn-num">{pad(i)}</span>
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-          <div className="lcn-after">
-            <a href="#valuation" className="lcn-btn lcn-btn-dark">
-              Get a Hollywood Hills Home Valuation
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ======================= MARKET SNAPSHOT ======================= */}
-      <section className="lcn-section lcn-ivory">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Market Snapshot</p>
-            <h2 className="lcn-title">Hollywood Hills Market Snapshot</h2>
-            <p className="lcn-sub">
-              Hills numbers swing by month, canyon, and source. Treat them as a guide, and ask Andrew for current
-              sales.
-            </p>
-          </div>
-          <div className="lcn-grid-4">
-            {SNAPSHOT.map(([v, l, d]) => (
-              <div key={l} className="lcn-card lcn-stat">
-                <p className="lcn-stat-value">{v}</p>
-                <p className="lcn-stat-label">{l}</p>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-          <p className="lcn-note lcn-note-small">Sources: Redfin, Zillow, and 2026 local guides.</p>
-        </div>
-      </section>
-
       {/* =========================== LISTINGS =========================== */}
       <section className="lcn-section lcn-stone" id="listings">
         <div className="container">
@@ -522,11 +360,16 @@ export default async function HollywoodHillsPage() {
               ))}
             </ul>
             <div className="lcn-ctas">
-              <Link href="/contact" className="lcn-btn lcn-btn-dark">
+              <a
+                href="https://wa.me/13107090581"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lcn-btn lcn-btn-dark"
+              >
                 Schedule a Consultation
-              </Link>
-              <Link href="/team" className="lcn-btn lcn-btn-outline">
-                Meet the Team
+              </a>
+              <Link href="/team/andrew-liberty" className="lcn-btn lcn-btn-outline">
+                Meet Andrew
               </Link>
             </div>
           </div>
@@ -597,53 +440,6 @@ export default async function HollywoodHillsPage() {
         </div>
       </section>
 
-      {/* ========================== NEARBY AREAS ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Nearby Areas</p>
-            <h2 className="lcn-title">How the Hollywood Hills Compare With Nearby Areas</h2>
-            <p className="lcn-sub">The Hills offer more variety and bigger views. Laurel Canyon and Studio City usually cost less.</p>
-          </div>
-          <div className="lcn-table-wrap">
-            <table className="lcn-table">
-              <thead>
-                <tr>
-                  <td />
-                  {COMPARE.cols.map((c) => (
-                    <th key={c} scope="col">
-                      {c}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {COMPARE.rows.map(([label, ...cells]) => (
-                  <tr key={label}>
-                    <th scope="row">{label}</th>
-                    {cells.map((c, i) => (
-                      <td key={i} data-label={COMPARE.cols[i]}>
-                        {c}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="lcn-note lcn-note-small">Prices come from 2026 local market guides and differ by source.</p>
-          <div className="lcn-grid-3">
-            {NEARBY.map((n) => (
-              <Link key={n.name} href={n.href} className="lcn-card lcn-nearby">
-                <p className="lcn-tag">{n.coords}</p>
-                <h3>{n.name}</h3>
-                <p>{n.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ============================== FAQ ============================== */}
       <section className="lcn-section lcn-ivory">
         <div className="container lcn-aside-layout">
@@ -679,9 +475,9 @@ export default async function HollywoodHillsPage() {
               <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-light">
                 Browse Hollywood Hills Homes
               </Link>
-              <a href="#valuation" className="lcn-btn lcn-btn-outline-light">
+              <Link href="/home-valuation" className="lcn-btn lcn-btn-outline-light">
                 Get Your Home Value
-              </a>
+              </Link>
             </div>
           </div>
         </div>

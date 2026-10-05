@@ -58,15 +58,15 @@ const START = [
     tag: "Buying",
     title: "Buying in Valley Village",
     body: "Valley Village draws families for the schools and the quiet streets. Andrew helps you compare condos and houses, so you find a home that fits how you want to live.",
-    cta: "Start with the buyer guide",
-    href: "#buyer-guide",
+    cta: "Browse Valley Village homes",
+    href: "/home-search?area=valley-village",
   },
   {
     tag: "Selling",
     title: "Selling in Valley Village",
     body: "Good schools and tree-lined blocks are the biggest draw. Andrew prices your home on real Valley Village sales and markets it to the families looking for exactly that.",
-    cta: "Start with the seller guide",
-    href: "#seller-guide",
+    cta: "Get your home value",
+    href: "/home-valuation",
   },
   {
     tag: "Investing",
@@ -95,50 +95,6 @@ const LIFESTYLE = [
   ["Family Life and Schools", "Families choose Valley Village for its quiet streets and school options, including Colfax Charter Elementary. Confirm the school for each address."],
 ];
 
-const INVENTORY = [
-  { tag: "Entry point", title: "Condos and Townhomes", body: "Priced from about $600,000. Low upkeep and often close to Magnolia Boulevard.", check: "HOA fees, reserves, and rental limits." },
-  { tag: "Most common", title: "Ranch and Traditional Homes", body: "Single-family homes from the 1940s and 1950s on quiet streets.", check: "Roof, plumbing, and permits for added rooms." },
-  { tag: "Updated", title: "Remodels", body: "Move-in-ready homes that sell quickly when priced well.", check: "Permits and the quality behind the finish." },
-  { tag: "Upper tier", title: "New Builds and Luxury Homes", body: "Some new homes on streets such as La Maida and Bellingham list above $3.5 million.", check: "Permits, comparable sales, and finish quality." },
-  { tag: "Income", title: "Duplexes and Small Multi-Unit", body: "Several units on one lot, often near the condo corridors.", check: "Rents, rent rules, and repair costs." },
-  { tag: "Larger income", title: "Apartment Buildings", body: "Larger buildings for investors who want more units.", check: "Rent roll, expenses, and rent rules." },
-];
-
-const BUYER_QA: { q: string; a: string; list?: string[] }[] = [
-  { q: "Who does Valley Village suit?", a: "First-time buyers, young professionals, and families who want quiet streets and good schools close to Studio City, often at a lower price." },
-  { q: "What should buyers look for?", a: "Check the exact street, the walkability, and the school for the address. Decide early between a condo and a house." },
-  { q: "How much does location within Valley Village matter?", a: "A lot. A home near Magnolia Boulevard feels different from one on a quiet side street or beside a busy boulevard. Price per square foot also changes by building and street." },
-  {
-    q: "What should you check before you make an offer?",
-    a: "Check these six items first:",
-    list: [
-      "Permit history with the city",
-      "HOA documents, fees, and reserves, for condos",
-      "The school boundary for the exact address",
-      "Noise from the boulevards and freeways",
-      "Rent rules, for older multi-unit buildings",
-      "Real comps from the same street or building",
-    ],
-  },
-  { q: "What do buyers commonly overlook?", a: "HOA fees and special assessments, parking limits, noise from the boulevards, and rent rules on multi-unit buildings." },
-];
-
-const SELLER_STEPS = [
-  ["How Valley Village homes are valued", "Andrew starts with sales on your street or in your building. Then he adjusts for size, condition, and parking."],
-  ["Preparing for market", "Do work that pays back. Paint, flooring, and landscaping help move-in-ready homes sell."],
-  ["Pricing against real comps", "Price goes into the range buyers search. Updated homes get absorbed fast, so the first two weeks matter."],
-  ["Positioning and marketing", "Photos, video, and words that show quiet streets, schools, walkability, and parking."],
-  ["Evaluating offers", "Price is one term. Check the loan type, contingencies, and closing time."],
-  ["Negotiation and closing", "Andrew, a Certified Real Estate Negotiation Expert, handles inspection requests, appraisal, and escrow."],
-];
-
-const SNAPSHOT = [
-  ["$1.1M to $1.4M", "Typical median price", "Sources measure it differently. Houses alone run higher."],
-  ["$600K+", "Condos and townhomes", "The usual entry point for buyers."],
-  ["About 42 days", "To go pending", "Updated, well-priced homes go faster."],
-  ["About 77", "Walk Score", "High for a Valley neighborhood. Outlying streets need a car."],
-];
-
 const EVERYDAY = [
   ["Food and drink", "Dining", "Magnolia Boulevard has cafes, restaurants, and small shops within a short walk of many homes."],
   ["Errands", "Shopping and Services", "Groceries and daily services sit along the main boulevards, a short drive from most streets."],
@@ -165,20 +121,6 @@ const PROCESS = [
 const QUOTES = [
   "His professionalism, patience and expertise made purchasing a home in an incredibly difficult market seamless.",
   "Andrew and his team made the whole process easy. We were green to everything, and he always had time to answer our questions.",
-];
-
-const COMPARE = {
-  cols: ["Valley Village", "Studio City", "Sherman Oaks"],
-  rows: [
-    ["Typical median price", "$1.1M to $1.4M", "About $1.8M", "$1.3M to $1.7M"],
-    ["Main appeal", "Quiet streets and a walkable village feel", "A walkable village and hillside streets", "Two markets: flats and hills"],
-    ["Entry point", "Condos from about $600K", "Condos and townhomes along Ventura", "Condos about $600K to $950K"],
-  ],
-};
-
-const NEARBY = [
-  { coords: "Los Angeles · 91604", name: "Studio City", desc: "Right next door, with a walkable village and a livelier pace.", href: "/real-estate-agent-in-studio-city" },
-  { coords: "Los Angeles · 91403", name: "Sherman Oaks", desc: "Just around the corner, with Ventura Boulevard’s shops and restaurants close by.", href: "/real-estate-agent-in-sherman-oaks" },
 ];
 
 const FAQS = [
@@ -269,9 +211,9 @@ export default async function ValleyVillagePage() {
             <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-light">
               Browse Valley Village Homes
             </Link>
-            <a href="#valuation" className="lcn-btn lcn-btn-outline-light">
-              Get Your Valley Village Home Value
-            </a>
+            <Link href="/home-valuation" className="lcn-btn lcn-btn-outline-light">
+              Get Your Home Valuation
+            </Link>
           </div>
         </div>
       </section>
@@ -347,106 +289,6 @@ export default async function ValleyVillagePage() {
         </div>
       </section>
 
-      {/* ========================== INVENTORY ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Inventory</p>
-            <h2 className="lcn-title">What Can You Buy in Valley Village?</h2>
-            <p className="lcn-sub">Six kinds of properties. Each has its own buyers, its own pricing, and its own checks.</p>
-          </div>
-          <div className="lcn-grid-2">
-            {INVENTORY.map((h) => (
-              <div key={h.title} className="lcn-card lcn-type-card">
-                <p className="lcn-tag">{h.tag}</p>
-                <div>
-                  <h3>{h.title}</h3>
-                  <p>{h.body}</p>
-                  <p>
-                    <strong>Check:</strong> {h.check}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================= BUYER GUIDE ========================= */}
-      <section className="lcn-section lcn-ivory" id="buyer-guide">
-        <div className="container lcn-aside-layout">
-          <div className="lcn-aside">
-            <p className="lcn-eyebrow">Buyer Guide</p>
-            <h2 className="lcn-title">Buying a Home in Valley Village</h2>
-            <p className="lcn-sub">Answers to find before you tour or write an offer.</p>
-            <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-dark">
-              Browse Valley Village Homes
-            </Link>
-          </div>
-          <div className="lcn-qa">
-            {BUYER_QA.map((x) => (
-              <div key={x.q}>
-                <h3>{x.q}</h3>
-                <p>{x.a}</p>
-                {x.list && (
-                  <ul>
-                    {x.list.map((l) => (
-                      <li key={l}>{l}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================= SELLER GUIDE ========================= */}
-      <section className="lcn-section lcn-stone" id="seller-guide">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Seller Guide</p>
-            <h2 className="lcn-title">Selling a Home in Valley Village</h2>
-            <p className="lcn-sub">Six steps. Each one shapes your final price.</p>
-          </div>
-          <div className="lcn-grid-3">
-            {SELLER_STEPS.map(([t, d], i) => (
-              <div key={t} className="lcn-card lcn-step-card">
-                <span className="lcn-num">{pad(i)}</span>
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-          <div className="lcn-after">
-            <a href="#valuation" className="lcn-btn lcn-btn-dark">
-              Get a Valley Village Home Valuation
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ======================= MARKET SNAPSHOT ======================= */}
-      <section className="lcn-section lcn-ivory">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Market Snapshot</p>
-            <h2 className="lcn-title">Valley Village Market Snapshot</h2>
-            <p className="lcn-sub">Numbers change by month and by source. Use these as a guide. Ask Andrew for current sales.</p>
-          </div>
-          <div className="lcn-grid-4">
-            {SNAPSHOT.map(([v, l, d]) => (
-              <div key={l} className="lcn-card lcn-stat">
-                <p className="lcn-stat-value">{v}</p>
-                <p className="lcn-stat-label">{l}</p>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-          <p className="lcn-note lcn-note-small">Sources: Redfin, Zillow, and 2026 local market guides.</p>
-        </div>
-      </section>
-
       {/* =========================== LISTINGS =========================== */}
       <section className="lcn-section lcn-stone" id="listings">
         <div className="container">
@@ -508,11 +350,16 @@ export default async function ValleyVillagePage() {
               ))}
             </ul>
             <div className="lcn-ctas">
-              <Link href="/contact" className="lcn-btn lcn-btn-dark">
+              <a
+                href="https://wa.me/13107090581"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lcn-btn lcn-btn-dark"
+              >
                 Schedule a Consultation
-              </Link>
-              <Link href="/team" className="lcn-btn lcn-btn-outline">
-                Meet the Team
+              </a>
+              <Link href="/team/andrew-liberty" className="lcn-btn lcn-btn-outline">
+                Meet Andrew
               </Link>
             </div>
           </div>
@@ -582,53 +429,6 @@ export default async function ValleyVillagePage() {
         </div>
       </section>
 
-      {/* ========================== NEARBY AREAS ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Nearby Areas</p>
-            <h2 className="lcn-title">How Valley Village Compares With Nearby Areas</h2>
-            <p className="lcn-sub">Valley Village often costs less than Studio City and offers more condos than Sherman Oaks.</p>
-          </div>
-          <div className="lcn-table-wrap">
-            <table className="lcn-table">
-              <thead>
-                <tr>
-                  <td />
-                  {COMPARE.cols.map((c) => (
-                    <th key={c} scope="col">
-                      {c}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {COMPARE.rows.map(([label, ...cells]) => (
-                  <tr key={label}>
-                    <th scope="row">{label}</th>
-                    {cells.map((c, i) => (
-                      <td key={i} data-label={COMPARE.cols[i]}>
-                        {c}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="lcn-note lcn-note-small">Prices come from 2026 local market reports and differ by source.</p>
-          <div className="lcn-grid-2">
-            {NEARBY.map((n) => (
-              <Link key={n.name} href={n.href} className="lcn-card lcn-nearby">
-                <p className="lcn-tag">{n.coords}</p>
-                <h3>{n.name}</h3>
-                <p>{n.desc}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ============================== FAQ ============================== */}
       <section className="lcn-section lcn-ivory">
         <div className="container lcn-aside-layout">
@@ -664,9 +464,9 @@ export default async function ValleyVillagePage() {
               <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-light">
                 Browse Valley Village Homes
               </Link>
-              <a href="#valuation" className="lcn-btn lcn-btn-outline-light">
+              <Link href="/home-valuation" className="lcn-btn lcn-btn-outline-light">
                 Get Your Home Value
-              </a>
+              </Link>
             </div>
           </div>
         </div>
