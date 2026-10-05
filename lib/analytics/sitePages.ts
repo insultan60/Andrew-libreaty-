@@ -57,6 +57,11 @@ export const SITE_PAGES: SitePage[] = [
     name: "Selling a house as-is in California",
     group: "Content",
   },
+  {
+    path: "/blog/how-to-buy-a-duplex-in-los-angeles",
+    name: "How to buy a duplex in Los Angeles",
+    group: "Content",
+  },
 
   { path: "/my-search-portal", name: "Saved search portal", group: "Internal" },
 ];

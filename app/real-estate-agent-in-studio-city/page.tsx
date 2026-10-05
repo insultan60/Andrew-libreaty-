@@ -494,12 +494,17 @@ export default async function StudioCityPage() {
               </div>
 
               <div className="sc-hero-ctas">
-                <Link href="/contact" className="btn-gold">
+                <a
+                  href="https://wa.me/13107090581"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-gold"
+                >
                   <span>Schedule a Consultation</span>
                   <ArrowRight />
-                </Link>
-                <Link href="/team" className="btn-outline-light">
-                  <span>Meet the Team</span>
+                </a>
+                <Link href="/team/andrew-liberty" className="btn-outline-light">
+                  <span>Meet Andrew</span>
                 </Link>
               </div>
             </div>

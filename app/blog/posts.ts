@@ -39,6 +39,7 @@ export const TITLES = {
   tipsForShowing: "Tips for Showing Your House",
   sellInFall: "Tips to Sell Your Home in the Fall",
   sellAsIs: "Selling a House As-Is in California",
+  buyDuplexLA: "How to Buy a Duplex in Los Angeles",
 } as const;
 
 export function slugify(s: string): string {
@@ -87,6 +88,25 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    /* The draft's H1 is "How to Buy a Duplex in Los Angeles: A Buyer Guide";
+       the title is the part before the colon so slugify() gives the agreed
+       URL, /blog/how-to-buy-a-duplex-in-los-angeles. The full SERP title is
+       metaTitle. */
+    title: TITLES.buyDuplexLA,
+    excerpt:
+      "Loan options, rent control, and the numbers to check before you buy. How a Los Angeles duplex works for an owner-occupant or an investor, from pre-approval to taking over the tenancy.",
+    metaTitle: "How to Buy a Duplex in Los Angeles: Buyer's Guide",
+    metaDescription:
+      "Learn how to buy a duplex in Los Angeles: loan options, rent control rules, the numbers to check, inspections, and each step from offer to closing.",
+    date: "Oct 5, 2026",
+    read: "15 min read",
+    img: "/images/blog/how-to-buy-a-duplex-in-los-angeles.webp",
+    imgWidth: 1600,
+    imgHeight: 1065,
+    tags: ["Buying Tips", "Duplex", "Rent Control", "Investment Property", "Los Angeles"],
+  },
   {
     category: "Selling Strategy",
     title: TITLES.sellAsIs,
