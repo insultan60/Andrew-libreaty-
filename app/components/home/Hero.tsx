@@ -54,7 +54,7 @@ export default function Hero() {
             </a>
             <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="capsule-item">
               <CalendarIcon className="capsule-icon" />
-              <span>Schedule a Meeting</span>
+              <span>Schedule<span className="capsule-long"> a Meeting</span></span>
             </a>
           </div>
         </div>

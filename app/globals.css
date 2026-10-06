@@ -546,7 +546,22 @@ ul, ol { list-style: none; }
   width: 150px; height: auto; display: block;
   filter: drop-shadow(0 1px 12px rgba(0, 0, 0, 0.4));
 }
-@media (max-width: 720px) { .hero-compass { display: none; } }
+/* Phones: the Compass mark stays (brokerage co-branding is required), but it
+   drops into the page flow under the hero copy instead of floating
+   bottom-right, where it would collide with the text and buttons. */
+@media (max-width: 720px) {
+  /* Copy sits at the bottom of the first screen (not centred) so the
+     Compass mark below it is visible without scrolling. */
+  .hero-screen { padding-bottom: 28px; }
+  .hero-inner { flex: 0 0 auto; margin-top: auto; }
+  .hero-compass {
+    position: static; flex-direction: column-reverse;
+    width: min(1360px, 100% - 48px); margin: 28px auto 0;
+    align-items: flex-start; text-align: left; gap: 10px;
+  }
+  .hero-compass-cred { font-size: 9.5px; letter-spacing: 0.1em; line-height: 1.75; }
+  .hero-compass-logo { width: 112px; }
+}
 
 /* Hero visual */
 .hero-visual { position: relative; min-height: 520px; }
@@ -1303,11 +1318,10 @@ ul, ol { list-style: none; }
 
   .header-cta { display: none; }
 
-  .hero { padding-top: calc(var(--header-h) + 40px); }
-  .hero-capsule { display: grid; grid-template-columns: 1fr 1fr; border-radius: var(--radius-md); width: 100%; }
-  .capsule-item { justify-content: flex-start; border-radius: var(--radius-sm); padding: 13px 14px; }
-  .capsule-item + .capsule-item::before { display: none; }
-  .capsule-item:nth-child(3) { grid-column: 1 / -1; }
+  /* One slim row of three instead of a tall two-row card. */
+  .hero-capsule { margin-top: 26px; padding: 4px; }
+  .capsule-item { gap: 6px; padding: 9px 12px; font-size: 13px; white-space: nowrap; }
+  .capsule-item svg { width: 15px; height: 15px; }
 
   .hero-visual { min-height: 400px; }
   .hero-image-wrap { inset: 0 0 26px 20px; }
@@ -1377,4 +1391,10 @@ ul, ol { list-style: none; }
   bottom: 20px !important;
   right: 20px !important;
   z-index: 999999 !important;
+}
+
+/* Very narrow phones: keep the three hero buttons on one row. */
+@media (max-width: 360px) {
+  .capsule-item { padding: 8px 9px; font-size: 12.5px; }
+  .capsule-long { display: none; }
 }
