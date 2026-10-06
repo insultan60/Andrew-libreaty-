@@ -194,3 +194,20 @@ export function Steps({ items }: { items: [string, ReactNode][] }) {
     </ol>
   );
 }
+
+/**
+ * A link to another site, cited as a source.
+ *
+ * Opens in a new tab so the reader keeps their place in the article, and is
+ * always `nofollow`: the client asked that outbound links pass no ranking
+ * credit. `noopener noreferrer` stops the opened page from reaching back into
+ * this one. Use this for every outbound link in an article body rather than a
+ * bare <a>, so the rel can't be forgotten on the next one.
+ */
+export function ExternalLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="nofollow noopener noreferrer">
+      {children}
+    </a>
+  );
+}

@@ -1,6 +1,13 @@
 import { Fragment, type ReactNode } from "react";
 import Link from "next/link";
-import { Steps, Table } from "./_parts";
+import { ExternalLink, Steps, Table } from "./_parts";
+
+const ZIMAS = "https://zimas.lacity.org/";
+const LAHD_RSO = "https://housing.lacity.gov/residents/rso-overview";
+const ASSESSOR_REAL_PROPERTY = "https://assessor.lacounty.gov/homeowners/realproperty";
+const FHA_LIMITS = "https://entp.hud.gov/idapp/html/hicostlook.cfm";
+const LADBS_SOFT_STORY =
+  "https://www.ladbs.org/services/core-services/plan-check-permit/plan-check-permit-special-assistance/mandatory-retrofit-programs/soft-story-retrofit-program";
 
 /**
  * Body for "How to Buy a Duplex in Los Angeles".
@@ -14,9 +21,9 @@ import { Steps, Table } from "./_parts";
  * through Table. The ten-step purchase sequence is numbered (Steps) because
  * its order is the content.
  *
- * Links: the three earlier posts the copy names are linked in place, and ZIMAS
- * is linked because the copy tells the reader to use it. LAHD, LADBS and the
- * loan programmes stay as plain text, as in the as-is post.
+ * Links: the three earlier posts the copy names are linked in place. Outbound
+ * links (ZIMAS, LAHD's RSO page, the Assessor, HUD's FHA limit lookup and
+ * LADBS's soft-story program) go through ExternalLink, so they're nofollow.
  *
  * NOT YET IN: the supplied draft carries an editor's note asking Andrew for one
  * real, anonymized example of something an inspection or tenant review turned
@@ -58,7 +65,12 @@ const QUICK_FACTS: ReactNode[][] = [
     "Lowest down payment if you live in one unit",
     "FHA allows 3.5% with a 580 credit score. Some conventional loans allow 5%.",
   ],
-  ["FHA loan limit for a duplex in LA County (2026)", "$1,599,375"],
+  [
+    <ExternalLink key="fha" href={FHA_LIMITS}>
+      FHA loan limit for a duplex in LA County (2026)
+    </ExternalLink>,
+    "$1,599,375",
+  ],
   [
     "Does rent control apply?",
     "Often. The City's Rent Stabilization Ordinance (RSO) covers most duplexes built on or before October 1, 1978.",
@@ -210,15 +222,6 @@ const STEPS: [string, ReactNode][] = [
   ],
 ];
 
-const ZIMAS = "https://zimas.lacity.org/";
-
-function Ext({ href, children }: { href: string; children: ReactNode }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      {children}
-    </a>
-  );
-}
 
 export default function HowToBuyADuplexInLosAngeles() {
   return (
@@ -267,9 +270,10 @@ export default function HowToBuyADuplexInLosAngeles() {
       <h2>Los Angeles Rules That Change the Math</h2>
       <p>
         Rent control decides how much income a duplex can really produce, so check it before you fall
-        for the photos. In the City of Los Angeles, the Rent Stabilization Ordinance (RSO) generally
+        for the photos. In the City of Los Angeles, the{" "}
+        <ExternalLink href={LAHD_RSO}>Rent Stabilization Ordinance (RSO)</ExternalLink> generally
         covers rental property first built on or before October 1, 1978, and LAHD lists duplexes as a
-        covered type. Look up any address on <Ext href={ZIMAS}>ZIMAS</Ext> and open the Housing tab to
+        covered type. Look up any address on <ExternalLink href={ZIMAS}>ZIMAS</ExternalLink> and open the Housing tab to
         see its RSO status.
       </p>
       <p>
@@ -302,8 +306,8 @@ export default function HowToBuyADuplexInLosAngeles() {
       <h3>Property Tax After You Buy</h3>
       <p>
         In California, a sale usually triggers a reassessment to the purchase price. The base tax rate
-        is limited to 1% plus voter-approved local charges, and the county can send a supplemental tax
-        bill for the gap between the old and new assessed value. Budget for that bill in your first
+        is limited to 1% plus voter-approved local charges, and the county can send a{" "}
+        <ExternalLink href={ASSESSOR_REAL_PROPERTY}>supplemental tax bill</ExternalLink> for the gap between the old and new assessed value. Budget for that bill in your first
         year.
       </p>
 
@@ -430,7 +434,8 @@ export default function HowToBuyADuplexInLosAngeles() {
 
       <h3>Earthquake Risk and the Soft-Story Rule</h3>
       <p>
-        LA’s mandatory soft-story retrofit program targets older wood-frame buildings with open
+        LA’s mandatory{" "}
+        <ExternalLink href={LADBS_SOFT_STORY}>soft-story retrofit program</ExternalLink> targets older wood-frame buildings with open
         ground-floor parking, but LADBS says it does not apply to residential buildings with three or
         fewer units. A duplex is usually outside it. A duplex with tuck-under parking can still be
         vulnerable, so ask a structural engineer for an opinion and price a voluntary retrofit.

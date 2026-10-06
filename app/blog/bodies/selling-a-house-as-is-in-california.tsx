@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import Link from "next/link";
-import { Cta, ProsCons, Steps, Table } from "./_parts";
+import { Cta, ExternalLink, ProsCons, Steps, Table } from "./_parts";
 
 /**
  * Body for "Selling a House As-Is in California".
@@ -29,13 +29,7 @@ import { Cta, ProsCons, Steps, Table } from "./_parts";
 const CIV = (section: string) =>
   `https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=${section}`;
 
-function Source({ href, children }: { href: string; children: ReactNode }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
-      {children}
-    </a>
-  );
-}
+const DRE_DISCLOSURES = "https://www.dre.ca.gov/files/pdf/re6.pdf";
 
 /**
  * Kept as data because it is rendered twice: as visible copy here, and as
@@ -231,7 +225,7 @@ export default function SellingAHouseAsIsInCalifornia() {
       </p>
       <p>
         California law is direct about this:{" "}
-        <Source href={CIV("1102.1")}>Civil Code section 1102.1</Source> says the transfer disclosure
+        <ExternalLink href={CIV("1102.1")}>Civil Code section 1102.1</ExternalLink> says the transfer disclosure
         statement cannot be waived in an as-is sale. The same section keeps in place your duty to
         disclose any fact that materially affects value, including previously received inspection
         reports.
@@ -239,7 +233,8 @@ export default function SellingAHouseAsIsInCalifornia() {
 
       <h3>The Transfer Disclosure Statement</h3>
       <p>
-        For homes with one to four units, you complete a Transfer Disclosure Statement (TDS) and
+        For homes with one to four units, you complete a{" "}
+        <ExternalLink href={CIV("1102.6")}>Transfer Disclosure Statement (TDS)</ExternalLink> and
         deliver it to the buyer. The form asks about the features of the home and about problems you
         know of, including:
       </p>
@@ -256,18 +251,22 @@ export default function SellingAHouseAsIsInCalifornia() {
 
       <h3>The Natural Hazard Disclosure</h3>
       <p>
-        You also provide a separate Natural Hazard Disclosure, which shows whether the property sits
+        You also provide a separate{" "}
+        <ExternalLink href={CIV("1103.2")}>Natural Hazard Disclosure</ExternalLink>, which shows whether the property sits
         in a mapped zone for flood, fire hazard, earthquake fault, or seismic hazards such as
         landslide and liquefaction. Sellers usually order it from a third-party company, and your
         agent can arrange it. The California Department of Real Estate explains both documents in{" "}
-        <em>Disclosures in Real Property Transactions</em>.
+        <ExternalLink href={DRE_DISCLOSURES}>
+          <em>Disclosures in Real Property Transactions</em>
+        </ExternalLink>
+        .
       </p>
 
       <h3>Deaths on the Property</h3>
       <p>
         You are generally not required to disclose a death that happened more than three years
         before the buyer’s offer. If a buyer asks you directly, you can’t lie about it.{" "}
-        <Source href={CIV("1710.2")}>Civil Code section 1710.2</Source> covers the details.
+        <ExternalLink href={CIV("1710.2")}>Civil Code section 1710.2</ExternalLink> covers the details.
       </p>
 
       <h3>What Happens If You Hide a Problem</h3>
