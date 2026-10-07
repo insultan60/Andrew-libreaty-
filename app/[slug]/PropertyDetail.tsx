@@ -9,6 +9,7 @@ import { useLead } from "@/hooks/useLead";
 import { useSavedFavorites } from "@/hooks/useSavedFavorites";
 import { addFavorite, removeFavorite } from "@/lib/favorites";
 import type { Listing } from "./data";
+import VideoTour from "./VideoTour";
 
 /* ---------- Inline icons ---------- */
 const BedIcon = () => (<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8M2 16h20M2 20v-2M22 20v-2M6 10V7a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3" /></svg>);
@@ -275,6 +276,9 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
               <h2 className="pd-section-title">Overview</h2>
               {listing.overview.map((p, i) => <p key={i}>{p}</p>)}
             </section>
+
+            {/* Video tour — renders only for listings with a video in lib/listingVideos.ts */}
+            <VideoTour slug={listing.slug} />
 
             {/* Features */}
             <section className="pd-section" id="features">

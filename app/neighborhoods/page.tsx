@@ -8,26 +8,23 @@ export const metadata: Metadata = {
   alternates: { canonical: "/neighborhoods" },
 };
 
-/* Places, not properties. This band ran four listing photos before — modern
-   houses shot against blank sky, the kind that could be in any city in the
-   world, and one of them (sold-sherman-oaks) was the same file as a card
-   further down the page. Under the word "Neighborhoods" that said nothing
-   about these neighborhoods.
-   These four are the images in the library that are recognisably Los Angeles:
-   the reservoir in the hills, a shaded stretch of village sidewalk, the Valley
-   under the San Gabriels, and the canyon from above. Three of them also appear
-   in the grid below, which is the point rather than an oversight — the band
-   previews the areas the grid then lets you open. Ordered so that no tile sits
-   directly above its own card: the grid opens on Studio City, so the Studio
-   City frame is third here, not first.
-   The real fix for the repetition is photography of these areas that the site
-   does not have yet; everything else in /public/images is a listing shot of a
-   modern house against blank sky, which is what this band was using. */
+/* Places, not properties. The band under "Neighborhoods" shows four views that
+   are recognisably Los Angeles, and none of them repeat anywhere else on the
+   site — an earlier version reused three of the grid's own photos and the
+   homepage hero frame, so the page showed the same pictures twice.
+
+   Free stock from Unsplash (Unsplash License: free for commercial use, no
+   attribution required). Source pages, should they need swapping later:
+     hillside-homes-hollywood-sign  unsplash.com/photos/QQ5CpZsqDRY  (Gerson Repreza)
+     palm-lined-street              unsplash.com/photos/7A3pvzBoEeM  (Rihards Sergis)
+     city-below-the-hills           unsplash.com/photos/Rp2LG-_ABqY  (Logan Voss)
+     santa-monica-mountains         unsplash.com/photos/Yw2ny6nM7CI  (Benjamin Ashton)
+   Replace with Andrew's own photography of these areas when it exists. */
 const HERO_GALLERY = [
-  { src: "/images/hollywood-hills.jpg", alt: "Lake Hollywood and the ridge line of the Hollywood Hills" },
-  { src: "/images/hero-poster.jpg", alt: "A shaded sidewalk on a walkable Los Angeles village street" },
-  { src: "/images/studio-city.jpg", alt: "The Valley below the San Gabriel Mountains, seen from Studio City" },
-  { src: "/images/laurel-canyon.jpg", alt: "Homes tucked into the hillside above Laurel Canyon" },
+  { src: "/images/neighborhoods/hillside-homes-hollywood-sign.jpg", alt: "Hillside homes below the Hollywood Sign" },
+  { src: "/images/neighborhoods/palm-lined-street.jpg", alt: "A palm-lined residential street in Los Angeles" },
+  { src: "/images/neighborhoods/city-below-the-hills.jpg", alt: "Los Angeles spreading out below the green hills" },
+  { src: "/images/neighborhoods/santa-monica-mountains.jpg", alt: "Golden light over the hills of the Santa Monica Mountains" },
 ];
 
 type Area = { name: string; img: string; alt: string; href: string; size: "tall" | "short" | "full" };
