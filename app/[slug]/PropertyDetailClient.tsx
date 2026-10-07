@@ -68,7 +68,7 @@ export default function PropertyDetailClient({
             </div>
             <div className="pd-similar-grid">
               {similar.map((p) => (
-                <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+                <PropertyCard key={p.slug} p={p} href={p.href} />
               ))}
             </div>
           </div>

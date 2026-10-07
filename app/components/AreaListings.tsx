@@ -80,7 +80,7 @@ export default function AreaListings({
           </p>
           <div className="prop-grid">
             {others.map((p) => (
-              <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+              <PropertyCard key={p.slug} p={p} href={p.href} />
             ))}
             {fill && <MlsSearchCard href={search} place={place} beside={others.length} />}
           </div>
@@ -92,7 +92,7 @@ export default function AreaListings({
       ) : (
         <div className="prop-grid">
           {shown.map((p) => (
-            <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+            <PropertyCard key={p.slug} p={p} href={p.href} />
           ))}
           {fill && <MlsSearchCard href={search} place={place} beside={shown.length} />}
         </div>

@@ -2,7 +2,7 @@ import "server-only";
 
 import { unstable_cache } from "next/cache";
 import { proxyIdxRequest } from "@/lib/idxProxy";
-import { isLease, type RawIdxListing } from "@/lib/idx";
+import { isLease, markFeatured, type RawIdxListing } from "@/lib/idx";
 
 /**
  * Server-side twin of fetchRawListings().
@@ -62,13 +62,14 @@ const cachedListings = unstable_cache(
       serverIdxFetch<RawIdxListResponse>("clients/soldpending"),
     ]);
     const all = [
-      ...Object.values(featured?.data || {}),
+      ...markFeatured(Object.values(featured?.data || {})),
       ...Object.values(soldpending?.data || {}),
     ].filter((raw) => !isLease(raw));
     if (all.length === 0) throw new Error("IDX returned no listings");
     return all;
   },
-  ["idx-listings-v1"],
+  // v2: records now carry `featured` (see listingPath); v1 entries lack it.
+  ["idx-listings-v2"],
   { revalidate: 900, tags: ["idx-listings"] }
 );
 

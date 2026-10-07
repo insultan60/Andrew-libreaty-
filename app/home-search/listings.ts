@@ -7,6 +7,8 @@
 export type Listing = {
   id: number;
   slug: string;
+  /** Detail-page path from listingPath(): /property/<slug> or /<slug>. */
+  href?: string;
   price: number;
   beds: number | null;
   baths: number | null;

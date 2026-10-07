@@ -54,7 +54,30 @@ export type RawIdxListing = {
   propSubType?: string;
   countyName?: string;
   advanced?: Record<string, unknown>;
+  /** Set by this site, not IDX: true when the record came from the
+   *  clients/featured feed (the team's own current listings). Decides where
+   *  the listing's page lives — see listingPath(). */
+  featured?: boolean;
 };
+
+/**
+ * Where a listing's detail page lives.
+ *
+ * Featured listings (the team's current listings, from clients/featured) live
+ * under /property/<slug> — the address Compass's marketing emails link to.
+ * Sold and pending listings stay at the site root, /<slug>. Each route
+ * permanently redirects to the other when a listing is requested at the wrong
+ * one, so a listing that sells moves without breaking old links.
+ */
+export function listingPath(raw: Pick<RawIdxListing, "detailsUrlSlug" | "featured">): string {
+  const slug = raw.detailsUrlSlug.toLowerCase();
+  return raw.featured ? `/property/${slug}` : `/${slug}`;
+}
+
+/** Tags the featured feed's records (see RawIdxListing.featured). */
+export function markFeatured(list: RawIdxListing[]): RawIdxListing[] {
+  return list.map((raw) => ({ ...raw, featured: true }));
+}
 
 type RawIdxListResponse = { total: number; data: Record<string, RawIdxListing> };
 
@@ -119,7 +142,7 @@ export async function fetchRawListings(): Promise<RawIdxListing[]> {
     idxFetch<RawIdxListResponse>("clients/featured"),
     idxFetch<RawIdxListResponse>("clients/soldpending"),
   ]);
-  return [...Object.values(featured?.data || {}), ...Object.values(soldpending?.data || {})].filter(
+  return [...markFeatured(Object.values(featured?.data || {})), ...Object.values(soldpending?.data || {})].filter(
     (raw) => !isLease(raw)
   );
 }
@@ -130,6 +153,7 @@ export function toListing(raw: RawIdxListing, index: number): Listing {
   return {
     id: index,
     slug: raw.detailsUrlSlug.toLowerCase(),
+    href: listingPath(raw),
     price: raw.price,
     beds: raw.bedrooms ?? null,
     baths: raw.totalBaths ?? null,
@@ -151,11 +175,12 @@ export function toListing(raw: RawIdxListing, index: number): Listing {
 
 /** PropertyCard's shape — used for the property listing page and the
  *  homepage/team "recently sold" grids. */
-export function toPropertyItem(raw: RawIdxListing): PropertyItem & { slug: string } {
+export function toPropertyItem(raw: RawIdxListing): PropertyItem & { slug: string; href: string } {
   const sold = statusOf(raw) === "Sold";
   const priceStr = sold && raw.soldPrice != null ? money(Number(raw.soldPrice)) : raw.listingPrice;
   return {
     slug: raw.detailsUrlSlug.toLowerCase(),
+    href: listingPath(raw),
     mlsId: raw.listingID,
     img: photos(raw)[0] || "",
     alt: raw.address,

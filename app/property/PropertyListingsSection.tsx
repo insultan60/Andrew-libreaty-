@@ -65,7 +65,7 @@ export default function PropertyListingsSection({
                runs the full width and stands in for the grid. */
             <div className="prop-grid">
               {featured.map((p) => (
-                <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+                <PropertyCard key={p.slug} p={p} href={p.href} />
               ))}
               <a
                 href="/home-search"
@@ -89,7 +89,7 @@ export default function PropertyListingsSection({
             <>
               <div className="prop-grid">
                 {featured.map((p) => (
-                  <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+                  <PropertyCard key={p.slug} p={p} href={p.href} />
                 ))}
               </div>
               {/* No "reveal" class, for the same reason as the sold link below:
@@ -143,7 +143,7 @@ export default function PropertyListingsSection({
             <>
               <div className="prop-grid">
                 {past.map((p) => (
-                  <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+                  <PropertyCard key={p.slug} p={p} href={p.href} />
                 ))}
               </div>
               {/* No "reveal" class here: GlobalEffects snapshots .reveal once per

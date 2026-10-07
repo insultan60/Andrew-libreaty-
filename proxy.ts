@@ -60,9 +60,11 @@ async function dashboardGate(req: NextRequest): Promise<NextResponse | null> {
  *                                     id that is no longer in use.
  *   /home-search/auth/*               the old account flow.
  *   /neighborhoods/*                  the nested neighbourhood pages.
- *   /property/<slug>                  the old detail-page location. Detail
- *                                     pages now live at the site root, e.g.
- *                                     /541-martos-drive-south-pasadena-91030.
+ *   /property/<slug>/...              anything deeper than one segment. A
+ *                                     single-segment /property/<slug> is a
+ *                                     live page again: featured listings live
+ *                                     there (app/property/[slug]), sold ones at
+ *                                     the root - see listingPath() in lib/idx.
  *                                     /property, /property/active and
  *                                     /property/sold are live listing pages
  *                                     and are held open in KEEP_EXACT below.
@@ -92,7 +94,6 @@ const GONE_PREFIXES = [
   "/home-search/auth/",
   "/neighborhoods/",
   "/agent/",
-  "/property/",
 ];
 
 /**
@@ -118,6 +119,8 @@ function isGone(pathname: string): boolean {
 
   if (KEEP_EXACT.has(path)) return false;
   if (GONE_EXACT.has(path)) return true;
+  // /property/<slug> is a live listing page; only deeper paths are retired.
+  if (path.startsWith("/property/") && path.split("/").length > 3) return true;
   return GONE_PREFIXES.some((prefix) => path.startsWith(prefix));
 }
 

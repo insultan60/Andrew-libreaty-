@@ -40,6 +40,7 @@ export const TITLES = {
   sellInFall: "Tips to Sell Your Home in the Fall",
   sellAsIs: "Selling a House As-Is in California",
   buyDuplexLA: "How to Buy a Duplex in Los Angeles",
+  affordableLA: "Most Affordable Places to Live in Los Angeles",
 } as const;
 
 export function slugify(s: string): string {
@@ -88,6 +89,21 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    title: TITLES.affordableLA,
+    excerpt:
+      "Lancaster and Palmdale for houses, Panorama City and Boyle Heights for city living. Typical prices, rents, and the commute trade-off for each, plus the costs to plan for beyond the price.",
+    metaTitle: "Most Affordable Places to Live in Los Angeles (2026)",
+    metaDescription:
+      "The most affordable places to live in Los Angeles, with typical home prices, rents, and commute trade-offs for Lancaster, Palmdale, Panorama City, and more.",
+    date: "Oct 7, 2026",
+    read: "5 min read",
+    img: "/images/blog/most-affordable-places-to-live-in-los-angeles.webp",
+    imgWidth: 1264,
+    imgHeight: 848,
+    tags: ["Buying Tips", "Affordable Housing", "Renting", "Los Angeles", "Neighborhoods"],
+  },
   {
     category: "Buying Tips",
     /* The draft's H1 is "How to Buy a Duplex in Los Angeles: A Buyer Guide";

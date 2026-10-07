@@ -44,7 +44,7 @@ export default function ActiveListingsSection({
             </p>
             <div className="prop-grid">
               {active.map((p) => (
-                <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+                <PropertyCard key={p.slug} p={p} href={p.href} />
               ))}
             </div>
           </>

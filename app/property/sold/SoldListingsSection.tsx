@@ -37,7 +37,7 @@ export default function SoldListingsSection({
                 <PropertyCard
                   key={p.slug}
                   p={p}
-                  href={`/${p.slug}`}
+                  href={p.href}
                  
                 />
               ))}

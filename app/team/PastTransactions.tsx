@@ -31,7 +31,7 @@ export default function PastTransactions() {
         ) : (
           <div className="prop-grid">
             {sold.map((p) => (
-              <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
+              <PropertyCard key={p.slug} p={p} href={p.href} />
             ))}
           </div>
         )}

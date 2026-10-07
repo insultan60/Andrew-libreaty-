@@ -3,6 +3,7 @@ import { SITE_URL } from "@/lib/site";
 import { ALL as ALL_POSTS } from "./blog/posts";
 import { isPublished } from "./blog/bodies";
 import { fetchRawListingsServer } from "@/lib/idxServer";
+import { listingPath } from "@/lib/idx";
 
 /**
  * Static routes only, as locations — no <lastmod>, <changefreq> or <priority>.
@@ -59,7 +60,8 @@ export const revalidate = 900;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const listings = (await fetchRawListingsServer()) ?? [];
-  const listingSlugs = [...new Set(listings.map((raw) => raw.detailsUrlSlug.toLowerCase()))];
+  // Featured listings live at /property/<slug>, the rest at /<slug>.
+  const listingPaths = [...new Set(listings.map(listingPath))];
 
   return [
     ...ROUTES.map((path) => ({ url: `${SITE_URL}${path}` })),
@@ -72,6 +74,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${SITE_URL}/blog/${post.slug}`,
     })),
 
-    ...listingSlugs.map((slug) => ({ url: `${SITE_URL}/${slug}` })),
+    ...listingPaths.map((path) => ({ url: `${SITE_URL}${path}` })),
   ];
 }
