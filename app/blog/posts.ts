@@ -41,6 +41,7 @@ export const TITLES = {
   sellAsIs: "Selling a House As-Is in California",
   buyDuplexLA: "How to Buy a Duplex in Los Angeles",
   affordableLA: "Most Affordable Places to Live in Los Angeles",
+  studioCityVsShermanOaks: "Studio City vs Sherman Oaks",
 } as const;
 
 export function slugify(s: string): string {
@@ -89,6 +90,27 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Neighborhoods",
+    /* The draft's H1 is "Studio City vs Sherman Oaks: Which Is Better to Live
+       In?"; the title is the part before the colon so slugify() gives the
+       agreed URL, /blog/studio-city-vs-sherman-oaks. The full SERP title is
+       metaTitle. */
+    title: TITLES.studioCityVsShermanOaks,
+    excerpt:
+      "Same boulevard, different feel. Prices, walkability, commutes, schools and hillside risks compared, so you can pick the neighborhood that fits your life and your budget.",
+    metaTitle: "Studio City vs Sherman Oaks: Which Is Better to Live In?",
+    metaDescription:
+      "Studio City vs Sherman Oaks: compare 2026 home prices, walkability, schools, commutes and hillside risks, then see which fits you best.",
+    date: "Oct 8, 2026",
+    read: "8 min read",
+    /* Aerial of the Studio City hills by Logan Voss on Unsplash (free under
+       the Unsplash License), cropped to 16:10 - see the body file's header. */
+    img: "/images/blog/studio-city-vs-sherman-oaks.webp",
+    imgWidth: 1600,
+    imgHeight: 1000,
+    tags: ["Neighborhoods", "Studio City", "Sherman Oaks", "San Fernando Valley", "Buying Tips"],
+  },
   {
     category: "Buying Tips",
     title: TITLES.affordableLA,

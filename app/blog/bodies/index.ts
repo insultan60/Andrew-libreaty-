@@ -5,6 +5,7 @@ import TipsToSellYourHomeInTheFall, { FAQS as FALL_FAQS } from "./tips-to-sell-y
 import SellingAHouseAsIsInCalifornia, { FAQS as AS_IS_FAQS } from "./selling-a-house-as-is-in-california";
 import HowToBuyADuplexInLosAngeles, { FAQS as DUPLEX_FAQS } from "./how-to-buy-a-duplex-in-los-angeles";
 import MostAffordablePlacesToLiveInLosAngeles, { FAQS as AFFORDABLE_FAQS } from "./most-affordable-places-to-live-in-los-angeles";
+import StudioCityVsShermanOaks, { FAQS as STUDIO_SHERMAN_FAQS } from "./studio-city-vs-sherman-oaks";
 
 /**
  * Slug -> article body.
@@ -23,6 +24,7 @@ export const BODIES: Record<string, ComponentType> = {
   [slugify(TITLES.sellAsIs)]: SellingAHouseAsIsInCalifornia,
   [slugify(TITLES.buyDuplexLA)]: HowToBuyADuplexInLosAngeles,
   [slugify(TITLES.affordableLA)]: MostAffordablePlacesToLiveInLosAngeles,
+  [slugify(TITLES.studioCityVsShermanOaks)]: StudioCityVsShermanOaks,
 };
 
 /**
@@ -39,6 +41,7 @@ export const FAQS_BY_SLUG: Record<string, { q: string; a: string }[]> = {
   [slugify(TITLES.sellAsIs)]: AS_IS_FAQS,
   [slugify(TITLES.buyDuplexLA)]: DUPLEX_FAQS,
   [slugify(TITLES.affordableLA)]: AFFORDABLE_FAQS,
+  [slugify(TITLES.studioCityVsShermanOaks)]: STUDIO_SHERMAN_FAQS,
 };
 
 /**
