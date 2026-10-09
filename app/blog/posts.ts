@@ -42,6 +42,7 @@ export const TITLES = {
   buyDuplexLA: "How to Buy a Duplex in Los Angeles",
   affordableLA: "Most Affordable Places to Live in Los Angeles",
   studioCityVsShermanOaks: "Studio City vs Sherman Oaks",
+  rentVsBuy: "Pros and Cons of Renting Vs Buying a House",
 } as const;
 
 export function slugify(s: string): string {
@@ -90,6 +91,24 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    title: TITLES.rentVsBuy,
+    excerpt:
+      "Rent or buy? The pros and cons side by side, a worked $400,000 cost example, how long until buying beats renting, and five questions that point you to your answer.",
+    /* The draft's meta title is the article title itself. */
+    metaTitle: "Pros and Cons of Renting Vs Buying a House",
+    metaDescription:
+      "Pros and cons of renting vs buying a house: see them side by side, plus a real $400,000 cost example and a 5-question check to find your answer.",
+    date: "Oct 9, 2026",
+    read: "7 min read",
+    /* The hero that shipped in the draft: a model apartment block and a model
+       house, each with its keys. 3:2. */
+    img: "/images/blog/pros-and-cons-of-renting-vs-buying-a-house.webp",
+    imgWidth: 1536,
+    imgHeight: 1024,
+    tags: ["Buying Tips", "Renting", "First-Time Buyers", "Home Costs", "Los Angeles"],
+  },
   {
     category: "Neighborhoods",
     /* The draft's H1 is "Studio City vs Sherman Oaks: Which Is Better to Live

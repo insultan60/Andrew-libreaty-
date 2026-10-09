@@ -31,6 +31,9 @@ const TEAM: Member[] = [
     specialties: ["Luxury Residential", "Historic Estates", "Relocation"],
   },
   { name: "Liza Calzoni", role: "REALTOR®", meta: "License Number # 02246252", img: "/team/lisa-cabrera.png" },
+  /* Details and headshot from her Compass profile (compass.com/agents/
+     marine-shirinian); the photo is cropped to the 391x504 the other cards use. */
+  { name: "Marine Shirinian", role: "REALTOR®", meta: "License Number # 02443948", img: "/team/marine-shirinian.png" },
   { name: "Seda Naumenko", role: "Marketing and Operations", meta: "License Number # 02246252", img: "/team/sonia-naumenko.png" },
   { name: "Andrew Coleman", role: "Designer", meta: "License Number # 02246252", img: "/team/andrew-coleman.png" },
   { name: "Victor Jimenez", role: "Manager", meta: "License Number # 02246252", img: "/team/victor-jimenez.png" },
