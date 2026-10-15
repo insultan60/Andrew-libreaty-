@@ -43,6 +43,7 @@ export const TITLES = {
   affordableLA: "Most Affordable Places to Live in Los Angeles",
   studioCityVsShermanOaks: "Studio City vs Sherman Oaks",
   rentVsBuy: "Pros and Cons of Renting Vs Buying a House",
+  sellLA: "Selling a House in Los Angeles",
 } as const;
 
 export function slugify(s: string): string {
@@ -91,6 +92,28 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Selling Strategy",
+    /* The draft's H1 is "Selling a House in Los Angeles: A 2026 Guide From a
+       Local Agent"; the title is the part before the colon so slugify() gives
+       the agreed URL, /blog/selling-a-house-in-los-angeles. The full SERP
+       title is metaTitle. */
+    title: TITLES.sellLA,
+    excerpt:
+      "Transfer taxes, Measure ULA, the disclosures LA sellers need, hillside insurance questions and a sample net sheet. The steps in order, what each one costs, and where sellers get caught off guard.",
+    metaTitle: "Selling a House in Los Angeles: 2026 Seller's Guide",
+    metaDescription:
+      "What it costs to sell a house in Los Angeles in 2026: transfer taxes, Measure ULA, disclosures, timeline and a sample net sheet, from a local agent.",
+    date: "Oct 15, 2026",
+    read: "19 min read",
+    /* A Spanish-style bungalow in Los Angeles by ubeyonroad on
+       Unsplash (free under the Unsplash License), cropped to 16:10 - see the
+       body file's header. */
+    img: "/images/blog/selling-a-house-in-los-angeles.webp",
+    imgWidth: 1600,
+    imgHeight: 1000,
+    tags: ["Selling Strategy", "Los Angeles", "Transfer Tax", "Seller Disclosures", "Net Sheet"],
+  },
   {
     category: "Buying Tips",
     title: TITLES.rentVsBuy,
