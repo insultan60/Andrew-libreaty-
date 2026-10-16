@@ -26,9 +26,14 @@
  * If the hosting is ever flipped to prefer www, this constant is the one place
  * to change, and it is worth re-running the two curls above rather than
  * trusting this comment.
+ *
+ * October 2026: the site moved to andrewlibertyhomes.com. In Vercel that apex
+ * is now the production domain, and www.andrewlibertyhomes.com,
+ * andrewliberty.com and www.andrewliberty.com all 308 to it. Canonicals and
+ * the sitemap follow, so they name the URL that actually answers 200.
  */
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://andrewliberty.com"
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://andrewlibertyhomes.com"
 ).replace(/\/$/, "");
 
 export const SITE_NAME = "Andrew Liberty Team";

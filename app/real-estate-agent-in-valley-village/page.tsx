@@ -159,20 +159,43 @@ export default async function ValleyVillagePage() {
             },
             {
               "@type": "WebPage",
-              "@id": abs(PATH),
+              "@id": `${abs(PATH)}#webpage`,
               url: abs(PATH),
-              name: TITLE,
-              description: DESCRIPTION,
+              name: "Real Estate Agent in Valley Village | Andrew Liberty",
+              description:
+                "Real estate agent in Valley Village: Andrew Liberty helps buyers, sellers, and investors find the right street and the right price.",
               primaryImageOfPage: abs(HERO),
-              about: { "@type": "Place", name: "Valley Village, Los Angeles, CA" },
-              provider: { "@id": `${SITE_URL}/#agent` },
-            },
-            {
-              "@type": "Service",
-              serviceType: "Real estate agent",
-              provider: { "@id": `${SITE_URL}/#agent` },
-              areaServed: { "@type": "Place", name: "Valley Village, Los Angeles, CA" },
-              url: abs(PATH),
+              isPartOf: {
+                "@type": "CollectionPage",
+                "@id": `${abs("/neighborhoods")}#webpage`,
+                url: abs("/neighborhoods"),
+              },
+              mainEntity: {
+                "@type": "Service",
+                "@id": `${abs(PATH)}#service`,
+                name: "Real Estate Agent Services in Valley Village",
+                serviceType: "Real estate agent",
+                description:
+                  "Buying, selling, and investment guidance for condos, townhomes, and houses in Valley Village, with pricing based on sales on your street or in your building.",
+                provider: { "@id": `${SITE_URL}/#agent` },
+                areaServed: {
+                  "@type": "Place",
+                  "@id": `${abs(PATH)}#place`,
+                  name: "Valley Village",
+                  description:
+                    "A quiet, walkable neighborhood in the southeast San Fernando Valley, City of Los Angeles, with tree-lined streets and a mix of condos, townhomes, and single-family homes.",
+                  image: abs("/images/sold-valley-village.jpg"),
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Valley Village",
+                    addressRegion: "CA",
+                    postalCode: "91607",
+                    addressCountry: "US",
+                  },
+                  containedInPlace: { "@type": "City", name: "Los Angeles" },
+                  sameAs: "https://en.wikipedia.org/wiki/Valley_Village,_Los_Angeles",
+                },
+              },
             },
             {
               "@type": "FAQPage",

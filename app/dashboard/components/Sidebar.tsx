@@ -8,6 +8,7 @@ import {
   CloseIcon,
   ExternalIcon,
   FileIcon,
+  InboxIcon,
   MenuIcon,
   PlugIcon,
   SearchIcon,
@@ -31,6 +32,7 @@ import {
 
 const NAV = [
   { href: "/dashboard", label: "Overview", Icon: ChartIcon, exact: true },
+  { href: "/dashboard/leads", label: "Leads", Icon: InboxIcon },
   { href: "/dashboard/pages", label: "Pages", Icon: FileIcon },
   { href: "/dashboard/audience", label: "Audience", Icon: UsersIcon },
   { href: "/dashboard/search", label: "Google Search", Icon: SearchIcon },

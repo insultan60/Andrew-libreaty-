@@ -1407,3 +1407,168 @@ button.dash-out {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ---------- leads ---------- */
+
+.dash-leads-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.dash-leads-search {
+  flex: 1 1 220px;
+  min-width: 0;
+  border: 1px solid var(--dash-line);
+  border-radius: 999px;
+  background: var(--dash-surface);
+  padding: 8px 14px;
+  /* 16px stops iOS zooming the page when the field takes focus */
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.dash-leads-search:focus {
+  outline: 2px solid var(--chart-1);
+  outline-offset: 1px;
+}
+
+.dash-lead-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.dash-lead-name:hover {
+  color: var(--chart-1);
+  text-decoration: underline;
+}
+
+.dash-lead-contact {
+  display: block;
+  overflow: hidden;
+  max-width: 260px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.dash-lead-contact.is-soft {
+  color: var(--ink-soft);
+}
+
+.dash-lead-contact:hover {
+  text-decoration: underline;
+}
+
+.dash-lead-sub {
+  display: none;
+}
+
+.dash-lead-date {
+  white-space: nowrap;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-soft);
+}
+
+.dash-back {
+  display: inline-block;
+  margin-bottom: 14px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-decoration: none;
+}
+
+.dash-back:hover {
+  color: var(--ink);
+}
+
+.dash-lead-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.dash-dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 16px;
+  margin: 0;
+  font-size: 13.5px;
+}
+
+.dash-dl dt {
+  color: var(--muted);
+}
+
+.dash-dl dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+
+.dash-notes {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dash-notes li + li {
+  border-top: 1px solid var(--dash-line-soft);
+  padding-top: 14px;
+}
+
+.dash-note-title {
+  margin: 0 0 4px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.dash-note-title a {
+  color: inherit;
+}
+
+.dash-note-body {
+  margin: 0 0 4px;
+  white-space: pre-wrap;
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+/* Grid items default to min-width:auto, so the table's own min-width pushed
+   the whole card (and the page) wider than a phone. */
+.dash-row > * {
+  min-width: 0;
+}
+
+@media (max-width: 639px) {
+  .dash-leads-table {
+    min-width: 0;
+  }
+  /* Two columns on a phone: the dates move under the name. */
+  .dash-leads-table th:nth-child(n + 3),
+  .dash-leads-table td:nth-child(n + 3) {
+    display: none;
+  }
+  .dash-leads-table td {
+    padding: 10px 8px;
+  }
+  .dash-lead-sub {
+    display: block;
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .dash-lead-contact {
+    max-width: 170px;
+  }
+}

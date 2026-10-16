@@ -161,20 +161,43 @@ export default async function HollywoodHillsPage() {
             },
             {
               "@type": "WebPage",
-              "@id": abs(PATH),
+              "@id": `${abs(PATH)}#webpage`,
               url: abs(PATH),
-              name: TITLE,
-              description: DESCRIPTION,
+              name: "Real Estate Agent in Hollywood Hills | Andrew Liberty",
+              description:
+                "Real estate agent in Hollywood Hills: Andrew Liberty prices view homes on the view, the lot, and nearby sales, not a formula.",
               primaryImageOfPage: abs(HERO),
-              about: { "@type": "Place", name: "Hollywood Hills, Los Angeles, CA" },
-              provider: { "@id": `${SITE_URL}/#agent` },
-            },
-            {
-              "@type": "Service",
-              serviceType: "Real estate agent",
-              provider: { "@id": `${SITE_URL}/#agent` },
-              areaServed: { "@type": "Place", name: "Hollywood Hills, Los Angeles, CA" },
-              url: abs(PATH),
+              isPartOf: {
+                "@type": "CollectionPage",
+                "@id": `${abs("/neighborhoods")}#webpage`,
+                url: abs("/neighborhoods"),
+              },
+              mainEntity: {
+                "@type": "Service",
+                "@id": `${abs(PATH)}#service`,
+                name: "Real Estate Agent Services in Hollywood Hills",
+                serviceType: "Real estate agent",
+                description:
+                  "Buying, selling, and investment guidance for view homes in the Hollywood Hills, with pricing based on the view, the lot, and nearby sales.",
+                provider: { "@id": `${SITE_URL}/#agent` },
+                areaServed: {
+                  "@type": "Place",
+                  "@id": `${abs(PATH)}#place`,
+                  name: "Hollywood Hills",
+                  description:
+                    "Hillside neighborhoods above Hollywood, in the Santa Monica Mountains in the City of Los Angeles, known for city views, winding canyon roads, privacy, and architecture.",
+                  image: abs("/images/hollywood-hills.jpg"),
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Los Angeles",
+                    addressRegion: "CA",
+                    postalCode: "90068",
+                    addressCountry: "US",
+                  },
+                  containedInPlace: { "@type": "City", name: "Los Angeles" },
+                  sameAs: "https://en.wikipedia.org/wiki/Hollywood_Hills",
+                },
+              },
             },
             {
               "@type": "FAQPage",

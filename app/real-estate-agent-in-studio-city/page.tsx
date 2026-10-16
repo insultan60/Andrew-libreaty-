@@ -65,21 +65,49 @@ export default async function StudioCityPage() {
               ],
             },
             {
-              "@type": "Place",
-              "@id": abs(PATH),
-              name: "Studio City, Los Angeles, CA",
-              description: DESCRIPTION,
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Studio City",
-                addressRegion: "CA",
-                postalCode: "91604",
-                addressCountry: "US",
+              "@type": "WebPage",
+              "@id": `${abs(PATH)}#webpage`,
+              url: abs(PATH),
+              name: "Real Estate Agent in Studio City | Andrew Liberty",
+              description:
+                "Real estate agent in Studio City: Andrew Liberty helps buyers, sellers, and investors with local knowledge, housing types, and market conditions.",
+              primaryImageOfPage: abs("/images/studio-city.jpg"),
+              isPartOf: {
+                "@type": "CollectionPage",
+                "@id": `${abs("/neighborhoods")}#webpage`,
+                url: abs("/neighborhoods"),
               },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: 34.1483,
-                longitude: -118.3965,
+              mainEntity: {
+                "@type": "Service",
+                "@id": `${abs(PATH)}#service`,
+                name: "Real Estate Agent Services in Studio City",
+                serviceType: "Real estate agent",
+                description:
+                  "Buying, selling, and investment guidance for homes in Studio City, with local knowledge of its housing types, micro-neighborhoods, and market conditions.",
+                provider: { "@id": `${SITE_URL}/#agent` },
+                areaServed: {
+                  "@type": "Place",
+                  "@id": `${abs(PATH)}#place`,
+                  name: "Studio City",
+                  description:
+                    "A neighborhood in the southeast San Fernando Valley, City of Los Angeles, known for a walkable stretch of Ventura Boulevard, quiet tree-lined residential flats, and hillside streets climbing toward Mulholland.",
+                  image: abs("/images/studio-city.jpg"),
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Studio City",
+                    addressRegion: "CA",
+                    postalCode: "91604",
+                    addressCountry: "US",
+                  },
+                  // Not in the supplied schema; kept from the earlier Place node.
+                  geo: {
+                    "@type": "GeoCoordinates",
+                    latitude: 34.1483,
+                    longitude: -118.3965,
+                  },
+                  containedInPlace: { "@type": "City", name: "Los Angeles" },
+                  sameAs: "https://en.wikipedia.org/wiki/Studio_City,_Los_Angeles",
+                },
               },
             },
             {

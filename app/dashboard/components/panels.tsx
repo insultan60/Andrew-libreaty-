@@ -78,6 +78,7 @@ export function Stat({
   hint,
   goodWhenUp = true,
   unavailable = false,
+  compare = true,
 }: {
   label: string;
   value: string | number;
@@ -86,6 +87,8 @@ export function Stat({
   goodWhenUp?: boolean;
   /** the source feeding this tile is not connected */
   unavailable?: boolean;
+  /** false for a count with no period to compare against (e.g. leads on file) */
+  compare?: boolean;
 }) {
   return (
     <div className="dash-stat">
@@ -94,7 +97,7 @@ export function Stat({
         {typeof value === "number" ? value.toLocaleString() : value}
       </p>
       <div className="dash-stat-foot">
-        {unavailable ? (
+        {!compare ? null : unavailable ? (
           <span className="dash-quiet">not connected</span>
         ) : (
           <Delta

@@ -174,20 +174,43 @@ export default async function ShermanOaksPage() {
             },
             {
               "@type": "WebPage",
-              "@id": abs(PATH),
+              "@id": `${abs(PATH)}#webpage`,
               url: abs(PATH),
-              name: TITLE,
-              description: DESCRIPTION,
+              name: "Real Estate Agent in Sherman Oaks | Andrew Liberty",
+              description:
+                "Real estate agent in Sherman Oaks: Andrew Liberty prices homes on both sides of Ventura Boulevard using real comps from each pocket.",
               primaryImageOfPage: abs(HERO_IMG),
-              about: { "@type": "Place", name: "Sherman Oaks, Los Angeles, CA" },
-              provider: { "@id": `${SITE_URL}/#agent` },
-            },
-            {
-              "@type": "Service",
-              serviceType: "Real estate agent",
-              provider: { "@id": `${SITE_URL}/#agent` },
-              areaServed: { "@type": "Place", name: "Sherman Oaks, Los Angeles, CA" },
-              url: abs(PATH),
+              isPartOf: {
+                "@type": "CollectionPage",
+                "@id": `${abs("/neighborhoods")}#webpage`,
+                url: abs("/neighborhoods"),
+              },
+              mainEntity: {
+                "@type": "Service",
+                "@id": `${abs(PATH)}#service`,
+                name: "Real Estate Agent Services in Sherman Oaks",
+                serviceType: "Real estate agent",
+                description:
+                  "Buying, selling, and investment guidance for homes in Sherman Oaks, with pricing based on real comps from each pocket on both sides of Ventura Boulevard.",
+                provider: { "@id": `${SITE_URL}/#agent` },
+                areaServed: {
+                  "@type": "Place",
+                  "@id": `${abs(PATH)}#place`,
+                  name: "Sherman Oaks",
+                  description:
+                    "A neighborhood in the central San Fernando Valley, City of Los Angeles, split by Ventura Boulevard into flat family streets to the north and hillside streets to the south.",
+                  image: abs(HERO_IMG),
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Sherman Oaks",
+                    addressRegion: "CA",
+                    postalCode: "91403",
+                    addressCountry: "US",
+                  },
+                  containedInPlace: { "@type": "City", name: "Los Angeles" },
+                  sameAs: "https://en.wikipedia.org/wiki/Sherman_Oaks,_Los_Angeles",
+                },
+              },
             },
             {
               "@type": "FAQPage",

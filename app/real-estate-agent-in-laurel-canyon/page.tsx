@@ -157,20 +157,43 @@ export default async function LaurelCanyonPage() {
             },
             {
               "@type": "WebPage",
-              "@id": abs(PATH),
+              "@id": `${abs(PATH)}#webpage`,
               url: abs(PATH),
-              name: TITLE,
-              description: DESCRIPTION,
+              name: "Real Estate Agent in Laurel Canyon | Andrew Liberty",
+              description:
+                "Real estate agent in Laurel Canyon: Andrew Liberty prices canyon homes that rarely compare using real comps, not guesswork.",
               primaryImageOfPage: abs("/images/laurel-canyon.jpg"),
-              about: { "@type": "Place", name: "Laurel Canyon, Los Angeles, CA" },
-              provider: { "@id": `${SITE_URL}/#agent` },
-            },
-            {
-              "@type": "Service",
-              serviceType: "Real estate agent",
-              provider: { "@id": `${SITE_URL}/#agent` },
-              areaServed: { "@type": "Place", name: "Laurel Canyon, Los Angeles, CA" },
-              url: abs(PATH),
+              isPartOf: {
+                "@type": "CollectionPage",
+                "@id": `${abs("/neighborhoods")}#webpage`,
+                url: abs("/neighborhoods"),
+              },
+              mainEntity: {
+                "@type": "Service",
+                "@id": `${abs(PATH)}#service`,
+                name: "Real Estate Agent Services in Laurel Canyon",
+                serviceType: "Real estate agent",
+                description:
+                  "Buying, selling, and investment guidance for canyon homes in Laurel Canyon, with pricing based on real comps for homes that rarely compare.",
+                provider: { "@id": `${SITE_URL}/#agent` },
+                areaServed: {
+                  "@type": "Place",
+                  "@id": `${abs(PATH)}#place`,
+                  name: "Laurel Canyon",
+                  description:
+                    "A wooded hillside neighborhood in the Hollywood Hills West area of Los Angeles, mostly in ZIP code 90046, with narrow winding roads, privacy, and mostly single-family homes.",
+                  image: abs("/images/laurel-canyon.jpg"),
+                  address: {
+                    "@type": "PostalAddress",
+                    addressLocality: "Los Angeles",
+                    addressRegion: "CA",
+                    postalCode: "90046",
+                    addressCountry: "US",
+                  },
+                  containedInPlace: { "@type": "City", name: "Los Angeles" },
+                  sameAs: "https://en.wikipedia.org/wiki/Laurel_Canyon,_Los_Angeles",
+                },
+              },
             },
             {
               "@type": "FAQPage",

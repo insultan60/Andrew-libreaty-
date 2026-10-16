@@ -53,7 +53,7 @@ function explain(source: "ga4" | "gsc", error?: string): string | undefined {
   if (/\((404)\)/.test(error)) {
     return source === "ga4"
       ? "Google Analytics has no property with that ID. Check GA4_PROPERTY_ID against Admin → Property details — it is the number, not the G- ID."
-      : "Search Console has no property by that name. GSC_SITE_URL must match the property exactly, e.g. sc-domain:andrewliberty.com.";
+      : "Search Console has no property by that name. GSC_SITE_URL must match the property exactly, e.g. sc-domain:andrewlibertyhomes.com.";
   }
   if (/DECODER|PEM|private key/i.test(error)) {
     return "The private key could not be read. Copy private_key from the service account JSON again, in quotes, with its literal backslash-n line breaks left as they are.";
@@ -139,7 +139,7 @@ export function gscStatus(error?: string): SourceStatus {
     {
       name: "GSC_SITE_URL",
       set: has("GSC_SITE_URL"),
-      what: "Exactly as Search Console lists it — sc-domain:andrewliberty.com for a domain property, or https://andrewliberty.com/ with the trailing slash for a URL-prefix one.",
+      what: "Exactly as Search Console lists it — sc-domain:andrewlibertyhomes.com for a domain property, or https://andrewlibertyhomes.com/ with the trailing slash for a URL-prefix one.",
     },
     {
       name: "GOOGLE_SERVICE_ACCOUNT_EMAIL",

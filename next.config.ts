@@ -6,11 +6,11 @@ const nextConfig: NextConfig = {
    *
    * Vercel gives every project a permanent <project>.vercel.app alias that
    * serves the exact same site as the real domain. Google found it, so
-   * andrew-libreaty.vercel.app and andrewliberty.com are now two complete
+   * andrew-libreaty.vercel.app and andrewlibertyhomes.com are now two complete
    * copies of one site competing with each other — and since the vercel.app
    * host is the one Google discovered on its own, it can win the URL it picks
    * to show. Every page already carries a canonical pointing at
-   * andrewliberty.com, but a canonical is a hint; this is not.
+   * andrewlibertyhomes.com, but a canonical is a hint; this is not.
    *
    * Vercel sends X-Robots-Tag: noindex on PREVIEW deployments automatically.
    * It does not send it on the production alias, which is the one indexed
@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
    *
    * The match is anchored to .vercel.app and nothing else. That direction
    * matters: an unexpected Host header falls through as indexable, which is
-   * recoverable, rather than accidentally noindexing andrewliberty.com, which
+   * recoverable, rather than accidentally noindexing andrewlibertyhomes.com, which
    * would take the whole site out of Google.
    */
   async headers() {

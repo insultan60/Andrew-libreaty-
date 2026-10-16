@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ArrowRight } from "../components/icons";
+import JsonLd from "../components/JsonLd";
+import { abs } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Neighborhoods — Andrew Liberty Team | Los Angeles Real Estate",
@@ -58,9 +60,40 @@ const GLANCE: { name: string; homes: string; bestFor: string }[] = [
   { name: "Pasadena, CA", homes: "Historic homes", bestFor: "Historic architecture and a walkable downtown" },
 ];
 
+/* The guide pages each point back here via isPartOf, so this @id has to match
+   the one they reference. Order follows the supplied schema. */
+const LISTED_AREAS = [
+  { name: "Studio City", path: "/real-estate-agent-in-studio-city", image: "/images/studio-city.jpg" },
+  { name: "Sherman Oaks", path: "/real-estate-agent-in-sherman-oaks", image: "/images/sold-sherman-oaks.jpg" },
+  { name: "Laurel Canyon", path: "/real-estate-agent-in-laurel-canyon", image: "/images/laurel-canyon.jpg" },
+  { name: "Valley Village", path: "/real-estate-agent-in-valley-village", image: "/images/sold-valley-village.jpg" },
+  { name: "Hollywood Hills", path: "/real-estate-agent-in-hollywood-hills", image: "/images/hollywood-hills.jpg" },
+];
+
+const COLLECTION = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": `${abs("/neighborhoods")}#webpage`,
+  url: abs("/neighborhoods"),
+  name: "Los Angeles Neighborhood Guide",
+  description:
+    "Compare Los Angeles neighborhoods by price, home type, and lifestyle, from Studio City and Sherman Oaks to Laurel Canyon and the Hollywood Hills.",
+  mainEntity: {
+    "@type": "ItemList",
+    name: "Los Angeles neighborhoods served by Andrew Liberty",
+    numberOfItems: LISTED_AREAS.length,
+    itemListElement: LISTED_AREAS.map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      item: { "@type": "Place", name: a.name, url: abs(a.path), image: abs(a.image) },
+    })),
+  },
+};
+
 export default function NeighborhoodsPage() {
   return (
     <>
+      <JsonLd data={COLLECTION} />
       {/* ============ HERO ============ */}
       <section className="hood-hero">
         <div className="container">
