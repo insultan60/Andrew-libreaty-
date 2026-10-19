@@ -43,6 +43,11 @@ import { GTM_CONTAINER_ID } from "@/lib/site";
 
 const BARE = ["/dashboard"];
 
+/* Pages that keep the full chrome but not the "Browse Homes / Get Home Value"
+   bar pinned to the bottom of phones. The private client event page is one:
+   the bar is a pitch to a buyer, and there it sat over the sign-up form. */
+const NO_CTA_BAR = ["/bingo-and-bites"];
+
 export default function SiteChrome({
   children,
   footer,
@@ -84,7 +89,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <Header />
       <main id="main">{children}</main>
       {footer}
-      <MobileCtaBar />
+      {!NO_CTA_BAR.includes(pathname) && <MobileCtaBar />}
       <AuthModal />
       <Script
         src="https://cdn.userway.org/widget.js"
