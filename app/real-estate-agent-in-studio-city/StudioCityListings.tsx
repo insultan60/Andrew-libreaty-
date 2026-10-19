@@ -55,8 +55,8 @@ export default function StudioCityListings({
           <span className="sc-eyebrow">LISTINGS</span>
           <h2 className="sc-title">Studio City Homes for Sale and Recently Sold</h2>
           <p className="sc-sub">
-            Andrew&apos;s Studio City listings straight from the MLS: homes on the market now, followed by
-            recent sales. Select any home to view photos, price, beds, baths, and square footage.
+            Browse homes for sale in Studio City, CA from my MLS feed, followed by recent sales.
+            Select any home to see photos, price, beds, baths, and square footage.
           </p>
         </div>
 

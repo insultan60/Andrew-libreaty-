@@ -20,9 +20,11 @@ import { inArea } from "@/lib/areas";
 export const revalidate = 900;
 
 const PATH = "/real-estate-agent-in-studio-city";
-const TITLE = "Studio City Neighborhood Guide & Real Estate | Andrew Liberty";
+/* Title and description from the October 2026 content brief (49 and 145
+   characters). The WebPage node in the JSON-LD below carries the same pair. */
+const TITLE = "Real Estate Agent in Studio City | Andrew Liberty";
 const DESCRIPTION =
-  "Comprehensive Studio City neighborhood guide. Explore micro-neighborhoods from Colfax Meadows to Wrightwood Estates, current market data, housing inventory, buyer and seller advice from Andrew Liberty.";
+  "Real estate agent in Studio City: Andrew Liberty helps buyers, sellers, and investors with local knowledge, housing types, and market conditions.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -44,6 +46,34 @@ export const metadata: Metadata = {
     images: ["/images/studio-city.jpg"],
   },
 };
+
+const IcPin = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z" /><circle cx="12" cy="9.5" r="2.5" /></svg>
+);
+const IcChart = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>
+);
+const IcShake = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m11 17 2 2a1.4 1.4 0 0 0 2-2" /><path d="m14 14 2.5 2.5a1.4 1.4 0 0 0 2-2l-3.9-3.9a2.8 2.8 0 0 0-4 0l-.9.9a1.4 1.4 0 0 1-2-2l2.8-2.8a4.8 4.8 0 0 1 5.7-.8l.5.3a3 3 0 0 0 2 .4H21" /><path d="m21 3 1 11h-2M3 3 2 14l6.5 6.5a1.4 1.4 0 0 0 2-2M3 4h8" /></svg>
+);
+
+const WHY_POINTS = [
+  {
+    Icon: IcPin,
+    title: "Local roots",
+    text: "My office is on Ventura Place. My recent Studio City sales run from a $775,000 condo to a $3.8 million home.",
+  },
+  {
+    Icon: IcChart,
+    title: "Clear numbers",
+    text: "I started in commercial real estate, so I check the numbers behind every deal and show you the sales behind every price.",
+  },
+  {
+    Icon: IcShake,
+    title: "Strong negotiation",
+    text: "I am a Certified Real Estate Negotiation Expert, RealTrends Verified, and a Los Angeles Magazine Real Estate All-Star.",
+  },
+];
 
 export default async function StudioCityPage() {
   // Only the Studio City subset goes to the client, not the whole feed.
@@ -68,9 +98,8 @@ export default async function StudioCityPage() {
               "@type": "WebPage",
               "@id": `${abs(PATH)}#webpage`,
               url: abs(PATH),
-              name: "Real Estate Agent in Studio City | Andrew Liberty",
-              description:
-                "Real estate agent in Studio City: Andrew Liberty helps buyers, sellers, and investors with local knowledge, housing types, and market conditions.",
+              name: TITLE,
+              description: DESCRIPTION,
               primaryImageOfPage: abs("/images/studio-city.jpg"),
               isPartOf: {
                 "@type": "CollectionPage",
@@ -155,14 +184,15 @@ export default async function StudioCityPage() {
               NEIGHBORHOOD GUIDE · STUDIO CITY
             </span>
             <h1 className="sc-hero-title">
-              Real Estate Agent in Studio City
+              Most Experienced Real Estate Agent
               <br />
-              <em>Who Knows the Streets</em>
+              <em>in Studio City</em>
             </h1>
             <p className="sc-hero-desc">
-              Studio City isn&apos;t one market. Explore its neighborhoods, housing stock,
-              current conditions and what buyers and sellers should understand before making
-              a move — then work with someone who knows the block, not just the ZIP code.
+              Hiring a real estate agent in Studio City? Pick one who knows the block, not just
+              the ZIP code. Studio City has many small markets, and the right price depends on
+              your street. As one of the real estate agents in Studio City, CA, I price by pocket,
+              negotiate with proof, and explain every step in plain words.
             </p>
             <div className="sc-hero-ctas">
               <Link href="/home-search?area=studio-city" className="btn-gold">
@@ -192,8 +222,9 @@ export default async function StudioCityPage() {
                 <span className="sc-hero-card-tag">BUYING</span>
                 <h2>Buying in Studio City</h2>
                 <p>
-                  Understand the pockets, home types, school boundaries and what current inventory
-                  actually looks like.
+                  I show you what your budget really buys: which pocket, which home type, and which
+                  school zone. Then I negotiate so you pay a fair price. Condos often start in the
+                  $600,000s to $700,000s, and houses often start near $1 million.
                 </p>
               </div>
               <span className="sc-hero-card-link">
@@ -206,8 +237,8 @@ export default async function StudioCityPage() {
                 <span className="sc-hero-card-tag">SELLING</span>
                 <h2>Selling in Studio City</h2>
                 <p>
-                  Valuation, preparation, positioning and pricing against real neighborhood
-                  comparables — not citywide averages.
+                  Want to sell a house in Studio City? I start with a free home valuation based on
+                  sales from your own streets.
                 </p>
               </div>
               <span className="sc-hero-card-link">
@@ -220,8 +251,9 @@ export default async function StudioCityPage() {
                 <span className="sc-hero-card-tag">INVESTING</span>
                 <h2>Investing in Studio City</h2>
                 <p>
-                  Income property, small multifamily and development sites evaluated on
-                  fundamentals and real numbers.
+                  I started in commercial real estate, so I run the numbers first: rents, costs,
+                  rules, and resale value. I look at duplexes, small apartment buildings, and
+                  development sites near the boulevard.
                 </p>
               </div>
               <span className="sc-hero-card-link">
@@ -239,11 +271,10 @@ export default async function StudioCityPage() {
         <div className="container">
           <div className="sc-section-head">
             <span className="sc-eyebrow">ORIENTATION</span>
-            <h2 className="sc-title">Studio City at a Glance</h2>
+            <h2 className="sc-title">Studio City Real Estate, Street by Street</h2>
             <p className="sc-sub">
-              The short version, before the detail. Studio City sits on the southern edge of the
-              San Fernando Valley, where the flats meet the Santa Monica Mountains — and that
-              geography drives almost everything about its housing.
+              Studio City sits where the Valley flats meet the Santa Monica Mountains. That splits
+              the market into pockets, and I price each pocket on its own sales.
             </p>
           </div>
 
@@ -251,16 +282,16 @@ export default async function StudioCityPage() {
             <div className="sc-glance-card">
               <span className="sc-glance-tag">LOCATION</span>
               <p>
-                Southeast San Fernando Valley, City of Los Angeles. Bounded roughly by the
-                Hollywood Hills to the south and the LA River to the north.
+                Southeast San Fernando Valley, City of Los Angeles, just west of the Cahuenga
+                Pass. Yes, Studio City is part of LA.
               </p>
             </div>
 
             <div className="sc-glance-card">
               <span className="sc-glance-tag">PRIMARY ZIP</span>
               <p>
-                91604, with portions of 91602 and 91607 depending on the specific block and
-                boundary line.
+                91604. Some blocks sit in 91602 or 91607. I check the exact address before I pull
+                sales, because the pocket matters more than the ZIP code.
               </p>
             </div>
 
@@ -268,32 +299,36 @@ export default async function StudioCityPage() {
               <span className="sc-glance-tag">KEY CORRIDORS</span>
               <p>
                 Ventura Boulevard, Laurel Canyon Boulevard, Coldwater Canyon Avenue, Colfax
-                Avenue, Moorpark Street, Tujunga Avenue.
+                Avenue, Moorpark Street, and Tujunga Avenue. The distance to these roads moves the
+                price.
               </p>
             </div>
 
             <div className="sc-glance-card">
               <span className="sc-glance-tag">LOCAL CHARACTER</span>
               <p>
-                A walkable commercial spine along Ventura, quiet tree-lined residential flats
-                behind it, and private canyon and ridgeline streets above.
+                A walkable stretch of Ventura, quiet tree-lined streets behind it, and private
+                canyon and ridgeline streets above.
               </p>
             </div>
 
             <div className="sc-glance-card">
               <span className="sc-glance-tag">HOUSING STOCK</span>
               <p>
-                Single-family homes dominate: 1920s–40s character homes and postwar ranches in
-                the flats, mid-century and contemporary architectural homes in the hills. Condos
-                and townhomes cluster near the boulevard.
+                Mostly single-family homes. I match sales by home type, not just size: 1920s to
+                1940s character homes and ranches in the flats, mid-century and modern homes in
+                the hills, and condos near the boulevard.
               </p>
             </div>
 
+            {/* The brief also listed Woodland Hills here. It does not border
+                Studio City (it is about 12 miles west, past Sherman Oaks and
+                Encino), so it is left off rather than published as a neighbor. */}
             <div className="sc-glance-card">
               <span className="sc-glance-tag">BORDERING AREAS</span>
               <p>
-                Sherman Oaks, Valley Village, North Hollywood, Toluca Lake, Hollywood Hills,
-                Woodland Hills via Ventura.
+                Sherman Oaks, Valley Village, North Hollywood, Toluca Lake, and the Hollywood
+                Hills. If you shop in those areas too, I compare them with you.
               </p>
             </div>
           </div>
@@ -309,8 +344,8 @@ export default async function StudioCityPage() {
             <span className="sc-eyebrow">LIFESTYLE</span>
             <h2 className="sc-title">Living in Studio City: What to Know Before You Buy</h2>
             <p className="sc-sub">
-              Where a home sits relative to the boulevard, the hills and the canyon routes shapes
-              daily life more than square footage does.
+              Where a home sits next to the boulevard, the hills, and the canyon roads shapes daily
+              life and price. Here is what I check with each client.
             </p>
           </div>
 
@@ -318,10 +353,10 @@ export default async function StudioCityPage() {
 
           <div className="sc-mls-cta">
             <div>
-              <h3>See what&apos;s on the market in Studio City right now</h3>
+              <h3>Ready to see Studio City homes for sale?</h3>
               <p>
-                Search every active Studio City listing on my MLS — flats, hillside and
-                condos — with live prices and photos.
+                Search every active Studio City listing on my MLS, from condos to hillside homes.
+                When one looks right, I tell you what it should really sell for.
               </p>
             </div>
             <Link href="/home-search?area=studio-city" className="btn-gold">
@@ -340,10 +375,7 @@ export default async function StudioCityPage() {
           <div className="sc-section-head">
             <span className="sc-eyebrow">INVENTORY</span>
             <h2 className="sc-title">What Can You Buy in Studio City?</h2>
-            <p className="sc-sub">
-              Seven broad categories, each with its own buyer pool, its own pricing logic and its
-              own due diligence.
-            </p>
+            <p className="sc-sub">Seven kinds of homes. Here is how I help with each one.</p>
           </div>
 
           <div className="sc-inventory-grid">
@@ -352,8 +384,7 @@ export default async function StudioCityPage() {
                 <span className="sc-inventory-tag">MOST COMMON</span>
                 <h3>Single-Family Homes</h3>
                 <p className="sc-inventory-desc">
-                  The bulk of the market. Traditional, Spanish and ranch in the flats;
-                  contemporary and mid-century in the hills.
+                  Houses for sale in Studio City, CA often start near $1 million. I match each house to the right set of sales, so you don&rsquo;t overpay or underprice.
                 </p>
               </div>
             </div>
@@ -363,8 +394,7 @@ export default async function StudioCityPage() {
                 <span className="sc-inventory-tag">ENTRY POINT</span>
                 <h3>Condos &amp; Townhomes</h3>
                 <p className="sc-inventory-desc">
-                  Concentrated along and just off Ventura. Often the accessible way into the
-                  neighborhood.
+                  Studio City condos for sale cluster along and just off Ventura, often in the $600,000s to $700,000s. I review HOA fees, reserves, and rules before you write an offer.
                 </p>
               </div>
             </div>
@@ -374,8 +404,7 @@ export default async function StudioCityPage() {
                 <span className="sc-inventory-tag">CHARACTER</span>
                 <h3>Mid-Century Homes</h3>
                 <p className="sc-inventory-desc">
-                  Post-and-beam, walls of glass, indoor—outdoor planning. A collector category with
-                  its own dedicated buyers.
+                  Post-and-beam frames, walls of glass, and indoor-outdoor living. I check original wiring, windows, and records, so you know what is charming and what is cost.
                 </p>
               </div>
             </div>
@@ -385,8 +414,7 @@ export default async function StudioCityPage() {
                 <span className="sc-inventory-tag">DESIGN-LED</span>
                 <h3>Modern &amp; Architectural</h3>
                 <p className="sc-inventory-desc">
-                  Ground-up contemporary builds and significant architectural remodels, mostly in
-                  the hills.
+                  New builds and big remodels, mostly in the hills. I check the permits and the build quality behind the finish.
                 </p>
               </div>
             </div>
@@ -396,8 +424,7 @@ export default async function StudioCityPage() {
                 <span className="sc-inventory-tag">VIEWS</span>
                 <h3>Hillside Properties</h3>
                 <p className="sc-inventory-desc">
-                  View lots on winding streets, often with tiered or stepped construction and
-                  scenic vistas.
+                  View lots on winding streets, often built in steps. I check walls, drainage, and road access before price talks.
                 </p>
               </div>
             </div>
@@ -407,8 +434,7 @@ export default async function StudioCityPage() {
                 <span className="sc-inventory-tag">UPPER TIER</span>
                 <h3>Luxury Homes</h3>
                 <p className="sc-inventory-desc">
-                  Large new construction and estate properties, concentrated in the hillside and
-                  Longridge pockets.
+                  Large new builds and estates in the hills and the Longridge area. I price them on views, lot size, and the few true comparables.
                 </p>
               </div>
             </div>
@@ -418,8 +444,7 @@ export default async function StudioCityPage() {
                 <span className="sc-inventory-tag">INCOME</span>
                 <h3>Multifamily &amp; Income</h3>
                 <p className="sc-inventory-desc">
-                  Duplexes through small apartment buildings, primarily near the boulevard and
-                  eastern edge.
+                  Duplexes through small apartment buildings, mostly near the boulevard. I check rents, rent rules, and repair costs, and I test the numbers with my commercial background.
                 </p>
               </div>
             </div>
@@ -433,118 +458,51 @@ export default async function StudioCityPage() {
       <StudioCityListings initialListings={studioCityListings} tone="stone" />
 
       {/* ==================================================================
-          12. EVERYDAY LIFE & LOCAL ANCHORS
+          13. WHY WORK WITH ANDREW
+          From the October 2026 content brief, which drops the "Local Places
+          & Daily Rhythm" section that sat above this and replaces the Meet
+          Andrew bio with three proof points. The full bio is one click away
+          on his team page.
           ================================================================== */}
-      <section className="sc-section sc-bg-ivory" id="everyday-life">
+      <section className="sc-section sc-bg-dark" id="why-andrew">
         <div className="container">
-          <div className="sc-section-head">
-            <span className="sc-eyebrow">EVERYDAY LIFE</span>
-            <h2 className="sc-title">Local Places &amp; Daily Rhythm</h2>
-            <p className="sc-sub">The anchors people actually use week to week.</p>
+          <div className="sc-section-head text-center">
+            <span className="sc-eyebrow sc-eyebrow-light">WHY ANDREW</span>
+            <h2 className="sc-title sc-title-light">
+              Why Work With Andrew, Your <em>Studio City</em> Realtor
+            </h2>
+            <p className="sc-sub sc-sub-light">
+              People often search for the most experienced real estate agent in Studio City or the
+              most recommended real estate agent in Studio City. A title can&apos;t prove either
+              one. Proof can, and here is mine.
+            </p>
           </div>
 
-          <div className="sc-life-grid">
-            <div className="sc-life-card">
-              <span className="sc-life-tag">FOOD &amp; DRINK</span>
-              <h3>Dining</h3>
-              <p>
-                A dense independent restaurant scene along Ventura, with a second cluster on the
-                Tujunga Village strip. Sunday farmers market on Ventura Place.
-              </p>
-            </div>
-
-            <div className="sc-life-card">
-              <span className="sc-life-tag">ERRANDS</span>
-              <h3>Shopping &amp; Services</h3>
-              <p>
-                Everyday needs are covered along the boulevard — groceries, pharmacy, fitness,
-                services — with larger retail a short drive toward Sherman Oaks or Universal City.
-              </p>
-            </div>
-
-            <div className="sc-life-card">
-              <span className="sc-life-tag">OUTDOORS</span>
-              <h3>Parks &amp; Recreation</h3>
-              <p>
-                Fryman Canyon and Wilacre Park for trails, Beeman Park for the flats, and the
-                expanding LA River greenway along the northern edge.
-              </p>
-            </div>
-
-            <div className="sc-life-card">
-              <span className="sc-life-tag">ANCHORS</span>
-              <h3>Schools &amp; Institutions</h3>
-              <p>
-                LAUSD serves the area alongside charter and private options; CBS Studio Center
-                sits within the neighborhood. Attendance areas should be confirmed per address.
-              </p>
-            </div>
+          <div className="sc-why-grid">
+            {WHY_POINTS.map(({ Icon, title, text }) => (
+              <div className="sc-why-card" key={title}>
+                <span className="sc-why-icon">
+                  <Icon />
+                </span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            ))}
           </div>
-        </div>
-      </section>
 
-      {/* ==================================================================
-          13. MEET ANDREW LIBERTY & EXPERTISE
-          ================================================================== */}
-      <section className="sc-section sc-bg-dark" id="meet-andrew">
-        <div className="container">
-          <div className="sc-meet-layout">
-            <div className="sc-meet-copy">
-              <span className="sc-eyebrow sc-eyebrow-light">LOCAL EXPERTISE</span>
-              <h2 className="sc-title sc-title-light">Meet Andrew Liberty</h2>
-              <div className="sc-credentials">
-                Andrew Ruric Liberty II • CA DRE# 01965696 | Compass California, Inc. • CA DRE#
-                01991628
-              </div>
-
-              <div className="sc-meet-bio">
-                <p>
-                  Everything above is the reason I work the way I do. I&apos;m based in Studio City,
-                  and it&apos;s the market I know street by street — which pocket a house sits in,
-                  which comparable set actually applies to it, and what a buyer in that specific
-                  band is comparing it against.
-                </p>
-                <p>
-                  I&apos;m a REALTOR® and Certified Real Estate Negotiation Expert with a
-                  background in commercial real estate, which gives me a sharp eye for value on any
-                  deal — a home, an income property or a development site. I&apos;ve worked with
-                  buyers, sellers and investors here for years. I&apos;m hands-on and
-                  straightforward, and I make sure clients understand the reasoning behind every
-                  recommendation.
-                </p>
-              </div>
-
-              <div className="sc-badges-row">
-                <span className="sc-badge">Negotiation Expert (RENE)</span>
-                <span className="sc-badge">REALTOR®</span>
-                <span className="sc-badge">Residential • Investment • Development</span>
-                <span className="sc-badge">Compass • California</span>
-              </div>
-
-              <div className="sc-hero-ctas">
-                <a
-                  href="https://wa.me/13107090581"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-gold"
-                >
-                  <span>Schedule a Consultation</span>
-                  <ArrowRight />
-                </a>
-                <Link href="/team/andrew-liberty" className="btn-outline-light">
-                  <span>Meet Andrew</span>
-                </Link>
-              </div>
-            </div>
-
-            <div className="sc-meet-portrait">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/andrew-liberty.jpg"
-                alt="Andrew Liberty, Studio City Real Estate Agent"
-                loading="lazy"
-              />
-            </div>
+          <div className="sc-hero-ctas" style={{ justifyContent: "center" }}>
+            <a
+              href="https://wa.me/13107090581"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-gold"
+            >
+              <span>Schedule a Consultation</span>
+              <ArrowRight />
+            </a>
+            <Link href="/team/andrew-liberty" className="btn-outline-light">
+              <span>Meet Andrew</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -557,40 +515,38 @@ export default async function StudioCityPage() {
           <div className="sc-section-head text-center">
             <span className="sc-eyebrow">PROCESS</span>
             <h2 className="sc-title">How I Work With Clients</h2>
-            <p className="sc-sub">
-              The same clear process from first call to closing, with no surprises.
-            </p>
+            <p className="sc-sub">Six steps from first call to closing, built around your street.</p>
           </div>
 
           <div className="sc-process-grid">
             <div className="sc-process-card">
               <span className="sc-process-num">01</span>
               <h3>Consultation</h3>
-              <p>Goals, timing and options. No pressure.</p>
+              <p>We talk about your goals, your timing, and which Studio City pocket fits.</p>
             </div>
 
             <div className="sc-process-card">
               <span className="sc-process-num">02</span>
               <h3>Strategy</h3>
-              <p>Value, comps and conditions before any move.</p>
+              <p>I compare sales on your streets before any move.</p>
             </div>
 
             <div className="sc-process-card">
               <span className="sc-process-num">03</span>
               <h3>Search or Pricing</h3>
-              <p>Curated search, or a precise pricing plan.</p>
+              <p>A curated search, or a price built on your pocket&rsquo;s recent sales.</p>
             </div>
 
             <div className="sc-process-card">
               <span className="sc-process-num">04</span>
               <h3>Negotiation</h3>
-              <p>Certified expertise at every point of leverage.</p>
+              <p>Certified skill on price, repairs, and terms.</p>
             </div>
 
             <div className="sc-process-card">
               <span className="sc-process-num">05</span>
               <h3>Closing</h3>
-              <p>Escrow, inspections and paperwork handled.</p>
+              <p>Escrow, inspections, and paperwork handled.</p>
             </div>
 
             <div className="sc-process-card">
@@ -678,8 +634,8 @@ export default async function StudioCityPage() {
             <span className="sc-eyebrow sc-eyebrow-light">NEXT STEP</span>
             <h2 className="sc-title sc-title-light">Buying or Selling in Studio City?</h2>
             <p className="sc-sub sc-sub-light" style={{ margin: "0 auto 36px" }}>
-              Start with a conversation about your street, your timing and what the current market
-              means for your specific situation.
+              Tell me your street, your timing, and your goal. I&rsquo;ll tell you what the market
+              means for your next move. Free consultation. No pressure.
             </p>
             <div className="sc-hero-ctas" style={{ justifyContent: "center" }}>
               <Link href="/home-search?area=studio-city" className="btn-gold">
