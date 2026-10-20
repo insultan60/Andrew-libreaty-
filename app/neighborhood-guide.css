@@ -319,3 +319,28 @@ a.lcn-card:hover { transform: translateY(-3px); border-color: rgba(154, 108, 46,
   .lcn-table tbody th { width: auto; margin-bottom: 4px; }
   .lcn-table td::before { content: attr(data-label) ": "; font-weight: 600; color: var(--lcn-ink); }
 }
+
+/* ==========================================================================
+   Why Choose Andrew (October 2026 brief): replaces the Meet Andrew bio, as
+   on Studio City. Brand teal with three white proof cards and gold icons.
+   ========================================================================== */
+.lcn-page .lcn-why { background: var(--brand); }
+.lcn-page .lcn-why .lcn-eyebrow { color: var(--gold); }
+.lcn-page .lcn-why .lcn-title { color: #fff; }
+.lcn-page .lcn-why .lcn-title em { font-style: italic; color: var(--gold); }
+.lcn-page .lcn-why .lcn-sub { color: rgba(255, 255, 255, 0.8); max-width: 640px; margin-inline: auto; }
+.lcn-page .lcn-why-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.lcn-page .lcn-why-card { background: #fff; border-radius: var(--lcn-radius); padding: 32px 30px; color: var(--lcn-ink); }
+.lcn-page .lcn-why-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--gold); color: #fff; margin-bottom: 20px;
+}
+.lcn-page .lcn-why-icon svg { width: 24px; height: 24px; }
+.lcn-page .lcn-why-card h3 { font-size: 21px; line-height: 1.25; color: var(--lcn-ink); margin: 0 0 10px; }
+.lcn-page .lcn-why-card p { font-size: 15.5px; line-height: 1.7; color: var(--lcn-muted); margin: 0; }
+.lcn-page .lcn-why-ctas { justify-content: center; margin-top: 44px; }
+.lcn-page .lcn-why-license { margin: 22px 0 0; text-align: center; font-size: 13px; color: rgba(255, 255, 255, 0.62); }
+@media (max-width: 1024px) {
+  .lcn-page .lcn-why-grid { grid-template-columns: minmax(0, 1fr); max-width: 560px; margin-inline: auto; }
+}
