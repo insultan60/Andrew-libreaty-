@@ -69,9 +69,18 @@ async function handle(req: NextRequest, ctx: { params: Promise<{ path: string[] 
     }
   }
 
+  // The public feeds (clients/systemlinks, which /home-search asks for on
+  // every visit, and the listing feeds) are the same for everyone, so they
+  // are cached at the edge for an hour instead of costing a function run and
+  // an IDX call per visitor. Lead paths are per person and never cached.
+  const headers: Record<string, string> = { "Content-Type": result.contentType };
+  if (req.method === "GET" && result.status === 200 && path[0] === "clients") {
+    headers["Cache-Control"] = "public, max-age=0, s-maxage=3600, stale-while-revalidate=86400";
+  }
+
   return new NextResponse(nullBodyStatus ? null : result.body, {
     status: result.status,
-    headers: { "Content-Type": result.contentType },
+    headers,
   });
 }
 

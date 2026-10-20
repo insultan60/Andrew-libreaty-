@@ -65,7 +65,7 @@ const FAQS: FaqItem[] = [
   },
 ];
 
-export const revalidate = 900;
+export const revalidate = 21600;
 
 type Props = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

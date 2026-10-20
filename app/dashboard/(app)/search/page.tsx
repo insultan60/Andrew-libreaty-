@@ -5,7 +5,7 @@ import { NotLiveBanner, SectionHead, Shell } from "../../components/Chrome";
 import { BarList, Card, Stat } from "../../components/panels";
 
 export const metadata: Metadata = { title: "Google Search | Andrew Liberty Team" };
-export const revalidate = 900;
+export const revalidate = 3600;
 
 interface Props {
   searchParams: Promise<{ range?: string }>;

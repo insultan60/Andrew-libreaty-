@@ -51,9 +51,9 @@ export const metadata: Metadata = {
   },
 };
 
-/* The listings are rendered from the server-side IDX feed, cached for fifteen
-   minutes in lib/idxServer.ts; the page follows the same cadence. */
-export const revalidate = 900;
+/* The listings are rendered from the server-side IDX feed, cached for six hours
+   in lib/idxServer.ts; the page follows the same cadence. */
+export const revalidate = 21600;
 
 const START = [
   {

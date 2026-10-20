@@ -4,7 +4,7 @@ import { ListingPage, listingMetadata } from "./listingRoute";
 /** Sold and pending listings, at /<slug>. Featured listings redirect to
  *  /property/<slug>. The shared logic, and why it is shaped as it is, is in
  *  ./listingRoute.tsx. */
-export const revalidate = 900;
+export const revalidate = 21600;
 
 export async function generateMetadata({
   params,

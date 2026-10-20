@@ -6,7 +6,7 @@ import { NotLiveBanner, SectionHead, Shell } from "../../components/Chrome";
 import { Card } from "../../components/panels";
 
 export const metadata: Metadata = { title: "Pages | Andrew Liberty Team" };
-export const revalidate = 900;
+export const revalidate = 3600;
 
 interface Props {
   searchParams: Promise<{ range?: string }>;

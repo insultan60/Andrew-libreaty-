@@ -3,7 +3,7 @@ import { SITE_URL } from "@/lib/site";
 import { ALL as ALL_POSTS } from "./blog/posts";
 import { isPublished } from "./blog/bodies";
 import { fetchRawListingsServer } from "@/lib/idxServer";
-import { listingPath } from "@/lib/idx";
+import { isSold, listingPath } from "@/lib/idx";
 
 /**
  * Static routes only, as locations — no <lastmod>, <changefreq> or <priority>.
@@ -22,14 +22,17 @@ import { listingPath } from "@/lib/idx";
  *   lastmod; that is a deliberate open choice, not an oversight.
  *
  * Listing pages (/<address-slug>) come from the live IDX feed, the same
- * fifteen-minute cached copy the pages render from, so every URL listed here
+ * six-hour cached copy the pages render from, so every URL listed here
  * is one the listing page will serve rather than 404. If IDX does not answer,
  * they are simply left out of that copy of the sitemap — an incomplete
  * sitemap beats one full of URLs that may 404.
  *
  * /my-search-portal is excluded on purpose: it is a signed-in area.
  *
- * The five neighbourhood landing pages and /property/sold are included. An
+ * Sold listings and /property/sold are left out while they are noindex
+ * (October 2026); everything else below stands.
+ *
+ * The five neighbourhood landing pages are included. An
  * earlier list from the SEO consultant covered 11 URLs against the 25 this
  * site publishes and omitted exactly the pages built to rank for "real estate
  * agent in <neighbourhood>" — the ones with the most to lose from being left
@@ -53,15 +56,16 @@ const ROUTES = [
   "/real-estate-agent-in-laurel-canyon",
   "/real-estate-agent-in-valley-village",
   "/property/active",
-  "/property/sold",
+  // "/property/sold" is noindex for now, so it is left out (see its page.tsx).
 ] as const;
 
-export const revalidate = 900;
+export const revalidate = 86400;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const listings = (await fetchRawListingsServer()) ?? [];
-  // Featured listings live at /property/<slug>, the rest at /<slug>.
-  const listingPaths = [...new Set(listings.map(listingPath))];
+  // Featured listings live at /property/<slug>, the rest at /<slug>. Sold
+  // listings are noindex for now, so they are not sitemapped either.
+  const listingPaths = [...new Set(listings.filter((l) => !isSold(l)).map(listingPath))];
 
   return [
     ...ROUTES.map((path) => ({ url: `${SITE_URL}${path}` })),

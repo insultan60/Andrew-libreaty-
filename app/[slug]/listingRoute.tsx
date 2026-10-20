@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import PropertyDetailClient from "./PropertyDetailClient";
 import { fetchRawListingsServer, findListing } from "@/lib/idxServer";
-import { listingPath, toPropertyItem, type RawIdxListing } from "@/lib/idx";
+import { isSold, listingPath, toPropertyItem, type RawIdxListing } from "@/lib/idx";
 
 /**
  * Listing detail pages, shared by two routes:
@@ -39,7 +39,7 @@ export function isListingSlug(slug: string): boolean {
   return LISTING_SLUG.test(slug.toLowerCase());
 }
 
-/* The listing is now looked up on the server, from the same fifteen-minute
+/* The listing is now looked up on the server, from the same six-hour
    cached feed the property pages use (lib/idxServer.ts). Two things follow
    from that for search engines:
 
@@ -55,7 +55,7 @@ export function isListingSlug(slug: string): boolean {
    Both only apply when the feed actually loaded. If IDX is unreachable the
    page renders exactly as before and the client fetches on its own — an IDX
    outage must not turn every listing on the site into a 404. */
-/* Each route file sets `revalidate = 900` itself; Next only reads it there. */
+/* Each route file sets `revalidate = 21600` itself; Next only reads it there. */
 
 function describe(raw: RawIdxListing): { title: string; description: string; image?: string } {
   const p = toPropertyItem(raw);
@@ -97,6 +97,10 @@ export async function listingMetadata(slug: string, route: ListingRoute): Promis
     title,
     description,
     alternates: { canonical: url },
+    /* Sold listings are kept out of search for now (client request, October
+       2026). "follow" stays on so links from these pages still count. They
+       are also left out of the sitemap. Delete this line to index them again. */
+    ...(isSold(match) ? { robots: { index: false, follow: true } } : {}),
     openGraph: { title, description, url, ...(image ? { images: [image] } : {}) },
     twitter: { title, description, ...(image ? { images: [image] } : {}) },
   };

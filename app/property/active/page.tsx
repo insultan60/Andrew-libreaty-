@@ -18,8 +18,8 @@ export const metadata: Metadata = {
    receives instead of arriving seconds later from the browser — the same fix
    /home-search had for its soft-404 report. If IDX does not answer, the
    section falls back to its old client-side fetch.
-   The feed itself is cached for fifteen minutes in lib/idxServer.ts. */
-export const revalidate = 900;
+   The feed itself is cached for six hours in lib/idxServer.ts. */
+export const revalidate = 21600;
 
 export default async function ActiveListingsPage() {
   const initialListings = await fetchRawListingsServer();

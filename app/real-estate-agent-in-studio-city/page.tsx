@@ -16,8 +16,8 @@ import { fetchRawListingsServer } from "@/lib/idxServer";
 import { inArea } from "@/lib/areas";
 
 /* The listings section is rendered from the server-side IDX feed, cached for
-   fifteen minutes in lib/idxServer.ts; the page follows the same cadence. */
-export const revalidate = 900;
+   six hours in lib/idxServer.ts; the page follows the same cadence. */
+export const revalidate = 21600;
 
 const PATH = "/real-estate-agent-in-studio-city";
 /* Title and description from the October 2026 content brief (49 and 145

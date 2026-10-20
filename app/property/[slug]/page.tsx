@@ -5,7 +5,7 @@ import { ListingPage, listingMetadata } from "../../[slug]/listingRoute";
  *  emails link to. Sold and pending listings redirect to /<slug>. The static
  *  /property/active and /property/sold pages sit beside this route and take
  *  precedence over it. Shared logic: app/[slug]/listingRoute.tsx. */
-export const revalidate = 900;
+export const revalidate = 21600;
 
 export async function generateMetadata({
   params,

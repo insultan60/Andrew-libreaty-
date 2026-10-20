@@ -117,6 +117,13 @@ function statusOf(raw: RawIdxListing): "Active" | "Sold" | "Pending" {
   return "Active";
 }
 
+/** True for a closed sale. Sold listing pages are kept out of search for now
+ *  (noindex, and left out of the sitemap); see listingMetadata in
+ *  app/[slug]/listingRoute.tsx. */
+export function isSold(raw: RawIdxListing): boolean {
+  return statusOf(raw) === "Sold";
+}
+
 /** Simplifies IDX's propType/propSubType into the app's existing coarse
  *  type categories (House/Condo/Townhouse/Multi-Family/Land). */
 function simpleType(raw: RawIdxListing): string {

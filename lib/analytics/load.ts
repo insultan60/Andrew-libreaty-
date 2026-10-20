@@ -17,8 +17,8 @@ import { SITE_PAGES, normalisePath } from "@/lib/analytics/sitePages";
  * One loader for every dashboard section.
  *
  * Each section is its own route, so each one fetches independently. That is
- * cheaper than it looks: `revalidate` caches the rendered result for fifteen
- * minutes per route, so moving between sections does not re-query Google.
+ * cheaper than it looks: `revalidate` caches the rendered result for an hour
+ * per route, so moving between sections does not re-query Google.
  */
 
 export const RANGES = [7, 28, 90] as const;

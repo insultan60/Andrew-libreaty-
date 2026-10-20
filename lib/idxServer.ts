@@ -48,12 +48,11 @@ type RawIdxListResponse = { total: number; data: Record<string, RawIdxListing> }
  * route's `revalidate`. Those are one URL per address, so a crawler walking
  * them would otherwise cost two IDX calls per page and run through IDX
  * Broker's hourly limit in a single pass. With this, the whole site makes at
- * most two calls per fifteen minutes however many pages are rendered.
+ * most two calls per six hours however many pages are rendered.
  *
  * A failed or empty fetch throws inside the cached function, and
  * unstable_cache does not store a throw, so an IDX outage is retried on the
- * next render instead of being remembered as "no listings" for fifteen
- * minutes.
+ * next render instead of being remembered as "no listings" for six hours.
  */
 const cachedListings = unstable_cache(
   async (): Promise<RawIdxListing[]> => {
@@ -70,7 +69,7 @@ const cachedListings = unstable_cache(
   },
   // v2: records now carry `featured` (see listingPath); v1 entries lack it.
   ["idx-listings-v2"],
-  { revalidate: 900, tags: ["idx-listings"] }
+  { revalidate: 21600, tags: ["idx-listings"] }
 );
 
 export async function fetchRawListingsServer(): Promise<RawIdxListing[] | null> {
