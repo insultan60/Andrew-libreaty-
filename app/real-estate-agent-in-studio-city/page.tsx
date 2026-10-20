@@ -10,6 +10,9 @@ import { FAQ_ITEMS } from "./data";
 import { SITE_URL, SITE_NAME, AGENT, abs } from "@/lib/site";
 // Scoped to this page: every rule is under .sc-page, so it is loaded here
 // rather than from the root layout.
+import GuideValuationForm from "../components/GuideValuationForm";
+// The valuation block reuses the neighbourhood-guide styles (all lcn-).
+import "../neighborhood-guide.css";
 import "./studio-city.css";
 import StudioCityListings from "./StudioCityListings";
 import { fetchRawListingsServer } from "@/lib/idxServer";
@@ -605,6 +608,34 @@ export default async function StudioCityPage() {
           </div>
         </div>
       </section>
+
+      {/* ==================================================================
+          16. HOME VALUATION
+          The same valuation block and form as the Sherman Oaks guide, added
+          at the client's request. Its styles are the guide's lcn- set
+          (neighborhood-guide.css), scoped by the .lcn-page wrapper.
+          ================================================================== */}
+      <div className="lcn-page">
+        <section className="lcn-section lcn-ivory" id="valuation">
+          <div className="container lcn-split lcn-split-center">
+            <div>
+              <p className="lcn-eyebrow">Free &amp; Confidential</p>
+              <h2 className="lcn-title">Know Your Studio City Home’s Value</h2>
+              <p className="lcn-sub">
+                A home valuation built on your street and your pocket of Studio City, not a citywide
+                average. I review the closest comparable sales and tell you what, if anything, is worth
+                doing before you list.
+              </p>
+              <ul className="lcn-bullets">
+                <li>Free and no obligation</li>
+                <li>Based on real Studio City sales</li>
+                <li>Reviewed by Andrew himself</li>
+              </ul>
+            </div>
+            <GuideValuationForm place="Studio City" title="Get Your Free Studio City Home Valuation" />
+          </div>
+        </section>
+      </div>
 
       {/* ==================================================================
           17. FAQ ACCORDION

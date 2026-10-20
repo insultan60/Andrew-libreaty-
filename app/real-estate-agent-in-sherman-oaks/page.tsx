@@ -14,7 +14,8 @@ import "../neighborhood-guide.css";
  * with the copy, tags and FAQ from the October 2026 content brief
  * ("Content Optimisation Andrew Liberty", Sherman Oaks tab). As on Studio
  * City, the Meet Andrew bio is replaced by three proof points; the full bio
- * is one click away on his team page.
+ * is one click away on his team page. The Local Places section came
+ * off at the client's request.
  */
 
 const PATH = "/real-estate-agent-in-sherman-oaks";
@@ -135,13 +136,6 @@ const LIFESTYLE = [
   ["Commute and Connectivity", "The 101 and 405 freeways meet here, so Burbank, downtown, and the Westside are easier than from many Valley areas. Rush hour still slows both. I help you test your real commute."],
   ["Family Life and Schools", "Many families choose Sherman Oaks for its schools, parks, and quiet streets. I help you confirm which of the Sherman Oaks schools and LAUSD attendance zones serve each address."],
   ["Outdoor Living", "Many homes have big yards for pools, play, and outdoor dining. South-side lots add views and privacy."],
-];
-
-const EVERYDAY = [
-  ["Food and drink", "Dining", "Ventura Boulevard has restaurants and cafes along its whole length. Streets just south of it sit within walking distance."],
-  ["Errands", "Shopping and Services", "Westfield Fashion Square and the boulevard cover shopping, groceries, and daily services."],
-  ["Outdoors", "Parks in Sherman Oaks", "Van Nuys Sherman Oaks Park has a pool, gym, and ball fields. Sherman Oaks Castle Park has an arcade and mini golf. Santa Monica Mountains trails sit above the south side."],
-  ["Anchors", "Sherman Oaks Schools", "LAUSD options include Sherman Oaks Elementary, Dixie Canyon, and Riverside Drive. Private options include Notre Dame and Buckley. Confirm zones by address."],
 ];
 
 const PROCESS = [
@@ -382,31 +376,6 @@ export default async function ShermanOaksPage() {
             </p>
           </div>
           <AreaListings initialListings={listings} area="sherman-oaks" place="Sherman Oaks" />
-          <div className="lcn-after">
-            <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-dark">
-              Search All Sherman Oaks Homes
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================= EVERYDAY LIFE ========================= */}
-      <section className="lcn-section lcn-ivory">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Everyday Life</p>
-            <h2 className="lcn-title">Local Places and Daily Rhythm</h2>
-            <p className="lcn-sub">Where Sherman Oaks eats, shops, and gets outside.</p>
-          </div>
-          <div className="lcn-grid-4">
-            {EVERYDAY.map(([tag, t, d]) => (
-              <div key={t} className="lcn-card">
-                <p className="lcn-tag">{tag}</p>
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
