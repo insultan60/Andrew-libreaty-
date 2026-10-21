@@ -239,6 +239,7 @@ export default async function LaurelCanyonPage() {
         subline="Your Laurel Canyon Realtor for view homes, vintage cabins, and estates"
         intro="Laurel Canyon homes rarely resemble each other. A cabin on a wooded side street and a glass house near the ridge can sit a short drive apart and follow different rules. Choosing a real estate agent in Laurel Canyon means choosing someone who can price what has no obvious comparable."
         points={WHY}
+        meetLink={false}
       />
 
       {/* =========================== LISTINGS =========================== */}
@@ -258,6 +259,7 @@ export default async function LaurelCanyonPage() {
             area="laurel-canyon"
             place="Laurel Canyon"
             searchLabel="Search Laurel Canyon Homes for Sale"
+            mlsCard
           />
         </div>
       </section>

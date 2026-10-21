@@ -28,6 +28,7 @@ export default function AreaListings({
   area,
   place,
   searchLabel,
+  mlsCard = false,
   max = 9,
 }: {
   initialListings?: RawIdxListing[] | null;
@@ -36,6 +37,8 @@ export default function AreaListings({
   place: string;
   /** Wording for the search button; defaults to "Search All {place} Homes". */
   searchLabel?: string;
+  /** Always end the grid with the full-MLS card, and keep the button too. */
+  mlsCard?: boolean;
   max?: number;
 }) {
   const { data, loading, error } = useIdxListings(initialListings);
@@ -66,7 +69,8 @@ export default function AreaListings({
      below, which would say the same thing twice. */
   const search = `/home-search?area=${area}`;
   const row = shown.length || others.length;
-  const fill = !loading && !error && row < 3;
+  const fill = !loading && !error && (row < 3 || mlsCard);
+  const beside = row % 3;
 
   return (
     <>
@@ -85,7 +89,7 @@ export default function AreaListings({
             {others.map((p) => (
               <PropertyCard key={p.slug} p={p} href={p.href} />
             ))}
-            {fill && <MlsSearchCard href={search} place={place} beside={others.length} />}
+            {fill && <MlsSearchCard href={search} place={place} beside={beside} />}
           </div>
         </>
       ) : shown.length === 0 ? (
@@ -97,13 +101,13 @@ export default function AreaListings({
           {shown.map((p) => (
             <PropertyCard key={p.slug} p={p} href={p.href} />
           ))}
-          {fill && <MlsSearchCard href={search} place={place} beside={shown.length} />}
+          {fill && <MlsSearchCard href={search} place={place} beside={beside} />}
         </div>
       )}
 
       {/* No "reveal" class: in the browser-fetch fallback this mounts after
           GlobalEffects has snapshotted .reveal, and would stay invisible. */}
-      {!fill && (
+      {(!fill || mlsCard) && (
         <div className="area-listings-more">
           <Link href={search} className="btn btn-gold btn-magnetic">
             <span>{searchLabel ?? `Search All ${place} Homes`}</span>

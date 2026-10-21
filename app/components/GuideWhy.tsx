@@ -38,11 +38,14 @@ export default function GuideWhy({
   subline,
   intro,
   points,
+  meetLink = true,
 }: {
   /** Short line under the heading, e.g. "Your Laurel Canyon Realtor for…". */
   subline?: string;
   intro: ReactNode;
   points: WhyPoint[];
+  /** False leaves Schedule a Consultation as the only button. */
+  meetLink?: boolean;
 }) {
   return (
     <section className="lcn-section lcn-why" id="why-andrew">
@@ -68,9 +71,11 @@ export default function GuideWhy({
           <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="lcn-btn lcn-btn-light">
             Schedule a Consultation
           </a>
-          <Link href="/team/andrew-liberty" className="lcn-btn lcn-btn-outline-light">
-            Meet Andrew
-          </Link>
+          {meetLink && (
+            <Link href="/team/andrew-liberty" className="lcn-btn lcn-btn-outline-light">
+              Meet Andrew
+            </Link>
+          )}
         </div>
         <p className="lcn-why-license">
           Andrew Ruric Liberty II · CA DRE# 01965696 | Compass California, Inc. · CA DRE# 01991628
