@@ -4,20 +4,18 @@ import { ArrowRight } from "../components/icons";
 import JsonLd from "../components/JsonLd";
 import AreaListings from "../components/AreaListings";
 import GuideValuationForm from "../components/GuideValuationForm";
+import GuideWhy, { type WhyPoint } from "../components/GuideWhy";
 import { fetchRawListingsServer } from "@/lib/idxServer";
 import { SITE_URL, SITE_NAME, abs } from "@/lib/site";
 // Shared neighbourhood-guide styles; every rule is under .lcn-page.
 import "../neighborhood-guide.css";
 
 /**
- * Hollywood Hills neighbourhood guide, built to "Hollywood Hills (desktop).pdf".
- *
- * Copy is the design's. Its bracketed notes to Andrew — "[Andrew: swap in
- * current MLS figures…]", "Data as of [Month Year]", "confirm local places",
- * the Homes.com sales note — are left off the page. The design's three
- * testimonial slots are all placeholders for Hollywood Hills quotes Andrew
- * has not supplied yet, so the section shows his two general client quotes
- * under a general heading rather than labelling them as Hills clients.
+ * Hollywood Hills neighbourhood guide, built to "Hollywood Hills (desktop).pdf"
+ * with the copy, tags and FAQ from the October 2026 content brief. As on
+ * Studio City and Sherman Oaks, the Meet Andrew bio is replaced by three
+ * proof points and the Local Places section is gone (the brief skips its
+ * number 6).
  *
  * Hero photo: Venti Views on Unsplash (Unsplash License).
  */
@@ -26,9 +24,9 @@ const PATH = "/real-estate-agent-in-hollywood-hills";
 const AREA_SEARCH = "/home-search?area=hollywood-hills";
 const HERO = "/images/hollywood-hills-hero.jpg";
 
-const TITLE = "Real Estate Agent in Hollywood Hills | Knows Every View";
+const TITLE = "Hollywood Hills Real Estate Agent | Homes for Sale";
 const DESCRIPTION =
-  "Not all Hollywood Hills views are priced the same. Andrew Liberty, a real estate agent in Hollywood Hills, knows which holds value.";
+  "Looking for a Hollywood Hills real estate agent? Andrew Liberty guides buyers and sellers through canyon homes, views, and hillside rules.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -59,83 +57,77 @@ const START = [
   {
     tag: "Buying",
     title: "Buying in the Hollywood Hills",
-    body: "Every home in the Hills is different. Andrew helps you find the right one and make a smart offer, view and all.",
+    body: "Want a Hollywood house with real views? A buyer agent in Hollywood Hills, CA walks the lot with you, tests the access road, and keeps your offer honest.",
     cta: "Browse Hollywood Hills homes",
-    href: "/home-search?area=hollywood-hills",
+    href: AREA_SEARCH,
   },
   {
     tag: "Selling",
     title: "Selling in the Hollywood Hills",
-    body: "Selling here means showing off the view and the design, not just the square footage. Andrew prices on the view and the lot, not a formula.",
+    body: "A great view still needs a great price. I build yours from the view, the lot, and what comparable canyons actually sold for, starting with a free valuation.",
     cta: "Get your home value",
     href: "/home-valuation",
   },
   {
     tag: "Investing",
     title: "Investing in the Hollywood Hills",
-    body: "Homes with strong views, unique architecture, and good access tend to hold their value. Andrew studies the numbers on each lot before he suggests any investment.",
+    body: "Strong views and good access hold value. Rare architecture holds it even better. I study a lot before I suggest a purchase.",
     cta: "Explore opportunities",
     href: "/contact",
   },
 ];
 
 const GLANCE = [
-  ["Location", "Hillside neighborhoods above Hollywood, in the Santa Monica Mountains, City of Los Angeles."],
-  ["Primary ZIP", "90068. Parts of the Hills also fall in 90046 and 90069."],
-  ["Key corridors", "Mulholland Drive, Nichols Canyon Road, Beachwood Drive, Laurel Canyon Boulevard, and Sunset Boulevard at the base."],
-  ["Local character", "Winding streets, steep lots, and city views. Each canyon has its own feel."],
-  ["Housing stock", "Spanish, mid-century, storybook, and modern homes. Condos sit near the base of Runyon and Beachwood Canyons."],
-  ["Bordering areas", "Laurel Canyon, Studio City, West Hollywood, the Sunset Strip, and Griffith Park."],
+  ["Location", "Above Hollywood, across the Cahuenga Pass in the Santa Monica Mountains, inside the City of Los Angeles."],
+  ["Primary ZIP", "90068, with parts of 90046 and 90069."],
+  ["Key corridors", "Mulholland Drive on the ridge, Nichols Canyon Road, Beachwood Drive, and Laurel Canyon Boulevard. Sunset Boulevard sits at the base, and US 101 cuts through the pass."],
+  ["Local character", "Narrow, winding roads, steep lots, and city views that change from canyon to canyon."],
+  ["Housing stock", "Spanish revival homes, storybook cottages, mid-century houses, and new architectural builds. Condos cluster near the base of Runyon and Beachwood Canyons."],
+  ["Bordering areas", "Studio City, Universal City, Griffith Park, Los Feliz, Hollywood, and the Sunset Strip."],
 ];
 
-const LIFESTYLE = [
-  ["Beachwood Canyon and Hollywoodland", "Storybook cottages and stone homes sit near Griffith Park trails. The Hollywood Sign rises above the neighborhood."],
-  ["Nichols Canyon", "A quiet road with large lots and a spring-fed creek. Mid-century and Spanish homes line the way. Runyon Canyon Park sits on its east side."],
-  ["Outpost and Mount Olympus", "Outpost Estates and Mount Olympus, a 1960s planned community, offer private streets and city views."],
-  ["Bird Streets and Sunset Plaza", "The Bird Streets are an ultra-luxury area with new view estates. Sunset Plaza puts dining and shops close by."],
-  ["Streets and Getting Around", "Streets are steep and narrow, so you drive to nearly everything. Sunset Boulevard, Hollywood Boulevard, and the Cahuenga Pass link you to the rest of the city."],
-  ["Nature and Privacy", "Expect trails, tall trees, wildlife, and quiet streets, all minutes from Hollywood."],
+const CANYONS = [
+  ["Beachwood Canyon and Hollywoodland", "This is the postcard canyon. Storybook cottages and stone walls line the road beneath the Hollywood Sign, and Griffith Park trails start close to the front door. Parking and access are the first questions to ask."],
+  ["Nichols Canyon", "A single road threads a quiet canyon of mid-century and Spanish homes, with Runyon Canyon Park nearby. Lots here are generous, so a lot’s shape and privacy drive value."],
+  ["Outpost and Mount Olympus", "Outpost Estates marks the western edge of the Hills. Mount Olympus, a planned community, adds private streets and wide city views. Road access and view easements decide what a home is worth."],
+  ["Bird Streets and Sunset Plaza", "Streets named for birds climb above Sunset Plaza, where new view estates sit minutes from dining and shops. Homes here are priced on the view and the lot, with few true comparisons."],
+  ["Streets and Getting Around", "You will drive to almost everything, and the roads are narrow. Sunset, Hollywood, and Franklin sit below, Mulholland Drive runs the ridge, and US 101 runs through the Cahuenga Pass. Test the commute at rush hour before you fall in love."],
+  ["Nature and Privacy", "Trails, old trees, and wildlife are part of daily life, and a well-known mountain lion named P-22 once lived in these hills. That nature comes with fire-zone rules and brush clearance, so ask about both early."],
 ];
 
-const EVERYDAY = [
-  ["Food and drink", "Dining", "Beachwood Village and Sunset Plaza have cafes and restaurants. Hollywood and Sunset Boulevards sit minutes below the hills."],
-  ["Errands", "Everyday Errands", "Groceries and daily services sit along the base of the hills, on Sunset, Hollywood, and Franklin."],
-  ["Outdoors", "Hiking and Parks", "Runyon Canyon Park, Griffith Park, and Lake Hollywood Park offer trails and open space."],
-  ["Anchors", "Schools", "LAUSD serves the Hills, and private and charter options exist. Confirm the school for each address."],
-];
-
-const CREDENTIALS = [
-  "REALTOR®",
-  "Certified Real Estate Negotiation Expert (RENE)",
-  "RealTrends Verified and Los Angeles Magazine Real Estate All-Stars",
-  "Residential, investment, and development",
+const WHY: WhyPoint[] = [
+  { icon: "hills", title: "Reads the land", text: "Geology reports, access roads, view easements, and fire zone status come first. Beautiful photos come second." },
+  { icon: "gem", title: "Prices the rare", text: "My start in commercial real estate taught me to value property with few comparables, which describes most of the Hills." },
+  { icon: "shake", title: "Negotiates with proof", text: "I am a Certified Real Estate Negotiation Expert, RealTrends Verified, and a Los Angeles Magazine Real Estate All-Star." },
 ];
 
 const PROCESS = [
-  ["Consultation", "We talk about your goals, your timing, and what the view means to you."],
-  ["Strategy", "I compare sales from your canyon and weigh the view, lot, and access."],
-  ["Search or Pricing", "A search of view homes, or a price built on the view and the lot."],
-  ["Negotiation", "Certified skill on price, repairs, and geology findings."],
-  ["Closing", "Escrow, inspections, and reports handled."],
-  ["Ongoing", "Advice on value and improvements long after closing."],
+  ["Consultation", "We talk through your goals, your timeline, and the view you want."],
+  ["Strategy", "I map the canyons that fit and the sales that matter."],
+  ["Search or Pricing", "Tours of the right view homes, or a price built on the view and the lot."],
+  ["Negotiation", "Offers and counters backed by comps, reports, and repair findings."],
+  ["Closing", "Escrow, inspections, and geology reports kept on schedule."],
+  ["Ongoing", "Advice on value, permits, and improvements long after you close."],
 ];
 
 const QUOTES = [
-  "His professionalism, patience and expertise made purchasing a home in an incredibly difficult market seamless.",
-  "Andrew and his team made the whole process easy. We were green to everything, and he always had time to answer our questions.",
+  "My wife and I have a very high bar for anyone we work with, and without exception Andrew over-delivered. He understood our needs and thought creatively to find the right home in a competitive market.",
+  "Andrew and his team made the whole process easy. We were green to everything, and he always had time to answer our questions clearly and on time.",
 ];
 
 const FAQS = [
-  { q: "What are the Hollywood Hills known for?", a: "The Hollywood Hills are known for city views, winding canyon roads, privacy, and homes that range from cottages to estates." },
-  { q: "Where are the Hollywood Hills?", a: "The Hollywood Hills are hillside neighborhoods above Hollywood, in the Santa Monica Mountains. The main ZIP code is 90068. Parts also sit in 90046 and 90069." },
-  { q: "How much do homes cost in the Hollywood Hills?", a: "Median prices run about $1.7 million to $2.4 million, depending on the source. Condos start near $600,000. View estates in the Bird Streets reach $20 million and up." },
-  { q: "What are the main neighborhoods in the Hollywood Hills?", a: "They include Beachwood Canyon, Hollywoodland, Nichols Canyon, Outpost Estates, Mount Olympus, the Bird Streets, and Laurel Canyon." },
-  { q: "Why do Hollywood Hills homes vary so much in price?", a: "Price depends on the view, lot access, privacy, and architectural style. Two homes on the same street can differ widely in value based on these factors alone." },
-  { q: "Do I need a specialized agent for hillside properties?", a: "It helps. Hillside homes come with geology reports, access roads, and view easements that a general agent may not handle often. Local experience can prevent costly surprises." },
-  { q: "Are Hollywood Hills homes at risk of wildfire?", a: "Some are. Fire risk depends on the street, the brush, and how fire trucks reach the home. Get a fire rating and an insurance quote first." },
-  { q: "Can I build an addition on a hillside lot?", a: "Maybe. City hillside rules can limit how large a house can be. Ask for the permit history and check the rules before you plan an addition." },
-  { q: "How long does it take to sell a home in the Hollywood Hills?", a: "It varies more than in flatland neighborhoods, since these homes appeal to a smaller buyer pool. Well-priced, well-marketed homes with strong views or architecture tend to move faster." },
-  { q: "Who is the best real estate agent in the Hollywood Hills?", a: "Pick an agent with hillside experience and strong negotiation skill. Andrew Liberty is a Certified Real Estate Negotiation Expert, a REALTOR®, RealTrends Verified, and a Los Angeles Magazine Real Estate All-Star." },
+  { q: "What does a Hollywood Hills real estate agent do?", a: "Beyond the usual pricing, negotiating, and closing, a Hollywood Hills real estate agent reads the land. That means geology reports, shared roads, view easements, permit history, and fire zone status. Hillside lots also fall under the city’s Baseline Hillside Ordinance, which regulates floor area, height, and stories." },
+  { q: "How do I choose among Hollywood Hills real estate agents?", a: "Ask three hillside questions. How do you price a view with no true comparables? What do you check on a steep lot before an offer? Who handles geology and access problems when they surface? The answers show real hillside experience." },
+  { q: "Do I need a buyer agent in Hollywood Hills, CA?", a: "Most buyers do better with one. A buyer agent in Hollywood Hills, CA can spot an unstable slope, a shared-driveway dispute, or an unpermitted addition before you are committed, and can negotiate price or repairs when issues appear." },
+  { q: "Where are the Hollywood Hills?", a: "The Hollywood Hills sit above Hollywood and straddle the Cahuenga Pass in the Santa Monica Mountains, within the City of Los Angeles. US 101 runs through the pass. The main ZIP code is 90068, with parts in 90046 and 90069." },
+  { q: "What are the Hollywood Hills known for?", a: "The Hollywood Sign, canyon roads, city views, and privacy. The Hollywood Bowl and the Hollywood Reservoir also sit within the neighborhood." },
+  { q: "What are the main neighborhoods in the Hollywood Hills?", a: "They include Beachwood Canyon, Hollywoodland, Hollywood Dell, Hollywood Heights, Whitley Heights, Franklin Village, Outpost Estates, the Bird Streets, and Laurel Canyon, which includes Mount Olympus." },
+  { q: "What is the difference between homes in Hollywood and Hollywood Hills homes?", a: "Homes in Hollywood sit on the flat streets below the hills. Hollywood Hills homes sit on hillside lots, with views, more privacy, and tighter access and building rules. A Hollywood house on the flats and a hillside house above it are different purchases, even a mile apart." },
+  { q: "Where can I find Hollywood Hills homes for sale?", a: "Start with my home search page. It lists every active Hollywood Hills listing, from hillside houses to condos, with live prices and photos. The same search shows Hollywood homes for sale and homes for sale in Los Angeles, CA, and I can send new listings as they appear." },
+  { q: "How much do homes cost in the Hollywood Hills?", a: "There is no single answer. The view, the lot, the access road, privacy, and architecture all move the price, and two homes on the same street can sit far apart. For a current number, search live listings or ask for a free home valuation." },
+  { q: "Are Hollywood Hills homes at risk of wildfire?", a: "Some are. The city’s Very High Fire Hazard Severity Zone covers most of the hilly and mountainous areas of Los Angeles. Risk depends on the street, the surrounding brush, and how fire trucks reach the home. Get a fire rating and an insurance quote before you commit." },
+  { q: "Can I build an addition on a hillside lot?", a: "Sometimes. City hillside rules can limit how large a house can be. Ask for the permit history and check the rules before you plan an addition." },
+  { q: "How long does it take to sell a home in the Hollywood Hills?", a: "It varies more than in flatland neighborhoods, because these homes appeal to a smaller pool of buyers. Well-priced, well-marketed homes with strong views or architecture tend to move faster." },
 ];
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
@@ -163,9 +155,8 @@ export default async function HollywoodHillsPage() {
               "@type": "WebPage",
               "@id": `${abs(PATH)}#webpage`,
               url: abs(PATH),
-              name: "Real Estate Agent in Hollywood Hills | Andrew Liberty",
-              description:
-                "Real estate agent in Hollywood Hills: Andrew Liberty prices view homes on the view, the lot, and nearby sales, not a formula.",
+              name: "Hollywood Hills Real Estate Agent | Andrew Liberty",
+              description: DESCRIPTION,
               primaryImageOfPage: abs(HERO),
               isPartOf: {
                 "@type": "CollectionPage",
@@ -175,17 +166,17 @@ export default async function HollywoodHillsPage() {
               mainEntity: {
                 "@type": "Service",
                 "@id": `${abs(PATH)}#service`,
-                name: "Real Estate Agent Services in Hollywood Hills",
+                name: "Real Estate Agent Services in the Hollywood Hills",
                 serviceType: "Real estate agent",
                 description:
-                  "Buying, selling, and investment guidance for view homes in the Hollywood Hills, with pricing based on the view, the lot, and nearby sales.",
+                  "Buying, selling, and investment guidance for hillside homes in the Hollywood Hills, with pricing built on the view, the lot, and comparable canyon sales.",
                 provider: { "@id": `${SITE_URL}/#agent` },
                 areaServed: {
                   "@type": "Place",
                   "@id": `${abs(PATH)}#place`,
                   name: "Hollywood Hills",
                   description:
-                    "Hillside neighborhoods above Hollywood, in the Santa Monica Mountains in the City of Los Angeles, known for city views, winding canyon roads, privacy, and architecture.",
+                    "Hillside neighborhoods above Hollywood, straddling the Cahuenga Pass in the Santa Monica Mountains within the City of Los Angeles, known for canyon roads, city views, and privacy.",
                   image: abs("/images/hollywood-hills.jpg"),
                   address: {
                     "@type": "PostalAddress",
@@ -223,15 +214,14 @@ export default async function HollywoodHillsPage() {
             <span aria-hidden="true">/</span>
             <span aria-current="page">Hollywood Hills</span>
           </nav>
-          <p className="lcn-eyebrow">Neighborhood Guide · Hollywood Hills</p>
+          <p className="lcn-eyebrow">Hollywood Hills, Los Angeles</p>
           <h1 className="lcn-hero-title">
-            Real Estate Agent in Hollywood Hills <em>Who Knows the Views and the Value</em>
+            Hollywood Hills Real Estate Agent <em>Who Knows Every View</em>
           </h1>
           <p className="lcn-hero-sub">
-            The Hollywood Hills are hillside neighborhoods above Hollywood, in the Santa Monica Mountains. Typical
-            median prices run about $1.7 million to $2.4 million, and view estates cost far more. Andrew Liberty
-            helps people buy, sell, and invest here, where views, privacy, and architecture matter as much as
-            price.
+            In the Hollywood Hills, the floor plan is only half the story. The slope, the road, the sightline, and
+            the fire zone matter just as much. As a Hollywood Hills real estate agent, I read all of it before you
+            write an offer, and I price what the view is really worth.
           </p>
           <div className="lcn-ctas">
             <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-light">
@@ -249,12 +239,12 @@ export default async function HollywoodHillsPage() {
         <div className="container">
           <div className="lcn-head lcn-head-center">
             <p className="lcn-eyebrow">Start Here</p>
-            <h2 className="lcn-title">What’s the Move in the Hollywood Hills?</h2>
+            <h2 className="lcn-title">What’s Your Move in the Hollywood Hills?</h2>
             <p className="lcn-sub">Not all views are priced the same. Pick where to begin.</p>
           </div>
           <div className="lcn-grid-3">
             {START.map((c) => (
-              <a key={c.title} href={c.href} className="lcn-card lcn-start-card">
+              <a key={c.title} href={c.href} className="lcn-card lcn-card-accent lcn-start-card">
                 <p className="lcn-tag">{c.tag}</p>
                 <h3>{c.title}</h3>
                 <p>{c.body}</p>
@@ -272,11 +262,11 @@ export default async function HollywoodHillsPage() {
         <div className="container lcn-split">
           <div>
             <div className="lcn-head">
-              <p className="lcn-eyebrow">Orientation</p>
-              <h2 className="lcn-title">Hollywood Hills at a Glance</h2>
+              <p className="lcn-eyebrow">What the View Means</p>
+              <h2 className="lcn-title">Hollywood Hills Real Estate: Where the View Sets the Price</h2>
               <p className="lcn-sub">
-                The short version first. The Hills are a set of canyons and ridges, and each one has its own feel
-                and its own price.
+                The Hills are not one market. They are a string of canyons and ridges, and every one has its own
+                feel and its own price.
               </p>
             </div>
             <dl className="lcn-facts">
@@ -295,16 +285,16 @@ export default async function HollywoodHillsPage() {
         </div>
       </section>
 
-      {/* ========================== LIFESTYLE ========================== */}
+      {/* ======================= CANYON BY CANYON ======================= */}
       <section className="lcn-section lcn-ivory">
         <div className="container">
           <div className="lcn-head">
-            <p className="lcn-eyebrow">Lifestyle</p>
-            <h2 className="lcn-title">Living in the Hollywood Hills: What to Know Before You Buy</h2>
+            <p className="lcn-eyebrow">Canyon by Canyon</p>
+            <h2 className="lcn-title">Canyon by Canyon: Living in the Hollywood Hills</h2>
             <p className="lcn-sub">Your canyon shapes daily life more than square feet do.</p>
           </div>
           <ol className="lcn-rows">
-            {LIFESTYLE.map(([t, d], i) => (
+            {CANYONS.map(([t, d], i) => (
               <li key={t}>
                 <span className="lcn-num">{pad(i)}</span>
                 <h3>{t}</h3>
@@ -320,92 +310,35 @@ export default async function HollywoodHillsPage() {
         <div className="container">
           <div className="lcn-head">
             <p className="lcn-eyebrow">Listings</p>
-            <h2 className="lcn-title">Hollywood Hills Homes for Sale and Recently Sold</h2>
+            <h2 className="lcn-title">Hollywood Hills Homes for Sale: See the View, Then the Sales</h2>
             <p className="lcn-sub">
-              View homes for sale now, then recent sales. Open any listing for photos, price, beds, baths, and
-              square footage.
+              Browse Hollywood Hills homes for sale, from hillside houses to condos, pulled straight from my MLS
+              feed, with recent sales below. Open any listing for photos, price, beds, baths, and square footage.
+            </p>
+            <p className="lcn-sub">
+              Searching for Hollywood homes for sale, or a house for sale in Hollywood on the flat streets below?
+              My <Link href="/home-search">home search</Link> covers those and other homes for sale in Los
+              Angeles, CA.
             </p>
           </div>
           <AreaListings initialListings={listings} area="hollywood-hills" place="Hollywood Hills" />
         </div>
       </section>
 
-      {/* ========================= EVERYDAY LIFE ========================= */}
-      <section className="lcn-section lcn-ivory">
-        <div className="container">
-          <div className="lcn-head">
-            <p className="lcn-eyebrow">Everyday Life</p>
-            <h2 className="lcn-title">Local Places in the Hollywood Hills</h2>
-            <p className="lcn-sub">Where the Hills eat, hike, and run errands.</p>
-          </div>
-          <div className="lcn-grid-4">
-            {EVERYDAY.map(([tag, t, d]) => (
-              <div key={t} className="lcn-card">
-                <p className="lcn-tag">{tag}</p>
-                <h3>{t}</h3>
-                <p>{d}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================== MEET ANDREW ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container lcn-andrew">
-          <div className="lcn-photo lcn-photo-portrait">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/andrew-liberty.jpg" alt="Andrew Liberty, Hollywood Hills real estate agent" loading="lazy" />
-          </div>
-          <div>
-            <p className="lcn-eyebrow">Local Expertise</p>
-            <h2 className="lcn-title">Meet Your Hollywood Hills Agent</h2>
-            <p className="lcn-license">
-              Andrew Ruric Liberty II · CA DRE# 01965696 | Compass California, Inc. · CA DRE# 01991628
-            </p>
-            <p className="lcn-body">
-              I work throughout the Hollywood Hills, where every home is different, from architectural landmarks
-              to hillside view lots. I am a REALTOR®, and I earned the Certified Real Estate Negotiation Expert
-              designation. I started in commercial real estate, so I have a sharp eye for value on any property,
-              luxury or otherwise.
-            </p>
-            <p className="lcn-body">
-              I am hands-on and straightforward. I explain each step in plain words, so you feel confident whether
-              you are buying your first home or investing in a luxury property.
-            </p>
-            <p className="lcn-body">
-              My commercial real estate background helps me weigh value on landmark homes where comparable sales
-              are thin.
-            </p>
-            <ul className="lcn-bullets">
-              {CREDENTIALS.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
-            <div className="lcn-ctas">
-              <a
-                href="https://wa.me/13107090581"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="lcn-btn lcn-btn-dark"
-              >
-                Schedule a Consultation
-              </a>
-              <Link href="/team/andrew-liberty" className="lcn-btn lcn-btn-outline">
-                Meet Andrew
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ======================= WHY CHOOSE ANDREW ======================= */}
+      <GuideWhy
+        subline="Your Hollywood Hills real estate agent for hillside homes"
+        intro="Anyone can call themselves the best Hollywood Hills real estate agent. What you can check is how an agent handles a steep lot, a shared road, or a view with no true comparable. Here is how I work."
+        points={WHY}
+      />
 
       {/* ============================ PROCESS ============================ */}
       <section className="lcn-section lcn-ivory">
         <div className="container">
           <div className="lcn-head">
             <p className="lcn-eyebrow">Process</p>
-            <h2 className="lcn-title">How I Work With Hollywood Hills Clients</h2>
-            <p className="lcn-sub">Six steps from first call to closing, built around the view.</p>
+            <h2 className="lcn-title">Six Steps to Your Hollywood Hills Home</h2>
+            <p className="lcn-sub">From first call to closing, built around the view.</p>
           </div>
           <ol className="lcn-process">
             {PROCESS.map(([t, d], i) => (
@@ -447,16 +380,15 @@ export default async function HollywoodHillsPage() {
         <div className="container lcn-split lcn-split-center">
           <div>
             <p className="lcn-eyebrow">Personal Review</p>
-            <h2 className="lcn-title">Know Your Hollywood Hills Home’s Value</h2>
+            <h2 className="lcn-title">What’s Your Hollywood Hills View Worth?</h2>
             <p className="lcn-sub">
-              Automated estimates often get hillside homes wrong. Andrew reviews your property personally,
-              factoring in the view, the lot, and what is actually selling nearby, so you get a number you can
-              trust.
+              An online estimate can’t see your sightline, your road, or your retaining walls. I review your
+              property myself and give you a number built on the view, the lot, and what has sold nearby.
             </p>
             <ul className="lcn-bullets">
               <li>Free and confidential</li>
               <li>Built on the view, the lot, and nearby sales</li>
-              <li>Reviewed personally by Andrew</li>
+              <li>Reviewed by Andrew himself</li>
             </ul>
           </div>
           <GuideValuationForm place="Hollywood Hills" title="Get Your Free Hollywood Hills Home Valuation" />
@@ -468,8 +400,8 @@ export default async function HollywoodHillsPage() {
         <div className="container lcn-aside-layout">
           <div className="lcn-aside">
             <p className="lcn-eyebrow">Common Questions</p>
-            <h2 className="lcn-title">Hollywood Hills Real Estate FAQ</h2>
-            <p className="lcn-sub">Quick answers about views, hillsides, and prices.</p>
+            <h2 className="lcn-title">Hollywood Hills Real Estate Questions, Answered</h2>
+            <p className="lcn-sub">Quick answers about views, hillsides, and buying.</p>
           </div>
           <div className="lcn-qa lcn-faq">
             {FAQS.map((f) => (
@@ -488,9 +420,9 @@ export default async function HollywoodHillsPage() {
           <div className="lcn-final">
             <div>
               <p className="lcn-eyebrow">Next Step</p>
-              <h2 className="lcn-title">Buying or Selling in the Hollywood Hills?</h2>
+              <h2 className="lcn-title">Ready for Your Hollywood Hills Move?</h2>
               <p className="lcn-sub">
-                Start with a conversation about your canyon, your timing, and what the market means for you. Free
+                Tell me which canyon you have your eye on, and let’s talk about what the view is worth. Free
                 consultation. No pressure.
               </p>
             </div>

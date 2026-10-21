@@ -4,18 +4,17 @@ import { ArrowRight } from "../components/icons";
 import JsonLd from "../components/JsonLd";
 import AreaListings from "../components/AreaListings";
 import GuideValuationForm from "../components/GuideValuationForm";
+import GuideWhy, { type WhyPoint } from "../components/GuideWhy";
 import { fetchRawListingsServer } from "@/lib/idxServer";
 import { SITE_URL, SITE_NAME, abs } from "@/lib/site";
 // Shared neighbourhood-guide styles; every rule is under .lcn-page.
 import "../neighborhood-guide.css";
 
 /**
- * Valley Village neighbourhood guide, built to "Valley Village (desktop).pdf".
- *
- * Copy is the design's. Its bracketed notes to Andrew — "[Andrew: replace
- * with current MLS figures…]", "Data as of [Month Year]", "confirm local
- * places", the third testimonial slot and the extra Meet Andrew line — are
- * left off the page until he supplies the real text.
+ * Valley Village neighbourhood guide, built to "Valley Village (desktop).pdf"
+ * with the copy, tags and FAQ from the October 2026 content brief. As on
+ * Studio City and Sherman Oaks, the Meet Andrew bio is replaced by three
+ * proof points, which this brief places straight after Start Here.
  *
  * Hero photo: Alex Simpson on Unsplash (Unsplash License).
  */
@@ -24,9 +23,9 @@ const PATH = "/real-estate-agent-in-valley-village";
 const AREA_SEARCH = "/home-search?area=valley-village";
 const HERO = "/images/valley-village-hero.jpg";
 
-const TITLE = "Real Estate Agent in Valley Village | Quiet Streets Expert";
+const TITLE = "Real Estate Agent in Valley Village | Condos & Homes";
 const DESCRIPTION =
-  "Valley Village's quiet streets don't show up in a citywide search. Andrew Liberty is a real estate agent in Valley Village who knows every block.";
+  "Andrew Liberty is a Valley Village real estate agent for condos, townhomes, and ranch homes. Buy, sell, or invest with a buyer agent who knows the area.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -57,84 +56,106 @@ const START = [
   {
     tag: "Buying",
     title: "Buying in Valley Village",
-    body: "Valley Village draws families for the schools and the quiet streets. Andrew helps you compare condos and houses, so you find a home that fits how you want to live.",
+    body: "Need a buyer agent in Valley Village? I help you choose between a condo, a townhome, and a house, then negotiate with the right comparable sales behind you.",
     cta: "Browse Valley Village homes",
-    href: "/home-search?area=valley-village",
+    href: AREA_SEARCH,
   },
   {
     tag: "Selling",
     title: "Selling in Valley Village",
-    body: "Good schools and tree-lined blocks are the biggest draw. Andrew prices your home on real Valley Village sales and markets it to the families looking for exactly that.",
+    body: "Planning to sell a house in Valley Village? I start with a free valuation built on sales from your block or building, then plan the listing around your likely buyers.",
     cta: "Get your home value",
     href: "/home-valuation",
   },
   {
     tag: "Investing",
     title: "Investing in Valley Village",
-    body: "Valley Village offers steady demand without the price of its flashier neighbors. Andrew runs the real numbers before he recommends any investment.",
+    body: "Duplexes and small apartment buildings sit near the boulevards. I study rents, rules, and repair costs before you commit.",
     cta: "Explore opportunities",
     href: "/contact",
   },
 ];
 
+const WHY: WhyPoint[] = [
+  { icon: "building", title: "Knows both kinds of buildings", text: "Condos and houses play by different rules. I read HOA documents as closely as inspection reports, and I price houses by the block, not the boulevard." },
+  { icon: "chart", title: "Prices each type on its own terms", text: "My start in commercial real estate taught me to separate what a building earns or costs from how it looks. That matters for condos, duplexes, and small apartment buildings." },
+  { icon: "shake", title: "Negotiates with proof", text: "I am a Certified Real Estate Negotiation Expert, RealTrends Verified, and a Los Angeles Magazine Real Estate All-Star." },
+];
+
 const GLANCE = [
-  ["Location", "Southeast San Fernando Valley, City of Los Angeles. Roughly between Burbank Boulevard to the north and the Ventura Freeway to the south."],
-  ["Primary ZIP", "91607. MLS records also use 91601, 91602, and 91401 for nearby streets."],
-  ["Key corridors", "Magnolia Boulevard, Burbank Boulevard, Laurel Canyon Boulevard, and Coldwater Canyon Avenue."],
-  ["Local character", "Quiet, tree-lined streets, walkable pockets, and small shops along Magnolia."],
-  ["Housing stock", "A mix of condos, townhomes, single-family houses, and small apartment buildings."],
-  ["Bordering areas", "Studio City, Sherman Oaks, North Hollywood, and Valley Glen."],
+  ["Location", "A neighborhood in the City of Los Angeles, in the San Fernando Valley, north of Studio City and east of Sherman Oaks."],
+  ["Primary ZIP", "91607. Streets near the edges can fall in 91401, 91423, 91601, or 91602, so I confirm the address first."],
+  ["Key corridors", "Magnolia Boulevard, Burbank Boulevard, Laurel Canyon Boulevard, Riverside Drive, Whitsett Avenue, and Radford Avenue. The 101 freeway runs along the south edge and the 170 along the east."],
+  ["Local character", "Tree-lined residential streets, a walkable Magnolia Boulevard core, and condo buildings along the main corridors."],
+  ["Housing stock", "Single-story Spanish and ranch-style homes on residential streets. Condos, townhomes, and small apartment buildings line the boulevards."],
+  ["Bordering areas", "Studio City, Sherman Oaks, and North Hollywood."],
 ];
 
 const LIFESTYLE = [
-  ["Magnolia Boulevard and the Village Core", "Magnolia Boulevard is the commercial spine, with cafes, restaurants, and shops. Homes close to it are easy to walk from."],
-  ["Quiet Single-Family Streets", "Many streets are calm and tree-lined, with 1940s and 1950s homes. Families like the quiet and the short drive to Studio City."],
-  ["Condo and Townhome Corridors", "Buildings cluster along streets such as Burbank Boulevard, Whitsett Avenue, and Radford Avenue. They offer a lower price and low upkeep."],
-  ["Walkability and Errands", "Walk Score is about 77, which is high for a Valley neighborhood. Many errands take a short walk. Outlying streets need a car."],
-  ["Commute and Connectivity", "The 101 and 170 freeways sit nearby, so trips to Burbank, Hollywood, and downtown are short. Rush hour still slows the main boulevards."],
-  ["Family Life and Schools", "Families choose Valley Village for its quiet streets and school options, including Colfax Charter Elementary. Confirm the school for each address."],
+  ["The Quiet Residential Streets", "Spanish and ranch-style homes sit on tree-lined streets with nice-size lots, away from the boulevards.", "buyers who want a calm street and a yard."],
+  ["The Condo Corridors", "Condo and townhome buildings line the main boulevards, including Burbank Boulevard, Whitsett Avenue, and Radford Avenue.", "buyers who want less upkeep and easy access."],
+  ["Magnolia Boulevard and the Village Core", "The Valley Village name began with a small post office on Magnolia Boulevard. Today the boulevard has cafes, shops, and services within walking distance of nearby homes.", "buyers who like to walk to errands."],
+  ["Getting Around", "The 101 and 170 freeways frame the neighborhood, so Burbank, Hollywood, and downtown are close. Rush hour still slows both.", "commuters who test the route before they commit."],
+  ["Schools and Families", "Colfax Charter Elementary, Burbank Boulevard Elementary, and private schools such as Oakwood and The Country School serve local families.", "families who confirm the school zone for each address."],
+  ["Parks and Open Space", "Valley Village Park and the Tujunga Wash Greenway offer play areas and walking paths without leaving the neighborhood.", "buyers who want green space close to home."],
+];
+
+const HOME_TYPES = [
+  ["Condos in Valley Village, CA", "Condo buildings line Burbank Boulevard, Whitsett Avenue, and Radford Avenue. Read the HOA documents, the reserves, and the rental rules before you offer."],
+  ["Valley Village Townhomes", "Townhomes in Valley Village often give you more room than a condo, with shared walls and HOA dues. I compare each one with sales in the same complex."],
+  ["Ranch-Style Houses", "Single-story Spanish and ranch homes sit on tree-lined streets, many on nice-size lots."],
+  ["Duplexes and Small Apartment Buildings", "Small multifamily buildings sit near the boulevards. Rents, rules, and repair costs decide the return."],
+  ["Remodels and New Builds", "Updated and newer homes sit beside original ones. The permit history shows what was done and how."],
 ];
 
 const EVERYDAY = [
-  ["Food and drink", "Dining", "Magnolia Boulevard has cafes, restaurants, and small shops within a short walk of many homes."],
-  ["Errands", "Shopping and Services", "Groceries and daily services sit along the main boulevards, a short drive from most streets."],
-  ["Outdoors", "Parks and Recreation", "Small neighborhood parks, such as Weddington Park, offer play areas and green space."],
-  ["Anchors", "Schools", "LAUSD serves Valley Village through four elementary zones, including Colfax Charter Elementary and Burbank Boulevard Elementary. Oakwood School is a private option. Confirm by address."],
-];
-
-const CREDENTIALS = [
-  "REALTOR®",
-  "Certified Real Estate Negotiation Expert (RENE)",
-  "RealTrends Verified and Los Angeles Magazine Real Estate All-Stars",
-  "Residential, investment, and development",
+  ["Food and drink", "Dining and Errands", "Magnolia Boulevard has cafes, restaurants, and daily services. Burbank Boulevard and Laurel Canyon Boulevard add more shops close by."],
+  ["Outdoors", "Parks in Valley Village", "Valley Village Park has a play area, picnic tables, and walking paths. The Tujunga Wash Greenway runs along the western edge."],
+  ["Anchors", "Valley Village Schools", "LAUSD schools include Colfax Charter Elementary and Burbank Boulevard Elementary, and North Hollywood High School serves the area. Private options include Oakwood School, Valley Torah High School, and The Country School. Confirm the school for each address."],
+  ["Getting around", "Getting Out of Town", "The 101 and 170 freeways meet the neighborhood at its edges, with Studio City and Sherman Oaks next door."],
 ];
 
 const PROCESS = [
-  ["Consultation", "Goals, timing, and options. No pressure."],
-  ["Strategy", "Value, comps, and conditions first."],
-  ["Search or Pricing", "A curated search, or a clear pricing plan."],
-  ["Negotiation", "Certified skill at every point of leverage."],
-  ["Closing", "Escrow, inspections, and paperwork handled."],
-  ["Ongoing", "Advice on value long after closing."],
+  ["Consultation", "We talk through your goals, your budget, and whether a condo, a townhome, or a house fits."],
+  ["Strategy", "You see which streets and buildings match."],
+  ["Search or Pricing", "A short list of homes, or a price built on the right comparable sales."],
+  ["Negotiation", "Offers backed by comps and, for condos, HOA findings."],
+  ["Closing", "Escrow and inspections stay on schedule."],
+  ["Ongoing", "You have an advisor for value and improvements after you close."],
 ];
 
 const QUOTES = [
-  "His professionalism, patience and expertise made purchasing a home in an incredibly difficult market seamless.",
-  "Andrew and his team made the whole process easy. We were green to everything, and he always had time to answer our questions.",
+  "His professionalism, patience and expertise made purchasing a home in an incredibly difficult market seamless. On our first consultation he spent almost two hours explaining the process end to end.",
+  "My wife and I have a very high bar for anyone we work with, and without exception Andrew over-delivered. He understood our needs and thought creatively to find the right home in a competitive market.",
 ];
 
-const FAQS = [
-  { q: "What is Valley Village known for?", a: "Valley Village is known for its quiet, tree-lined streets, strong schools, walkable pockets, and easy access to Studio City." },
-  { q: "Where is Valley Village?", a: "Valley Village is a neighborhood in the southeast San Fernando Valley, in the City of Los Angeles. It sits between Studio City, Sherman Oaks, and North Hollywood." },
-  { q: "How much do homes cost in Valley Village?", a: "Median prices run about $1.1 million to $1.4 million, depending on the source. Condos and townhomes start near $600,000. Single-family houses range from about $900,000 to $2.5 million and up." },
-  { q: "What ZIP code is Valley Village?", a: "The main ZIP code is 91607. Some MLS records also use 91601, 91602, and 91401 for nearby streets." },
-  { q: "Is Valley Village walkable?", a: "Yes. Walk Score is about 77, which is high for a Valley neighborhood. Most errands near Magnolia Boulevard take a short walk. Outlying streets need a car." },
-  { q: "Are the schools good in Valley Village?", a: "Valley Village is known for strong schools, including Colfax Charter Elementary. LAUSD serves the area through four elementary zones, and Oakwood School is a private option. Confirm the school for each address." },
-  { q: "Should I buy a condo or a house in Valley Village?", a: "Condos suit buyers who want a lower price and low upkeep. Houses suit buyers who want a yard and more room. Compare the full monthly cost, including HOA fees." },
-  { q: "Is Valley Village a good place to invest?", a: "It can be. Condos, duplexes, and small apartment buildings give several ways in. Check rents, rent rules, and repair costs for each property." },
-  { q: "Is it easy to commute from Valley Village?", a: "Yes, compared with many Valley areas. The 101 and 170 freeways sit nearby, so trips to Burbank, Hollywood, and downtown are short. Rush hour still slows the main boulevards." },
-  { q: "Who is the best real estate agent in Valley Village?", a: "Choose an agent with local comps and real negotiation skill. Andrew Liberty is a REALTOR®, a Certified Real Estate Negotiation Expert, RealTrends Verified, and a Los Angeles Magazine Real Estate All-Star." },
+const FAQ_GROUPS: { label: string; items: { q: string; a: string }[] }[] = [
+  {
+    label: "Choosing an agent",
+    items: [
+      { q: "What does a real estate agent in Valley Village do?", a: "A Valley Village real estate agent prices and markets homes, negotiates offers, and guides you through escrow. Here, the job also means knowing the difference between condo buildings, townhomes, and single-family streets, and reading HOA documents as carefully as inspection reports." },
+      { q: "How do I choose among real estate agents in Valley Village, CA?", a: "Ask whether the agent works condos and houses equally. Ask how they review HOA documents and which comparable sales they would use for your home. A good Valley Village Realtor answers with specifics, not slogans." },
+      { q: "Do I need a buyer agent in Valley Village?", a: "It helps. A buyer agent in Valley Village reviews HOA finances, rental rules, and permit history before you commit, and negotiates when issues appear." },
+    ],
+  },
+  {
+    label: "Buying here",
+    items: [
+      { q: "Where can I find Valley Village homes for sale?", a: "Start with my home search page. It shows every active Valley Village listing, from condos to ranch homes, with live prices and photos. It also covers Valley Village houses for sale on the quiet residential streets, and I can send new listings as they appear." },
+      { q: "Are there condos for sale in Valley Village?", a: "Yes, and they are a large part of the neighborhood. Valley Village condos for sale cluster along the main corridors, such as Burbank Boulevard, Whitsett Avenue, and Radford Avenue. Condos in Valley Village, CA come with HOA dues, so compare the monthly cost, not just the price." },
+      { q: "Are there townhomes in Valley Village?", a: "Yes. Valley Village townhomes sit among the condo buildings and near the boulevards. Townhomes in Valley Village usually carry HOA dues, so I compare each one with recent sales in the same complex." },
+      { q: "What should I check before buying a Valley Village condo?", a: "Read the HOA budget, the reserve fund, the rental rules, and any planned special assessments. Ask about parking and pet rules too. I will review these documents with you before you make an offer." },
+    ],
+  },
+  {
+    label: "Selling here",
+    items: [
+      { q: "What should I do first to sell a house in Valley Village?", a: "Start with a free valuation based on recent sales on your own block. Then plan repairs, photos, and timing around the buyers a Valley Village house attracts. I can walk you through each step in a short meeting." },
+      { q: "How can I find my Valley Village home value?", a: "Look at sales from your own block or building, then adjust for condition and updates. Online estimates miss those details. A free personal review from me includes them." },
+    ],
+  },
 ];
+const FAQS = FAQ_GROUPS.flatMap((g) => g.items);
 
 const pad = (i: number) => String(i + 1).padStart(2, "0");
 
@@ -162,8 +183,7 @@ export default async function ValleyVillagePage() {
               "@id": `${abs(PATH)}#webpage`,
               url: abs(PATH),
               name: "Real Estate Agent in Valley Village | Andrew Liberty",
-              description:
-                "Real estate agent in Valley Village: Andrew Liberty helps buyers, sellers, and investors find the right street and the right price.",
+              description: DESCRIPTION,
               primaryImageOfPage: abs(HERO),
               isPartOf: {
                 "@type": "CollectionPage",
@@ -176,14 +196,14 @@ export default async function ValleyVillagePage() {
                 name: "Real Estate Agent Services in Valley Village",
                 serviceType: "Real estate agent",
                 description:
-                  "Buying, selling, and investment guidance for condos, townhomes, and houses in Valley Village, with pricing based on sales on your street or in your building.",
+                  "Buying, selling, and investment guidance for condos, townhomes, and houses in Valley Village, with pricing based on sales from your block or your building.",
                 provider: { "@id": `${SITE_URL}/#agent` },
                 areaServed: {
                   "@type": "Place",
                   "@id": `${abs(PATH)}#place`,
                   name: "Valley Village",
                   description:
-                    "A quiet, walkable neighborhood in the southeast San Fernando Valley, City of Los Angeles, with tree-lined streets and a mix of condos, townhomes, and single-family homes.",
+                    "A neighborhood in the City of Los Angeles, in the San Fernando Valley, with tree-lined residential streets of ranch homes and condo corridors along its main boulevards.",
                   image: abs("/images/sold-valley-village.jpg"),
                   address: {
                     "@type": "PostalAddress",
@@ -221,14 +241,14 @@ export default async function ValleyVillagePage() {
             <span aria-hidden="true">/</span>
             <span aria-current="page">Valley Village</span>
           </nav>
-          <p className="lcn-eyebrow">Neighborhood Guide · Valley Village</p>
+          <p className="lcn-eyebrow">Valley Village, Los Angeles</p>
           <h1 className="lcn-hero-title">
-            Real Estate Agent in Valley Village <em>Who Knows Its Quiet Streets</em>
+            Real Estate Agent in Valley Village: <em>Condos to Ranch Homes</em>
           </h1>
           <p className="lcn-hero-sub">
-            Valley Village is a quiet, walkable neighborhood in the southeast San Fernando Valley, in the City of
-            Los Angeles. It sits between Studio City, Sherman Oaks, and North Hollywood. Typical median prices run
-            about $1.1 million to $1.4 million. Andrew Liberty helps people buy, sell, and invest here.
+            Valley Village packs quiet ranch-home streets and busy condo corridors into one small neighborhood. As
+            a real estate agent in Valley Village, I help you buy, sell, or invest on the right side of that
+            difference.
           </p>
           <div className="lcn-ctas">
             <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-light">
@@ -246,12 +266,12 @@ export default async function ValleyVillagePage() {
         <div className="container">
           <div className="lcn-head lcn-head-center">
             <p className="lcn-eyebrow">Start Here</p>
-            <h2 className="lcn-title">What’s the Move in Valley Village?</h2>
-            <p className="lcn-sub">Quiet streets, strong schools, and a mix of homes. Pick where to begin.</p>
+            <h2 className="lcn-title">What’s Your Move in Valley Village?</h2>
+            <p className="lcn-sub">Condo, townhome, or house? Pick where to begin.</p>
           </div>
           <div className="lcn-grid-3">
             {START.map((c) => (
-              <a key={c.title} href={c.href} className="lcn-card lcn-start-card">
+              <a key={c.title} href={c.href} className="lcn-card lcn-card-accent lcn-start-card">
                 <p className="lcn-tag">{c.tag}</p>
                 <h3>{c.title}</h3>
                 <p>{c.body}</p>
@@ -264,16 +284,23 @@ export default async function ValleyVillagePage() {
         </div>
       </section>
 
+      {/* ======================= WHY CHOOSE ANDREW ======================= */}
+      <GuideWhy
+        subline="Your Valley Village Realtor for condos, townhomes, and houses"
+        intro="Valley Village is compact, and its housing is mixed. A condo on Burbank Boulevard and a ranch home two blocks away follow different rules and attract different buyers. Choosing a real estate agent in Valley Village means choosing someone who can speak to both."
+        points={WHY}
+      />
+
       {/* ========================= AT A GLANCE ========================= */}
       <section className="lcn-section lcn-stone">
         <div className="container lcn-split">
           <div>
             <div className="lcn-head">
-              <p className="lcn-eyebrow">Orientation</p>
-              <h2 className="lcn-title">Valley Village at a Glance</h2>
+              <p className="lcn-eyebrow">Two Personalities</p>
+              <h2 className="lcn-title">Valley Village Real Estate: Quiet Streets and Busy Corridors</h2>
               <p className="lcn-sub">
-                The short version first. Valley Village is a small, quiet neighborhood where condos, townhomes,
-                and single-family streets sit side by side.
+                Valley Village is small, but it does not live like one market. Where a home sits decides who buys
+                it and what it is worth.
               </p>
             </div>
             <dl className="lcn-facts">
@@ -297,43 +324,69 @@ export default async function ValleyVillagePage() {
         <div className="container">
           <div className="lcn-head">
             <p className="lcn-eyebrow">Lifestyle</p>
-            <h2 className="lcn-title">Living in Valley Village: What to Know Before You Buy</h2>
-            <p className="lcn-sub">Your street and your building shape daily life more than square feet do.</p>
+            <h2 className="lcn-title">Living in Valley Village: Streets, Corridors, and Village Life</h2>
+            <p className="lcn-sub">Six parts of daily life that shape what you buy.</p>
           </div>
-          <ol className="lcn-rows">
-            {LIFESTYLE.map(([t, d], i) => (
-              <li key={t}>
+          <div className="lcn-grid-3">
+            {LIFESTYLE.map(([t, d, best], i) => (
+              <div key={t} className="lcn-card lcn-step-card">
                 <span className="lcn-num">{pad(i)}</span>
                 <h3>{t}</h3>
                 <p>{d}</p>
-              </li>
+                <p className="lcn-best">
+                  <strong>Best for:</strong> {best}
+                </p>
+              </div>
             ))}
-          </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* ========================== HOME TYPES ========================== */}
+      <section className="lcn-section lcn-stone">
+        <div className="container">
+          <div className="lcn-head">
+            <p className="lcn-eyebrow">What You Can Buy</p>
+            <h2 className="lcn-title">Valley Village Condos for Sale, and What Else You Can Buy</h2>
+            <p className="lcn-sub">
+              Valley Village is a condo-friendly neighborhood. Most buyers start by choosing between a condo, a
+              townhome, and a house.
+            </p>
+          </div>
+          <div className="lcn-grid-3">
+            {HOME_TYPES.map(([t, d]) => (
+              <div key={t} className="lcn-card">
+                <h3>{t}</h3>
+                <p>{d}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* =========================== LISTINGS =========================== */}
-      <section className="lcn-section lcn-stone" id="listings">
+      <section className="lcn-section lcn-ivory" id="listings">
         <div className="container">
           <div className="lcn-head">
             <p className="lcn-eyebrow">Listings</p>
             <h2 className="lcn-title">Valley Village Homes for Sale and Recently Sold</h2>
             <p className="lcn-sub">
-              See homes on the market now, followed by recent sales. Select any home to view photos, price,
-              beds, baths, and square footage.
+              Browse Valley Village homes for sale from my MLS feed, from condos to single-family houses, with
+              recent sales below. Looking for homes for sale in Valley Village, CA? Start with the live listings.
+              Open any listing for photos, price, beds, baths, and square footage.
             </p>
           </div>
           <AreaListings initialListings={listings} area="valley-village" place="Valley Village" />
         </div>
       </section>
 
-      {/* ========================= EVERYDAY LIFE ========================= */}
-      <section className="lcn-section lcn-ivory">
+      {/* ===================== COFFEE, PARKS, ERRANDS ===================== */}
+      <section className="lcn-section lcn-stone">
         <div className="container">
           <div className="lcn-head">
-            <p className="lcn-eyebrow">Everyday Life</p>
-            <h2 className="lcn-title">Local Places and Daily Rhythm</h2>
-            <p className="lcn-sub">The places people use week to week.</p>
+            <p className="lcn-eyebrow">Around the Neighborhood</p>
+            <h2 className="lcn-title">Coffee, Parks, and Errands in Valley Village</h2>
+            <p className="lcn-sub">Where Valley Village eats, walks, and learns.</p>
           </div>
           <div className="lcn-grid-4">
             {EVERYDAY.map(([tag, t, d]) => (
@@ -347,55 +400,13 @@ export default async function ValleyVillagePage() {
         </div>
       </section>
 
-      {/* ========================== MEET ANDREW ========================== */}
-      <section className="lcn-section lcn-stone">
-        <div className="container lcn-andrew">
-          <div className="lcn-photo lcn-photo-portrait">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/andrew-liberty.jpg" alt="Andrew Liberty, Valley Village real estate agent" loading="lazy" />
-          </div>
-          <div>
-            <p className="lcn-eyebrow">Local Expertise</p>
-            <h2 className="lcn-title">Meet Andrew Liberty</h2>
-            <p className="lcn-license">
-              Andrew Ruric Liberty II · CA DRE# 01965696 | Compass California, Inc. · CA DRE# 01991628
-            </p>
-            <p className="lcn-body">
-              I work throughout Valley Village, where good schools and quiet, tree-lined streets matter more to
-              most buyers than anything flashy. I am a REALTOR® and a Certified Real Estate Negotiation Expert. I
-              started in commercial real estate, so I analyze condos, multi-unit buildings, and houses with the
-              same careful eye.
-            </p>
-            <p className="lcn-body">I explain each step in plain words. You always know what you are buying or selling.</p>
-            <ul className="lcn-bullets">
-              {CREDENTIALS.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
-            <div className="lcn-ctas">
-              <a
-                href="https://wa.me/13107090581"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="lcn-btn lcn-btn-dark"
-              >
-                Schedule a Consultation
-              </a>
-              <Link href="/team/andrew-liberty" className="lcn-btn lcn-btn-outline">
-                Meet Andrew
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ============================ PROCESS ============================ */}
       <section className="lcn-section lcn-ivory">
         <div className="container">
           <div className="lcn-head">
             <p className="lcn-eyebrow">Process</p>
-            <h2 className="lcn-title">How I Work With Clients</h2>
-            <p className="lcn-sub">The same clear steps from first call to closing.</p>
+            <h2 className="lcn-title">Six Steps From First Call to Closing</h2>
+            <p className="lcn-sub">What you no longer have to worry about.</p>
           </div>
           <ol className="lcn-process">
             {PROCESS.map(([t, d], i) => (
@@ -415,6 +426,7 @@ export default async function ValleyVillagePage() {
           <div className="lcn-head">
             <p className="lcn-eyebrow">Client Proof</p>
             <h2 className="lcn-title">What Clients Say About Working With Andrew</h2>
+            <p className="lcn-sub">What it is like to work with Andrew, in clients’ words.</p>
           </div>
           <div className="lcn-grid-2">
             {QUOTES.map((q) => (
@@ -437,14 +449,15 @@ export default async function ValleyVillagePage() {
         <div className="container lcn-split lcn-split-center">
           <div>
             <p className="lcn-eyebrow">Free &amp; Confidential</p>
-            <h2 className="lcn-title">Know Your Valley Village Home’s Value</h2>
+            <h2 className="lcn-title">Know Your Valley Village Home Value</h2>
             <p className="lcn-sub">
-              A valuation built on your street or your building, not a citywide average. Andrew reviews the
-              closest real sales and tells you what, if anything, is worth doing before you list.
+              Condos, townhomes, and houses each sell on different comparable sales, so one online estimate
+              rarely fits. I review your home personally, using sales from your building or your block, and tell
+              you what it is worth.
             </p>
             <ul className="lcn-bullets">
-              <li>Free and no obligation</li>
-              <li>Based on real Valley Village sales</li>
+              <li>Free and confidential</li>
+              <li>Based on your building or your block</li>
               <li>Reviewed by Andrew himself</li>
             </ul>
           </div>
@@ -457,16 +470,21 @@ export default async function ValleyVillagePage() {
         <div className="container lcn-aside-layout">
           <div className="lcn-aside">
             <p className="lcn-eyebrow">Common Questions</p>
-            <h2 className="lcn-title">Valley Village Real Estate FAQ</h2>
-            <p className="lcn-sub">Direct answers to what buyers and sellers ask most.</p>
+            <h2 className="lcn-title">Valley Village Real Estate Questions, Answered</h2>
+            <p className="lcn-sub">Quick answers about choosing an agent, buying, selling, and the neighborhood.</p>
           </div>
           <div className="lcn-qa lcn-faq">
-            {FAQS.map((f) => (
-              <div key={f.q}>
-                <h3>{f.q}</h3>
-                <p>{f.a}</p>
-              </div>
-            ))}
+            {FAQ_GROUPS.map((g) => [
+              <p key={g.label} className="lcn-faq-group">
+                {g.label}
+              </p>,
+              ...g.items.map((f) => (
+                <div key={f.q}>
+                  <h3>{f.q}</h3>
+                  <p>{f.a}</p>
+                </div>
+              )),
+            ])}
           </div>
         </div>
       </section>
@@ -479,8 +497,8 @@ export default async function ValleyVillagePage() {
               <p className="lcn-eyebrow">Next Step</p>
               <h2 className="lcn-title">Buying or Selling in Valley Village?</h2>
               <p className="lcn-sub">
-                Start with a conversation about your street, your timing, and what the market means for you. Free
-                consultation. No pressure.
+                Tell me whether you are looking at a condo, a townhome, or a house, and your timing. I’ll tell you
+                what the market means for your next move. Free consultation. No pressure.
               </p>
             </div>
             <div className="lcn-ctas">

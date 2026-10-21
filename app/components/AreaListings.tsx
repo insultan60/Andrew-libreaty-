@@ -27,12 +27,15 @@ export default function AreaListings({
   initialListings,
   area,
   place,
+  searchLabel,
   max = 9,
 }: {
   initialListings?: RawIdxListing[] | null;
   area: AreaKey;
   /** Display name, e.g. "Laurel Canyon". */
   place: string;
+  /** Wording for the search button; defaults to "Search All {place} Homes". */
+  searchLabel?: string;
   max?: number;
 }) {
   const { data, loading, error } = useIdxListings(initialListings);
@@ -103,7 +106,7 @@ export default function AreaListings({
       {!fill && (
         <div className="area-listings-more">
           <Link href={search} className="btn btn-gold btn-magnetic">
-            <span>Search All {place} Homes</span>
+            <span>{searchLabel ?? `Search All ${place} Homes`}</span>
             <ArrowRight />
           </Link>
         </div>
