@@ -330,6 +330,7 @@ export default async function HollywoodHillsPage() {
         subline="Your Hollywood Hills real estate agent for hillside homes"
         intro="Anyone can call themselves the best Hollywood Hills real estate agent. What you can check is how an agent handles a steep lot, a shared road, or a view with no true comparable. Here is how I work."
         points={WHY}
+        meetLink={false}
       />
 
       {/* ============================ PROCESS ============================ */}

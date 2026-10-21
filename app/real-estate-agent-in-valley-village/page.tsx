@@ -289,6 +289,7 @@ export default async function ValleyVillagePage() {
         subline="Your Valley Village Realtor for condos, townhomes, and houses"
         intro="Valley Village is compact, and its housing is mixed. A condo on Burbank Boulevard and a ranch home two blocks away follow different rules and attract different buyers. Choosing a real estate agent in Valley Village means choosing someone who can speak to both."
         points={WHY}
+        meetLink={false}
       />
 
       {/* ========================= AT A GLANCE ========================= */}
