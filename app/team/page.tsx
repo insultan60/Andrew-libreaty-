@@ -20,7 +20,7 @@ const HERO_GALLERY = [
 ];
 
 type Member = {
-  name: string; role: string; meta: string; img: string;
+  name: string; role: string; meta?: string; img: string;
   href?: string; bio?: string; specialties?: string[];
 };
 const TEAM: Member[] = [
@@ -34,9 +34,10 @@ const TEAM: Member[] = [
   /* Details and headshot from her Compass profile (compass.com/agents/
      marine-shirinian); the photo is cropped to the 391x504 the other cards use. */
   { name: "Marine Shirinian", role: "REALTOR®", meta: "License Number # 02443948", img: "/team/marine-shirinian.png" },
-  { name: "Seda Naumenko", role: "Marketing and Operations", meta: "License Number # 02246252", img: "/team/sonia-naumenko.png" },
-  { name: "Andrew Coleman", role: "Designer", meta: "License Number # 02246252", img: "/team/andrew-coleman.png" },
-  { name: "Victor Jimenez", role: "Manager", meta: "License Number # 02246252", img: "/team/victor-jimenez.png" },
+  /* No DRE line for the non-agent staff below (client request: they hold none). */
+  { name: "Seda Naumenko", role: "Marketing and Operations", img: "/team/sonia-naumenko.png" },
+  { name: "Andrew Coleman", role: "Designer", img: "/team/andrew-coleman.png" },
+  { name: "Victor Jimenez", role: "Manager", img: "/team/victor-jimenez.png" },
 ];
 
 export default function TeamPage() {
@@ -101,7 +102,7 @@ export default function TeamPage() {
                     {m.href ? <a href={m.href}>{m.name}</a> : m.name}
                   </h3>
                   <p className="team-role">{m.role}</p>
-                  <p className="team-meta">{m.meta}</p>
+                  {m.meta && <p className="team-meta">{m.meta}</p>}
                   <div className="team-contact">
                     <a
                       href="mailto:andrew.liberty@compass.com"
