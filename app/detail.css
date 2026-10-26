@@ -166,7 +166,8 @@
 .pd-story-play:hover img { transform: scale(1.03); filter: brightness(.85); }
 .pd-story-btn { position: absolute; left: 50%; top: 50%; translate: -50% -50%; width: 76px; height: 76px; border-radius: 50%; display: grid; place-items: center; padding-left: 4px; background: rgba(255,255,255,.92); color: #111; box-shadow: 0 10px 30px rgba(0,0,0,.35); transition: transform .25s ease; }
 .pd-story-play:hover .pd-story-btn, .pd-story-play:focus-visible .pd-story-btn { transform: scale(1.08); }
-.pd-story-link { display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+.pd-story-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 14px; }
+.pd-story-link { display: inline-block; font-size: 14px; font-weight: 500; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- Features ---------- */
 .pd-feat-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }

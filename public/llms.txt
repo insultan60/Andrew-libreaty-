@@ -35,6 +35,7 @@ This file helps AI assistants and search tools understand andrewlibertyhomes.com
 - [Meet the Team](https://andrewlibertyhomes.com/team): The Andrew Liberty Team and its members.
 - [Andrew Liberty (profile)](https://andrewlibertyhomes.com/team/andrew-liberty): Biography, credentials, contact details, social links and his approach ("We do not sell houses. We help people move forward.").
 - [Testimonials](https://andrewlibertyhomes.com/testimonials): Client reviews from first-time buyers and from a seller who sold while living 3,000 miles away (paginated).
+- [Client Stories](https://andrewlibertyhomes.com/client-stories): Video stories from past clients in their own words, starting with Becky, who sold her Canton Lane home in Studio City with Andrew.
 - [Contact](https://andrewlibertyhomes.com/contact): Phone, email, hours, address and a message form.
 
 ## Buying, selling and listings

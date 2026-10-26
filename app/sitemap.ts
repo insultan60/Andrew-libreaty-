@@ -48,6 +48,7 @@ const ROUTES = [
   "/team",
   "/team/andrew-liberty",
   "/testimonials",
+  "/client-stories",
   "/compass-concierge",
   "/blog",
   "/real-estate-agent-in-studio-city",

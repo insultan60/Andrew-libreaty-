@@ -22,6 +22,7 @@ const SIDE_LINKS = [
   { href: "/home-valuation", label: "Home Valuation" },
   { href: "/neighborhoods", label: "Neighborhoods" },
   { href: "/testimonials", label: "Testimonials" },
+  { href: "/client-stories", label: "Client Stories" },
   { href: "/compass-concierge", label: "Compass Concierge" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact Us" },

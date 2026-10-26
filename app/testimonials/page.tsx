@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowRight } from "../components/icons";
 
 export const metadata: Metadata = {
@@ -134,6 +135,10 @@ export default function TestimonialsPage() {
                 <span>Contact us</span>
                 <ArrowRight />
               </a>
+              <Link href="/client-stories" className="btn btn-secondary">
+                <span>Watch Client Stories</span>
+                <ArrowRight />
+              </Link>
             </div>
           </div>
         </div>

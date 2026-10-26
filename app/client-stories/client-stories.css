@@ -1,0 +1,62 @@
+/* ==========================================================================
+   Client Stories page — dark hero, then one card per story video.
+   The player itself (.pd-story-*) is styled in app/detail.css.
+   ========================================================================== */
+
+.cs-hero {
+  background: var(--dark);
+  color: var(--on-dark);
+  text-align: center;
+  padding: 72px 0 80px;
+}
+.cs-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.cs-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(44px, 5.6vw, 74px);
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  color: var(--gold-tint);
+}
+.cs-lede {
+  max-width: 640px;
+  margin: 20px auto 0;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--on-dark-muted);
+}
+
+.cs-list { padding: 80px 0 40px; }
+.cs-story {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+  padding-bottom: 64px;
+  margin-bottom: 64px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.cs-story:last-child { border-bottom: 0; margin-bottom: 0; }
+.cs-story-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(26px, 3vw, 36px);
+  line-height: 1.15;
+  color: var(--ink);
+}
+.cs-story-address { margin-top: 8px; font-size: 14px; color: var(--muted); }
+.cs-story-intro { margin-top: 18px; font-size: 15.5px; line-height: 1.8; color: var(--ink-soft); }
+.cs-story-links { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-top: 26px; }
+
+@media (max-width: 900px) {
+  .cs-hero { padding: 56px 0 60px; }
+  .cs-list { padding: 56px 0 24px; }
+  .cs-story { grid-template-columns: 1fr; gap: 28px; padding-bottom: 48px; margin-bottom: 48px; }
+}
