@@ -8,6 +8,8 @@ import MostAffordablePlacesToLiveInLosAngeles, { FAQS as AFFORDABLE_FAQS } from 
 import StudioCityVsShermanOaks, { FAQS as STUDIO_SHERMAN_FAQS } from "./studio-city-vs-sherman-oaks";
 import ProsAndConsOfRentingVsBuyingAHouse, { FAQS as RENT_VS_BUY_FAQS } from "./pros-and-cons-of-renting-vs-buying-a-house";
 import SellingAHouseInLosAngeles, { FAQS as SELL_LA_FAQS } from "./selling-a-house-in-los-angeles";
+import HouseHackingInLosAngeles, { FAQS as HOUSE_HACK_FAQS } from "./house-hacking-in-los-angeles";
+import HowToNegotiateAHousePriceInLosAngeles, { FAQS as NEGOTIATE_FAQS } from "./how-to-negotiate-a-house-price-in-los-angeles";
 
 /**
  * Slug -> article body.
@@ -29,6 +31,8 @@ export const BODIES: Record<string, ComponentType> = {
   [slugify(TITLES.studioCityVsShermanOaks)]: StudioCityVsShermanOaks,
   [slugify(TITLES.rentVsBuy)]: ProsAndConsOfRentingVsBuyingAHouse,
   [slugify(TITLES.sellLA)]: SellingAHouseInLosAngeles,
+  [slugify(TITLES.houseHackLA)]: HouseHackingInLosAngeles,
+  [slugify(TITLES.negotiateLA)]: HowToNegotiateAHousePriceInLosAngeles,
 };
 
 /**
@@ -48,6 +52,8 @@ export const FAQS_BY_SLUG: Record<string, { q: string; a: string }[]> = {
   [slugify(TITLES.studioCityVsShermanOaks)]: STUDIO_SHERMAN_FAQS,
   [slugify(TITLES.rentVsBuy)]: RENT_VS_BUY_FAQS,
   [slugify(TITLES.sellLA)]: SELL_LA_FAQS,
+  [slugify(TITLES.houseHackLA)]: HOUSE_HACK_FAQS,
+  [slugify(TITLES.negotiateLA)]: NEGOTIATE_FAQS,
 };
 
 /**

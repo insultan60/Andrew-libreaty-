@@ -44,6 +44,8 @@ export const TITLES = {
   studioCityVsShermanOaks: "Studio City vs Sherman Oaks",
   rentVsBuy: "Pros and Cons of Renting Vs Buying a House",
   sellLA: "Selling a House in Los Angeles",
+  houseHackLA: "House Hacking in Los Angeles",
+  negotiateLA: "How to Negotiate a House Price in Los Angeles",
 } as const;
 
 export function slugify(s: string): string {
@@ -92,6 +94,44 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    title: TITLES.negotiateLA,
+    excerpt:
+      "Where the room is on a Los Angeles listing, how to build an offer from adjusted comps, and why a seller credit can save more each month than a price cut at 7% rates.",
+    metaTitle: "How to Negotiate a House Price in Los Angeles",
+    metaDescription:
+      "How to negotiate a house price in Los Angeles: use current market data, smart offer terms, and credits that matter at 7% rates. By Andrew Liberty.",
+    date: "Oct 30, 2026",
+    read: "9 min read",
+    /* An agent talking a buyer through a house, from the stock artwork supplied
+       with the project, cropped to 16:10 - see the body file's header. */
+    img: "/images/blog/how-to-negotiate-a-house-price-in-los-angeles.webp",
+    imgWidth: 1600,
+    imgHeight: 1000,
+    tags: ["Buying Tips", "Negotiation", "Seller Credits", "Inspections", "Los Angeles"],
+  },
+  {
+    category: "Buying Tips",
+    /* The draft's H1 is "House Hacking in Los Angeles: A Numbers-First Guide";
+       the title is the part before the colon so slugify() gives the agreed
+       URL, /blog/house-hacking-in-los-angeles. The full SERP title is
+       metaTitle. */
+    title: TITLES.houseHackLA,
+    excerpt:
+      "Buy a home with a rentable space, live in part of it, and let a tenant cover part of the bill. A worked Valley duplex example, FHA and conventional options, and the LA rent rules to check first.",
+    metaTitle: "House Hacking in Los Angeles: A Numbers-First Guide",
+    metaDescription:
+      "House hacking in Los Angeles: see real numbers, FHA rules, rent control limits, and where it works best in the Valley. By Andrew Liberty.",
+    date: "Oct 30, 2026",
+    read: "8 min read",
+    /* A hand holding a model house, from the stock artwork supplied with the
+       project, cropped to 16:10 - see the body file's header. */
+    img: "/images/blog/house-hacking-in-los-angeles.webp",
+    imgWidth: 1600,
+    imgHeight: 1000,
+    tags: ["Buying Tips", "House Hacking", "Duplex", "Rent Control", "FHA Loans"],
+  },
   {
     category: "Selling Strategy",
     /* The draft's H1 is "Selling a House in Los Angeles: A 2026 Guide From a
