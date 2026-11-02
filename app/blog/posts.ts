@@ -26,6 +26,9 @@ export type Post = {
    */
   metaTitle?: string;
   metaDescription?: string;
+  /** The on-page headline, when it should be longer than `title` (which
+   *  also sets the slug and the card heading). */
+  h1?: string;
   tags?: string[];
 };
 
@@ -47,6 +50,7 @@ export const TITLES = {
   houseHackLA: "House Hacking in Los Angeles",
   negotiateLA: "How to Negotiate a House Price in Los Angeles",
   canIBuyLA: "Can I Buy a House in Los Angeles?",
+  buyLA: "How to Buy a House in Los Angeles",
 } as const;
 
 export function slugify(s: string): string {
@@ -95,6 +99,27 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    /* The draft's H1 is longer than the agreed URL, so `title` is the part
+       before the colon (slugify() gives /blog/how-to-buy-a-house-in-los-angeles)
+       and the full headline is `h1`. */
+    title: TITLES.buyLA,
+    h1: "How to Buy a House in Los Angeles: First-Time Buyer's Guide",
+    excerpt:
+      "Eight steps from credit check to keys, with real 2026 numbers: what $900,000 costs a month, LIPA and CalHFA help, closing costs, earnest money, inspections, escrow and the supplemental tax bill.",
+    metaTitle: "First-Time Home Buyer in Los Angeles: 2026 Guide",
+    metaDescription:
+      "How to buy a house in Los Angeles as a first-time buyer: budget, loans, down payment help, offers and escrow, from a local agent. Updated for 2026.",
+    date: "Nov 3, 2026",
+    read: "16 min read",
+    /* A buyer touring a house with an agent, from the stock artwork supplied
+       with the project, cropped to 16:10. */
+    img: "/images/blog/how-to-buy-a-house-in-los-angeles.webp",
+    imgWidth: 1600,
+    imgHeight: 1000,
+    tags: ["Buying Tips", "First-Time Buyers", "Down Payment Assistance", "Closing Costs", "Escrow"],
+  },
   {
     category: "Buying Tips",
     title: TITLES.canIBuyLA,

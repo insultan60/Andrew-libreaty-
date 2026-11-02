@@ -98,7 +98,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               <span className="bl-dot" />
               <span className="date">{post.date}</span>
             </div>
-            <h1 className="ar-title">{post.title}</h1>
+            <h1 className="ar-title">{post.h1 ?? post.title}</h1>
             <div className="ar-meta">
               <div className="ar-meta-author">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
