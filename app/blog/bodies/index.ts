@@ -10,6 +10,7 @@ import ProsAndConsOfRentingVsBuyingAHouse, { FAQS as RENT_VS_BUY_FAQS } from "./
 import SellingAHouseInLosAngeles, { FAQS as SELL_LA_FAQS } from "./selling-a-house-in-los-angeles";
 import HouseHackingInLosAngeles, { FAQS as HOUSE_HACK_FAQS } from "./house-hacking-in-los-angeles";
 import HowToNegotiateAHousePriceInLosAngeles, { FAQS as NEGOTIATE_FAQS } from "./how-to-negotiate-a-house-price-in-los-angeles";
+import CanIBuyAHouseInLosAngeles, { FAQS as CAN_I_BUY_FAQS } from "./can-i-buy-a-house-in-los-angeles";
 
 /**
  * Slug -> article body.
@@ -33,6 +34,7 @@ export const BODIES: Record<string, ComponentType> = {
   [slugify(TITLES.sellLA)]: SellingAHouseInLosAngeles,
   [slugify(TITLES.houseHackLA)]: HouseHackingInLosAngeles,
   [slugify(TITLES.negotiateLA)]: HowToNegotiateAHousePriceInLosAngeles,
+  [slugify(TITLES.canIBuyLA)]: CanIBuyAHouseInLosAngeles,
 };
 
 /**
@@ -54,6 +56,7 @@ export const FAQS_BY_SLUG: Record<string, { q: string; a: string }[]> = {
   [slugify(TITLES.sellLA)]: SELL_LA_FAQS,
   [slugify(TITLES.houseHackLA)]: HOUSE_HACK_FAQS,
   [slugify(TITLES.negotiateLA)]: NEGOTIATE_FAQS,
+  [slugify(TITLES.canIBuyLA)]: CAN_I_BUY_FAQS,
 };
 
 /**

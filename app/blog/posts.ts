@@ -46,6 +46,7 @@ export const TITLES = {
   sellLA: "Selling a House in Los Angeles",
   houseHackLA: "House Hacking in Los Angeles",
   negotiateLA: "How to Negotiate a House Price in Los Angeles",
+  canIBuyLA: "Can I Buy a House in Los Angeles?",
 } as const;
 
 export function slugify(s: string): string {
@@ -94,6 +95,22 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    title: TITLES.canIBuyLA,
+    excerpt:
+      "Yes, with steady income, a down payment and credit a lender accepts. What you need, what the monthly cost really includes, CalHFA help for first-time buyers and seven steps to the keys.",
+    metaTitle: "Can I Buy a House in Los Angeles? Yes, Here’s How",
+    metaDescription:
+      "Can I buy a house in Los Angeles? Yes. You need steady income, a down payment, and credit a lender accepts, and help exists for first-time buyers.",
+    date: "Nov 3, 2026",
+    read: "5 min read",
+    /* The keys-on-a-railing image supplied with the draft, cropped to 16:10. */
+    img: "/images/blog/can-i-buy-a-house-in-los-angeles.webp",
+    imgWidth: 1536,
+    imgHeight: 960,
+    tags: ["Buying Tips", "First-Time Buyers", "Down Payment", "CalHFA"],
+  },
   {
     category: "Buying Tips",
     title: TITLES.negotiateLA,
