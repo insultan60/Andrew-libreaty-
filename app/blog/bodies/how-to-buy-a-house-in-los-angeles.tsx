@@ -15,8 +15,8 @@ import { Cta, ExternalLink, Steps, Table } from "./_parts";
  * weekly survey, AnnualCreditReport.com, LAHD, CalHFA, the County Assessor and
  * the California Earthquake Authority) are linked.
  *
- * Hero: a buyer touring a house with an agent, from the stock artwork supplied
- * with the project, cropped to 16:10.
+ * Hero: a couple moving into their first home, holding up the keys
+ * (Unsplash), cropped to 16:10.
  */
 
 export const FAQS: { q: string; a: string }[] = [

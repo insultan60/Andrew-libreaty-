@@ -113,9 +113,9 @@ const POSTS_RAW: RawPost[] = [
       "How to buy a house in Los Angeles as a first-time buyer: budget, loans, down payment help, offers and escrow, from a local agent. Updated for 2026.",
     date: "Nov 3, 2026",
     read: "16 min read",
-    /* A buyer touring a house with an agent, from the stock artwork supplied
-       with the project, cropped to 16:10. */
-    img: "/images/blog/how-to-buy-a-house-in-los-angeles.webp",
+    /* A couple moving into their first home, holding up the keys
+       (Unsplash), cropped to 16:10. */
+    img: "/images/blog/first-time-buyers-moving-in.webp",
     imgWidth: 1600,
     imgHeight: 1000,
     tags: ["Buying Tips", "First-Time Buyers", "Down Payment Assistance", "Closing Costs", "Escrow"],
