@@ -43,6 +43,10 @@ const FEATURE_GROUPS = [
   { key: "details", title: "Property\nDetails" },
 ] as const;
 
+/** How many photos the hero cycles through, and how long each one shows. */
+const HERO_SLIDES = 10;
+const SLIDE_MS = 5000;
+
 const EMPTY = new Set(["", "—", "-", "0"]);
 
 /** "Listed Nov 1, 2026" within the last 30 days. */
@@ -168,6 +172,14 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lightbox]);
 
+  /* ---------- Hero slideshow ---------- */
+  // The first photos crossfade in the hero; every photo is still in the
+  // lightbox and the strip. Sold listings have only the one allowed photo.
+  const slides = gallery.slice(0, HERO_SLIDES);
+  const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const nextSlide = (dir: number) => setSlide((s) => (s + dir + slides.length) % slides.length);
+
   /* ---------- Private showing request ---------- */
   const [showing, setShowing] = useState(false);
   const [showingStatus, setShowingStatus] = useState("");
@@ -187,6 +199,15 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
       document.body.style.overflow = "";
     };
   }, [showing]);
+
+  // Advance every few seconds, but not while hovered, while the gallery or
+  // showing form is open, or for visitors who prefer reduced motion.
+  useEffect(() => {
+    if (slides.length < 2 || paused || lightbox !== null || showing) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const timer = window.setInterval(() => setSlide((s) => (s + 1) % slides.length), SLIDE_MS);
+    return () => window.clearInterval(timer);
+  }, [slides.length, paused, lightbox, showing]);
 
   const openShowing = () => {
     setShowingSent(false);
@@ -291,11 +312,37 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
     <>
       {/* ============ HERO ============ */}
       <section className="sc-hero" id="overview">
-        <button type="button" className="sc-hero-media" onClick={() => openLightbox(0)} aria-label={`View photos of ${listing.address}`}>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={gallery[0]} alt={`${listing.address}, ${listing.city}`} loading="eager" />
+        <button
+          type="button"
+          className="sc-hero-media"
+          onClick={() => openLightbox(slide)}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          aria-label={`View photos of ${listing.address}`}
+        >
+          {slides.map((src, i) => (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              key={i}
+              src={src}
+              alt={i === slide ? `${listing.address}, ${listing.city}` : ""}
+              className={i === slide ? "is-active" : undefined}
+              loading={i === 0 ? "eager" : "lazy"}
+            />
+          ))}
         </button>
         <div className="sc-hero-shade" aria-hidden="true" />
+
+        {slides.length > 1 && (
+          <>
+            <button type="button" className="sc-hero-arrow is-prev" onClick={() => nextSlide(-1)} aria-label="Previous photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+            </button>
+            <button type="button" className="sc-hero-arrow is-next" onClick={() => nextSlide(1)} aria-label="Next photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
+            </button>
+          </>
+        )}
 
         <div className="sc-hero-tools">
           <button type="button" className={`sc-tool${saved ? " is-active" : ""}`} onClick={toggleSave}>
@@ -304,7 +351,10 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
           <button type="button" className="sc-tool" onClick={share}><ShareIcon />Share</button>
           <button type="button" className="sc-tool" onClick={() => window.print()}><PrintIcon />Print</button>
           {gallery.length > 1 && (
-            <button type="button" className="sc-tool" onClick={() => openLightbox(0)}><AreaIcon />{gallery.length} Photos</button>
+            <button type="button" className="sc-tool" onClick={() => openLightbox(slide)}>
+              <AreaIcon />
+              <span aria-live="polite">{slides.length > 1 ? `${slide + 1} / ${gallery.length}` : `${gallery.length} Photos`}</span>
+            </button>
           )}
         </div>
 
