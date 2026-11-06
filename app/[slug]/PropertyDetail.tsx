@@ -176,9 +176,13 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
   // The first photos crossfade in the hero; every photo is still in the
   // lightbox and the strip. Sold listings have only the one allowed photo.
   const slides = gallery.slice(0, HERO_SLIDES);
-  const [slide, setSlide] = useState(0);
+  // The photo showing, the one sliding out, and which way they move
+  // (1 = in from the right, -1 = in from the left, 0 = first paint, no motion).
+  const [slider, setSlider] = useState({ current: 0, leaving: -1, dir: 0 });
+  const slide = slider.current;
   const [paused, setPaused] = useState(false);
-  const nextSlide = (dir: number) => setSlide((s) => (s + dir + slides.length) % slides.length);
+  const nextSlide = (dir: 1 | -1) =>
+    setSlider((s) => ({ current: (s.current + dir + slides.length) % slides.length, leaving: s.current, dir }));
 
   /* ---------- Private showing request ---------- */
   const [showing, setShowing] = useState(false);
@@ -205,7 +209,10 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
   useEffect(() => {
     if (slides.length < 2 || paused || lightbox !== null || showing) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => setSlide((s) => (s + 1) % slides.length), SLIDE_MS);
+    const timer = window.setInterval(
+      () => setSlider((s) => ({ current: (s.current + 1) % slides.length, leaving: s.current, dir: 1 })),
+      SLIDE_MS,
+    );
     return () => window.clearInterval(timer);
   }, [slides.length, paused, lightbox, showing]);
 
@@ -326,7 +333,13 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
               key={i}
               src={src}
               alt={i === slide ? `${listing.address}, ${listing.city}` : ""}
-              className={i === slide ? "is-active" : undefined}
+              className={
+                i === slider.current
+                  ? `is-active${slider.dir === 1 ? " in-right" : slider.dir === -1 ? " in-left" : ""}`
+                  : i === slider.leaving
+                    ? `is-leaving${slider.dir === 1 ? " out-left" : " out-right"}`
+                    : undefined
+              }
               loading={i === 0 ? "eager" : "lazy"}
             />
           ))}
