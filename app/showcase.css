@@ -24,7 +24,11 @@
   padding: 0; border: 0; background: none; cursor: zoom-in;
 }
 /* Slideshow: photos stacked; the next one slides in as the last slides out. */
-.sc-hero-media { overflow: hidden; }
+/* z-index 0 keeps the slides' own stacking inside this layer, so the shade,
+   address and stats always sit above the photos. */
+.sc-hero-media { overflow: hidden; z-index: 0; }
+.sc-hero-shade { z-index: 1; }
+.sc-hero-inner { z-index: 1; }
 .sc-hero-media img {
   position: absolute; inset: 0;
   width: 100%; height: 100%; object-fit: cover; display: block;
