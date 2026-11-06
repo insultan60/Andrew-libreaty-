@@ -10,6 +10,7 @@ import "./agent.css";
 import "./compass-concierge/concierge.css";
 import "./blog/blog.css";
 import "./detail.css";
+import "./showcase.css";
 import "./neighborhood.css";
 import "./buttons.css";
 import "./my-search-portal/portal.css";
