@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "../components/icons";
 import { SmsIcon, ShareIcon, WhatsappIcon } from "../components/vuesax";
 import PropertyMap from "./PropertyMap";
+import NearbyPlaces from "./NearbyPlaces";
 import { createLead } from "@/lib/idx";
 import { useLead } from "@/hooks/useLead";
 import { useSavedFavorites } from "@/hooks/useSavedFavorites";
@@ -549,6 +550,8 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
       </section>
 
       <div className="container">
+        {listing.lat && listing.lng ? <NearbyPlaces lat={listing.lat} lng={listing.lng} label={listing.pin} /> : null}
+
         {/* History */}
         {listing.history.length > 0 && (
           <section className="pd-section sc-history" id="history">
