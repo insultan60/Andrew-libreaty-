@@ -124,6 +124,14 @@ export default function HomeSearchClient({
   const filterCount = activeFilterCount(state);
   const isFiltered = filterCount > 0 || !!state.q || !!state.area;
   const areaLabel = isAreaKey(state.area) ? AREA_LABELS[state.area] : "";
+  // Say "For Sale" only when every home shown is actually for sale.
+  const shownStatuses = new Set(visibleResults.map((l) => l.status));
+  const headingLead =
+    shownStatuses.size === 1 && shownStatuses.has("Sold")
+      ? "Recently Sold Homes"
+      : shownStatuses.size > 0 && [...shownStatuses].every((s) => s === "Active")
+        ? "Homes For Sale"
+        : "Real Estate & Homes";
 
   const patch = (p: Partial<SearchState>) => setState((s) => ({ ...s, ...p }));
 
@@ -449,7 +457,7 @@ export default function HomeSearchClient({
             <div className="results-head">
               <div>
                 <h1 className="results-title">
-                  Real Estate &amp; Homes For Sale in {areaLabel || "Los Angeles"}
+                  {headingLead} in {areaLabel || "Los Angeles"}
                 </h1>
                 <p className="results-intro">
                   {areaLabel ? (
