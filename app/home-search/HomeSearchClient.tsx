@@ -314,7 +314,7 @@ export default function HomeSearchClient({
     // Name the statuses actually selected, so a search that includes sold
     // homes never reads as "For sale".
     state.status.length === 0 || state.status.length === STATUS_OPTS.length
-      ? "All statuses"
+      ? "Status"
       : STATUS_OPTS.filter((o) => state.status.includes(o.val))
           .map((o) => o.val)
           .join(" + ");
@@ -323,12 +323,12 @@ export default function HomeSearchClient({
       ? (state.priceMin != null ? abbr(state.priceMin) : "$0") +
         " – " +
         (state.priceMax != null ? abbr(state.priceMax) : "Any")
-      : "Any price";
+      : "Price";
   const typeLabel = state.types.length
     ? state.types.length === 1
       ? state.types[0]
       : state.types.length + " types"
-    : "All property types";
+    : "Type";
   const isSet = {
     status: state.status.length !== 3,
     price: state.priceMin != null || state.priceMax != null,
@@ -375,8 +375,8 @@ export default function HomeSearchClient({
             <Pill label={statusLabel} set={isSet.status} open={openPop?.key === "status"} onClick={(e) => togglePop("status", e)} />
             <Pill label={priceLabel} set={isSet.price} open={openPop?.key === "price"} onClick={(e) => togglePop("price", e)} />
             <Pill label={typeLabel} set={isSet.type} open={openPop?.key === "type"} onClick={(e) => togglePop("type", e)} />
-            <Pill label={state.beds ? state.beds + "+ beds" : "All beds"} set={isSet.beds} open={openPop?.key === "beds"} onClick={(e) => togglePop("beds", e)} />
-            <Pill label={state.baths ? state.baths + "+ baths" : "All baths"} set={isSet.baths} open={openPop?.key === "baths"} onClick={(e) => togglePop("baths", e)} />
+            <Pill label={state.beds ? state.beds + "+ beds" : "Beds"} set={isSet.beds} open={openPop?.key === "beds"} onClick={(e) => togglePop("beds", e)} />
+            <Pill label={state.baths ? state.baths + "+ baths" : "Baths"} set={isSet.baths} open={openPop?.key === "baths"} onClick={(e) => togglePop("baths", e)} />
           </div>
 
           <div className="filter-right">
@@ -543,6 +543,16 @@ export default function HomeSearchClient({
                     onMenuAction={(act) => menuAction(act, l)}
                   />
                 ))}
+                {/* End of the list: the same search across the whole MLS. */}
+                <div className="empty-state" style={{ gridColumn: "1 / -1", padding: "32px 0", textAlign: "center" }}>
+                  <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 500, fontSize: 22, marginBottom: 8 }}>
+                    That&rsquo;s all of Andrew&rsquo;s listings
+                  </h2>
+                  <p style={{ color: "var(--muted)", marginBottom: 16 }}>
+                    See every MLS home in {mls.place} that matches your filters.
+                  </p>
+                  <a href={mls.url} className="btn btn-gold">Search the full MLS</a>
+                </div>
               </div>
             ) : (
               <div className="empty-state" style={{ padding: "48px 0" }}>
