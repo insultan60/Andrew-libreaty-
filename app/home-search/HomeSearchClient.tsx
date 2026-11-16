@@ -311,7 +311,13 @@ export default function HomeSearchClient({
 
   /* ---------- Labels ---------- */
   const statusLabel =
-    state.status.length === 0 ? "Any status" : state.status.length >= 2 ? "For sale" : state.status[0];
+    // Name the statuses actually selected, so a search that includes sold
+    // homes never reads as "For sale".
+    state.status.length === 0 || state.status.length === STATUS_OPTS.length
+      ? "All statuses"
+      : STATUS_OPTS.filter((o) => state.status.includes(o.val))
+          .map((o) => o.val)
+          .join(" + ");
   const priceLabel =
     state.priceMin != null || state.priceMax != null
       ? (state.priceMin != null ? abbr(state.priceMin) : "$0") +
