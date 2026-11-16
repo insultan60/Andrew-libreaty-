@@ -17,6 +17,7 @@ import "./studio-city.css";
 import StudioCityListings from "./StudioCityListings";
 import { fetchRawListingsServer } from "@/lib/idxServer";
 import { inArea } from "@/lib/areas";
+import { mlsAreaUrl } from "@/lib/mlsSearch";
 
 /* The listings section is rendered from the server-side IDX feed, cached for
    six hours in lib/idxServer.ts; the page follows the same cadence. */
@@ -198,7 +199,7 @@ export default async function StudioCityPage() {
               negotiate with proof, and explain every step in plain words.
             </p>
             <div className="sc-hero-ctas">
-              <Link href="/home-search?area=studio-city" className="btn-gold">
+              <Link href={mlsAreaUrl("studio-city")} className="btn-gold">
                 <span>Browse Studio City Homes</span>
                 <ArrowRight />
               </Link>
@@ -220,7 +221,7 @@ export default async function StudioCityPage() {
       <section className="sc-section sc-bg-stone sc-paths">
         <div className="container">
           <div className="sc-hero-action-grid">
-            <Link href="/home-search?area=studio-city" className="sc-hero-action-card">
+            <Link href={mlsAreaUrl("studio-city")} className="sc-hero-action-card">
               <div>
                 <span className="sc-hero-card-tag">BUYING</span>
                 <h2>Buying in Studio City</h2>
@@ -362,7 +363,7 @@ export default async function StudioCityPage() {
                 When one looks right, I tell you what it should really sell for.
               </p>
             </div>
-            <Link href="/home-search?area=studio-city" className="btn-gold">
+            <Link href={mlsAreaUrl("studio-city")} className="btn-gold">
               <span>Search My MLS</span>
               <ArrowRight />
             </Link>
@@ -669,7 +670,7 @@ export default async function StudioCityPage() {
               means for your next move. Free consultation. No pressure.
             </p>
             <div className="sc-hero-ctas" style={{ justifyContent: "center" }}>
-              <Link href="/home-search?area=studio-city" className="btn-gold">
+              <Link href={mlsAreaUrl("studio-city")} className="btn-gold">
                 <span>Browse Studio City Homes</span>
                 <ArrowRight />
               </Link>

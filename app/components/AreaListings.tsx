@@ -8,6 +8,7 @@ import PropertyCard from "../property/PropertyCard";
 import PageLoader from "./PageLoader";
 import MlsSearchCard from "./MlsSearchCard";
 import { ArrowRight } from "./icons";
+import { mlsAreaUrl } from "@/lib/mlsSearch";
 
 /**
  * One neighbourhood's listings from Andrew's IDX feed — for sale first, then
@@ -67,7 +68,7 @@ export default function AreaListings({
   /* A row of fewer than three cards gets the full-MLS card in the gap, so a
      thin area still leads somewhere. It also replaces the "Search All" button
      below, which would say the same thing twice. */
-  const search = `/home-search?area=${area}`;
+  const search = mlsAreaUrl(area);
   const row = shown.length || others.length;
   const fill = !loading && !error && (row < 3 || mlsCard);
   const beside = row % 3;

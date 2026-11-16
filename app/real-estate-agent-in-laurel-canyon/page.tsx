@@ -7,6 +7,7 @@ import GuideValuationForm from "../components/GuideValuationForm";
 import GuideWhy, { type WhyPoint } from "../components/GuideWhy";
 import { fetchRawListingsServer } from "@/lib/idxServer";
 import { SITE_URL, SITE_NAME, abs } from "@/lib/site";
+import { mlsAreaUrl } from "@/lib/mlsSearch";
 // Shared neighbourhood-guide styles; every rule is under .lcn-page.
 import "../neighborhood-guide.css";
 
@@ -19,7 +20,7 @@ import "../neighborhood-guide.css";
  */
 
 const PATH = "/real-estate-agent-in-laurel-canyon";
-const AREA_SEARCH = "/home-search?area=laurel-canyon";
+const AREA_SEARCH = mlsAreaUrl("laurel-canyon");
 const CONSULT = "https://wa.me/13107090581";
 
 const TITLE = "Real Estate Agent in Laurel Canyon | Homes for Sale";

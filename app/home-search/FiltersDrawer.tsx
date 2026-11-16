@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { countFor, DEFAULT_STATE, type SearchState, type Listing } from "./listings";
+import { mlsSearch } from "@/lib/mlsSearch";
 
 const Caret = () => (
   <svg className="acc-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
@@ -10,33 +11,17 @@ const Caret = () => (
 );
 
 const TYPE_CHIPS = [
-  { val: "House", label: "Residential" },
+  { val: "House", label: "Houses" },
   { val: "Townhouse", label: "Townhomes" },
-  { val: "Co-op", label: "Co-op" },
   { val: "Multi-Family", label: "Multi-family" },
   { val: "Condo", label: "Condos" },
-  { val: "Commercial", label: "Commercial" },
-  { val: "Manufactured", label: "Manufactured" },
   { val: "Land", label: "Land" },
-  { val: "Other", label: "Other" },
 ];
 const STATUS_CHIPS = [
   { val: "Active", label: "Active" },
   { val: "Pending", label: "Pending" },
   { val: "Sold", label: "Sold" },
 ];
-const TOUR_CHIPS = [
-  { val: "virtual", label: "Virtual tour" },
-  { val: "3d", label: "3D tour" },
-  { val: "openhouse", label: "Open house" },
-];
-const FEATURES = [
-  "Appliances", "Architectural style", "Community features", "Cooling", "Fireplace features",
-  "Flooring", "Foundation details", "Heating", "Interior features", "Laundry features", "MLS area",
-  "Parking features", "Patio & porch features", "Pool features", "Roof", "Security features",
-  "Sewer", "Subdivision", "Water source", "Waterfront features", "Window features",
-];
-
 function Seg({
   options,
   value,
@@ -69,54 +54,28 @@ const BATHS = [
   { val: 0, label: "Any" }, { val: 1, label: "1+" }, { val: 1.5, label: "1.5+" }, { val: 2, label: "2+" },
   { val: 3, label: "3+" }, { val: 4, label: "4+" }, { val: 5, label: "5+" },
 ];
-const GARAGE = [{ val: 0, label: "Any" }, { val: 1, label: "1+" }, { val: 2, label: "2+" }, { val: 3, label: "3+" }];
-const STORIES = [{ val: 0, label: "Any" }, { val: 1, label: "1" }, { val: 2, label: "2+" }];
-const DOM = [
-  { val: 0, label: "Any" }, { val: 1, label: "1 day" }, { val: 7, label: "7 days" },
-  { val: 14, label: "14 days" }, { val: 30, label: "30 days" },
-];
-
 type Draft = {
   status: string[];
   types: string[];
-  tours: string[];
   priceMin: string;
   priceMax: string;
   beds: number;
   baths: number;
   sqftMin: string;
-  sqftMax: string;
-  lotMin: string;
-  lotMax: string;
-  yearMin: string;
-  yearMax: string;
-  garage: number;
-  stories: number;
-  hoa: string;
-  dom: number;
-  reduced: boolean;
   keywords: string;
   mls: string;
-  listingType: "sale" | "rent";
-  features: string[];
 };
 
 function seed(state: SearchState): Draft {
   return {
     status: state.status,
     types: state.types,
-    tours: [],
     priceMin: state.priceMin != null ? String(state.priceMin) : "",
     priceMax: state.priceMax != null ? String(state.priceMax) : "",
     beds: state.beds,
     baths: state.baths,
     sqftMin: state.sqft ? String(state.sqft) : "",
-    sqftMax: "",
-    lotMin: "", lotMax: "", yearMin: "", yearMax: "",
-    garage: 0, stories: 0, hoa: "", dom: 0, reduced: false,
     keywords: state.q, mls: "",
-    listingType: "sale",
-    features: [],
   };
 }
 
@@ -127,7 +86,8 @@ export default function FiltersDrawer({
   onApply,
   onReset,
   onClose,
-  onToast,
+  rent,
+  onRentChange,
 }: {
   open: boolean;
   state: SearchState;
@@ -135,7 +95,9 @@ export default function FiltersDrawer({
   onApply: (next: Partial<SearchState>) => void;
   onReset: () => void;
   onClose: () => void;
-  onToast: (msg: string) => void;
+  /** For sale vs for rent. Only the full-MLS search has rentals. */
+  rent: boolean;
+  onRentChange: (rent: boolean) => void;
 }) {
   const [draft, setDraft] = useState<Draft>(() => seed(state));
   const [filterQ, setFilterQ] = useState("");
@@ -184,6 +146,20 @@ export default function FiltersDrawer({
     onClose();
   };
 
+  /* The same draft filters, run against every active MLS listing. */
+  const mlsUrl = mlsSearch({
+    area: state.area as Parameters<typeof mlsSearch>[0]["area"],
+    location: draft.keywords.trim(),
+    rent,
+    priceMin: draft.priceMin ? +draft.priceMin : null,
+    priceMax: draft.priceMax ? +draft.priceMax : null,
+    beds: draft.beds,
+    baths: draft.baths,
+    sqft: draft.sqftMin ? +draft.sqftMin : 0,
+    types: draft.types,
+    sort: state.sort,
+  }).url;
+
   const reset = () => {
     setDraft(seed(DEFAULT_STATE));
     onReset();
@@ -223,11 +199,9 @@ export default function FiltersDrawer({
             {(["sale", "rent"] as const).map((v) => (
               <button
                 key={v}
-                className={`sr-btn${draft.listingType === v ? " is-active" : ""}`}
-                onClick={() => {
-                  set("listingType", v);
-                  if (v === "rent") onToast("Rentals connect to your IDX rental feed");
-                }}
+                className={`sr-btn${(v === "rent") === rent ? " is-active" : ""}`}
+                aria-pressed={(v === "rent") === rent}
+                onClick={() => onRentChange(v === "rent")}
               >
                 {v === "sale" ? "For sale" : "For rent"}
               </button>
@@ -329,88 +303,14 @@ export default function FiltersDrawer({
             </details>
           )}
 
-          {accVisible("Tours") && (
-            <details className="acc">
-              <summary>Tours<Caret /></summary>
-              <div className="acc-body">
-                <div className="chip-row">
-                  {TOUR_CHIPS.map((c) => (
-                    <button
-                      key={c.val}
-                      className={`chip${draft.tours.includes(c.val) ? " is-active" : ""}`}
-                      onClick={() => set("tours", toggleIn(draft.tours, c.val))}
-                    >
-                      {c.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </details>
-          )}
-
           {accVisible("Property details") && (
             <details className="acc">
               <summary>Property details<Caret /></summary>
               <div className="acc-body">
-                <p className="acc-label">Square feet</p>
+                <p className="acc-label">Minimum square feet</p>
                 <div className="price-inputs">
-                  <label>Min<input type="number" placeholder="No min" step={250} value={draft.sqftMin} onChange={(e) => set("sqftMin", e.target.value)} /></label>
-                  <span className="price-dash">to</span>
-                  <label>Max<input type="number" placeholder="No max" step={250} value={draft.sqftMax} onChange={(e) => set("sqftMax", e.target.value)} /></label>
+                  <label className="full">Min<input type="number" placeholder="No min" step={250} value={draft.sqftMin} onChange={(e) => set("sqftMin", e.target.value)} /></label>
                 </div>
-                <p className="acc-label">Lot size (sq ft)</p>
-                <div className="price-inputs">
-                  <label>Min<input type="number" placeholder="No min" step={500} value={draft.lotMin} onChange={(e) => set("lotMin", e.target.value)} /></label>
-                  <span className="price-dash">to</span>
-                  <label>Max<input type="number" placeholder="No max" step={500} value={draft.lotMax} onChange={(e) => set("lotMax", e.target.value)} /></label>
-                </div>
-                <p className="acc-label">Year built</p>
-                <div className="price-inputs">
-                  <label>From<input type="number" placeholder="Any" min={1900} max={2026} value={draft.yearMin} onChange={(e) => set("yearMin", e.target.value)} /></label>
-                  <span className="price-dash">to</span>
-                  <label>To<input type="number" placeholder="Any" min={1900} max={2026} value={draft.yearMax} onChange={(e) => set("yearMax", e.target.value)} /></label>
-                </div>
-                <p className="acc-label">Garage spaces</p>
-                <Seg options={GARAGE} value={draft.garage} onChange={(v) => set("garage", v)} />
-                <p className="acc-label">Stories</p>
-                <Seg options={STORIES} value={draft.stories} onChange={(v) => set("stories", v)} />
-              </div>
-            </details>
-          )}
-
-          {accVisible("Property features", FEATURES) && (
-            <details className="acc">
-              <summary>Property features<Caret /></summary>
-              <div className="acc-body">
-                <div className="feature-list">
-                  {FEATURES.map((f) => (
-                    <button
-                      key={f}
-                      className={`feature-row${draft.features.includes(f) ? " is-on" : ""}`}
-                      onClick={() => set("features", toggleIn(draft.features, f))}
-                    >
-                      {f}
-                      <span>+</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </details>
-          )}
-
-          {accVisible("Costs") && (
-            <details className="acc">
-              <summary>Costs<Caret /></summary>
-              <div className="acc-body">
-                <p className="acc-label">Max HOA (monthly)</p>
-                <div className="price-inputs">
-                  <label className="full">Any<input type="number" placeholder="No max HOA" step={50} value={draft.hoa} onChange={(e) => set("hoa", e.target.value)} /></label>
-                </div>
-                <p className="acc-label">Days on market</p>
-                <Seg options={DOM} value={draft.dom} onChange={(v) => set("dom", v)} />
-                <label className="opt-check acc-check">
-                  <input type="checkbox" checked={draft.reduced} onChange={(e) => set("reduced", e.target.checked)} /> Price reduced
-                </label>
               </div>
             </details>
           )}
@@ -419,9 +319,9 @@ export default function FiltersDrawer({
             <details className="acc">
               <summary>Advanced<Caret /></summary>
               <div className="acc-body">
-                <p className="acc-label">Keywords</p>
-                <input className="drawer-text" type="text" placeholder="City, neighborhood, ZIP, or keyword" value={draft.keywords} onChange={(e) => set("keywords", e.target.value)} />
-                <p className="acc-label">MLS number</p>
+                <p className="acc-label">Location</p>
+                <input className="drawer-text" type="text" placeholder="City, neighborhood, or ZIP" value={draft.keywords} onChange={(e) => set("keywords", e.target.value)} />
+                <p className="acc-label">MLS number (Andrew&rsquo;s listings)</p>
                 <input className="drawer-text" type="text" placeholder="e.g. 26861057" value={draft.mls} onChange={(e) => set("mls", e.target.value)} />
               </div>
             </details>
@@ -430,9 +330,14 @@ export default function FiltersDrawer({
 
         <div className="drawer-foot">
           <button className="btn btn-tertiary" onClick={reset}>Reset filters</button>
-          <button className="btn btn-primary btn-magnetic" onClick={apply}>
-            <span>See</span>&nbsp;<span>{count === 1 ? "1 home" : count.toLocaleString() + " homes"}</span>
-          </button>
+          {!rent && (
+            <button className="btn btn-secondary" onClick={apply}>
+              <span>Andrew&rsquo;s:</span>&nbsp;<span>{count === 1 ? "1 home" : count.toLocaleString() + " homes"}</span>
+            </button>
+          )}
+          <a className="btn btn-primary btn-magnetic" href={mlsUrl}>
+            <span>Search full MLS</span>
+          </a>
         </div>
       </aside>
     </>

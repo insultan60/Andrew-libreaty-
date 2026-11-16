@@ -8,6 +8,7 @@ import PropertyCard from "../property/PropertyCard";
 import PageLoader from "../components/PageLoader";
 import MlsSearchCard from "../components/MlsSearchCard";
 import { ArrowRight } from "../components/icons";
+import { mlsAreaUrl } from "@/lib/mlsSearch";
 
 /* Most a neighbourhood page shows before handing over to the full search. */
 const MAX = 9;
@@ -72,7 +73,7 @@ export default function StudioCityListings({
               <PropertyCard key={p.slug} p={p} href={`/${p.slug}`} />
             ))}
             {fill && (
-              <MlsSearchCard href="/home-search?area=studio-city" place="Studio City" beside={shown.length} />
+              <MlsSearchCard href={mlsAreaUrl("studio-city")} place="Studio City" beside={shown.length} />
             )}
           </div>
         )}
@@ -81,7 +82,7 @@ export default function StudioCityListings({
             GlobalEffects has snapshotted .reveal, and would stay invisible. */}
         {!fill && (
           <div className="prop-more">
-            <Link href="/home-search?area=studio-city" className="btn btn-gold btn-magnetic">
+            <Link href={mlsAreaUrl("studio-city")} className="btn btn-gold btn-magnetic">
               <span>Search All Studio City Homes</span>
               <ArrowRight />
             </Link>

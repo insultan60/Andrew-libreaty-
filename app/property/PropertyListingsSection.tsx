@@ -5,6 +5,7 @@ import { toPropertyItem, type RawIdxListing } from "@/lib/idx";
 import { ArrowRight } from "../components/icons";
 import PropertyCard from "./PropertyCard";
 import PageLoader from "../components/PageLoader";
+import { mlsSearch } from "@/lib/mlsSearch";
 
 /* Past transactions run to dozens of closings, far more than belongs on a page
    that is also introducing the practice. Show two rows and send the rest to
@@ -68,7 +69,7 @@ export default function PropertyListingsSection({
                 <PropertyCard key={p.slug} p={p} href={p.href} />
               ))}
               <a
-                href="/home-search"
+                href={mlsSearch({}).url}
                 className="prop-mls-card"
                 data-beside={featured.length}
               >

@@ -577,3 +577,16 @@ body.map-view .results-col { display: none; }
 .lm-map .leaflet-control-zoom { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow-soft); }
 .lm-map .leaflet-control-zoom a { color: var(--ink); background: var(--paper); }
 .lm-map .leaflet-control-attribution { font-size: 10px; background: rgba(255,253,248,0.8); }
+
+/* Full-MLS search strip above Andrew's own listings */
+.hs-mls-banner {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  margin: 0 0 20px; padding: 16px 18px; border: 1px solid var(--line, #e5e1d8);
+  border-radius: 12px; background: var(--paper, #faf8f4);
+}
+.hs-mls-title { font-weight: 600; margin: 0 0 4px; }
+.hs-mls-sub { margin: 0; color: var(--muted); font-size: 14px; }
+.hs-mls-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+@media (max-width: 720px) {
+  .hs-mls-banner { flex-direction: column; align-items: flex-start; }
+}

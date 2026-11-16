@@ -18,7 +18,8 @@ import MapPanel from "./MapPanel";
 import SaveSearchButton from "./SaveSearchButton";
 import { useIdxListings } from "@/hooks/useIdxListings";
 import type { RawIdxListing } from "@/lib/idx";
-import { toListing, fetchSystemLinks } from "@/lib/idx";
+import { toListing } from "@/lib/idx";
+import { mlsSearch } from "@/lib/mlsSearch";
 import { useLead } from "@/hooks/useLead";
 import { listFavoriteMlsIds, addFavorite, removeFavorite } from "@/lib/favorites";
 import PageLoader from "../components/PageLoader";
@@ -80,10 +81,11 @@ export default function HomeSearchClient({
   const [hidden, setHidden] = useState<Set<number>>(new Set());
   const [menuOpen, setMenuOpen] = useState<number | null>(null);
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
-  const [fullSearchUrl, setFullSearchUrl] = useState<string | null>(null);
+  /* Buy vs rent only applies to the full-MLS search: Andrew's own feed is
+     homes for sale and sold. */
+  const [rent, setRent] = useState(false);
   const [view, setView] = useState<"list" | "map">("list");
   const [mapType, setMapType] = useState<"map" | "satellite">("map");
-  const [drawActive, setDrawActive] = useState(false);
   const [share, setShare] = useState<Listing | null>(null);
   const [shareStatus, setShareStatus] = useState("");
   const [toastMsg, setToastMsg] = useState("");
@@ -191,16 +193,25 @@ export default function HomeSearchClient({
     return () => document.body.classList.remove("map-view");
   }, [view]);
 
-  useEffect(() => {
-    fetchSystemLinks()
-      .then((links) => {
-        const search = links.find((l) => l.name === "Map Search") || links.find((l) => l.category === "search");
-        if (search) setFullSearchUrl(search.url);
-      })
-      .catch(() => {
-        // full-MLS-search link is a nice-to-have — silently skip if it fails
-      });
-  }, []);
+  /* ---------- Full-MLS search ----------
+     The grid below is only Andrew's own listings. The same filters, as a
+     search of every active MLS home, live on the IDX results page. */
+  const mls = useMemo(
+    () =>
+      mlsSearch({
+        area: isAreaKey(state.area) ? state.area : "",
+        location: state.q,
+        rent,
+        priceMin: state.priceMin,
+        priceMax: state.priceMax,
+        beds: state.beds,
+        baths: state.baths,
+        sqft: state.sqft,
+        types: state.types,
+        sort: state.sort,
+      }),
+    [state, rent]
+  );
 
   /* ---------- Save / share / hide ---------- */
   const toggleSave = (l: Listing) => {
@@ -245,9 +256,14 @@ export default function HomeSearchClient({
       case "details": openDetails(l); break;
       case "save2": toggleSave(l); break;
       case "share2": openShare(l); break;
-      case "tour": toast("Tour request — connect to your CRM"); break;
-      case "ask": toast("Message the agent — connect to your CRM"); break;
-      case "mortgage": toast("Mortgage calculator — add your tool here"); break;
+      case "tour":
+      case "ask": {
+        const msg =
+          (act === "tour" ? "Hi Andrew, I'd like to tour " : "Hi Andrew, I have a question about ") +
+          `${l.addr}, ${l.city} ${l.zip} (MLS# ${l.mls}).`;
+        window.open(`https://wa.me/13107090581?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+        break;
+      }
       case "directions":
         window.open(
           `https://maps.google.com/?q=${encodeURIComponent(l.addr + ", " + l.city + " CA " + l.zip)}`,
@@ -367,16 +383,9 @@ export default function HomeSearchClient({
               <span>All filters</span>
               {filterCount > 0 && <span className="filter-count">{filterCount}</span>}
             </button>
-            {fullSearchUrl && (
-              <a
-                href={fullSearchUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-secondary hs-full-mls"
-              >
-                Search the full MLS
-              </a>
-            )}
+            <a href={mls.url} className="btn btn-secondary hs-full-mls">
+              Search the full MLS
+            </a>
             {leadId ? (
               <div className="hs-account" data-open={accountMenuOpen}>
                 <button
@@ -492,6 +501,26 @@ export default function HomeSearchClient({
               </label>
             </div>
 
+
+            <div className="hs-mls-banner">
+              <div className="hs-mls-copy">
+                <p className="hs-mls-title">
+                  Every MLS home {rent ? "for rent" : "for sale"} in {mls.place}
+                </p>
+                <p className="hs-mls-sub">
+                  Andrew&rsquo;s own listings are below. Search all active listings with your filters
+                  {mls.unmatched.length ? ` (we couldn’t place "${mls.unmatched.join(", ")}", so this searches ${mls.place})` : ""}.
+                </p>
+              </div>
+              <div className="hs-mls-actions">
+                <div className="view-toggle" role="group" aria-label="For sale or for rent">
+                  <button type="button" className={`view-btn${!rent ? " is-active" : ""}`} aria-pressed={!rent} onClick={() => setRent(false)}>Buy</button>
+                  <button type="button" className={`view-btn${rent ? " is-active" : ""}`} aria-pressed={rent} onClick={() => setRent(true)}>Rent</button>
+                </div>
+                <a href={mls.url} className="btn btn-gold">Search MLS</a>
+              </div>
+            </div>
+
             {loading ? (
               <PageLoader label="Loading listings…" />
             ) : visibleResults.length ? (
@@ -512,9 +541,12 @@ export default function HomeSearchClient({
             ) : (
               <div className="empty-state" style={{ padding: "48px 0" }}>
                 <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 500, fontSize: 24, marginBottom: 8 }}>
-                  No homes match those filters
+                  None of Andrew&rsquo;s own listings match
                 </h2>
-                <p style={{ color: "var(--muted)", marginBottom: 18 }}>Try widening your price range or clearing a filter.</p>
+                <p style={{ color: "var(--muted)", marginBottom: 18 }}>
+                  The full MLS has many more. Run the same search across every active listing in {mls.place}.
+                </p>
+                <a href={mls.url} className="btn btn-gold" style={{ marginRight: 10 }}>Search the full MLS</a>
                 <button className="btn btn-secondary" onClick={resetAll}>Clear all filters</button>
               </div>
             )}
@@ -535,12 +567,6 @@ export default function HomeSearchClient({
             <div className="map-panel">
               <MapPanel items={visibleResults} mapType={mapType} onOpen={openDetails} />
 
-              <div className="map-controls-tl">
-                <button className={`map-chip${drawActive ? " is-active" : ""}`} onClick={() => { setDrawActive((v) => !v); toast(!drawActive ? "Draw mode — sketch an area on the live map" : "Draw mode off"); }}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 19l7-7 3 3-7 7-3-3z" /><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" /><path d="M2 2l7.586 7.586" /><circle cx="11" cy="11" r="2" /></svg>
-                  Draw
-                </button>
-              </div>
               <div className="map-controls-tr">
                 <div className="map-toggle">
                   <button className={`map-toggle-btn${mapType === "map" ? " is-active" : ""}`} onClick={() => setMapType("map")}>Map</button>
@@ -652,7 +678,8 @@ export default function HomeSearchClient({
         onApply={(next) => { patch(next); if (next.q != null) setSearchValue(next.q); }}
         onReset={resetAll}
         onClose={() => setDrawerOpen(false)}
-        onToast={toast}
+        rent={rent}
+        onRentChange={setRent}
       />
 
       {/* ============ SHARE SHEET ============ */}
@@ -836,7 +863,6 @@ function ListingCard({
               <hr />
               <button onClick={(e) => { e.stopPropagation(); onMenuAction("tour"); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>Request a tour</button>
               <button onClick={(e) => { e.stopPropagation(); onMenuAction("ask"); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg>Ask a question</button>
-              <button onClick={(e) => { e.stopPropagation(); onMenuAction("mortgage"); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" /><path d="M8 6h8M8 10h8M8 14h4" /></svg>Mortgage calculator</button>
               <button onClick={(e) => { e.stopPropagation(); onMenuAction("directions"); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg>Get directions</button>
               <hr />
               <button onClick={(e) => { e.stopPropagation(); onMenuAction("hide"); }}><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M9.9 4.24A9.1 9.1 0 0 1 12 4c7 0 10 8 10 8a13.2 13.2 0 0 1-1.67 2.68M6.6 6.6A13.3 13.3 0 0 0 2 12s3 8 10 8a9 9 0 0 0 5.4-1.8M1 1l22 22" /></svg>Hide this home</button>

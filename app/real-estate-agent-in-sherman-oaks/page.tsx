@@ -6,6 +6,7 @@ import AreaListings from "../components/AreaListings";
 import GuideValuationForm from "../components/GuideValuationForm";
 import { fetchRawListingsServer } from "@/lib/idxServer";
 import { SITE_URL, SITE_NAME, abs } from "@/lib/site";
+import { mlsAreaUrl } from "@/lib/mlsSearch";
 // Shared neighbourhood-guide styles; every rule is under .lcn-page.
 import "../neighborhood-guide.css";
 
@@ -79,7 +80,7 @@ const START = [
     title: "Buying in Sherman Oaks",
     body: "Looking for a Sherman Oaks house, condo, or townhome? I show what your budget buys on each side of Ventura, then negotiate a fair price.",
     cta: "Browse Sherman Oaks homes",
-    href: "/home-search?area=sherman-oaks",
+    href: mlsAreaUrl("sherman-oaks"),
   },
   {
     tag: "Selling",
@@ -261,7 +262,7 @@ export default async function ShermanOaksPage() {
               negotiate with proof, and explain every step plainly.
             </p>
             <div className="lcn-ctas">
-              <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-dark">
+              <Link href={mlsAreaUrl("sherman-oaks")} className="lcn-btn lcn-btn-dark">
                 Browse Sherman Oaks Homes
               </Link>
               <Link href="/home-valuation" className="lcn-btn lcn-btn-outline">
@@ -520,7 +521,7 @@ export default async function ShermanOaksPage() {
               </p>
             </div>
             <div className="lcn-ctas">
-              <Link href="/home-search?area=sherman-oaks" className="lcn-btn lcn-btn-light">
+              <Link href={mlsAreaUrl("sherman-oaks")} className="lcn-btn lcn-btn-light">
                 Browse Sherman Oaks Homes
               </Link>
               <Link href="/home-valuation" className="lcn-btn lcn-btn-outline-light">

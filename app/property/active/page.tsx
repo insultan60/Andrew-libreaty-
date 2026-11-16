@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ArrowRight } from "../../components/icons";
 import ActiveListingsSection from "./ActiveListingsSection";
 import { fetchRawListingsServer } from "@/lib/idxServer";
+import { mlsSearch } from "@/lib/mlsSearch";
 
 const TITLE = "Active Listings — Andrew Liberty Team | Los Angeles Real Estate";
 const DESCRIPTION =
@@ -42,7 +43,7 @@ export default async function ActiveListingsPage() {
         <div className="container">
           <div className="prop-searchband reveal">
             <h2>Not Seeing the Right Fit?</h2>
-            <a href="/home-search" className="btn btn-gold btn-magnetic">
+            <a href={mlsSearch({}).url} className="btn btn-gold btn-magnetic">
               <span>Search Every Listing</span>
               <ArrowRight />
             </a>

@@ -7,6 +7,7 @@ import GuideValuationForm from "../components/GuideValuationForm";
 import GuideWhy, { type WhyPoint } from "../components/GuideWhy";
 import { fetchRawListingsServer } from "@/lib/idxServer";
 import { SITE_URL, SITE_NAME, abs } from "@/lib/site";
+import { mlsAreaUrl } from "@/lib/mlsSearch";
 // Shared neighbourhood-guide styles; every rule is under .lcn-page.
 import "../neighborhood-guide.css";
 
@@ -21,7 +22,7 @@ import "../neighborhood-guide.css";
  */
 
 const PATH = "/real-estate-agent-in-hollywood-hills";
-const AREA_SEARCH = "/home-search?area=hollywood-hills";
+const AREA_SEARCH = mlsAreaUrl("hollywood-hills");
 const HERO = "/images/hollywood-hills-hero.jpg";
 
 const TITLE = "Hollywood Hills Real Estate Agent | Homes for Sale";
