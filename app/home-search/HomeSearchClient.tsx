@@ -45,7 +45,7 @@ function Thumb({ src, alt }: { src: string; alt: string }) {
 
 type PopKey = "status" | "price" | "type" | "beds" | "baths";
 const STATUS_OPTS = [
-  { val: "Active", label: "Active / For sale" },
+  { val: "Active", label: "Active" },
   { val: "Pending", label: "Pending" },
   { val: "Sold", label: "Sold" },
 ];
@@ -519,7 +519,7 @@ export default function HomeSearchClient({
                 </p>
               </div>
               <div className="hs-mls-actions">
-                <div className="view-toggle" role="group" aria-label="For sale or for rent">
+                <div className="view-toggle" role="group" aria-label="Buy or rent (full MLS search)">
                   <button type="button" className={`view-btn${!rent ? " is-active" : ""}`} aria-pressed={!rent} onClick={() => setRent(false)}>Buy</button>
                   <button type="button" className={`view-btn${rent ? " is-active" : ""}`} aria-pressed={rent} onClick={() => setRent(true)}>Rent</button>
                 </div>

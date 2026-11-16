@@ -203,7 +203,7 @@ export default function FiltersDrawer({
                 aria-pressed={(v === "rent") === rent}
                 onClick={() => onRentChange(v === "rent")}
               >
-                {v === "sale" ? "For sale" : "For rent"}
+                {v === "sale" ? "Buy" : "Rent"}
               </button>
             ))}
           </div>
