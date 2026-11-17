@@ -51,6 +51,7 @@ export const TITLES = {
   negotiateLA: "How to Negotiate a House Price in Los Angeles",
   canIBuyLA: "Can I Buy a House in Los Angeles?",
   buyLA: "How to Buy a House in Los Angeles",
+  negotiateInspection: "How to Negotiate After Home Inspection in California",
 } as const;
 
 export function slugify(s: string): string {
@@ -99,6 +100,27 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    /* `title` drops the "a" so slugify() gives the agreed URL,
+       /blog/how-to-negotiate-after-home-inspection-in-california; the
+       headline as written is `h1`. */
+    title: TITLES.negotiateInspection,
+    h1: "How to Negotiate After a Home Inspection in California",
+    excerpt:
+      "The 17-day window, the Request for Repair, and whether to take repairs, a credit or a price cut, with the math at 7.11%. What to ask for, how sellers respond, and when to walk away.",
+    metaTitle: "How to Negotiate After a Home Inspection in California",
+    metaDescription:
+      "How to negotiate after a home inspection in California: the Request for Repair, credit vs. price cut, seller replies and when to walk away.",
+    date: "Nov 18, 2026",
+    read: "12 min read",
+    /* A model house held in an open hand, from the valuation artwork already on
+       the site, cropped to 16:10. */
+    img: "/images/blog/how-to-negotiate-after-home-inspection-in-california.webp",
+    imgWidth: 1600,
+    imgHeight: 1000,
+    tags: ["Buying Tips", "Home Inspection", "Negotiation", "Seller Credits", "California"],
+  },
   {
     category: "Buying Tips",
     /* The draft's H1 is longer than the agreed URL, so `title` is the part
