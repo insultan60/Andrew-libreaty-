@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { proxyIdxRequest } from "@/lib/idxProxy";
+import { emailLead } from "@/lib/leadEmail";
 
 /**
  * This route is public — the browser calls it for listings, sign-ups, saved
@@ -43,6 +44,13 @@ async function handle(req: NextRequest, ctx: { params: Promise<{ path: string[] 
     query,
     jsonBody,
   });
+
+  // A new lead from one of the site's forms: also email it to Andrew. A
+  // returning visitor gets 409 "already exists" from IDX, but their new
+  // message still matters, so it is emailed either way.
+  if (req.method === "PUT" && path.join("/").toLowerCase() === "leads/lead" && jsonBody?.email) {
+    await emailLead(jsonBody, req.headers.get("referer"));
+  }
 
   // The Fetch spec forbids a body on null-body statuses (204/205/304) — even
   // an empty string throws when constructing the Response. IDX Broker
