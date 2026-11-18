@@ -516,25 +516,6 @@ export default function HomeSearchClient({
             </div>
 
 
-            <div className="hs-mls-banner">
-              <div className="hs-mls-copy">
-                <p className="hs-mls-title">
-                  Every MLS home {rent ? "for rent" : "for sale"} in {mls.place}
-                </p>
-                <p className="hs-mls-sub">
-                  Andrew&rsquo;s own listings are below. Search all active listings with your filters
-                  {mls.unmatched.length ? ` (we couldn’t place "${mls.unmatched.join(", ")}", so this searches ${mls.place})` : ""}.
-                </p>
-              </div>
-              <div className="hs-mls-actions">
-                <div className="view-toggle" role="group" aria-label="Buy or rent (full MLS search)">
-                  <button type="button" className={`view-btn${!rent ? " is-active" : ""}`} aria-pressed={!rent} onClick={() => setRent(false)}>Buy</button>
-                  <button type="button" className={`view-btn${rent ? " is-active" : ""}`} aria-pressed={rent} onClick={() => setRent(true)}>Rent</button>
-                </div>
-                <a href={mls.url} className="btn btn-gold">Search MLS</a>
-              </div>
-            </div>
-
             {loading ? (
               <PageLoader label="Loading listings…" />
             ) : visibleResults.length ? (
@@ -552,14 +533,23 @@ export default function HomeSearchClient({
                   />
                 ))}
                 {/* End of the list: the same search across the whole MLS. */}
-                <div className="empty-state" style={{ gridColumn: "1 / -1", padding: "32px 0", textAlign: "center" }}>
-                  <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 500, fontSize: 22, marginBottom: 8 }}>
-                    That&rsquo;s all of Andrew&rsquo;s listings
-                  </h2>
-                  <p style={{ color: "var(--muted)", marginBottom: 16 }}>
-                    See every MLS home in {mls.place} that matches your filters.
-                  </p>
-                  <a href={mls.url} className="btn btn-gold">Search the full MLS</a>
+                <div className="hs-mls-banner" style={{ gridColumn: "1 / -1", marginTop: 8 }}>
+                  <div className="hs-mls-copy">
+                    <p className="hs-mls-title">
+                      Every MLS home {rent ? "for rent" : "for sale"} in {mls.place}
+                    </p>
+                    <p className="hs-mls-sub">
+                      That&rsquo;s all of Andrew&rsquo;s own listings. Search every active listing with your filters
+                      {mls.unmatched.length ? ` (we couldn’t place "${mls.unmatched.join(", ")}", so this searches ${mls.place})` : ""}.
+                    </p>
+                  </div>
+                  <div className="hs-mls-actions">
+                    <div className="view-toggle" role="group" aria-label="Buy or rent (full MLS search)">
+                      <button type="button" className={`view-btn${!rent ? " is-active" : ""}`} aria-pressed={!rent} onClick={() => setRent(false)}>Buy</button>
+                      <button type="button" className={`view-btn${rent ? " is-active" : ""}`} aria-pressed={rent} onClick={() => setRent(true)}>Rent</button>
+                    </div>
+                    <a href={mls.url} className="btn btn-gold">Search MLS</a>
+                  </div>
                 </div>
               </div>
             ) : (
