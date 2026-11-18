@@ -9,7 +9,7 @@ import "server-only";
  *   RESEND_API_KEY   Resend API key
  *   LEAD_TO_EMAIL    where leads go (default andrew.liberty@compass.com)
  *   LEAD_FROM_EMAIL  sender on a domain verified in Resend, e.g.
- *                    "Andrew Liberty Website <leads@andrewliberty.com>".
+ *                    "Andrew Liberty Website <leads@andrewlibertyhomes.com>".
  *                    Until a domain is verified, Resend only allows
  *                    onboarding@resend.dev, and only to the Resend account's
  *                    own address.
@@ -29,7 +29,7 @@ const esc = (s: string) =>
 export async function emailLead(lead: LeadBody, page?: string | null): Promise<boolean> {
   const key = process.env.RESEND_API_KEY;
   const to = process.env.LEAD_TO_EMAIL || "andrew.liberty@compass.com";
-  const from = process.env.LEAD_FROM_EMAIL || "Andrew Liberty Website <onboarding@resend.dev>";
+  const from = process.env.LEAD_FROM_EMAIL || "Andrew Liberty Website <leads@andrewlibertyhomes.com>";
 
   const name = `${clean(lead.firstName, 100)} ${clean(lead.lastName, 100)}`.trim();
   const email = clean(lead.email, 200);
