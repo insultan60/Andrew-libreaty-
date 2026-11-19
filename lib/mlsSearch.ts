@@ -16,7 +16,7 @@
 import { MLS_CITY_IDS } from "./mlsCities";
 import type { AreaKey } from "./areas";
 
-export const MLS_RESULTS_URL = "https://andrewliberty.idxbroker.com/idx/results/listings";
+export const MLS_RESULTS_URL = "https://search.andrewliberty.com/idx/results/listings";
 const MLS_ID = "e025";
 const LOS_ANGELES = MLS_CITY_IDS["Los Angeles"];
 
