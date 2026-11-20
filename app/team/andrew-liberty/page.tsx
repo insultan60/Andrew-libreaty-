@@ -3,7 +3,7 @@ import { ArrowRight } from "../../components/icons";
 import PhoneLink, { PHONE_DISPLAY } from "../../components/PhoneLink";
 import {
   SmsIcon, LocationIcon, StarIcon, ShieldTickIcon, ShareIcon,
-  FacebookIcon, InstagramIcon, WhatsappIcon, LinkedInIcon, CompassIcon, CallIcon,
+  FacebookIcon, InstagramIcon, LinkedInIcon, CompassIcon, CallIcon,
 } from "../../components/vuesax";
 
 export const metadata: Metadata = {
@@ -16,7 +16,6 @@ export const metadata: Metadata = {
 const SPECIALTIES = ["Luxury Residential", "Historic Estates", "Relocation"];
 const SOCIALS = [
   { label: "Facebook", href: "https://www.facebook.com/andrew.liberty.90?mibextid=wwXIfr", Icon: FacebookIcon },
-  { label: "WhatsApp", href: "https://wa.me/13107090581", Icon: WhatsappIcon },
   { label: "Instagram", href: "https://www.instagram.com/iamandrewliberty?igsi=cnZ3c3g4dmxsdWdu", Icon: InstagramIcon },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/andrew-liberty-7768431a9", Icon: LinkedInIcon },
   { label: "Compass agent profile", href: "https://www.compass.com/agents/andrew-liberty/", Icon: CompassIcon },
@@ -43,7 +42,7 @@ export default function AndrewLibertyPage() {
               whether that&rsquo;s a single-family home, an income property, or a development play.
             </p>
             <div className="ag-hero-ctas">
-              <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="btn btn-gold btn-magnetic">
+              <a href="/contact" className="btn btn-gold btn-magnetic">
                 <span>Schedule a Call</span>
                 <ArrowRight />
               </a>

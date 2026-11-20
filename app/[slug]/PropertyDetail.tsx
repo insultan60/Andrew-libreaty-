@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight } from "../components/icons";
-import { SmsIcon, ShareIcon, WhatsappIcon } from "../components/vuesax";
+import { SmsIcon, ShareIcon } from "../components/vuesax";
 import PropertyMap from "./PropertyMap";
 import NearbyPlaces from "./NearbyPlaces";
 import { createLead } from "@/lib/idx";
@@ -539,7 +539,7 @@ export default function PropertyDetail({ listing }: { listing: Listing }) {
               </div>
             </form>
             <div className="sc-inquire-alt">
-              <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer"><WhatsappIcon />WhatsApp Andrew</a>
+              <a href="/contact"><SmsIcon />Message Andrew</a>
               <button type="button" onClick={copyAddr}><CopyIcon />{copied ? "Copied!" : "Copy address"}</button>
             </div>
           </div>

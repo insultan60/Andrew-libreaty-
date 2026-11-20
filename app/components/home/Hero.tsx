@@ -52,7 +52,7 @@ export default function Hero() {
               <DollarSquareIcon className="capsule-icon" />
               <span>Sell</span>
             </a>
-            <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="capsule-item">
+            <a href="/contact" className="capsule-item">
               <CalendarIcon className="capsule-icon" />
               <span>Schedule<span className="capsule-long"> a Meeting</span></span>
             </a>

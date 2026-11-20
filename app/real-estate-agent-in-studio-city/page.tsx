@@ -664,7 +664,7 @@ export default async function StudioCityPage() {
             Andrew Ruric Liberty II · CA DRE# 01965696 | Compass California, Inc. · CA DRE# 01991628
           </p>
           <div className="sc-hero-ctas" style={{ justifyContent: "center" }}>
-            <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="btn-gold">
+            <a href="/contact" className="btn-gold">
               <span>Schedule a Consultation</span>
               <ArrowRight />
             </a>

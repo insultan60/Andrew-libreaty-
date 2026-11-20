@@ -21,7 +21,7 @@ import "../neighborhood-guide.css";
 
 const PATH = "/real-estate-agent-in-laurel-canyon";
 const AREA_SEARCH = mlsAreaUrl("laurel-canyon");
-const CONSULT = "https://wa.me/13107090581";
+const CONSULT = "/contact";
 
 const TITLE = "Real Estate Agent in Laurel Canyon | Homes for Sale";
 const DESCRIPTION =
@@ -202,7 +202,7 @@ export default async function LaurelCanyonPage() {
             the setting, and the road as carefully as the square feet.
           </p>
           <div className="lcn-ctas">
-            <a href={CONSULT} target="_blank" rel="noopener noreferrer" className="lcn-btn lcn-btn-light">
+            <a href={CONSULT} className="lcn-btn lcn-btn-light">
               Schedule a Consultation
             </a>
             <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-outline-light">
@@ -361,7 +361,7 @@ export default async function LaurelCanyonPage() {
               </p>
             </div>
             <div className="lcn-ctas">
-              <a href={CONSULT} target="_blank" rel="noopener noreferrer" className="lcn-btn lcn-btn-light">
+              <a href={CONSULT} className="lcn-btn lcn-btn-light">
                 Schedule a Consultation
               </a>
               <Link href={AREA_SEARCH} className="lcn-btn lcn-btn-outline-light">

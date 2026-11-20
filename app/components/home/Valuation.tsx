@@ -73,11 +73,11 @@ export default function Valuation({
         form.reset();
       } else {
         setIsError(true);
-        setStatus("Something went wrong — please try again, or reach out on WhatsApp.");
+        setStatus("Something went wrong — please try again, or call (310) 709-0581.");
       }
     } catch {
       setIsError(true);
-      setStatus("Something went wrong — please try again, or reach out on WhatsApp.");
+      setStatus("Something went wrong — please try again, or call (310) 709-0581.");
     } finally {
       setSending(false);
     }
@@ -196,7 +196,7 @@ export default function Valuation({
                 <span>{sending ? "Sending…" : "Unlock Your Free Valuation"}</span>
                 <ArrowRight />
               </button>
-              <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="btn btn-secondary">
+              <a href="/contact" className="btn btn-secondary">
                 Schedule a Consultation
               </a>
             </div>

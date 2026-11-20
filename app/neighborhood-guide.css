@@ -375,3 +375,28 @@ a.lcn-card:hover { transform: translateY(-3px); border-color: rgba(154, 108, 46,
 .lcn-page .lcn-note a { color: var(--lcn-accent); text-decoration: underline; }
 @media (max-width: 1024px) { .lcn-page .lcn-grid-4 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 680px) { .lcn-page .lcn-grid-4 { grid-template-columns: 1fr; } }
+
+/* ---------- FAQ cards (grouped, always open) ---------- */
+.lcn-page .lcn-faq-group {
+  background: var(--lcn-card, #fff); border: 1px solid var(--line-soft); border-radius: var(--lcn-radius);
+  padding: 8px 28px 4px; box-shadow: 0 10px 30px rgba(23, 20, 15, 0.05);
+}
+.lcn-page .lcn-faq-group + .lcn-faq-group { margin-top: 20px; }
+.lcn-page .lcn-faq-group > .lcn-tag {
+  display: inline-flex; align-items: center; gap: 8px; margin: 20px 0 4px;
+  padding: 6px 14px; border-radius: 999px; background: var(--lcn-stone); color: var(--lcn-accent);
+}
+.lcn-page .lcn-faq-group .lcn-qa { border-top: 0; }
+.lcn-page .lcn-faq-group .lcn-qa > div { position: relative; padding: 20px 0 20px 44px; border-bottom: 1px solid var(--line-soft); }
+.lcn-page .lcn-faq-group .lcn-qa > div:last-child { border-bottom: 0; }
+.lcn-page .lcn-faq-group .lcn-qa > div::before {
+  content: "Q"; position: absolute; left: 0; top: 20px; width: 28px; height: 28px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 13px; font-weight: 700;
+  background: var(--gold, #c5a880); color: #fff;
+}
+.lcn-page .lcn-faq-group .lcn-faq h3 { margin: 3px 0 0; font-size: 16.5px; line-height: 1.4; color: var(--lcn-ink); }
+.lcn-page .lcn-faq-group .lcn-qa p { margin-top: 8px; }
+@media (max-width: 680px) {
+  .lcn-page .lcn-faq-group { padding: 4px 18px 2px; }
+  .lcn-page .lcn-faq-group .lcn-qa > div { padding-left: 38px; }
+}

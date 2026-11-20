@@ -68,7 +68,7 @@ export default function GuideWhy({
           ))}
         </div>
         <div className="lcn-ctas lcn-why-ctas">
-          <a href="https://wa.me/13107090581" target="_blank" rel="noopener noreferrer" className="lcn-btn lcn-btn-light">
+          <a href="/contact" className="lcn-btn lcn-btn-light">
             Schedule a Consultation
           </a>
           {meetLink && (

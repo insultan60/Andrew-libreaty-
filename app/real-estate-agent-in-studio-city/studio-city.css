@@ -1535,3 +1535,12 @@
   .sc-nearby-grid { grid-template-columns: 1fr; }
   .sc-signup-row { flex-direction: column; }
 }
+
+/* ---------- FAQ cards (grouped, always open) ---------- */
+.sc-faq-group { background: #fff; border: 1px solid var(--sc-border); border-radius: var(--sc-radius-lg); padding: 24px 28px 8px; box-shadow: 0 10px 30px rgba(23, 20, 15, 0.05); }
+.sc-faq-group > .sc-h3 { display: inline-block; font-family: var(--font-body); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sc-gold-deep); background: var(--sc-gold-light); padding: 6px 14px; border-radius: 999px; margin: 0 0 6px; }
+.sc-faq-group .sc-faq-item { position: relative; border-top: 0; border-bottom: 1px solid var(--sc-border); padding: 18px 0 18px 42px; }
+.sc-faq-group .sc-faq-item:last-child { border-bottom: 0; }
+.sc-faq-group .sc-faq-item::before { content: "Q"; position: absolute; left: 0; top: 18px; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; background: var(--sc-gold); color: #fff; }
+.sc-faq-group .sc-faq-item dt { font-size: 1.02rem; line-height: 1.4; margin-top: 3px; }
+@media (max-width: 560px) { .sc-faq-group { padding: 18px 18px 4px; } }

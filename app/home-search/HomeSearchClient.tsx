@@ -269,7 +269,7 @@ export default function HomeSearchClient({
         const msg =
           (act === "tour" ? "Hi Andrew, I'd like to tour " : "Hi Andrew, I have a question about ") +
           `${l.addr}, ${l.city} ${l.zip} (MLS# ${l.mls}).`;
-        window.open(`https://wa.me/13107090581?text=${encodeURIComponent(msg)}`, "_blank", "noopener");
+        window.location.href = `mailto:andrew.liberty@compass.com?subject=${encodeURIComponent(act === "tour" ? "Tour request" : "Listing question")}&body=${encodeURIComponent(msg)}`;
         break;
       }
       case "directions":

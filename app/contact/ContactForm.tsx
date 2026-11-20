@@ -35,10 +35,10 @@ export default function ContactForm() {
         setStatus(`Thanks, ${firstName} — your message is on its way. Andrew will be in touch shortly.`);
         setForm({ name: "", email: "", phone: "", message: "", consent: false });
       } else {
-        setStatus("Something went wrong sending your message — please try again, or reach out on WhatsApp.");
+        setStatus("Something went wrong sending your message — please try again, or call (310) 709-0581.");
       }
     } catch {
-      setStatus("Something went wrong sending your message — please try again, or reach out on WhatsApp.");
+      setStatus("Something went wrong sending your message — please try again, or call (310) 709-0581.");
     } finally {
       setSending(false);
     }
