@@ -31,6 +31,9 @@ export default function AreaListings({
   searchLabel,
   mlsCard = false,
   max = 9,
+  only,
+  fallback = true,
+  emptyText,
 }: {
   initialListings?: RawIdxListing[] | null;
   area: AreaKey;
@@ -41,6 +44,12 @@ export default function AreaListings({
   /** Always end the grid with the full-MLS card, and keep the button too. */
   mlsCard?: boolean;
   max?: number;
+  /** Show only homes for sale, or only sold homes. Default: both, sale first. */
+  only?: "sale" | "sold";
+  /** When the area has nothing, show three of Andrew's other homes (default). */
+  fallback?: boolean;
+  /** Shown above the full-MLS card when the area has nothing and no fallback. */
+  emptyText?: string;
 }) {
   const { data, loading, error } = useIdxListings(initialListings);
   const items = (data ?? [])
@@ -48,8 +57,8 @@ export default function AreaListings({
     .map(toPropertyItem)
     .map((p) => ({ ...p, location: `${place}, CA` }));
   const shown = [
-    ...items.filter((p) => p.badge !== "Sold"),
-    ...items.filter((p) => p.badge === "Sold"),
+    ...(only === "sold" ? [] : items.filter((p) => p.badge !== "Sold")),
+    ...(only === "sale" ? [] : items.filter((p) => p.badge === "Sold")),
   ].slice(0, max);
 
   /* Nothing in this area right now: rather than an empty section, show three
@@ -58,7 +67,7 @@ export default function AreaListings({
      passed off as being in this area. Only works when the page passes the
      whole feed, not just the area's subset. */
   const others =
-    shown.length === 0
+    shown.length === 0 && fallback
       ? (() => {
           const rest = (data ?? []).filter((raw) => !inArea(raw, area)).map(toPropertyItem);
           return [...rest.filter((p) => p.badge !== "Sold"), ...rest.filter((p) => p.badge === "Sold")].slice(0, 3);
@@ -94,9 +103,12 @@ export default function AreaListings({
           </div>
         </>
       ) : shown.length === 0 ? (
+        <>
+        {emptyText && <p className="area-listings-note">{emptyText}</p>}
         <div className="prop-grid">
           <MlsSearchCard href={search} place={place} beside={0} />
         </div>
+        </>
       ) : (
         <div className="prop-grid">
           {shown.map((p) => (

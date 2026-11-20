@@ -359,3 +359,19 @@ a.lcn-card:hover { transform: translateY(-3px); border-color: rgba(154, 108, 46,
 @media (max-width: 1024px) {
   .lcn-page .lcn-why-grid { grid-template-columns: minmax(0, 1fr); max-width: 560px; margin-inline: auto; }
 }
+
+/* ---------- Sherman Oaks v2 brief (Nov 2026) ---------- */
+.lcn-page .lcn-proof-row { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; padding: 0; margin: 0 0 36px; }
+.lcn-page .lcn-proof-row li { border: 1px solid var(--lcn-line); border-radius: 999px; padding: 8px 16px; font-size: 14px; background: var(--lcn-card); }
+.lcn-page .lcn-subhead { margin: 48px 0 20px; }
+.lcn-page .lcn-h3 { font-family: var(--font-display); font-weight: 500; font-size: 22px; color: var(--lcn-ink); margin: 0 0 12px; }
+.lcn-page .lcn-prose p { margin: 0 0 16px; font-size: 15.5px; line-height: 1.7; color: var(--lcn-text); }
+.lcn-page .lcn-prose .lcn-h3 + p { margin-top: 0; }
+.lcn-page .lcn-prose p + .lcn-h3 { margin-top: 28px; }
+.lcn-page .lcn-list { margin: 0 0 16px; padding-left: 20px; font-size: 15px; line-height: 1.75; color: var(--lcn-text); }
+.lcn-page .lcn-list li { margin-bottom: 6px; }
+.lcn-page .lcn-table-title { margin-top: 48px; }
+.lcn-page .lcn-faq-group + .lcn-faq-group { margin-top: 36px; }
+.lcn-page .lcn-note a { color: var(--lcn-accent); text-decoration: underline; }
+@media (max-width: 1024px) { .lcn-page .lcn-grid-4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 680px) { .lcn-page .lcn-grid-4 { grid-template-columns: 1fr; } }
