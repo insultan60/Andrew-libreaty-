@@ -14,6 +14,15 @@ const NAV_LINKS = [
   { href: "/contact", label: "Contact" },
 ];
 
+// Neighborhood guides, shown as a dropdown under "Neighborhoods".
+const AREAS = [
+  { href: "/real-estate-agent-in-studio-city", label: "Studio City" },
+  { href: "/real-estate-agent-in-sherman-oaks", label: "Sherman Oaks" },
+  { href: "/real-estate-agent-in-valley-village", label: "Valley Village" },
+  { href: "/real-estate-agent-in-laurel-canyon", label: "Laurel Canyon" },
+  { href: "/real-estate-agent-in-hollywood-hills", label: "Hollywood Hills" },
+];
+
 // Full site navigation shown in the slide-out side drawer
 const SIDE_LINKS = [
   { href: "/team", label: "Meet the Team" },
@@ -95,7 +104,31 @@ export default function Header() {
           </a>
 
           <nav className="main-nav" aria-label="Primary">
-            {NAV_LINKS.map((link) => (
+            {NAV_LINKS.map((link) =>
+              link.href === "/neighborhoods" ? (
+                <div className="nav-drop" key={link.label}>
+                  <a
+                    href={link.href}
+                    className={`nav-link nav-drop-toggle${pathname === link.href || AREAS.some((a) => a.href === pathname) ? " is-active" : ""}`}
+                    aria-haspopup="true"
+                  >
+                    {link.label}
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="m6 9 6 6 6-6" />
+                    </svg>
+                  </a>
+                  <div className="nav-drop-menu" role="menu">
+                    {AREAS.map((a) => (
+                      <a key={a.href} href={a.href} role="menuitem" className={pathname === a.href ? "is-active" : undefined}>
+                        {a.label}
+                      </a>
+                    ))}
+                    <a href="/neighborhoods" role="menuitem" className="nav-drop-all">
+                      All Neighborhoods
+                    </a>
+                  </div>
+                </div>
+              ) : (
               <a
                 key={link.label}
                 href={link.href}
@@ -107,7 +140,8 @@ export default function Header() {
               >
                 {link.label}
               </a>
-            ))}
+              )
+            )}
           </nav>
 
           <div className="header-actions">
@@ -160,7 +194,7 @@ export default function Header() {
           </button>
         </div>
         <nav className="side-nav" aria-label="Site">
-          {SIDE_LINKS.map((link) => (
+          {SIDE_LINKS.map((link) => [
             <a
               key={link.label}
               href={link.href}
@@ -168,8 +202,19 @@ export default function Header() {
               aria-current={link.href.startsWith("/") && pathname === link.href ? "page" : undefined}
             >
               {link.label}
-            </a>
-          ))}
+            </a>,
+            link.href === "/neighborhoods" &&
+              AREAS.map((a) => (
+                <a
+                  key={a.href}
+                  href={a.href}
+                  className={`side-item side-sub${pathname === a.href ? " is-active" : ""}`}
+                  aria-current={pathname === a.href ? "page" : undefined}
+                >
+                  {a.label}
+                </a>
+              )),
+          ])}
         </nav>
         <div className="side-foot">
           <a href="/my-search-portal" className="side-item">
