@@ -67,6 +67,11 @@ export const SITE_PAGES: SitePage[] = [
     name: "Real estate negotiation tips for buyers",
     group: "Content",
   },
+  {
+    path: "/blog/buying-a-condo-in-los-angeles",
+    name: "Buying a condo in Los Angeles",
+    group: "Content",
+  },
 
   { path: "/my-search-portal", name: "Saved search portal", group: "Internal" },
 ];

@@ -53,6 +53,7 @@ export const TITLES = {
   buyLA: "How to Buy a House in Los Angeles",
   negotiateInspection: "How to Negotiate After Home Inspection in California",
   negotiationTipsBuyers: "Real Estate Negotiation Tips for Buyers",
+  buyCondoLA: "Buying a Condo in Los Angeles",
 } as const;
 
 export function slugify(s: string): string {
@@ -101,6 +102,22 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    title: TITLES.buyCondoLA,
+    excerpt:
+      "With a condo you buy the building too: HOA documents, reserve studies, SB 326 balcony reports, soft-story retrofits, FHA approval, the real monthly cost, and what Valley Village condos sell for.",
+    metaTitle: "Buying a Condo in Los Angeles: HOA, Costs and Checks",
+    metaDescription:
+      "Buying a condo in Los Angeles? HOA documents, reserves, balcony reports, soft-story risk, FHA approval, real monthly costs and Valley Village condo prices.",
+    date: "Nov 21, 2026",
+    read: "15 min read",
+    /* Reuses the first-time-buyer artwork (a couple holding up their keys). */
+    img: "/images/blog/first-time-buyers-moving-in.webp",
+    imgWidth: 1600,
+    imgHeight: 1000,
+    tags: ["Condos", "HOA", "Valley Village", "First-Time Buyers", "California"],
+  },
   {
     category: "Buying Tips",
     /* slugify() gives /blog/real-estate-negotiation-tips-for-buyers; the

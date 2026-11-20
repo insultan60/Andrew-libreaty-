@@ -181,7 +181,9 @@ export default function RealEstateNegotiationTipsForBuyers() {
       <p>
         That gap matters. A condo buyer usually has more room to negotiate than a house buyer in the same
         neighborhood. Condo buyers also have more to review, including HOA documents, reserves and any special
-        assessments.
+        assessments. My guide to{" "}
+        <Link href="/blog/buying-a-condo-in-los-angeles">buying a condo in Los Angeles</Link> walks through
+        each one.
       </p>
 
       <h3>What I See in Studio City, Sherman Oaks and the Hills</h3>
