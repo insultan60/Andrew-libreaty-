@@ -52,6 +52,7 @@ export const TITLES = {
   canIBuyLA: "Can I Buy a House in Los Angeles?",
   buyLA: "How to Buy a House in Los Angeles",
   negotiateInspection: "How to Negotiate After Home Inspection in California",
+  negotiationTipsBuyers: "Real Estate Negotiation Tips for Buyers",
 } as const;
 
 export function slugify(s: string): string {
@@ -100,6 +101,25 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Buying Tips",
+    /* slugify() gives /blog/real-estate-negotiation-tips-for-buyers; the
+       full headline is `h1`. */
+    title: TITLES.negotiationTipsBuyers,
+    h1: "Real Estate Negotiation Tips for Buyers: Making Offers in Los Angeles",
+    excerpt:
+      "How much to offer below asking, writing a competitive offer, SCO and BCO counteroffers, which contingencies to shorten, appraisal gaps and escalation clauses, with LA numbers for November 2026.",
+    metaTitle: "Real Estate Negotiation Tips for Buyers in Los Angeles",
+    metaDescription:
+      "Real estate negotiation tips for buyers in LA: how much to offer below asking, writing a competitive offer, counteroffers, contingencies and bidding wars.",
+    date: "Nov 21, 2026",
+    read: "14 min read",
+    /* Reuses the negotiation artwork from the house-price post. */
+    img: "/images/blog/how-to-negotiate-a-house-price-in-los-angeles.webp",
+    imgWidth: 1600,
+    imgHeight: 1000,
+    tags: ["Negotiation", "Offers", "Bidding Wars", "Contingencies", "California"],
+  },
   {
     category: "Buying Tips",
     /* `title` drops the "a" so slugify() gives the agreed URL,

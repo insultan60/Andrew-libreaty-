@@ -62,6 +62,11 @@ export const SITE_PAGES: SitePage[] = [
     name: "How to buy a duplex in Los Angeles",
     group: "Content",
   },
+  {
+    path: "/blog/real-estate-negotiation-tips-for-buyers",
+    name: "Real estate negotiation tips for buyers",
+    group: "Content",
+  },
 
   { path: "/my-search-portal", name: "Saved search portal", group: "Internal" },
 ];
