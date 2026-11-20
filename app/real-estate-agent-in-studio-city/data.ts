@@ -63,44 +63,73 @@ export type FaqItem = {
   a: string;
 };
 
-/* Questions and answers from the October 2026 content brief, in its order.
-   The market figures are dated (Zillow and Resideline, October 2026) and go
-   stale: refresh them, or the page quotes last season's market. */
-export const FAQ_ITEMS: FaqItem[] = [
+/* November 2026 (v2) brief. Grouped and rendered open on the page, so every
+   answer is in the HTML; FAQPage schema is built from the same list. Market
+   figures are dated: refresh them with the Market Snapshot table. */
+export type FaqGroup = { title: string; items: FaqItem[] };
+
+export const FAQ_GROUPS: FaqGroup[] = [
   {
-    q: "How do I choose a real estate agent in Studio City?",
-    a: "Ask how many Studio City homes the agent sold in the last 12 months, and which sales they would use to price yours. Ask for proof, not titles like “top” or “best.” Check licenses, reviews, and how clearly they explain each step.",
+    title: "Choosing an Agent",
+    items: [
+      {
+        q: "What should I look for in a real estate agent in Studio City?",
+        a: "Ask for recent Studio City sales that match your home type and price range, and ask how the agent decides on a list price in your specific pocket. Check licenses and reviews, and meet at least two agents. I’m a Certified Real Estate Negotiation Expert with a commercial real estate background, and I’m happy to show you the sales behind any recommendation.",
+      },
+      {
+        q: "Do I need a buyer’s agent in Studio City?",
+        a: "It helps. An agent can read HOA documents on a condo, check permits and slope on a hillside lot, and negotiate repairs when inspections turn up problems.",
+      },
+    ],
   },
   {
-    q: "How do I choose an agent as a first-time buyer in Studio City?",
-    a: "Pick someone who explains the process in plain words and shows you both condos and houses. Studio City condos often cost less than houses, so compare both before you decide.",
+    title: "The Area",
+    items: [
+      { q: "Is Studio City part of LA?", a: "Yes. Studio City is a neighborhood in the City of Los Angeles, in the San Fernando Valley." },
+      {
+        q: "What is the ZIP code for Studio City?",
+        a: "Most of Studio City uses ZIP code 91604, including addresses written as “Studio City, CA 91604.” Some blocks near the edges use 91602 or 91607, so confirm the exact address.",
+      },
+      {
+        q: "Which schools serve Studio City homes?",
+        a: "It depends on the address. Carpenter Community Charter, Rio Vista Elementary and Walter Reed Middle School are Studio City schools, and some addresses are zoned for nearby schools in Sherman Oaks or Valley Village. Verify the assignment with LAUSD before you make an offer.",
+      },
+      {
+        q: "How does Studio City compare with Sherman Oaks?",
+        a: "Studio City is smaller and more village-like, with a compact walkable center and hillside pockets to the south. Sherman Oaks is larger and splits into two very different markets on either side of Ventura Boulevard.",
+      },
+    ],
   },
   {
-    q: "How much does a real estate agent cost in Studio City?",
-    a: "Agent fees are negotiable. Total commissions often run about 5% to 6% of the sale price. Ask for the fee in writing before you sign.",
+    title: "Buying",
+    items: [
+      {
+        q: "How much does a home cost in Studio City?",
+        a: "It depends on the type and the date. Recent sources put the median sale price between about $1.45 million and $1.81 million depending on the time window, with houses at roughly $2.34 million and condos mostly below $1 million. See the Market Snapshot above for each figure and its source.",
+      },
+      {
+        q: "How much do Studio City condos cost?",
+        a: "The average condo sold for about $873,000 over the past year, with one-bedroom medians near $540,000 and two-bedroom medians near $770,000. Always compare monthly dues and building finances, not just the price.",
+      },
+      {
+        q: "Are Studio City homes at risk of wildfire?",
+        a: "Some are, especially in the hills. Redfin’s Fire Factor rating for Studio City is moderate, with roughly 42% of properties facing some wildfire risk over the next 30 years. Risk varies by street, vegetation and road access, so I recommend getting an insurance quote before you commit to a hillside home.",
+      },
+    ],
   },
   {
-    q: "How much does a home cost in Studio City?",
-    a: "Zillow shows a median sale price near $1.64 million, and Resideline shows about $1.78 million over the last six months in ZIP 91604. Condos often start in the $600,000s to $700,000s, and houses often start near $1 million. Hillside and luxury homes reach $3 million and up.",
-  },
-  {
-    q: "How do I find my home’s value before I sell a house in Studio City?",
-    a: "Start with recent sales from your own pocket. Then adjust for lot size, view, condition, and updates. I do this in a free valuation. Online estimates often miss these details.",
-  },
-  {
-    q: "What should sellers know about the current market?",
-    a: "On October 5, 2026, Resideline counted 64 active listings and 3 pending sales in ZIP 91604, which it reads as a balanced market. Zillow shows homes going pending in about 40 days. Asking prices run above sold prices, so price against recent sales, not other listings.",
-  },
-  {
-    q: "What types of homes can I buy in Studio City, and where?",
-    a: "Mostly single-family houses: traditional and ranch homes in the flats, and mid-century and modern homes in the hills. Condos and townhomes sit near Ventura Boulevard, and duplexes and small apartment buildings sit near the boulevard and the eastern edge.",
-  },
-  {
-    q: "How does Studio City compare with Sherman Oaks?",
-    a: "Studio City often costs more and has a village feel along Ventura Boulevard. Sherman Oaks often costs less, and Ventura splits it into flat streets to the north and hills to the south.",
-  },
-  {
-    q: "What is the ZIP code for Studio City, and is it part of LA?",
-    a: "The main ZIP code is 91604. Some blocks use 91602 or 91607. Yes, Studio City is a neighborhood in the City of Los Angeles, just west of the Cahuenga Pass.",
+    title: "Selling",
+    items: [
+      {
+        q: "How do I find my Studio City home’s value?",
+        a: "Start with recent sales on your own block or in your own building, then adjust for condition, updates and lot. Online estimates miss those details. I offer a free personal review that includes them.",
+      },
+      {
+        q: "How long does it take to sell a house in Studio City?",
+        a: "Recent data shows a median of about 70 days on the market (Redfin, September 2026) and about 40 days to pending (Zillow, August 2026). Pricing, condition and timing drive where your home lands in that range.",
+      },
+    ],
   },
 ];
+
+export const FAQ_ITEMS: FaqItem[] = FAQ_GROUPS.flatMap((g) => g.items);
