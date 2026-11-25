@@ -1425,3 +1425,12 @@ ul, ol { list-style: none; }
 
 /* Drawer: neighborhood guides indented under "Neighborhoods". */
 .side-item.side-sub { font-family: var(--font-body); font-size: 15px; padding: 11px 24px 11px 44px; color: var(--ink-soft); }
+
+/* ---------- Homepage (Nov 2026 brief) ---------- */
+.hero-eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin: 0 0 14px; }
+.move-guide { margin: -4px 0 16px; font-size: 14px; }
+.move-guide a { color: var(--gold-deep, #9a6c2e); text-decoration: underline; }
+.move-grid--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1100px) { .move-grid--4 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .move-grid--4 { grid-template-columns: 1fr; } }
+.section-sold .hood-all { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }

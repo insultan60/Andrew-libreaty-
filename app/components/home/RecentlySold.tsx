@@ -54,6 +54,12 @@ export default function RecentlySold({
             ))}
           </div>
         )}
+        {!area && (
+          <div className="hood-all">
+            <a href="/home-search" className="btn btn-primary">Search All Homes</a>{" "}
+            <a href="/property" className="btn btn-secondary">View Properties</a>
+          </div>
+        )}
       </div>
     </section>
   );

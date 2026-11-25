@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "../icons";
 
-const TESTIMONIALS = [
+const TESTIMONIALS_ALL = [
   {
     type: "Buyer",
     quote:
@@ -21,7 +21,11 @@ const TESTIMONIALS = [
   },
 ];
 
-export default function Testimonials() {
+export default function Testimonials({
+  title = "Clients Move With Confidence",
+  limit,
+}: { title?: string; limit?: number } = {}) {
+  const TESTIMONIALS = limit ? TESTIMONIALS_ALL.slice(0, limit) : TESTIMONIALS_ALL;
   const [current, setCurrent] = useState(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -54,7 +58,7 @@ export default function Testimonials() {
     <section className="section section-testimonials" id="testimonials">
       <div className="container">
         <div className="section-head reveal">
-          <h2 className="section-title">Clients Move With Confidence</h2>
+          <h2 className="section-title">{title}</h2>
         </div>
 
         <div

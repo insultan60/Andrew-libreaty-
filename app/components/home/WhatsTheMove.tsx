@@ -8,6 +8,8 @@ export type MoveCard = {
   proof?: string;
   ctaLabel: string;
   href: string;
+  /** Optional guide link under the body. */
+  guide?: { label: string; href: string };
 };
 
 /* Fixed per position: buy / sell / invest. The copy varies by page, the
@@ -72,6 +74,11 @@ export default function WhatsTheMove({
                 <h3>{card.title}</h3>
                 <p>{card.body}</p>
                 {card.proof ? <p className="move-proof">{card.proof}</p> : null}
+                {card.guide ? (
+                  <p className="move-guide">
+                    <a href={card.guide.href} className="inline-link">{card.guide.label}</a>
+                  </p>
+                ) : null}
                 <a href={card.href} className="btn btn-secondary btn-card">
                   <span>{card.ctaLabel}</span>
                   <ArrowRight />

@@ -42,8 +42,11 @@ const DEFAULT_TITLE = (
   </>
 );
 
+type Step = { index: string; title: string; body: string };
+
 type Props = {
   title?: ReactNode;
+  steps?: Step[];
   sub?: string;
   ctaLabel?: string;
   ctaHref?: string;
@@ -51,6 +54,7 @@ type Props = {
 
 export default function Process({
   title = DEFAULT_TITLE,
+  steps = STEPS,
   sub = "A clear plan from first call to closing. No surprises.",
   ctaLabel = "Book a Strategy Call",
   ctaHref = "/contact",
@@ -72,7 +76,7 @@ export default function Process({
         </div>
 
         <ol className="process-timeline">
-          {STEPS.map((step, i) => (
+          {steps.map((step, i) => (
             <li
               key={step.index}
               className="process-step reveal"

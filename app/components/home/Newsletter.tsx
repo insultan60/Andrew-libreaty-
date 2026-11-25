@@ -15,7 +15,7 @@ export default function Newsletter() {
           <div className="newsletter-copy">
             <p className="eyebrow eyebrow-light">Newsletter</p>
             <h2>The Liberty Brief</h2>
-            <p>Market perspective, smart analysis, and opportunities delivered with clarity.</p>
+            <p>Market perspective, smart analysis, and opportunities from a Studio City real estate agent, delivered with clarity.</p>
           </div>
           <form className="newsletter-form" onSubmit={onSubmit} noValidate>
             <div className="newsletter-row">

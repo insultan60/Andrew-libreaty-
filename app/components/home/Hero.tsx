@@ -27,14 +27,18 @@ export default function Hero() {
       <div className="hero-screen">
       <div className="hero-inner">
         <div className="hero-copy">
+          <p className="hero-eyebrow reveal" data-reveal-delay="40">
+            Studio City · Los Angeles · San Fernando Valley
+          </p>
           <h1 className="hero-title reveal" data-reveal-delay="80">
-            Real Estate Agent in Los&nbsp;Angeles
+            Los&nbsp;Angeles Real Estate Agent
             <br />
-            <em>for Smart, Confident Moves</em>
+            <em>With a Studio City Home Base</em>
           </h1>
           <p className="hero-sub reveal" data-reveal-delay="160">
-            Andrew Liberty, a Certified Real Estate Negotiation Expert with Compass, offers strategic
-            guidance for buyers, sellers, and investors across Los&nbsp;Angeles.
+            Andrew Liberty is a Studio City real estate agent and Certified Real Estate Negotiation Expert
+            with Compass. He guides buyers, sellers, and investors across Studio City, the San Fernando
+            Valley, and greater Los&nbsp;Angeles.
           </p>
 
           {/* Search capsule */}

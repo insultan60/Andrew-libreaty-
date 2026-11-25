@@ -18,9 +18,14 @@ export default function OfficeMap() {
     <section className="contact-map-band" id="office-map">
       <div className="container">
         <div className="contact-map-head">
-          <p className="eyebrow">Find Us</p>
-          <h2 className="contact-map-title">Visit the Office</h2>
-          <p className="contact-map-addr">12001 Ventura Pl Ste 100, Studio City, CA 91604</p>
+          <p className="eyebrow">Based in Studio City, serving Los Angeles</p>
+          <h2 className="contact-map-title">Visit Andrew’s Studio City Office</h2>
+          <p className="contact-map-addr">12001 Ventura Pl, Ste 100, Studio City, CA 91604</p>
+          <p className="contact-map-addr">
+            Monday to Sunday, 8:00 AM to 7:00 PM ·{" "}
+            <a href="tel:+13107090581" className="inline-link">(310) 709-0581</a> ·{" "}
+            <a href="mailto:andrew.liberty@compass.com" className="inline-link">andrew.liberty@compass.com</a>
+          </p>
         </div>
         <div className="office-map-frame">
           <MapPanel

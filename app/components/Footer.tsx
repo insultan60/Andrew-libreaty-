@@ -23,7 +23,7 @@ export default function Footer() {
             <img src="/andrew-liberty-logo.svg" alt="" className="footer-logo-svg" width={1054} height={214} />
           </a>
           <p className="footer-tagline">
-            Strategic real estate guidance for Los Angeles buyers, sellers, and investors.
+            Strategic real estate guidance for Studio City and Los Angeles buyers, sellers, and investors.
           </p>
           <div className="footer-social" aria-label="Social links">
             {SOCIALS.map(({ label, href, Icon }) => (
