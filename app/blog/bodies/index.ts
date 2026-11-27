@@ -15,6 +15,8 @@ import HowToBuyAHouseInLosAngeles, { FAQS as BUY_LA_FAQS } from "./how-to-buy-a-
 import HowToNegotiateAfterHomeInspectionInCalifornia, { FAQS as INSPECTION_FAQS } from "./how-to-negotiate-after-home-inspection-in-california";
 import RealEstateNegotiationTipsForBuyers, { FAQS as NEGOTIATION_TIPS_FAQS } from "./real-estate-negotiation-tips-for-buyers";
 import BuyingACondoInLosAngeles, { FAQS as CONDO_FAQS } from "./buying-a-condo-in-los-angeles";
+import TopRealEstateAgentsInStudioCity, { FAQS as TOP_AGENTS_SC_FAQS } from "./top-real-estate-agents-in-studio-city";
+import PropertyForSaleInStudioCityCa, { FAQS as PROPERTY_SC_FAQS } from "./property-for-sale-in-studio-city-ca";
 
 /**
  * Slug -> article body.
@@ -43,6 +45,8 @@ export const BODIES: Record<string, ComponentType> = {
   [slugify(TITLES.negotiateInspection)]: HowToNegotiateAfterHomeInspectionInCalifornia,
   [slugify(TITLES.negotiationTipsBuyers)]: RealEstateNegotiationTipsForBuyers,
   [slugify(TITLES.buyCondoLA)]: BuyingACondoInLosAngeles,
+  [slugify(TITLES.topAgentsStudioCity)]: TopRealEstateAgentsInStudioCity,
+  [slugify(TITLES.propertyStudioCity)]: PropertyForSaleInStudioCityCa,
 };
 
 /**
@@ -69,6 +73,8 @@ export const FAQS_BY_SLUG: Record<string, { q: string; a: string }[]> = {
   [slugify(TITLES.negotiateInspection)]: INSPECTION_FAQS,
   [slugify(TITLES.negotiationTipsBuyers)]: NEGOTIATION_TIPS_FAQS,
   [slugify(TITLES.buyCondoLA)]: CONDO_FAQS,
+  [slugify(TITLES.topAgentsStudioCity)]: TOP_AGENTS_SC_FAQS,
+  [slugify(TITLES.propertyStudioCity)]: PROPERTY_SC_FAQS,
 };
 
 /**

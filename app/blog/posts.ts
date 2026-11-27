@@ -54,6 +54,8 @@ export const TITLES = {
   negotiateInspection: "How to Negotiate After Home Inspection in California",
   negotiationTipsBuyers: "Real Estate Negotiation Tips for Buyers",
   buyCondoLA: "Buying a Condo in Los Angeles",
+  topAgentsStudioCity: "Top Real Estate Agents in Studio City",
+  propertyStudioCity: "Property for Sale in Studio City, CA",
 } as const;
 
 export function slugify(s: string): string {
@@ -102,6 +104,42 @@ const FEATURED_RAW: RawPost = {
  * and both came back on their own when the second article landed here.
  */
 const POSTS_RAW: RawPost[] = [
+  {
+    category: "Neighborhoods",
+    /* slugify() gives /blog/property-for-sale-in-studio-city-ca; the full
+       headline is `h1`. */
+    title: TITLES.propertyStudioCity,
+    h1: "Property for Sale in Studio City, CA: A 2026 Buyer's Guide",
+    excerpt:
+      "Condos in the $700,000s to hillside estates: what each property type costs, the monthly math, multifamily cap rates, rent rules, Measure ULA and the checks to run before you offer.",
+    metaTitle: "Property for Sale in Studio City, CA: 2026 Buyer's Guide",
+    metaDescription:
+      "Browse property for sale in Studio City, CA. See current prices, home types, hillside and condo tips, and what to check before you offer.",
+    date: "Nov 27, 2026",
+    read: "10 min read",
+    img: "/images/blog/property-for-sale-in-studio-city-ca.webp",
+    imgWidth: 1600,
+    imgHeight: 1066,
+    tags: ["Neighborhoods", "Investment", "Studio City", "Condos", "Multifamily"],
+  },
+  {
+    category: "Buying Tips",
+    /* slugify() gives /blog/top-real-estate-agents-in-studio-city (the brief
+       suggested the URL without "in"); the full headline is `h1`. */
+    title: TITLES.topAgentsStudioCity,
+    h1: "Top Real Estate Agents in Studio City, CA (2026 Guide)",
+    excerpt:
+      "Eight Studio City agents and teams, how they were chosen, what makes a good local agent, and the five checks and six questions to use before you sign with anyone.",
+    metaTitle: "Top Real Estate Agents in Studio City, CA (2026 Guide)",
+    metaDescription:
+      "Meet top real estate agents in Studio City, CA. See who they are, what they are known for, and how to check an agent before you hire.",
+    date: "Nov 27, 2026",
+    read: "8 min read",
+    img: "/images/blog/top-real-estate-agents-in-studio-city.webp",
+    imgWidth: 800,
+    imgHeight: 534,
+    tags: ["Buying Tips", "Selling Strategy", "Studio City", "Choosing an Agent"],
+  },
   {
     category: "Buying Tips",
     title: TITLES.buyCondoLA,
